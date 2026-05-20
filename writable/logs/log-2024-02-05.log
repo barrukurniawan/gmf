@@ -1,0 +1,21 @@
+CRITICAL - 2024-02-05 22:51:50 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-05 22:55:36 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-05 22:56:35 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

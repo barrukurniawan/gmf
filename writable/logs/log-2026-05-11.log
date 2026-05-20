@@ -1,0 +1,7 @@
+CRITICAL - 2026-05-11 14:27:28 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

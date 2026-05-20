@@ -1,0 +1,7 @@
+CRITICAL - 2025-11-18 10:08:00 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

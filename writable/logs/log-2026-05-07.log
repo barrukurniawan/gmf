@@ -1,0 +1,367 @@
+CRITICAL - 2026-05-07 10:52:59 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 10:54:03 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Views/erp/employees/staff_details.php(107): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 107)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/View/View.php(230): include('/Users/barrukur...')
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/View/View.php(232): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/Common.php(1271): CodeIgniter\View\View->render('erp/employees/s...', Array, true)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Employees.php(165): view('erp/employees/s...', Array)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Employees->staff_details()
+#6 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Employees))
+#7 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2026-05-07 10:57:13 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Finance.php(495): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 495)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Finance->expense_list()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Finance))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 11:24:28 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 11:24:40 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 12:39:54 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 12:40:10 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Clients.php(277): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 277)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Clients->clients_list()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Clients))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 12:54:00 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Payroll.php(644): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 644)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Payroll->payslip_history_list()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Payroll))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 12:54:27 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Payroll.php(644): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 644)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Payroll->payslip_history_list()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Payroll))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 01:00:46 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Logout.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 34)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Logout->index()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Logout))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 13:01:53 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 13:02:56 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 13:04:13 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 13:08:17 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 13:15:08 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 13:15:48 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 13:24:02 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 01:29:59 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:29:59 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/globalmaintenance/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php(137): header('HTTP/1.1 403 Fo...', true, 403)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(CodeIgniter\Security\Exceptions\SecurityException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-07 01:30:00 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:30:00 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/globalmaintenance/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php(137): header('HTTP/1.1 403 Fo...', true, 403)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(CodeIgniter\Security\Exceptions\SecurityException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-07 01:30:01 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:30:01 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/globalmaintenance/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php(137): header('HTTP/1.1 403 Fo...', true, 403)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(CodeIgniter\Security\Exceptions\SecurityException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-07 01:30:02 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:30:02 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/globalmaintenance/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php(137): header('HTTP/1.1 403 Fo...', true, 403)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(CodeIgniter\Security\Exceptions\SecurityException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-07 01:30:11 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:30:12 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:30:55 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:30:55 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/globalmaintenance/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php(137): header('HTTP/1.1 403 Fo...', true, 403)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(CodeIgniter\Security\Exceptions\SecurityException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-07 01:30:55 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/globalmaintenance/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/documents/...', 'before')
+#4 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-07 01:30:55 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/globalmaintenance/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/Debug/Exceptions.php(137): header('HTTP/1.1 403 Fo...', true, 403)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(CodeIgniter\Security\Exceptions\SecurityException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-07 13:59:32 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:05:11 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:05:14 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:08:42 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:09:03 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:13:03 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:13:47 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:16:56 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 14:58:20 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:00:19 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:00:41 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:10:51 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:11:31 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:11:44 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:12:23 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:12:37 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:13:15 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-07 15:13:40 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/globalmaintenance/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/globalmaintenance/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/globalmaintenance/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

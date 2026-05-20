@@ -1,0 +1,8 @@
+CRITICAL - 2024-02-12 22:46:56 --> The action you requested is not allowed.
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#5 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}

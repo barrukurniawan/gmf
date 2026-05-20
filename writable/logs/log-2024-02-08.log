@@ -1,0 +1,147 @@
+CRITICAL - 2024-02-08 22:16:15 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:16:54 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Clients.php(277): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Clients->clients_list()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:17:04 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:24:16 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Clients.php(277): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Clients->clients_list()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:48:23 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:48:42 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:48:43 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:49:33 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:49:36 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:50:54 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:51:47 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:51:47 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:52:33 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:52:33 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 22:54:57 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 23:13:05 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 23:13:34 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 23:37:31 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 23:39:27 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 23:39:44 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2024-02-08 23:39:58 --> Trying to access array offset on value of type null
+#0 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /home/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

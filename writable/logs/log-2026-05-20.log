@@ -1,0 +1,226 @@
+CRITICAL - 2026-05-20 09:46:22 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/integratedsystems.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:07:23 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:07:52 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:09:38 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:14:26 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:15:11 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:18:49 --> syntax error, unexpected token "endif", expecting end of file
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/View/View.php(232): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/Common.php(1271): CodeIgniter\View\View->render()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Views/default/left_menu.php(26): view()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/View/View.php(230): include('/DATA/globalmai...')
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/View/View.php(232): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#5 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/Common.php(1271): CodeIgniter\View\View->render()
+#6 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Views/erp/layout/layout_main_company.php(49): view()
+#7 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/View/View.php(230): include('/DATA/globalmai...')
+#8 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/View/View.php(232): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#9 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/Common.php(1271): CodeIgniter\View\View->render()
+#10 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Views/erp/layout/layout_main.php(22): view()
+#11 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/View/View.php(230): include('/DATA/globalmai...')
+#12 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/View/View.php(232): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#13 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/Common.php(1271): CodeIgniter\View\View->render()
+#14 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/TrainingRecord.php(75): view()
+#15 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\TrainingRecord->index()
+#16 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#17 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#18 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#19 {main}
+CRITICAL - 2026-05-20 10:19:44 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:20:10 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:21:08 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 10:57:37 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 11:19:18 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 11:31:24 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 12:25:19 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 13:29:36 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 13:51:23 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 13:51:51 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 13:52:20 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 14:06:19 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-20 14:30:10 --> Trying to access array offset on value of type null
+#0 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler()
+#1 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController()
+#3 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest()
+#4 /DATA/globalmaintenanc/gis.globalmaintenance.co.id/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2026-05-20 02:45:14 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2026-05-20 02:45:14 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 /Users/barrukurniawan/Documents/gmf/system/Database/BaseConnection.php(637): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/barrukurniawan/Documents/gmf/system/Database/BaseBuilder.php(1881): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 /Users/barrukurniawan/Documents/gmf/system/Model.php(228): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/barrukurniawan/Documents/gmf/system/BaseModel.php(644): CodeIgniter\Model->doFirst()
+#4 /Users/barrukurniawan/Documents/gmf/app/Controllers/Home.php(31): CodeIgniter\BaseModel->first()
+#5 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(928): App\Controllers\Home->index()
+#6 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/barrukurniawan/Documents/gmf/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2026-05-20 02:45:14 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2026-05-20 02:45:14 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 /Users/barrukurniawan/Documents/gmf/system/Database/BaseConnection.php(637): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/barrukurniawan/Documents/gmf/system/Database/BaseBuilder.php(1881): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 /Users/barrukurniawan/Documents/gmf/system/Model.php(228): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/barrukurniawan/Documents/gmf/system/BaseModel.php(644): CodeIgniter\Model->doFirst()
+#4 /Users/barrukurniawan/Documents/gmf/app/Controllers/Home.php(31): CodeIgniter\BaseModel->first()
+#5 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(928): App\Controllers\Home->index()
+#6 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/barrukurniawan/Documents/gmf/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2026-05-20 02:45:27 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2026-05-20 02:45:27 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 /Users/barrukurniawan/Documents/gmf/system/Database/BaseConnection.php(637): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/barrukurniawan/Documents/gmf/system/Database/BaseBuilder.php(1881): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 /Users/barrukurniawan/Documents/gmf/system/Model.php(228): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/barrukurniawan/Documents/gmf/system/BaseModel.php(644): CodeIgniter\Model->doFirst()
+#4 /Users/barrukurniawan/Documents/gmf/app/Controllers/Home.php(31): CodeIgniter\BaseModel->first()
+#5 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(928): App\Controllers\Home->index()
+#6 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/barrukurniawan/Documents/gmf/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2026-05-20 02:45:29 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2026-05-20 02:45:29 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 /Users/barrukurniawan/Documents/gmf/system/Database/BaseConnection.php(637): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/barrukurniawan/Documents/gmf/system/Database/BaseBuilder.php(1881): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 /Users/barrukurniawan/Documents/gmf/system/Model.php(228): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/barrukurniawan/Documents/gmf/system/BaseModel.php(644): CodeIgniter\Model->doFirst()
+#4 /Users/barrukurniawan/Documents/gmf/app/Controllers/Home.php(31): CodeIgniter\BaseModel->first()
+#5 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(928): App\Controllers\Home->index()
+#6 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/barrukurniawan/Documents/gmf/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2026-05-20 02:45:30 --> Error connecting to the database: Access denied for user '****'@'localhost' (using password: YES)
+CRITICAL - 2026-05-20 02:45:30 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+#0 /Users/barrukurniawan/Documents/gmf/system/Database/BaseConnection.php(637): CodeIgniter\Database\BaseConnection->initialize()
+#1 /Users/barrukurniawan/Documents/gmf/system/Database/BaseBuilder.php(1881): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#2 /Users/barrukurniawan/Documents/gmf/system/Model.php(228): CodeIgniter\Database\BaseBuilder->get()
+#3 /Users/barrukurniawan/Documents/gmf/system/BaseModel.php(644): CodeIgniter\Model->doFirst()
+#4 /Users/barrukurniawan/Documents/gmf/app/Controllers/Home.php(31): CodeIgniter\BaseModel->first()
+#5 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(928): App\Controllers\Home->index()
+#6 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /Users/barrukurniawan/Documents/gmf/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2026-05-20 14:46:08 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gmf/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gmf/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gmf/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

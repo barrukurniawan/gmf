@@ -1,0 +1,350 @@
+CRITICAL - 2026-05-13 08:16:18 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 09:09:47 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 09:09:52 --> Class "App\Controllers\Erp\EmployeeBasicCertificateModel" not found
+#0 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\TrainingRecord->form()
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\TrainingRecord))
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2026-05-13 09:13:43 --> Table 'globalmaintenanc_dashboard.employee_training_signatures' doesn't exist
+CRITICAL - 2026-05-13 09:13:43 --> Call to a member function getResult() on false
+#0 /Users/barrukurniawan/Documents/gis/system/BaseModel.php(603): CodeIgniter\Model->doFindAll(0, 0)
+#1 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/TrainingRecord.php(126): CodeIgniter\BaseModel->findAll()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\TrainingRecord->form()
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\TrainingRecord))
+#4 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2026-05-13 09:13:47 --> Table 'globalmaintenanc_dashboard.employee_training_signatures' doesn't exist
+CRITICAL - 2026-05-13 09:13:47 --> Call to a member function getResult() on false
+#0 /Users/barrukurniawan/Documents/gis/system/BaseModel.php(603): CodeIgniter\Model->doFindAll(0, 0)
+#1 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/TrainingRecord.php(126): CodeIgniter\BaseModel->findAll()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\TrainingRecord->form()
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\TrainingRecord))
+#4 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-13 10:33:59 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 10:38:14 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 10:41:30 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 10:44:36 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 10:44:45 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 11:26:51 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 11:27:00 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 11:27:10 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 11:35:20 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 12:42:44 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 12:43:14 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 13:36:59 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 13:37:26 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 14:19:14 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 14:19:43 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 02:20:17 --> During inheritance of SessionHandlerInterface: Uncaught ErrorException: Return type of CodeIgniter\Session\Handlers\FileHandler::read($sessionID) should either be compatible with SessionHandlerInterface::read(string $id): string|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in /Users/barrukurniawan/Documents/gis/system/Session/Handlers/FileHandler.php:145
+Stack trace:
+#0 /Users/barrukurniawan/Documents/gis/system/Session/Handlers/FileHandler.php(21): CodeIgniter\Debug\Exceptions->errorHandler(8192, 'Return type of ...', '/Users/barrukur...', 145)
+#1 /Users/barrukurniawan/Documents/gis/system/Autoloader/Autoloader.php(300): include_once('/Users/barrukur...')
+#2 /Users/barrukurniawan/Documents/gis/system/Autoloader/Autoloader.php(273): CodeIgniter\Autoloader\Autoloader->includeFile('/Users/barrukur...')
+#3 /Users/barrukurniawan/Documents/gis/system/Autoloader/Autoloader.php(247): CodeIgniter\Autoloader\Autoloader->loadInNamespace('CodeIgniter\\Ses...')
+#4 /Users/barrukurniawan/Documents/gis/system/Config/Services.php(728): CodeIgniter\Autoloader\Autoloader->loadClass('CodeIgniter\\Ses...')
+#5 /Users/barrukurniawan/Documents/gis/system/Config/BaseService.php(263): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#6 /Users/barrukurniawan/Documents/gis/system/Config/BaseService.php(192): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#7 /Users/barrukurniawan/Documents/gis/system/Config/Services.php(721): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#8 /Users/barrukurniawan/Documents/gis/system/Config/BaseService.php(263): CodeIgniter\Config\Services::session()
+#9 /Users/barrukurniawan/Documents/gis/app/Filters/CheckLogin.php(14): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#10 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): App\Filters\CheckLogin->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#11 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/training-r...', 'before')
+#12 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#14 {main}
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-13 02:20:17 --> Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php(137): header('HTTP/1.1 500 In...', true, 500)
+#2 /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php(195): CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#4 {main}
+CRITICAL - 2026-05-13 02:20:25 --> Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 303)
+#1 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(303): setcookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#2 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(205): CodeIgniter\Cookie\CookieStore->setCookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#3 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(461): CodeIgniter\Cookie\CookieStore->dispatch()
+#4 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(445): CodeIgniter\Security\Security->doSendCookie()
+#5 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(213): CodeIgniter\Security\Security->sendCookie(Object(CodeIgniter\HTTP\IncomingRequest))
+#6 /Users/barrukurniawan/Documents/gis/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#7 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#8 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/', 'before')
+#9 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2026-05-13 02:20:25 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php(137): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-13 02:20:26 --> Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 303)
+#1 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(303): setcookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#2 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(205): CodeIgniter\Cookie\CookieStore->setCookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#3 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(461): CodeIgniter\Cookie\CookieStore->dispatch()
+#4 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(445): CodeIgniter\Security\Security->doSendCookie()
+#5 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(213): CodeIgniter\Security\Security->sendCookie(Object(CodeIgniter\HTTP\IncomingRequest))
+#6 /Users/barrukurniawan/Documents/gis/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#7 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#8 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/', 'before')
+#9 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2026-05-13 02:20:26 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php(137): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-13 02:20:29 --> Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 303)
+#1 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(303): setcookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#2 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(205): CodeIgniter\Cookie\CookieStore->setCookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#3 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(461): CodeIgniter\Cookie\CookieStore->dispatch()
+#4 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(445): CodeIgniter\Security\Security->doSendCookie()
+#5 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(213): CodeIgniter\Security\Security->sendCookie(Object(CodeIgniter\HTTP\IncomingRequest))
+#6 /Users/barrukurniawan/Documents/gis/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#7 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#8 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/logout', 'before')
+#9 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2026-05-13 02:20:29 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php(137): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-13 02:20:34 --> Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 303)
+#1 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(303): setcookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#2 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(205): CodeIgniter\Cookie\CookieStore->setCookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#3 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(461): CodeIgniter\Cookie\CookieStore->dispatch()
+#4 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(445): CodeIgniter\Security\Security->doSendCookie()
+#5 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(213): CodeIgniter\Security\Security->sendCookie(Object(CodeIgniter\HTTP\IncomingRequest))
+#6 /Users/barrukurniawan/Documents/gis/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#7 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#8 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/', 'before')
+#9 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2026-05-13 02:20:34 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php(137): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-13 02:20:43 --> Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35)
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 303)
+#1 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(303): setcookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#2 /Users/barrukurniawan/Documents/gis/system/Cookie/CookieStore.php(205): CodeIgniter\Cookie\CookieStore->setCookie('csrf_cookie_nam...', '8e6b3cafaeecb50...', Array)
+#3 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(461): CodeIgniter\Cookie\CookieStore->dispatch()
+#4 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(445): CodeIgniter\Security\Security->doSendCookie()
+#5 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(213): CodeIgniter\Security\Security->sendCookie(Object(CodeIgniter\HTTP\IncomingRequest))
+#6 /Users/barrukurniawan/Documents/gis/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#7 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#8 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/', 'before')
+#9 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2026-05-13 02:20:43 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /Users/barrukurniawan/Documents/gis/app/Config/Events.php:35) in /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php:137
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/Users/barrukur...', 137)
+#1 /Users/barrukurniawan/Documents/gis/system/Debug/Exceptions.php(137): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2026-05-13 14:24:27 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 14:30:17 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 02:33:49 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/gis/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/training-r...', 'before')
+#4 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-13 02:34:04 --> The action you requested is not allowed.
+#0 /Users/barrukurniawan/Documents/gis/system/Security/Security.php(240): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+#1 /Users/barrukurniawan/Documents/gis/system/Filters/CSRF.php(57): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+#2 /Users/barrukurniawan/Documents/gis/system/Filters/Filters.php(181): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), NULL)
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(407): CodeIgniter\Filters\Filters->run('/erp/training-r...', 'before')
+#4 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2026-05-13 14:37:40 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 14:37:50 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 16:30:00 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 16:31:58 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 16:43:53 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2026-05-13 16:54:18 --> Trying to access array offset on null
+#0 /Users/barrukurniawan/Documents/gis/app/Controllers/Erp/Tasks.php(1227): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', '/Users/barrukur...', 1227)
+#1 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(928): App\Controllers\Erp\Tasks->client_task_status_chart()
+#2 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(436): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Erp\Tasks))
+#3 /Users/barrukurniawan/Documents/gis/system/CodeIgniter.php(336): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Users/barrukurniawan/Documents/gis/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
