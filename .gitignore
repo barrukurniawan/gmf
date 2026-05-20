@@ -1,0 +1,52 @@
+# Ignore environment files
+.env
+.env.*
+
+# Ignore writable directories and generated files
+/writable/*
+!/writable/.gitkeep
+/public/uploads/
+/public/module_scripts/
+/installation/assets/
+/installation/config/
+
+# Ignore system artifacts
+*.log
+*.cache
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor settings
+.vscode/
+.idea/
+*.sublime-* 
+*.code-workspace
+
+# Ignore dependency directories
+/vendor/
+/node_modules/
+
+# Ignore certs and keys
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+
+# Ignore Composer and npm debug logs
+composer.phar
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore OS files
+.AppleDouble
+.LSOverride
+
+# Keep sample env in source control
+!.env.example
