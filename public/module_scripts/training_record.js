@@ -96,38 +96,86 @@
       // Form submit via AJAX
       Ladda.bind('button[type=submit]');
 
+      function isCanvasBlank(canvas) {
+        if (!canvas) return true;
+        var blank = document.createElement('canvas');
+        blank.width = canvas.width;
+        blank.height = canvas.height;
+        return canvas.toDataURL() === blank.toDataURL();
+      }
+
+      function dataURLToBlob(dataURL) {
+        var parts = dataURL.split(',');
+        var mime = parts[0].match(/:(.*?);/)[1];
+        var binary = atob(parts[1]);
+        var array = [];
+        for (var i = 0; i < binary.length; i++) {
+          array.push(binary.charCodeAt(i));
+        }
+        return new Blob([new Uint8Array(array)], {type: mime});
+      }
+
       $("#training_record_form").submit(function(e){
         e.preventDefault();
         var form = this;
         var fd = new FormData(form);
+        var canvas = document.getElementById('signature_canvas');
 
-        var prepId = $('#prepared_by_id').val();
-        var appvId = $('#approved_by_id').val();
+        if (fd.has('approved_by_sig')) {
+          fd.delete('approved_by_sig');
+        }
 
-        if (prepId || appvId) {
-          Swal.fire({
-            title: 'Send Notification Email?',
-            text: "Apakah anda ingin mengirim email ke Assign Signatories untuk segera tanda tangan?",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Kirim & Save',
-            cancelButtonText: 'Tidak, Save Saja'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              fd.append('send_email_signatories', '1');
-              submitTrainingRecordAjax(fd, form);
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              fd.append('send_email_signatories', '0');
-              submitTrainingRecordAjax(fd, form);
-            } else {
-              Ladda.stopAll();
-            }
-          });
+        var processSubmission = function() {
+          var prepId = $('#prepared_by_id').val();
+          var appvId = $('#approved_by_id').val();
+
+          var executeSubmit = function(sendValue) {
+            fd.append('send_email_signatories', sendValue ? '1' : '0');
+            submitTrainingRecordAjax(fd, form);
+          };
+
+          if (prepId || appvId) {
+            Swal.fire({
+              title: 'Send Notification Email?',
+              text: "Apakah anda ingin mengirim email ke Assign Signatories untuk segera tanda tangan?",
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ya, Kirim & Save',
+              cancelButtonText: 'Tidak, Save Saja'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                executeSubmit(true);
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
+                executeSubmit(false);
+              } else {
+                Ladda.stopAll();
+              }
+            });
+          } else {
+            executeSubmit(false);
+          }
+        };
+
+        var submitAfterCanvas = function() {
+          processSubmission();
+        };
+
+        if ($('#draw_sig').hasClass('active') && canvas && !isCanvasBlank(canvas)) {
+          if (typeof canvas.toBlob === 'function') {
+            canvas.toBlob(function(blob) {
+              fd.append('approved_by_signature_file', blob, 'signature.png');
+              submitAfterCanvas();
+            }, 'image/png');
+          } else {
+            var dataURL = canvas.toDataURL('image/png');
+            var blob = dataURLToBlob(dataURL);
+            fd.append('approved_by_signature_file', blob, 'signature.png');
+            submitAfterCanvas();
+          }
         } else {
-          fd.append('send_email_signatories', '0');
-          submitTrainingRecordAjax(fd, form);
+          submitAfterCanvas();
         }
       });
 

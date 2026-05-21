@@ -385,18 +385,40 @@ document.addEventListener("DOMContentLoaded", function() {
         data: fdToSend,
         processData: false,
         contentType: false,
-        dataType: 'json',
-        success: function(response) {
-          if(response.error) {
-            toastr.error(response.error);
+        success: function(response, status, xhr) {
+          var data = response;
+          if(typeof data === 'string') {
+            try {
+              data = JSON.parse(data);
+            } catch (e) {
+              data = { result: 'Signature saved successfully!' };
+            }
+          }
+          if(data && data.error) {
+            toastr.error(data.error);
             $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Signature');
           } else {
-            toastr.success(response.result || 'Signature saved successfully!');
+            toastr.success((data && data.result) ? data.result : 'Signature saved successfully!');
             setTimeout(function() { location.reload(); }, 1000);
           }
         },
-        error: function() {
-          toastr.error('Error saving signature. Please try again.');
+        error: function(xhr) {
+          var text = xhr.responseText || '';
+          try {
+            var parsed = JSON.parse(text);
+            if(parsed && !parsed.error) {
+              toastr.success(parsed.result || 'Signature saved successfully!');
+              setTimeout(function() { location.reload(); }, 1000);
+              return;
+            }
+            if(parsed && parsed.error) {
+              toastr.error(parsed.error);
+            } else {
+              toastr.error('Error saving signature. Please try again.');
+            }
+          } catch (e) {
+            toastr.error('Error saving signature. Please try again.');
+          }
           $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Signature');
         }
       });

@@ -501,52 +501,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // --- Submit form as multipart; convert canvas to Blob to avoid large base64 in POST ---
-  $('#training_record_form').on('submit', function(e) {
-    e.preventDefault();
-    var form = this;
-    var $btn = $(form).find('button[type=submit]');
-    $btn.prop('disabled', true).html('<i class="feather icon-loader"></i> Saving...');
-
-    var submitForm = function(fd) {
-      $.ajax({
-        url: $(form).attr('action'),
-        type: 'POST',
-        data: fd,
-        processData: false,
-        contentType: false,
-        dataType: 'json',
-        success: function(response) {
-          if(response.error) {
-            toastr.error(response.error);
-            $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Training Record');
-          } else {
-            toastr.success(response.result || 'Training record saved successfully');
-            setTimeout(function(){ location.reload(); }, 1000);
-          }
-        },
-        error: function(xhr, status, err) {
-          toastr.error('Error saving record.');
-          $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Training Record');
-        }
-      });
-    };
-
-    var fd = new FormData(form);
-    // Remove large base64 field if present
-    if(fd.has('approved_by_sig')) fd.delete('approved_by_sig');
-
-    if($('#draw_sig').hasClass('active') && canvas && hasDrawn) {
-      canvas.toBlob(function(blob) {
-        // append as file field (server expects 'approved_by_signature_file')
-        fd.append('approved_by_signature_file', blob, 'signature.png');
-        submitForm(fd);
-      }, 'image/png');
-    } else {
-      submitForm(fd);
-    }
-  });
-
   // --- Signature preview on load ---
   <?php if(!empty($approved_by_signature)): ?>
   // keep signature base if needed
