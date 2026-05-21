@@ -482,9 +482,10 @@
     };
 
     window.openSignModal = function(type, userId) {
-      document.getElementById('modal_signature_type').value = type;
+      var normalizedType = (type || '').toString().trim().toLowerCase();
+      document.getElementById('modal_signature_type').value = normalizedType;
       document.getElementById('modal_user_id').value = userId;
-      var label = type.replace('_', ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
+      var label = normalizedType.replace('_', ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
       document.getElementById('signModalTitle').textContent = 'Sign as ' + label;
       clearCanvas();
       document.getElementById('modal_sig_file').value = '';
@@ -519,8 +520,12 @@
     }
 
     window.submitSignature = function() {
-      var type = document.getElementById('modal_signature_type').value;
+      var type = (document.getElementById('modal_signature_type').value || '').trim().toLowerCase();
       var userId = document.getElementById('modal_user_id').value;
+      if(!['prepared_by','approved_by'].includes(type)) {
+        alert('Invalid signature type. Please reopen the sign modal and try again.');
+        return;
+      }
       var formData = new FormData();
       formData.append(csrfName, csrfHash);
       formData.append('user_id', userId);

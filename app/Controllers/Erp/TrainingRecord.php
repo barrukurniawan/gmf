@@ -660,12 +660,15 @@ class TrainingRecord extends BaseController {
 		}
 
 		$user_id = $this->request->getPost('user_id'); // the employee whose record is being signed
-		$signature_type = $this->request->getPost('signature_type'); // 'prepared_by' or 'approved_by'
+		$raw_signature_type = strtolower(trim((string) $this->request->getPost('signature_type')));
+		$signature_type = preg_replace('/[\s\-]+/', '_', $raw_signature_type);
+		$signature_type = strtolower(trim($signature_type, '_'));
 		$logged_in_user_id = $usession['sup_user_id'];
 
 		// Validate signature_type
-		if(!in_array($signature_type, ['prepared_by', 'approved_by'])) {
+		if(!in_array($signature_type, ['prepared_by', 'approved_by'], true)) {
 			$Return['error'] = 'Invalid signature type.';
+			$Return['debug_signature_type'] = $raw_signature_type;
 			$this->output($Return);
 			return;
 		}
