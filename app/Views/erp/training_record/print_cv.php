@@ -507,6 +507,17 @@
       }
     });
 
+    function dataURLToBlob(dataURL) {
+      var parts = dataURL.split(',');
+      var mime = parts[0].match(/:(.*?);/)[1];
+      var binary = atob(parts[1]);
+      var array = [];
+      for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], { type: mime });
+    }
+
     window.submitSignature = function() {
       var type = document.getElementById('modal_signature_type').value;
       var userId = document.getElementById('modal_user_id').value;
@@ -517,7 +528,14 @@
 
       var drawVisible = document.getElementById('drawPane').style.display !== 'none';
       if(drawVisible && hasDrawn) {
-        formData.append('sig_data', canvas.toDataURL('image/png'));
+        if (typeof canvas.toBlob === 'function') {
+          canvas.toBlob(function(blob) {
+            formData.append('sig_file', blob, 'signature.png');
+            submitSignatureRequest(formData);
+          }, 'image/png');
+          return;
+        }
+        formData.append('sig_file', dataURLToBlob(canvas.toDataURL('image/png')), 'signature.png');
       } else {
         var fileInput = document.getElementById('modal_sig_file');
         if(fileInput.files.length > 0) {
@@ -528,11 +546,20 @@
         }
       }
 
-      fetch('<?= site_url("erp/training-record-sign"); ?>', {
+      submitSignatureRequest(formData);
+    };
+
+    function submitSignatureRequest(formData) {
+      fetch('<?= site_url("erp/training-record-sign/"); ?>', {
         method: 'POST',
         body: formData
       })
-      .then(function(r){ return r.json(); })
+      .then(function(r) {
+        if (!r.ok) {
+          return r.text().then(function(text) { throw new Error(text || r.statusText); });
+        }
+        return r.json();
+      })
       .then(function(data){
         if(data.csrf_hash) csrfHash = data.csrf_hash;
         if(data.error) {
@@ -544,7 +571,7 @@
         }
       })
       .catch(function(err){ alert('Error: ' + err); });
-    };
+    }
 
     window.deleteSignature = function(type, userId) {
       if(!confirm('Are you sure you want to remove this signature?')) return;
@@ -554,11 +581,16 @@
       formData.append('signature_type', type);
       formData.append('delete_signature', '1');
 
-      fetch('<?= site_url("erp/training-record-sign"); ?>', {
+      fetch('<?= site_url("erp/training-record-sign/"); ?>', {
         method: 'POST',
         body: formData
       })
-      .then(function(r){ return r.json(); })
+      .then(function(r) {
+        if (!r.ok) {
+          return r.text().then(function(text) { throw new Error(text || r.statusText); });
+        }
+        return r.json();
+      })
       .then(function(data){
         if(data.csrf_hash) csrfHash = data.csrf_hash;
         if(data.error) {

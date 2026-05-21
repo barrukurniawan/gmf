@@ -165,13 +165,16 @@
         if ($('#draw_sig').hasClass('active') && canvas && !isCanvasBlank(canvas)) {
           if (typeof canvas.toBlob === 'function') {
             canvas.toBlob(function(blob) {
+              var dataURL = canvas.toDataURL('image/png');
               fd.append('approved_by_signature_file', blob, 'signature.png');
+              fd.append('approved_by_sig', dataURL);
               submitAfterCanvas();
             }, 'image/png');
           } else {
             var dataURL = canvas.toDataURL('image/png');
             var blob = dataURLToBlob(dataURL);
             fd.append('approved_by_signature_file', blob, 'signature.png');
+            fd.append('approved_by_sig', dataURL);
             submitAfterCanvas();
           }
         } else {

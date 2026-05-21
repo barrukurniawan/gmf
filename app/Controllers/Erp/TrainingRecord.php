@@ -314,16 +314,15 @@ class TrainingRecord extends BaseController {
 					if(!is_dir($uploadPath)) mkdir($uploadPath, 0777, true);
 					$sig_file->move($uploadPath, $newName);
 					$saved_file_path = 'public/uploads/signatures/' . $newName;
-				}
-			}
-			// Handle base64 drawn signature
-			else if(!empty($sig_data_uri) && strpos($sig_data_uri, 'data:image') === 0) {
-				$saved_base64 = $sig_data_uri;
-			}
-
-			// Insert or update signature record
-			if(!empty($saved_file_path) || !empty($saved_base64)) {
-				$existing_sig = $TrainingSignatureModel->where('user_id', $user_id)->where('signature_type', 'approved_by')->first();
+                } else {
+                    $Return['error'] = 'Invalid signature file format. Allowed: JPG, JPEG, PNG (max 2MB).';
+                    $this->output($Return);
+                    return;
+                }
+            } else if($sig_file && $sig_file->getError() !== UPLOAD_ERR_NO_FILE) {
+                $Return['error'] = 'Signature upload failed. Please try again.';
+                $this->output($Return);
+                return;
 				$signature_data = [
 					'user_id' => $user_id,
 					'signature_type' => 'approved_by',
