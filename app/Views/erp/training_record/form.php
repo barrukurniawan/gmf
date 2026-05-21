@@ -408,7 +408,7 @@ foreach($signatures as $sig) {
         <a href="<?= site_url('erp/training-record'); ?>" class="btn btn-light">
           <?= lang('Main.xin_close'); ?>
         </a>
-        <button type="submit" class="btn btn-primary ladda-button" data-style="expand-right">
+        <button type="submit" class="btn btn-primary ladda-button" data-style="expand-right" id="save_record_btn">
           <i class="feather icon-save"></i> Save Training Record
         </button>
       </div>
@@ -505,6 +505,18 @@ document.addEventListener("DOMContentLoaded", function() {
   <?php if(!empty($approved_by_signature)): ?>
   // keep signature base if needed
   <?php endif; ?>
+
+  // --- Capture signature canvas data before form submit ---
+  $('#training_record_form').on('submit', function(e) {
+    var activeTab = $('.sig-content.active').attr('id');
+    var isDelete = $('#delete_signature').is(':checked');
+
+    if(!isDelete && activeTab === 'draw_sig' && canvas && hasDrawn) {
+      $('#approved_by_sig').val(canvas.toDataURL('image/png'));
+    } else {
+      $('#approved_by_sig').val('');
+    }
+  });
 
 });
 </script>

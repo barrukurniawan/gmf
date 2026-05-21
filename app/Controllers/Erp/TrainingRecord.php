@@ -323,31 +323,36 @@ class TrainingRecord extends BaseController {
                 $Return['error'] = 'Signature upload failed. Please try again.';
                 $this->output($Return);
                 return;
-				$signature_data = [
-					'user_id' => $user_id,
-					'signature_type' => 'approved_by',
-					'signature_data' => $saved_base64,
-					'file_path' => $saved_file_path,
-					'updated_at' => $dt,
-				];
-				if($existing_sig) {
-					$TrainingSignatureModel->update($existing_sig['signature_id'], $signature_data);
-				} else {
-					$signature_data['created_at'] = $dt;
-					$TrainingSignatureModel->insert($signature_data);
-				}
-			}
+            } else if(!empty($sig_data_uri) && strpos($sig_data_uri, 'data:image') === 0) {
+                $saved_base64 = $sig_data_uri;
+            }
+
+            if(!empty($saved_file_path) || !empty($saved_base64)) {
+                $existing_sig = $TrainingSignatureModel->where('user_id', $user_id)->where('signature_type', 'approved_by')->first();
+                $signature_data = [
+                    'user_id' => $user_id,
+                    'signature_type' => 'approved_by',
+                    'signature_data' => $saved_base64,
+                    'file_path' => $saved_file_path,
+                    'updated_at' => $dt,
+                ];
+                if($existing_sig) {
+                    $TrainingSignatureModel->update($existing_sig['signature_id'], $signature_data);
+                } else {
+                    $signature_data['created_at'] = $dt;
+                    $TrainingSignatureModel->insert($signature_data);
+                }
+            }
 		}
 
-		// Send email if requested
 		if($this->request->getPost('send_email_signatories') == '1') {
+			$emp = $UsersModel->where('user_id', $user_id)->first();
+			$emp_name = $emp ? ($emp['first_name'] . ' ' . $emp['last_name']) : 'Employee';
+			$sender_name = $user_info['first_name'] . ' ' . $user_info['last_name'];
 			$prepId = $this->request->getPost('prepared_by_id');
 			$appvId = $this->request->getPost('approved_by_id');
-			$employee_info = $UsersModel->where('user_id', $user_id)->first();
-			$emp_name = $employee_info ? $employee_info['first_name'] . ' ' . $employee_info['last_name'] : 'Employee';
-			$sender_name = $user_info['first_name'] . ' ' . $user_info['last_name'];
-			
-			$subject = 'Action Required: Training Record Signature Needed for ' . $emp_name;
+			$subject = "Training Record Assignment";
+
 			$message = "
 				<p>Dear Signatory,</p>
 				<p>This is a notification that you have been assigned to sign the Training Record for <strong>{$emp_name}</strong>.</p>

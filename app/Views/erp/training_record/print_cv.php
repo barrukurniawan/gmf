@@ -555,7 +555,7 @@
     };
 
     function submitSignatureRequest(formData) {
-      fetch('<?= site_url("erp/training-record-sign/"); ?>', {
+      fetch('<?= site_url("erp/training-record-sign"); ?>', {
         method: 'POST',
         body: formData
       })
@@ -586,7 +586,7 @@
       formData.append('signature_type', type);
       formData.append('delete_signature', '1');
 
-      fetch('<?= site_url("erp/training-record-sign/"); ?>', {
+      fetch('<?= site_url("erp/training-record-sign"); ?>', {
         method: 'POST',
         body: formData
       })
