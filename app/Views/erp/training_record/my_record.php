@@ -44,7 +44,7 @@ $emp_sig_src = !empty($employee_signature['file_path']) ? base_url().'/'.$employ
 
 <div class="row">
   <div class="col-sm-12">
-    <?php $attributes = array('name' => 'my_training_record_form', 'id' => 'my_training_record_form', 'autocomplete' => 'off', 'class' => 'm-b-1'); ?>
+    <?php $attributes = array('name' => 'my_training_record_form', 'id' => 'my_training_record_form', 'autocomplete' => 'off', 'class' => 'm-b-1', 'enctype' => 'multipart/form-data'); ?>
     <?php $hidden = array('user_id' => $employee['user_id']); ?>
     <?= form_open('erp/training-record-save-signature', $attributes, $hidden); ?>
 
@@ -345,67 +345,71 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // --- Save canvas to hidden input before submit ---
+  // --- Save canvas/upload signature as multipart; convert canvas to Blob before sending ---
   $('#my_training_record_form').on('submit', function(e) {
     e.preventDefault();
 
     var isDelete = $('#delete_employee_signature').is(':checked');
+    var form = this;
+    var $btn = $('#save_sig_btn');
 
     if(!isDelete) {
       var activeTab = $('.sig-content.active').attr('id');
 
-      // Check if draw tab is active
       if(activeTab === 'draw_emp_sig') {
         if(!hasEmpDrawn) {
           toastr.warning('Please draw your signature first.');
           return;
         }
-        var dataURL = empCanvas.toDataURL('image/png');
-        $('#employee_sig').val(dataURL);
-      }
-      // Check if upload tab is active
-      else if(activeTab === 'upload_emp_sig') {
+      } else if(activeTab === 'upload_emp_sig') {
         var fileInput = $('#employee_signature_file')[0];
         if(!fileInput || !fileInput.files || !fileInput.files[0]) {
           toastr.warning('Please select a signature file to upload.');
           return;
         }
-      }
-      // Preview tab - no new signature provided
-      else if(activeTab === 'preview_emp_sig') {
+      } else if(activeTab === 'preview_emp_sig') {
         toastr.warning('Check "Delete current signature" to remove it, or switch to Draw/Upload tab to provide a new signature.');
         return;
       }
     }
 
-    var $btn = $('#save_sig_btn');
     $btn.prop('disabled', true).html('<i class="feather icon-loader"></i> Saving...');
 
-    var formData = new FormData(this);
+    var fd = new FormData(form);
+    if(fd.has('employee_sig')) fd.delete('employee_sig');
 
-    $.ajax({
-      url: $(this).attr('action'),
-      type: 'POST',
-      data: formData,
-      processData: false,
-      contentType: false,
-      dataType: 'json',
-      success: function(response) {
-        if(response.error) {
-          toastr.error(response.error);
+    var sendFd = function(fdToSend) {
+      $.ajax({
+        url: $(form).attr('action'),
+        type: 'POST',
+        data: fdToSend,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function(response) {
+          if(response.error) {
+            toastr.error(response.error);
+            $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Signature');
+          } else {
+            toastr.success(response.result || 'Signature saved successfully!');
+            setTimeout(function() { location.reload(); }, 1000);
+          }
+        },
+        error: function() {
+          toastr.error('Error saving signature. Please try again.');
           $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Signature');
-        } else {
-          toastr.success(response.result || 'Signature saved successfully!');
-          setTimeout(function() {
-            location.reload();
-          }, 1000);
         }
-      },
-      error: function(xhr, status, error) {
-        toastr.error('Error saving signature. Please try again.');
-        $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Signature');
-      }
-    });
+      });
+    };
+
+    if($('.sig-tab.active').data('target') === 'draw_emp_sig' && empCanvas && hasEmpDrawn) {
+      empCanvas.toBlob(function(blob) {
+        fd.append('employee_signature_file', blob, 'employee_signature.png');
+        sendFd(fd);
+      }, 'image/png');
+    } else {
+      sendFd(fd);
+    }
   });
 });
 </script>

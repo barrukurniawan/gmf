@@ -48,7 +48,7 @@ foreach($signatures as $sig) {
 
 <div class="row">
   <div class="col-sm-12">
-    <?php $attributes = array('name' => 'training_record_form', 'id' => 'training_record_form', 'autocomplete' => 'off', 'class' => 'm-b-1'); ?>
+    <?php $attributes = array('name' => 'training_record_form', 'id' => 'training_record_form', 'autocomplete' => 'off', 'class' => 'm-b-1', 'enctype' => 'multipart/form-data'); ?>
     <?php $hidden = array('user_id' => $employee['user_id']); ?>
     <?= form_open('erp/training-record-save', $attributes, $hidden); ?>
 
@@ -501,14 +501,49 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // --- Save canvas to hidden input before submit ---
+  // --- Submit form as multipart; convert canvas to Blob to avoid large base64 in POST ---
   $('#training_record_form').on('submit', function(e) {
-    // If draw tab is active, save canvas
+    e.preventDefault();
+    var form = this;
+    var $btn = $(form).find('button[type=submit]');
+    $btn.prop('disabled', true).html('<i class="feather icon-loader"></i> Saving...');
+
+    var submitForm = function(fd) {
+      $.ajax({
+        url: $(form).attr('action'),
+        type: 'POST',
+        data: fd,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function(response) {
+          if(response.error) {
+            toastr.error(response.error);
+            $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Training Record');
+          } else {
+            toastr.success(response.result || 'Training record saved successfully');
+            setTimeout(function(){ location.reload(); }, 1000);
+          }
+        },
+        error: function(xhr, status, err) {
+          toastr.error('Error saving record.');
+          $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Training Record');
+        }
+      });
+    };
+
+    var fd = new FormData(form);
+    // Remove large base64 field if present
+    if(fd.has('approved_by_sig')) fd.delete('approved_by_sig');
+
     if($('#draw_sig').hasClass('active') && canvas && hasDrawn) {
-      var dataURL = canvas.toDataURL('image/png');
-      $('#approved_by_sig').val(dataURL);
-    } else if($('#draw_sig').hasClass('active')) {
-      $('#approved_by_sig').val('');
+      canvas.toBlob(function(blob) {
+        // append as file field (server expects 'approved_by_signature_file')
+        fd.append('approved_by_signature_file', blob, 'signature.png');
+        submitForm(fd);
+      }, 'image/png');
+    } else {
+      submitForm(fd);
     }
   });
 
