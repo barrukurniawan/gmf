@@ -214,17 +214,30 @@ class TrainingRecord extends BaseController {
 			if(!empty($course_titles)){
 				foreach($course_titles as $i => $course_title){
 					if(!empty($course_title) || !empty($this->request->getPost('course_objective')[$i])){
-						$th_data = [
-							'user_id' => $user_id,
-							'course_title' => $course_title,
-							'course_objective' => $this->request->getPost('course_objective')[$i] ?? '',
-							'date_completed' => $this->request->getPost('date_completed')[$i] ?? '',
-							'test_result' => $this->request->getPost('test_result')[$i] ?? '',
-							'total_hours' => $this->request->getPost('total_hours')[$i] ?? '',
-							'location' => $this->request->getPost('location')[$i] ?? '',
-							'instructor_name' => $this->request->getPost('instructor_name')[$i] ?? '',
-							'created_at' => $dt,
-							'updated_at' => $dt,
+                        $raw_date = trim($this->request->getPost('date_completed')[$i] ?? '');
+                        $date_completed = '';
+                        if ($raw_date !== '') {
+                            $date = \DateTime::createFromFormat('d-m-Y', $raw_date);
+                            if (!$date) {
+                                $date = \DateTime::createFromFormat('d/m/Y', $raw_date);
+                            }
+                            if (!$date) {
+                                $date = date_create($raw_date);
+                            }
+                            $date_completed = $date ? $date->format('Y-m-d') : $raw_date;
+                        }
+                        $th_data = [
+                            'user_id' => $user_id,
+                            'course_title' => $course_title,
+                            'course_objective' => $this->request->getPost('course_objective')[$i] ?? '',
+                            'date_completed' => $date_completed,
+                            'test_result' => $this->request->getPost('test_result')[$i] ?? '',
+                            'total_hours' => $this->request->getPost('total_hours')[$i] ?? '',
+                            'institution' => $this->request->getPost('institution')[$i] ?? '',
+                            'location' => $this->request->getPost('location')[$i] ?? '',
+                            'instructor_name' => $this->request->getPost('instructor_name')[$i] ?? '',
+                            'created_at' => $dt,
+                            'updated_at' => $dt,
 						];
 						$EmployeeTrainingHistoryModel->insert($th_data);
 					}
@@ -425,20 +438,35 @@ class TrainingRecord extends BaseController {
 
 		$data['header'] = $TrainingRecordHeaderModel->where('user_id', $user_id_param)->first();
 		$data['education'] = $EmployeeEducationModel->where('user_id', $user_id_param)->orderBy('education_id', 'ASC')->findAll();
-		$training_history = $EmployeeTrainingHistoryModel->where('user_id', $user_id_param)->orderBy('training_history_id', 'ASC')->findAll();
+		$training_history = $EmployeeTrainingHistoryModel->where('user_id', $user_id_param)->findAll();
 		usort($training_history, function($a, $b) {
-			$dateA = !empty($a['date_completed']) ? strtotime($a['date_completed']) : 0;
-			$dateB = !empty($b['date_completed']) ? strtotime($b['date_completed']) : 0;
-			if ($dateA === $dateB) {
-				return 0;
+			$dateA = 0;
+			$dateB = 0;
+			if (!empty($a['date_completed'])) {
+				$date = \DateTime::createFromFormat('Y-m-d', $a['date_completed']);
+				if (!$date) {
+					$date = \DateTime::createFromFormat('d-m-Y', $a['date_completed']);
+				}
+				if (!$date) {
+					$date = \DateTime::createFromFormat('d/m/Y', $a['date_completed']);
+				}
+				if ($date) {
+					$dateA = $date->getTimestamp();
+				}
 			}
-			if ($dateA === 0) {
-				return 1;
+			if (!empty($b['date_completed'])) {
+				$date = \DateTime::createFromFormat('Y-m-d', $b['date_completed']);
+				if (!$date) {
+					$date = \DateTime::createFromFormat('d-m-Y', $b['date_completed']);
+				}
+				if (!$date) {
+					$date = \DateTime::createFromFormat('d/m/Y', $b['date_completed']);
+				}
+				if ($date) {
+					$dateB = $date->getTimestamp();
+				}
 			}
-			if ($dateB === 0) {
-				return -1;
-			}
-			return $dateB <=> $dateA;
+			return $dateA <=> $dateB;
 		});
 		$data['training_history'] = $training_history;
 		$data['licenses'] = $EmployeeLicenseModel->where('user_id', $user_id_param)->orderBy('license_id', 'ASC')->findAll();

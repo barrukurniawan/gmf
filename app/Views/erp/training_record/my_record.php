@@ -129,7 +129,7 @@ $emp_sig_src = !empty($employee_signature['file_path']) ? base_url().'/'.$employ
             </thead>
             <tbody>
               <?php foreach($training_history as $th): ?>
-              <tr><td><?= $th['course_title']; ?></td><td><?= $th['course_objective']; ?></td><td><?= $th['date_completed']; ?></td><td><?= $th['test_result']; ?></td><td><?= $th['total_hours']; ?></td><td><?= $th['location']; ?></td><td><?= $th['instructor_name']; ?></td></tr>
+              <tr><td><?= $th['course_title']; ?></td><td><?= $th['course_objective']; ?></td><td><?= !empty($th['date_completed']) && strtotime($th['date_completed']) ? date('d-m-Y', strtotime($th['date_completed'])) : ''; ?></td><td><?= $th['test_result']; ?></td><td><?= $th['total_hours']; ?></td><td><?= $th['location']; ?></td><td><?= $th['instructor_name']; ?></td></tr>
               <?php endforeach; ?>
             </tbody>
           </table>

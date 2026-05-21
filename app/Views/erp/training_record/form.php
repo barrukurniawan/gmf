@@ -168,13 +168,14 @@ foreach($signatures as $sig) {
           <table class="table table-bordered table-dynamic" id="training_table">
             <thead>
               <tr>
-                <th style="width:14%">Course Title</th>
-                <th style="width:16%">Course Objective</th>
-                <th style="width:12%">Date Completed</th>
-                <th style="width:12%">Test Result</th>
+                <th style="width:13%">Course Title</th>
+                <th style="width:15%">Course Objective</th>
+                <th style="width:11%">Date Completed</th>
+                <th style="width:11%">Test Result</th>
                 <th style="width:10%">Total Hours</th>
-                <th style="width:14%">Location</th>
-                <th style="width:14%">Instructor</th>
+                <th style="width:12%">Institution</th>
+                <th style="width:12%">Location</th>
+                <th style="width:12%">Instructor</th>
                 <th style="width:8%"></th>
               </tr>
             </thead>
@@ -184,9 +185,10 @@ foreach($signatures as $sig) {
                 <tr>
                   <td><input type="text" class="form-control" name="course_title[]" value="<?= $th['course_title']; ?>" placeholder="Course Title"></td>
                   <td><input type="text" class="form-control" name="course_objective[]" value="<?= $th['course_objective']; ?>" placeholder="Objective"></td>
-                  <td><input type="text" class="form-control date" name="date_completed[]" value="<?= $th['date_completed']; ?>" placeholder="Date"></td>
+                  <td><input type="text" class="form-control date" name="date_completed[]" data-date-format="dd-mm-yyyy" value="<?= !empty($th['date_completed']) && strtotime($th['date_completed']) ? date('d-m-Y', strtotime($th['date_completed'])) : ''; ?>" placeholder="Date"></td>
                   <td><input type="text" class="form-control" name="test_result[]" value="<?= $th['test_result']; ?>" placeholder="Test Result"></td>
                   <td><input type="text" class="form-control" name="total_hours[]" value="<?= $th['total_hours']; ?>" placeholder="Hours"></td>
+                  <td><input type="text" class="form-control" name="institution[]" value="<?= $th['institution'] ?? ''; ?>" placeholder="Institution"></td>
                   <td><input type="text" class="form-control" name="location[]" value="<?= $th['location']; ?>" placeholder="Location"></td>
                   <td><input type="text" class="form-control" name="instructor_name[]" value="<?= $th['instructor_name']; ?>" placeholder="Instructor"></td>
                   <td class="text-center"><i class="feather icon-trash-2 btn-remove-row"></i></td>
@@ -196,9 +198,10 @@ foreach($signatures as $sig) {
               <tr>
                 <td><input type="text" class="form-control" name="course_title[]" placeholder="Course Title"></td>
                 <td><input type="text" class="form-control" name="course_objective[]" placeholder="Objective"></td>
-                <td><input type="text" class="form-control date" name="date_completed[]" placeholder="Date"></td>
+                <td><input type="text" class="form-control date" name="date_completed[]" data-date-format="dd-mm-yyyy" placeholder="Date"></td>
                 <td><input type="text" class="form-control" name="test_result[]" placeholder="Test Result"></td>
                 <td><input type="text" class="form-control" name="total_hours[]" placeholder="Hours"></td>
+                <td><input type="text" class="form-control" name="institution[]" placeholder="Institution"></td>
                 <td><input type="text" class="form-control" name="location[]" placeholder="Location"></td>
                 <td><input type="text" class="form-control" name="instructor_name[]" placeholder="Instructor"></td>
                 <td class="text-center"><i class="feather icon-trash-2 btn-remove-row"></i></td>

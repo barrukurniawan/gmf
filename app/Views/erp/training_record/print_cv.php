@@ -129,7 +129,7 @@
           <table class="contact-table">
             <tr><td style="width:35px;">Phone</td><td>: +62 21 809 2019</td></tr>
             <tr><td>Fax</td><td>: +62 21 809 1993</td></tr>
-            <tr><td>Email</td><td>: info@globalmaintenancefacility.co.id</td></tr>
+            <tr><td>Email</td><td>: info@globalmaintenance.co.id</td></tr>
           </table>
         </td>
       </tr>
@@ -189,7 +189,8 @@
               <th style="width:18%;">Course Objective</th>
               <th style="width:15%;">Date Completed</th>
               <th style="width:12%;">Test Resulted</th>
-              <th style="width:12%;">Total Hours<br>of Training</th>
+              <th style="width:10%;">Total Hours<br>of Training</th>
+              <th style="width:12%;">Institution</th>
               <th style="width:13%;">Location<br>of<br>Training</th>
               <th style="width:15%;">Name of<br>Instructor</th>
             </tr>
@@ -198,15 +199,16 @@
               <tr>
                 <td><?= $th['course_title']; ?></td>
                 <td><?= $th['course_objective']; ?></td>
-                <td><?= $th['date_completed']; ?></td>
+                <td><?= !empty($th['date_completed']) && strtotime($th['date_completed']) ? date('d-m-Y', strtotime($th['date_completed'])) : ''; ?></td>
                 <td><?= $th['test_result']; ?></td>
                 <td><?= $th['total_hours']; ?></td>
+                <td><?= $th['institution']; ?></td>
                 <td><?= $th['location']; ?></td>
                 <td><?= $th['instructor_name']; ?></td>
               </tr>
               <?php endforeach; ?>
             <?php else: ?>
-            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
             <?php endif; ?>
           </table>
         </td>
