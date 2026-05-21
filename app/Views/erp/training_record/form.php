@@ -19,11 +19,14 @@ $training_history = $training_history ?? [];
 $licenses = $licenses ?? [];
 $certificates = $certificates ?? [];
 $signatures = $signatures ?? [];
+$prepared_by_signature = '';
 $approved_by_signature = '';
 foreach($signatures as $sig) {
+    if(($sig['signature_type'] ?? '') === 'prepared_by') {
+        $prepared_by_signature = !empty($sig['file_path']) ? base_url().'/'.$sig['file_path'] : ($sig['signature_data'] ?? '');
+    }
     if(($sig['signature_type'] ?? '') === 'approved_by') {
         $approved_by_signature = !empty($sig['file_path']) ? base_url().'/'.$sig['file_path'] : ($sig['signature_data'] ?? '');
-        break;
     }
 }
 ?>
@@ -43,7 +46,6 @@ foreach($signatures as $sig) {
 .sig-content.active { display: block; }
 .signature-preview-img { max-width: 100%; max-height: 120px; border: 1px solid #ddd; display: none; margin-top: 5px; }
 .signature-canvas-wrapper { position: relative; border: 1px solid #ddd; display: inline-block; }
-#signature_canvas { cursor: crosshair; background: #fff; }
 </style>
 
 <div class="row">
@@ -53,7 +55,6 @@ foreach($signatures as $sig) {
     <?= form_open('erp/training-record-save', $attributes, $hidden); ?>
 
     <input type="hidden" name="type" value="save_record" />
-    <input type="hidden" name="approved_by_sig" id="approved_by_sig" value="" />
 
     <!-- Employee Info Banner -->
     <div class="card">
@@ -359,43 +360,86 @@ foreach($signatures as $sig) {
       </div>
     </div>
 
-    <!-- G. Signature - Approved By -->
+    <!-- G. Signature - Prepared By -->
     <div class="card section-card">
       <div class="card-header">
-        <h5>G. Signature - Approved By</h5>
+        <h5>G. Signature - Prepared By</h5>
       </div>
       <div class="card-body">
         <div class="sig-tabs">
-          <div class="sig-tab active" data-target="draw_sig">Free Draw</div>
-          <div class="sig-tab" data-target="upload_sig">Upload File</div>
-          <?php if(!empty($approved_by_signature)): ?>
-          <div class="sig-tab" data-target="preview_sig">Current Signature</div>
+          <div class="sig-tab active" data-type="prepared_by" data-target="draw_sig_prepared_by">Free Draw</div>
+          <div class="sig-tab" data-type="prepared_by" data-target="upload_sig_prepared_by">Upload File</div>
+          <?php if(!empty($prepared_by_signature)): ?>
+          <div class="sig-tab" data-type="prepared_by" data-target="preview_sig_prepared_by">Current Signature</div>
           <?php endif; ?>
         </div>
-        <div id="draw_sig" class="sig-content active">
+        <div id="draw_sig_prepared_by" class="sig-content sig-content-prepared_by active" data-tab="draw_sig">
           <div class="signature-canvas-wrapper">
-            <canvas id="signature_canvas" width="400" height="150"></canvas>
+            <canvas id="signature_canvas_prepared_by" width="400" height="150" style="cursor:crosshair; background:#fff;"></canvas>
           </div>
           <div class="mt-2">
-            <button type="button" class="btn btn-sm btn-secondary" id="clear_sig">Clear</button>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="clearSig('prepared_by')">Clear</button>
             <small class="text-muted ml-2">Draw your signature in the box above</small>
           </div>
         </div>
-        <div id="upload_sig" class="sig-content">
+        <div id="upload_sig_prepared_by" class="sig-content sig-content-prepared_by" data-tab="upload_sig">
+          <input type="file" class="form-control-file" name="prepared_by_signature_file" id="prepared_by_signature_file" accept="image/jpeg,image/jpg,image/png">
+          <small class="text-muted">Allowed formats: JPG, JPEG, PNG</small>
+          <div id="upload_preview_container_prepared_by" style="display:none; margin-top:10px;">
+            <img id="upload_preview_img_prepared_by" class="signature-preview-img" style="display:block;" />
+          </div>
+        </div>
+        <?php if(!empty($prepared_by_signature)): ?>
+        <div id="preview_sig_prepared_by" class="sig-content sig-content-prepared_by" data-tab="preview_sig">
+          <div class="mb-2">
+            <img src="<?= $prepared_by_signature; ?>" alt="Current Prepared By Signature" style="max-width:100%; max-height:120px; border:1px solid #ddd;">
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="delete_signature_prepared_by" id="delete_signature_prepared_by" value="1">
+            <label class="form-check-label" for="delete_signature_prepared_by">Delete current signature</label>
+          </div>
+        </div>
+        <?php endif; ?>
+      </div>
+    </div>
+
+    <!-- H. Signature - Approved By -->
+    <div class="card section-card">
+      <div class="card-header">
+        <h5>H. Signature - Approved By</h5>
+      </div>
+      <div class="card-body">
+        <div class="sig-tabs">
+          <div class="sig-tab active" data-type="approved_by" data-target="draw_sig_approved_by">Free Draw</div>
+          <div class="sig-tab" data-type="approved_by" data-target="upload_sig_approved_by">Upload File</div>
+          <?php if(!empty($approved_by_signature)): ?>
+          <div class="sig-tab" data-type="approved_by" data-target="preview_sig_approved_by">Current Signature</div>
+          <?php endif; ?>
+        </div>
+        <div id="draw_sig_approved_by" class="sig-content sig-content-approved_by active" data-tab="draw_sig">
+          <div class="signature-canvas-wrapper">
+            <canvas id="signature_canvas_approved_by" width="400" height="150" style="cursor:crosshair; background:#fff;"></canvas>
+          </div>
+          <div class="mt-2">
+            <button type="button" class="btn btn-sm btn-secondary" onclick="clearSig('approved_by')">Clear</button>
+            <small class="text-muted ml-2">Draw your signature in the box above</small>
+          </div>
+        </div>
+        <div id="upload_sig_approved_by" class="sig-content sig-content-approved_by" data-tab="upload_sig">
           <input type="file" class="form-control-file" name="approved_by_signature_file" id="approved_by_signature_file" accept="image/jpeg,image/jpg,image/png">
           <small class="text-muted">Allowed formats: JPG, JPEG, PNG</small>
-          <div id="upload_preview_container" style="display:none; margin-top:10px;">
-            <img id="upload_preview_img" class="signature-preview-img" style="display:block;" />
+          <div id="upload_preview_container_approved_by" style="display:none; margin-top:10px;">
+            <img id="upload_preview_img_approved_by" class="signature-preview-img" style="display:block;" />
           </div>
         </div>
         <?php if(!empty($approved_by_signature)): ?>
-        <div id="preview_sig" class="sig-content">
+        <div id="preview_sig_approved_by" class="sig-content sig-content-approved_by" data-tab="preview_sig">
           <div class="mb-2">
             <img src="<?= $approved_by_signature; ?>" alt="Current Approved By Signature" style="max-width:100%; max-height:120px; border:1px solid #ddd;">
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="delete_signature" id="delete_signature" value="1">
-            <label class="form-check-label" for="delete_signature">Delete current signature</label>
+            <input class="form-check-input" type="checkbox" name="delete_signature_approved_by" id="delete_signature_approved_by" value="1">
+            <label class="form-check-label" for="delete_signature_approved_by">Delete current signature</label>
           </div>
         </div>
         <?php endif; ?>
@@ -423,29 +467,32 @@ document.addEventListener("DOMContentLoaded", function() {
   "use strict";
 
   // --- Signature Drawing ---
-  var canvas = document.getElementById('signature_canvas');
-  var ctx = canvas ? canvas.getContext('2d') : null;
-  var isDrawing = false;
-  var hasDrawn = false;
+  window.hasDrawn_prepared_by = false;
+  window.hasDrawn_approved_by = false;
 
-  function getPos(e) {
-    var rect = canvas.getBoundingClientRect();
-    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return {
-      x: (clientX - rect.left) * (canvas.width / rect.width),
-      y: (clientY - rect.top) * (canvas.height / rect.height)
-    };
-  }
+  function initCanvas(type) {
+    var canvas = document.getElementById('signature_canvas_' + type);
+    if(!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var isDrawing = false;
 
-  if(canvas && ctx) {
+    function getPos(e) {
+      var rect = canvas.getBoundingClientRect();
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: (clientX - rect.left) * (canvas.width / rect.width),
+        y: (clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
     ctx.lineWidth = 2;
     ctx.lineCap = 'round';
     ctx.strokeStyle = '#000000';
 
     canvas.addEventListener('mousedown', function(e) {
       isDrawing = true;
-      hasDrawn = true;
+      window['hasDrawn_' + type] = true;
       var p = getPos(e);
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
@@ -458,10 +505,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     canvas.addEventListener('mouseup', function() { isDrawing = false; });
     canvas.addEventListener('mouseout', function() { isDrawing = false; });
+    
     canvas.addEventListener('touchstart', function(e) {
       e.preventDefault();
       isDrawing = true;
-      hasDrawn = true;
+      window['hasDrawn_' + type] = true;
       var p = getPos(e);
       ctx.beginPath();
       ctx.moveTo(p.x, p.y);
@@ -474,48 +522,122 @@ document.addEventListener("DOMContentLoaded", function() {
       ctx.stroke();
     }, { passive: false });
     canvas.addEventListener('touchend', function() { isDrawing = false; });
-
-    $('#clear_sig').on('click', function() {
-      if(ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
-      hasDrawn = false;
-      $('#approved_by_sig').val('');
-    });
   }
+
+  initCanvas('prepared_by');
+  initCanvas('approved_by');
+
+  window.clearSig = function(type) {
+    var canvas = document.getElementById('signature_canvas_' + type);
+    if(canvas) {
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      window['hasDrawn_' + type] = false;
+    }
+  };
 
   // --- Signature Tabs ---
   $('.sig-tab').on('click', function() {
-    $('.sig-tab').removeClass('active');
+    var type = $(this).data('type');
+    $('.sig-tab[data-type="'+type+'"]').removeClass('active');
     $(this).addClass('active');
-    $('.sig-content').removeClass('active');
+    $('.sig-content-' + type).removeClass('active');
     var target = $(this).data('target');
     if(target) $('#'+target).addClass('active');
   });
 
   // --- Upload Preview ---
+  $('#prepared_by_signature_file').on('change', function() {
+    var file = this.files[0];
+    if(file) {
+      var url = URL.createObjectURL(file);
+      $('#upload_preview_img_prepared_by').attr('src', url).show();
+      $('#upload_preview_container_prepared_by').show();
+    }
+  });
+
   $('#approved_by_signature_file').on('change', function() {
     var file = this.files[0];
     if(file) {
       var url = URL.createObjectURL(file);
-      $('#upload_preview_img').attr('src', url).show();
-      $('#upload_preview_container').show();
+      $('#upload_preview_img_approved_by').attr('src', url).show();
+      $('#upload_preview_container_approved_by').show();
     }
   });
 
-  // --- Signature preview on load ---
-  <?php if(!empty($approved_by_signature)): ?>
-  // keep signature base if needed
-  <?php endif; ?>
-
-  // --- Capture signature canvas data before form submit ---
+  // --- Capture signature canvas data and send via AJAX ---
   $('#training_record_form').on('submit', function(e) {
-    var activeTab = $('.sig-content.active').attr('id');
-    var isDelete = $('#delete_signature').is(':checked');
+    e.preventDefault();
+    var form = this;
+    var $btn = $('#save_record_btn');
+    $btn.prop('disabled', true).html('<i class="feather icon-loader"></i> Saving...');
 
-    if(!isDelete && activeTab === 'draw_sig' && canvas && hasDrawn) {
-      $('#approved_by_sig').val(canvas.toDataURL('image/png'));
-    } else {
-      $('#approved_by_sig').val('');
+    var fd = new FormData(form);
+
+    // Helper to convert dataURL to Blob
+    function dataURLToBlob(dataURL) {
+      var parts = dataURL.split(',');
+      var mime = parts[0].match(/:(.*?);/)[1];
+      var binary = atob(parts[1]);
+      var array = [];
+      for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], { type: mime });
     }
+
+    var sigTypes = ['prepared_by', 'approved_by'];
+    var promises = [];
+
+    sigTypes.forEach(function(type) {
+      var isDelete = $('#delete_signature_' + type).is(':checked');
+      var activeTab = $('.sig-content-' + type + '.active').attr('data-tab');
+      
+      if (!isDelete && activeTab === 'draw_sig') {
+        var canvas = document.getElementById('signature_canvas_' + type);
+        var hasDrawn = window['hasDrawn_' + type];
+        if (canvas && hasDrawn) {
+          if (typeof canvas.toBlob === 'function') {
+            var p = new Promise(function(resolve) {
+              canvas.toBlob(function(blob) {
+                fd.append(type + '_signature_file', blob, 'signature.png');
+                resolve();
+              }, 'image/png');
+            });
+            promises.push(p);
+          } else {
+            fd.append(type + '_signature_file', dataURLToBlob(canvas.toDataURL('image/png')), 'signature.png');
+          }
+        }
+      }
+    });
+
+    Promise.all(promises).then(function() {
+      $.ajax({
+        url: $(form).attr('action'),
+        type: 'POST',
+        data: fd,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          var data = response;
+          if(typeof data === 'string') {
+            try { data = JSON.parse(data); } catch (e) { data = { result: 'Saved successfully!' }; }
+          }
+          if(data && data.error) {
+            toastr.error(data.error);
+            $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Training Record');
+          } else {
+            toastr.success((data && data.result) ? data.result : 'Saved successfully!');
+            setTimeout(function() { window.location.href = '<?= site_url('erp/training-record'); ?>'; }, 1000);
+          }
+        },
+        error: function(xhr) {
+          toastr.error('Error saving record. Please try again.');
+          $btn.prop('disabled', false).html('<i class="feather icon-save"></i> Save Training Record');
+        }
+      });
+    });
   });
 
 });

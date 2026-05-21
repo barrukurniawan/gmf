@@ -285,64 +285,62 @@ class TrainingRecord extends BaseController {
 			$EmployeeBasicCertificateModel->insert($cert_data);
 		}
 
-		// 6. Save signature (approved_by)
+		// 6. Save signatures (prepared_by & approved_by)
 		$TrainingSignatureModel = new TrainingSignatureModel();
 
-		// Check if delete is requested
-		if($this->request->getPost('delete_signature') == '1') {
-			$existing_sig = $TrainingSignatureModel->where('user_id', $user_id)->where('signature_type', 'approved_by')->first();
-			if($existing_sig) {
-				// Delete file if exists
-				if(!empty($existing_sig['file_path']) && file_exists(ROOTPATH . $existing_sig['file_path'])) {
-					unlink(ROOTPATH . $existing_sig['file_path']);
+		$signature_types = ['prepared_by', 'approved_by'];
+		foreach($signature_types as $sig_type) {
+			if($this->request->getPost('delete_signature_' . $sig_type) == '1') {
+				$existing_sig = $TrainingSignatureModel->where('user_id', $user_id)->where('signature_type', $sig_type)->first();
+				if($existing_sig) {
+					if(!empty($existing_sig['file_path']) && file_exists(ROOTPATH . $existing_sig['file_path'])) {
+						unlink(ROOTPATH . $existing_sig['file_path']);
+					}
+					$TrainingSignatureModel->delete($existing_sig['signature_id']);
 				}
-				$TrainingSignatureModel->delete($existing_sig['signature_id']);
+			} else {
+				$sig_file = $this->request->getFile($sig_type . '_signature_file');
+				$saved_file_path = null;
+
+				if($sig_file && $sig_file->isValid() && !$sig_file->hasMoved()) {
+					$validationRule = [ $sig_type . '_signature_file' => 'uploaded['.$sig_type.'_signature_file]|mime_in['.$sig_type.'_signature_file,image/jpg,image/jpeg,image/png]|max_size['.$sig_type.'_signature_file,2048]' ];
+					if($this->validate($validationRule)){
+						$newName = $sig_file->getRandomName();
+						$uploadPath = ROOTPATH . 'public/uploads/signatures/';
+						if(!is_dir($uploadPath)) mkdir($uploadPath, 0777, true);
+						$sig_file->move($uploadPath, $newName);
+						$saved_file_path = 'public/uploads/signatures/' . $newName;
+					} else {
+						$Return['error'] = 'Invalid signature file format for ' . str_replace('_', ' ', $sig_type) . '. Allowed: JPG, JPEG, PNG (max 2MB).';
+						$this->output($Return);
+						return;
+					}
+				} else if($sig_file && $sig_file->getError() !== UPLOAD_ERR_NO_FILE) {
+					$Return['error'] = 'Signature upload failed for ' . str_replace('_', ' ', $sig_type) . '. Please try again.';
+					$this->output($Return);
+					return;
+				}
+
+				if(!empty($saved_file_path)) {
+					$existing_sig = $TrainingSignatureModel->where('user_id', $user_id)->where('signature_type', $sig_type)->first();
+					$signature_data = [
+						'user_id' => $user_id,
+						'signature_type' => $sig_type,
+						'signature_data' => '',
+						'file_path' => $saved_file_path,
+						'updated_at' => $dt,
+					];
+					if($existing_sig) {
+						if(!empty($existing_sig['file_path']) && file_exists(ROOTPATH . $existing_sig['file_path'])) {
+							unlink(ROOTPATH . $existing_sig['file_path']);
+						}
+						$TrainingSignatureModel->update($existing_sig['signature_id'], $signature_data);
+					} else {
+						$signature_data['created_at'] = $dt;
+						$TrainingSignatureModel->insert($signature_data);
+					}
+				}
 			}
-		} else {
-			$sig_data_uri = $this->request->getPost('approved_by_sig');
-			$sig_file = $this->request->getFile('approved_by_signature_file');
-
-			$saved_file_path = null;
-			$saved_base64 = null;
-
-			// Handle uploaded file
-			if($sig_file && $sig_file->isValid() && !$sig_file->hasMoved()) {
-				$validationRule = [ 'approved_by_signature_file' => 'uploaded[approved_by_signature_file]|mime_in[approved_by_signature_file,image/jpg,image/jpeg,image/png]|max_size[approved_by_signature_file,2048]' ];
-				if($this->validate($validationRule)){
-					$newName = $sig_file->getRandomName();
-					$uploadPath = ROOTPATH . 'public/uploads/signatures/';
-					if(!is_dir($uploadPath)) mkdir($uploadPath, 0777, true);
-					$sig_file->move($uploadPath, $newName);
-					$saved_file_path = 'public/uploads/signatures/' . $newName;
-                } else {
-                    $Return['error'] = 'Invalid signature file format. Allowed: JPG, JPEG, PNG (max 2MB).';
-                    $this->output($Return);
-                    return;
-                }
-            } else if($sig_file && $sig_file->getError() !== UPLOAD_ERR_NO_FILE) {
-                $Return['error'] = 'Signature upload failed. Please try again.';
-                $this->output($Return);
-                return;
-            } else if(!empty($sig_data_uri) && strpos($sig_data_uri, 'data:image') === 0) {
-                $saved_base64 = $sig_data_uri;
-            }
-
-            if(!empty($saved_file_path) || !empty($saved_base64)) {
-                $existing_sig = $TrainingSignatureModel->where('user_id', $user_id)->where('signature_type', 'approved_by')->first();
-                $signature_data = [
-                    'user_id' => $user_id,
-                    'signature_type' => 'approved_by',
-                    'signature_data' => $saved_base64,
-                    'file_path' => $saved_file_path,
-                    'updated_at' => $dt,
-                ];
-                if($existing_sig) {
-                    $TrainingSignatureModel->update($existing_sig['signature_id'], $signature_data);
-                } else {
-                    $signature_data['created_at'] = $dt;
-                    $TrainingSignatureModel->insert($signature_data);
-                }
-            }
 		}
 
 		if($this->request->getPost('send_email_signatories') == '1') {
