@@ -55,6 +55,7 @@ foreach($signatures as $sig) {
     <?= form_open('erp/training-record-save', $attributes, $hidden); ?>
 
     <input type="hidden" name="type" value="save_record" />
+    <input type="hidden" name="send_email_signatories" id="send_email_signatories" value="0" />
 
     <!-- Employee Info Banner -->
     <div class="card">
@@ -452,13 +453,38 @@ foreach($signatures as $sig) {
         <a href="<?= site_url('erp/training-record'); ?>" class="btn btn-light">
           <?= lang('Main.xin_close'); ?>
         </a>
-        <button type="submit" class="btn btn-primary ladda-button" data-style="expand-right" id="save_record_btn">
+        <button type="button" class="btn btn-primary ladda-button" data-style="expand-right" id="save_record_btn" data-toggle="modal" data-target="#email_notification_modal">
           <i class="feather icon-save"></i> Save Training Record
         </button>
       </div>
     </div>
 
     <?= form_close(); ?>
+
+    <!-- Email Notification Modal -->
+    <div class="modal fade" id="email_notification_modal" tabindex="-1" role="dialog" aria-labelledby="email_notification_modalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="email_notification_modalLabel">Send Notification Email?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Apakah anda ingin mengirim email ke Assign Signatories untuk segera tanda tangan?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btn_send_email_yes">
+              <i class="feather icon-mail"></i> Ya, Kirim & Save
+            </button>
+            <button type="button" class="btn btn-secondary" id="btn_send_email_no">
+              <i class="feather icon-save"></i> Tidak, Save Saja
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -565,10 +591,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  // --- Capture signature canvas data and send via AJAX ---
-  $('#training_record_form').on('submit', function(e) {
-    e.preventDefault();
-    var form = this;
+  // --- Modal Confirmation for Email ---
+  $('#btn_send_email_yes').on('click', function() {
+    $('#send_email_signatories').val('1');
+    $('#email_notification_modal').modal('hide');
+    submitTrainingRecordForm();
+  });
+
+  $('#btn_send_email_no').on('click', function() {
+    $('#send_email_signatories').val('0');
+    $('#email_notification_modal').modal('hide');
+    submitTrainingRecordForm();
+  });
+
+  function submitTrainingRecordForm() {
+    var form = document.getElementById('training_record_form');
     var $btn = $('#save_record_btn');
     $btn.prop('disabled', true).html('<i class="feather icon-loader"></i> Saving...');
 
@@ -592,7 +629,7 @@ document.addEventListener("DOMContentLoaded", function() {
     sigTypes.forEach(function(type) {
       var isDelete = $('#delete_signature_' + type).is(':checked');
       var activeTab = $('.sig-content-' + type + '.active').attr('data-tab');
-      
+
       if (!isDelete && activeTab === 'draw_sig') {
         var canvas = document.getElementById('signature_canvas_' + type);
         var hasDrawn = window['hasDrawn_' + type];
@@ -638,7 +675,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
     });
-  });
+  }
 
 });
 </script>
