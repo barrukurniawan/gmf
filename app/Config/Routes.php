@@ -358,6 +358,10 @@ $routes->get('erp/regulation/list', 'Regulation::list', ['namespace' => 'App\Con
 $routes->get('erp/regulation/preview/(:segment)', 'Regulation::preview/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/regulation/download/(:segment)', 'Regulation::download/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/regulation/file/(:segment)', 'Regulation::file/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/regulation/read', 'Regulation::read', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->match(['get', 'post'], 'erp/regulation/add', 'Regulation::add', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->match(['get', 'post'], 'erp/regulation/edit', 'Regulation::edit', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->match(['get', 'post'], 'erp/regulation/delete', 'Regulation::delete', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 
 /**
  * --------------------------------------------------------------------

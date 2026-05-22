@@ -161,17 +161,17 @@ $activeDoc = $active_doc ?? null;
     font-weight: 600;
 }
 
-.pdf-viewer-panel {
-    background: #ffffff;
-    border: 1px solid var(--portal-border);
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 480px;
-}
+    .pdf-viewer-panel {
+        background: #ffffff;
+        border: 1px solid var(--portal-border);
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 220px);
+        min-height: 480px;
+    }
 
 .pdf-viewer-header {
     padding: 1rem 1.25rem;
@@ -258,6 +258,7 @@ $activeDoc = $active_doc ?? null;
         border-bottom: 1px solid var(--portal-border);
     }
     .pdf-viewer-panel {
+        height: auto;
         min-height: 380px;
     }
 }
@@ -296,15 +297,20 @@ $activeDoc = $active_doc ?? null;
                     </ol>
                 </nav>
 
-                <div class="row">
+                <div class="row" style="align-items:flex-start;">
                     <!-- Document List -->
                     <div class="col-lg-5 mb-3">
                         <div class="reg-card h-100">
                             <div class="reg-card-header">
                                 <h5><i class="fas fa-list-ul mr-2" style="color:var(--portal-accent);"></i>Daftar Dokumen</h5>
-                                <div class="reg-search-box">
-                                    <i class="fas fa-search"></i>
-                                    <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari dokumen...">
+                                <div class="d-flex align-items-center gap-2" style="gap:0.5rem;">
+                                    <div class="reg-search-box">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari dokumen...">
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-sm btn-add-doc" data-toggle="modal" data-target="#regulation-modal">
+                                        <i class="fas fa-plus mr-1"></i> Tambah
+                                    </button>
                                 </div>
                             </div>
                             <div class="p-0">
@@ -361,6 +367,39 @@ $activeDoc = $active_doc ?? null;
 
 <input type="hidden" id="activeDocId" value="<?= $activeDoc ? uencode($activeDoc) : '' ?>">
 
+<!-- Add/Edit Modal -->
+<div class="modal fade" id="regulation-modal" tabindex="-1" role="dialog" aria-labelledby="regulation-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" id="regulation-modal-content">
+            <!-- Content loaded via AJAX -->
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="delete-regulation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Konfirmasi Hapus</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus dokumen ini?</p>
+                <p class="text-muted small">File dokumen juga akan dihapus dari server.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger" id="btn-confirm-delete">
+                    <i class="fas fa-trash-alt mr-1"></i> Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
 // DataTables initialization will be in module_scripts/regulation.js
 var REGULATION = {
@@ -372,4 +411,6 @@ var REGULATION = {
     csrfHash: '<?= csrf_hash() ?>',
     categories: <?= json_encode(array_map(function($c){return $c['label'];}, $categories)) ?>
 };
+// Global csrf_hash for form submissions (used by modal forms)
+var csrf_hash = '<?= csrf_hash() ?>';
 </script>

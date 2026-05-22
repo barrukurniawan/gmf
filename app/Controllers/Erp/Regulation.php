@@ -119,6 +119,8 @@ class Regulation extends BaseController
 
             $actions = '<div class="btn-group">';
             $actions .= '<button class="btn btn-sm btn-outline-primary btn-view-doc" data-id="' . $encId . '" title="Lihat Dokumen"><i class="fas fa-eye"></i></button>';
+            $actions .= '<button class="btn btn-sm btn-outline-info btn-edit-doc" data-id="' . $encId . '" title="Edit Dokumen" data-toggle="modal" data-target="#regulation-modal"><i class="fas fa-edit"></i></button>';
+            $actions .= '<button class="btn btn-sm btn-outline-danger btn-delete-doc" data-id="' . $encId . '" title="Hapus Dokumen"><i class="fas fa-trash-alt"></i></button>';
             $actions .= '<a href="' . site_url('erp/regulation/download/' . $encId) . '" class="btn btn-sm btn-outline-success" title="Download" target="_blank"><i class="fas fa-download"></i></a>';
             $actions .= '</div>';
 
@@ -246,6 +248,305 @@ class Regulation extends BaseController
         }
 
         readfile($filePath);
+        exit;
+    }
+
+    /**
+     * Read record - return modal view for edit
+     */
+    public function read()
+    {
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+
+        if (!$session->has('sup_username')) {
+            return redirect()->to(site_url('erp/login'));
+        }
+
+        $id = $request->getGet('field_id');
+        $data = [
+            'field_id' => $id,
+        ];
+
+        if ($session->has('sup_username')) {
+            return view('erp/regulation/dialog_document', $data);
+        } else {
+            return redirect()->to(site_url('erp/login'));
+        }
+    }
+
+    /**
+     * Add new regulation document (AJAX)
+     */
+    public function add()
+    {
+        $validation = \Config\Services::validation();
+        $session    = \Config\Services::session();
+        $request    = \Config\Services::request();
+        $usession   = $session->get('sup_username');
+
+        if (!$session->has('sup_username')) {
+            return redirect()->to(site_url('erp/login'));
+        }
+
+        if ($this->request->getPost('type') !== 'add_record') {
+            $Return = ['result' => '', 'error' => lang('Main.xin_error_msg'), 'csrf_hash' => csrf_hash()];
+            $this->output($Return);
+            exit;
+        }
+
+        $Return = ['result' => '', 'error' => '', 'csrf_hash' => csrf_hash()];
+
+        // Validation rules
+        $rules = [
+            'title' => [
+                'rules'  => 'required|min_length[3]',
+                'errors' => ['required' => 'Judul dokumen wajib diisi.']
+            ],
+            'category' => [
+                'rules'  => 'required|in_list[sop,draft_regulasi,policy_letter,forms,others]',
+                'errors' => ['required' => 'Kategori wajib dipilih.']
+            ],
+            'document_file' => [
+                'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                'errors' => ['uploaded' => 'File dokumen wajib diupload.']
+            ]
+        ];
+
+        if (!$this->validate($rules)) {
+            $errors = [
+                'title'         => $validation->getError('title'),
+                'category'      => $validation->getError('category'),
+                'document_file' => $validation->getError('document_file'),
+            ];
+            foreach ($errors as $err) {
+                if ($err) {
+                    $Return['error'] = $err;
+                    $this->output($Return);
+                    exit;
+                }
+            }
+        }
+
+        // Handle file upload
+        $document_file = $this->request->getFile('document_file');
+        $file_ext = $document_file->getClientExtension();
+        if ($file_ext === '' || $file_ext === null) {
+            $file_ext = $document_file->getExtension();
+        }
+
+        $allowed_exts = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
+        if (!in_array(strtolower($file_ext), $allowed_exts)) {
+            $Return['error'] = 'Ekstensi file tidak valid. Diizinkan: pdf, png, jpg, jpeg, gif, txt, xls, xlsx, doc, docx';
+            $this->output($Return);
+            exit;
+        }
+
+        $original_name = $document_file->getName();
+        $random_number = mt_rand(10000, 99999);
+        $file_extension = pathinfo($original_name, PATHINFO_EXTENSION);
+        $file_name = 'reg_' . $random_number . '_' . time() . '.' . $file_extension;
+
+        if (!is_dir($this->uploadPath)) {
+            mkdir($this->uploadPath, 0755, true);
+        }
+
+        $document_file->move($this->uploadPath, $file_name);
+
+        $title           = $this->request->getPost('title', FILTER_SANITIZE_STRING);
+        $document_number = $this->request->getPost('document_number', FILTER_SANITIZE_STRING);
+        $category        = $this->request->getPost('category', FILTER_SANITIZE_STRING);
+        $publish_date    = $this->request->getPost('publish_date', FILTER_SANITIZE_STRING);
+
+        $RegulationDocumentsModel = new RegulationDocumentsModel();
+        $data = [
+            'title'           => $title,
+            'document_number' => $document_number,
+            'category'        => $category,
+            'file_path'       => $file_name,
+            'publish_date'    => $publish_date ?: null,
+            'created_at'      => date('Y-m-d H:i:s'),
+            'updated_at'      => date('Y-m-d H:i:s'),
+        ];
+
+        $result = $RegulationDocumentsModel->insert($data);
+        $Return['csrf_hash'] = csrf_hash();
+
+        if ($result) {
+            $Return['result'] = 'Dokumen regulasi berhasil ditambahkan.';
+        } else {
+            $Return['error'] = lang('Main.xin_error_msg');
+        }
+
+        $this->output($Return);
+        exit;
+    }
+
+    /**
+     * Edit regulation document (AJAX)
+     */
+    public function edit()
+    {
+        $validation = \Config\Services::validation();
+        $session    = \Config\Services::session();
+        $request    = \Config\Services::request();
+
+        if (!$session->has('sup_username')) {
+            return redirect()->to(site_url('erp/login'));
+        }
+
+        if ($this->request->getPost('type') !== 'edit_record') {
+            $Return = ['result' => '', 'error' => lang('Main.xin_error_msg'), 'csrf_hash' => csrf_hash()];
+            $this->output($Return);
+            exit;
+        }
+
+        $Return = ['result' => '', 'error' => '', 'csrf_hash' => csrf_hash()];
+
+        // Validation rules
+        $rules = [
+            'title' => [
+                'rules'  => 'required|min_length[3]',
+                'errors' => ['required' => 'Judul dokumen wajib diisi.']
+            ],
+            'category' => [
+                'rules'  => 'required|in_list[sop,draft_regulasi,policy_letter,forms,others]',
+                'errors' => ['required' => 'Kategori wajib dipilih.']
+            ],
+        ];
+
+        if (!$this->validate($rules)) {
+            $errors = [
+                'title'    => $validation->getError('title'),
+                'category' => $validation->getError('category'),
+            ];
+            foreach ($errors as $err) {
+                if ($err) {
+                    $Return['error'] = $err;
+                    $this->output($Return);
+                    exit;
+                }
+            }
+        }
+
+        $id = udecode($this->request->getPost('token', FILTER_SANITIZE_STRING));
+        $title           = $this->request->getPost('title', FILTER_SANITIZE_STRING);
+        $document_number = $this->request->getPost('document_number', FILTER_SANITIZE_STRING);
+        $category        = $this->request->getPost('category', FILTER_SANITIZE_STRING);
+        $publish_date    = $this->request->getPost('publish_date', FILTER_SANITIZE_STRING);
+
+        $RegulationDocumentsModel = new RegulationDocumentsModel();
+        $document = $RegulationDocumentsModel->find($id);
+
+        if (!$document) {
+            $Return['error'] = 'Dokumen tidak ditemukan.';
+            $this->output($Return);
+            exit;
+        }
+
+        $data = [
+            'title'           => $title,
+            'document_number' => $document_number,
+            'category'        => $category,
+            'publish_date'    => $publish_date ?: null,
+            'updated_at'      => date('Y-m-d H:i:s'),
+        ];
+
+        // Handle file replace (optional)
+        $document_file = $this->request->getFile('document_file');
+        if ($document_file && $document_file->isValid() && !$document_file->hasMoved()) {
+            $validated = $this->validate([
+                'document_file' => [
+                    'rules'  => 'max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                ]
+            ]);
+
+            if (!$validated) {
+                $Return['error'] = $validation->getError('document_file');
+                $this->output($Return);
+                exit;
+            }
+
+            $file_ext = $document_file->getClientExtension();
+            if ($file_ext === '' || $file_ext === null) {
+                $file_ext = $document_file->getExtension();
+            }
+            $allowed_exts = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
+            if (!in_array(strtolower($file_ext), $allowed_exts)) {
+                $Return['error'] = 'Ekstensi file tidak valid.';
+                $this->output($Return);
+                exit;
+            }
+
+            $random_number = mt_rand(10000, 99999);
+            $file_extension = pathinfo($document_file->getName(), PATHINFO_EXTENSION);
+            $file_name = 'reg_' . $random_number . '_' . time() . '.' . $file_extension;
+            $document_file->move($this->uploadPath, $file_name);
+
+            // Delete old file
+            $oldFilePath = $this->uploadPath . $document['file_path'];
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
+            }
+
+            $data['file_path'] = $file_name;
+        }
+
+        $result = $RegulationDocumentsModel->update($id, $data);
+        $Return['csrf_hash'] = csrf_hash();
+
+        if ($result) {
+            $Return['result'] = 'Dokumen regulasi berhasil diperbarui.';
+        } else {
+            $Return['error'] = lang('Main.xin_error_msg');
+        }
+
+        $this->output($Return);
+        exit;
+    }
+
+    /**
+     * Delete regulation document (AJAX)
+     */
+    public function delete()
+    {
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+        $usession = $session->get('sup_username');
+
+        if ($this->request->getPost('_method') !== 'DELETE') {
+            $Return = ['result' => '', 'error' => lang('Main.xin_error_msg'), 'csrf_hash' => csrf_hash()];
+            $this->output($Return);
+            exit;
+        }
+
+        $id = udecode($this->request->getPost('_token', FILTER_SANITIZE_STRING));
+        $Return = ['result' => '', 'error' => '', 'csrf_hash' => csrf_hash()];
+
+        $RegulationDocumentsModel = new RegulationDocumentsModel();
+        $document = $RegulationDocumentsModel->find($id);
+
+        if (!$document) {
+            $Return['error'] = 'Dokumen tidak ditemukan.';
+            $this->output($Return);
+            exit;
+        }
+
+        // Delete physical file
+        $filePath = $this->uploadPath . $document['file_path'];
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        $result = $RegulationDocumentsModel->delete($id);
+
+        if ($result) {
+            $Return['result'] = 'Dokumen regulasi berhasil dihapus.';
+        } else {
+            $Return['error'] = lang('Main.xin_error_msg');
+        }
+
+        $this->output($Return);
         exit;
     }
 }
