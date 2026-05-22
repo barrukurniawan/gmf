@@ -1,0 +1,375 @@
+<?php
+$categories = [
+    'all'            => ['label' => 'All Documents', 'icon' => 'fa-folder-open'],
+    'sop'            => ['label' => 'SOP', 'icon' => 'fa-clipboard-check'],
+    'draft_regulasi' => ['label' => 'Draft Regulasi', 'icon' => 'fa-file-signature'],
+    'policy_letter'  => ['label' => 'Policy Letter', 'icon' => 'fa-envelope-open-text'],
+    'forms'          => ['label' => 'Forms', 'icon' => 'fa-file-alt'],
+    'others'         => ['label' => 'Others', 'icon' => 'fa-ellipsis-h'],
+];
+$activeCategory = $active_category ?? 'all';
+$activeDoc = $active_doc ?? null;
+?>
+
+<style>
+/* Regulation Portal Custom Styles */
+.regulation-portal {
+    --portal-primary: #1e3a5f;
+    --portal-secondary: #f4f6f9;
+    --portal-accent: #2b579a;
+    --portal-border: #e2e8f0;
+}
+
+.reg-sidebar {
+    background: #ffffff;
+    border-right: 1px solid var(--portal-border);
+    min-height: calc(100vh - 200px);
+    padding: 1.5rem 0;
+}
+
+.reg-sidebar .nav-link {
+    color: #475569;
+    font-weight: 500;
+    padding: 0.85rem 1.5rem;
+    border-left: 4px solid transparent;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.reg-sidebar .nav-link:hover {
+    background: #f8fafc;
+    color: var(--portal-accent);
+    border-left-color: #cbd5e1;
+}
+
+.reg-sidebar .nav-link.active {
+    background: #eef2ff;
+    color: var(--portal-accent);
+    border-left-color: var(--portal-accent);
+}
+
+.reg-sidebar .nav-link i {
+    width: 24px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.reg-sidebar .category-count {
+    margin-left: auto;
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.reg-sidebar .nav-link.active .category-count {
+    background: var(--portal-accent);
+    color: #fff;
+}
+
+.reg-content {
+    background: #f8fafc;
+    min-height: calc(100vh - 200px);
+    padding: 1.5rem;
+}
+
+.reg-card {
+    background: #ffffff;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.reg-card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--portal-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reg-card-header h5 {
+    margin: 0;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.reg-search-box {
+    position: relative;
+    max-width: 320px;
+}
+
+.reg-search-box input {
+    padding-left: 2.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--portal-border);
+    background: #f8fafc;
+    font-size: 0.875rem;
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.reg-search-box i {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 0.875rem;
+}
+
+.table-documents {
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.table-documents thead th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    border-bottom: 2px solid var(--portal-border);
+    padding: 0.85rem 1rem;
+    white-space: nowrap;
+}
+
+.table-documents tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    color: #475569;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.table-documents tbody tr:hover {
+    background: #f8fafc;
+}
+
+.table-documents tbody tr.doc-active {
+    background: #eef2ff !important;
+}
+
+.badge-category {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+    border-radius: 0.375rem;
+    font-weight: 600;
+}
+
+.pdf-viewer-panel {
+    background: #ffffff;
+    border: 1px solid var(--portal-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 480px;
+}
+
+.pdf-viewer-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--portal-border);
+    background: #f8fafc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pdf-viewer-header h6 {
+    margin: 0;
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70%;
+}
+
+.pdf-viewer-body {
+    flex: 1;
+    background: #e2e8f0;
+    position: relative;
+}
+
+.pdf-viewer-body iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #94a3b8;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.spinner-portal {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: var(--portal-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .reg-sidebar {
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--portal-border);
+    }
+    .pdf-viewer-panel {
+        min-height: 380px;
+    }
+}
+</style>
+
+<div class="regulation-portal">
+    <div class="row no-gutters">
+        <!-- Sidebar Categories -->
+        <div class="col-lg-2 col-md-3">
+            <div class="reg-sidebar">
+                <div class="px-3 mb-3">
+                    <h6 class="text-uppercase text-muted font-weight-bold" style="font-size:0.75rem; letter-spacing:0.05em;">Kategori Dokumen</h6>
+                </div>
+                <nav class="nav flex-column">
+                    <?php foreach ($categories as $key => $cat): ?>
+                        <a href="javascript:void(0);" 
+                           class="nav-link category-filter <?= $activeCategory === $key ? 'active' : '' ?>" 
+                           data-category="<?= $key ?>">
+                            <i class="fas <?= $cat['icon'] ?>"></i>
+                            <span><?= $cat['label'] ?></span>
+                            <span class="category-count" id="count-<?= $key ?>">-</span>
+                        </a>
+                    <?php endforeach; ?>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-10 col-md-9">
+            <div class="reg-content">
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb" class="mb-3">
+                    <ol class="breadcrumb bg-transparent p-0 m-0" style="font-size:0.875rem;">
+                        <li class="breadcrumb-item"><a href="<?= site_url('erp/desk') ?>">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Regulation Portal</li>
+                    </ol>
+                </nav>
+
+                <div class="row">
+                    <!-- Document List -->
+                    <div class="col-lg-5 mb-3">
+                        <div class="reg-card h-100">
+                            <div class="reg-card-header">
+                                <h5><i class="fas fa-list-ul mr-2" style="color:var(--portal-accent);"></i>Daftar Dokumen</h5>
+                                <div class="reg-search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari dokumen...">
+                                </div>
+                            </div>
+                            <div class="p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-documents" id="documentsTable" style="width:100% !important;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:40px;">No</th>
+                                                <th>Nama Dokumen</th>
+                                                <th style="width:110px;">Kategori</th>
+                                                <th style="width:100px;">Tanggal</th>
+                                                <th style="width:100px;">Aksi</th>
+                                                <th style="display:none;">encId</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div id="emptyStateList" class="empty-state" style="display:none;">
+                                    <i class="fas fa-inbox"></i>
+                                    <p>Tidak ada dokumen ditemukan.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PDF Preview -->
+                    <div class="col-lg-7 mb-3">
+                        <div class="pdf-viewer-panel" id="pdfViewerPanel">
+                            <div class="pdf-viewer-header">
+                                <h6 id="previewTitle"><i class="fas fa-file-pdf mr-2 text-danger"></i>Pratinjau Dokumen</h6>
+                                <div>
+                                    <a href="#" id="previewDownload" class="btn btn-sm btn-outline-primary" style="display:none;" target="_blank">
+                                        <i class="fas fa-download mr-1"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pdf-viewer-body" id="previewBody">
+                                <div class="empty-state">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <p>Pilih dokumen dari daftar untuk melihat pratinjau.</p>
+                                </div>
+                                <div class="loading-overlay" id="previewLoader" style="display:none;">
+                                    <div class="spinner-portal"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="activeDocId" value="<?= $activeDoc ? uencode($activeDoc) : '' ?>">
+
+<script>
+// DataTables initialization will be in module_scripts/regulation.js
+var REGULATION = {
+    baseUrl: '<?= site_url('erp/regulation') ?>',
+    viewUrl: '<?= site_url('erp/regulation/view') ?>',
+    activeCategory: '<?= $activeCategory ?>',
+    activeDocId: '<?= $activeDoc ? uencode($activeDoc) : '' ?>',
+    csrfName: '<?= csrf_token() ?>',
+    csrfHash: '<?= csrf_hash() ?>',
+    categories: <?= json_encode(array_map(function($c){return $c['label'];}, $categories)) ?>
+};
+</script>

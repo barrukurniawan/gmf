@@ -350,6 +350,15 @@ $routes->get('erp/quote-detail/(:segment)', 'Orderquotes::quote_details', ['name
 $routes->get('erp/edit-quote/(:segment)', 'Orderquotes::edit_quote', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/print-quote/(:segment)', 'Orderquotes::view_quote_order', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 
+// Regulation Portal
+$routes->get('erp/regulation-portal/', 'Regulation::index', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/regulation-portal/(:segment)', 'Regulation::index/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/regulation/view/(:segment)', 'Regulation::index/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/regulation/list', 'Regulation::list', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/regulation/preview/(:segment)', 'Regulation::preview/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/regulation/download/(:segment)', 'Regulation::download/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/regulation/file/(:segment)', 'Regulation::file/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

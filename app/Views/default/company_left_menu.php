@@ -74,6 +74,10 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     <?= lang('Dashboard.xin_upload_files');?>
     </span> </a> </li>
   <?php } ?>
+  <!-- Regulation Portal -->
+  <li class="pc-item <?php if($router->controllerName() == '\App\Controllers\Erp\Regulation')echo 'active';?>"> <a href="<?= site_url('erp/regulation-portal');?>" class="pc-link"> <span class="pc-micon"><i data-feather="book"></i></span><span class="pc-mtext">
+    Regulation Portal
+    </span> </a> </li>
     <?php if(isset($setup_modules['training'])): if($setup_modules['training']==1):?>
   <!-- Training Record (CV) -->
   <li class="pc-item"> <a href="<?= site_url('erp/training-record');?>" class="pc-link"> <span class="pc-micon"><i data-feather="file-text"></i></span><span class="pc-mtext">

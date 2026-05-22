@@ -112,6 +112,10 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
   <li class="pc-item"> <a href="<?= site_url('erp/training-record');?>" class="pc-link"> <span class="pc-micon"><i data-feather="file-text"></i></span><span class="pc-mtext">
     Training Record
     </span> </a> </li>
+  <!-- Regulation Portal -->
+  <li class="pc-item <?php if($router->controllerName() == '\App\Controllers\Erp\Regulation')echo 'active';?>"> <a href="<?= site_url('erp/regulation-portal');?>" class="pc-link"> <span class="pc-micon"><i data-feather="book"></i></span><span class="pc-mtext">
+    Regulation Portal
+    </span> </a> </li>
   <?php } ?>
   <?php
   $TrainingRecordHeaderModel = new \App\Models\TrainingRecordHeaderModel();
