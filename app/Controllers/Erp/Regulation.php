@@ -41,6 +41,9 @@ class Regulation extends BaseController
         $data['active_doc']      = $documentId ? udecode($documentId) : null;
         $data['active_category'] = $request->getGet('category') ?: 'all';
 
+        // Role-based CRUD permission: only company/super_user can CRUD
+        $data['can_crud'] = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
+
         // Categories
         $data['categories'] = [
             'all'             => 'All Documents',
@@ -66,6 +69,11 @@ class Regulation extends BaseController
         }
 
         $request = \Config\Services::request();
+        $UsersModel = new UsersModel();
+        $usession = $session->get('sup_username');
+        $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+        $canCrud = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
+
         $RegulationDocumentsModel = new RegulationDocumentsModel();
 
         $category = $request->getGet('category');
@@ -119,8 +127,10 @@ class Regulation extends BaseController
 
             $actions = '<div class="btn-group">';
             $actions .= '<button class="btn btn-sm btn-outline-primary btn-view-doc" data-id="' . $encId . '" title="Lihat Dokumen"><i class="fas fa-eye"></i></button>';
-            $actions .= '<button class="btn btn-sm btn-outline-info btn-edit-doc" data-id="' . $encId . '" title="Edit Dokumen" data-toggle="modal" data-target="#regulation-modal"><i class="fas fa-edit"></i></button>';
-            $actions .= '<button class="btn btn-sm btn-outline-danger btn-delete-doc" data-id="' . $encId . '" title="Hapus Dokumen"><i class="fas fa-trash-alt"></i></button>';
+            if ($canCrud) {
+                $actions .= '<button class="btn btn-sm btn-outline-info btn-edit-doc" data-id="' . $encId . '" title="Edit Dokumen" data-toggle="modal" data-target="#regulation-modal"><i class="fas fa-edit"></i></button>';
+                $actions .= '<button class="btn btn-sm btn-outline-danger btn-delete-doc" data-id="' . $encId . '" title="Hapus Dokumen"><i class="fas fa-trash-alt"></i></button>';
+            }
             $actions .= '<a href="' . site_url('erp/regulation/download/' . $encId) . '" class="btn btn-sm btn-outline-success" title="Download" target="_blank"><i class="fas fa-download"></i></a>';
             $actions .= '</div>';
 
@@ -263,6 +273,15 @@ class Regulation extends BaseController
             return redirect()->to(site_url('erp/login'));
         }
 
+        $usession = $session->get('sup_username');
+        $UsersModel = new UsersModel();
+        $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+
+        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+            $session->setFlashdata('unauthorized_module', lang('Dashboard.xin_error_unauthorized_module'));
+            return redirect()->to(site_url('erp/desk'));
+        }
+
         $id = $request->getGet('field_id');
         $data = [
             'field_id' => $id,
@@ -287,6 +306,14 @@ class Regulation extends BaseController
 
         if (!$session->has('sup_username')) {
             return redirect()->to(site_url('erp/login'));
+        }
+
+        $UsersModel = new UsersModel();
+        $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+            $Return = ['result' => '', 'error' => lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash' => csrf_hash()];
+            $this->output($Return);
+            exit;
         }
 
         if ($this->request->getPost('type') !== 'add_record') {
@@ -393,6 +420,15 @@ class Regulation extends BaseController
 
         if (!$session->has('sup_username')) {
             return redirect()->to(site_url('erp/login'));
+        }
+
+        $usession = $session->get('sup_username');
+        $UsersModel = new UsersModel();
+        $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+            $Return = ['result' => '', 'error' => lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash' => csrf_hash()];
+            $this->output($Return);
+            exit;
         }
 
         if ($this->request->getPost('type') !== 'edit_record') {
@@ -513,6 +549,14 @@ class Regulation extends BaseController
         $session = \Config\Services::session();
         $request = \Config\Services::request();
         $usession = $session->get('sup_username');
+
+        $UsersModel = new UsersModel();
+        $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+            $Return = ['result' => '', 'error' => lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash' => csrf_hash()];
+            $this->output($Return);
+            exit;
+        }
 
         if ($this->request->getPost('_method') !== 'DELETE') {
             $Return = ['result' => '', 'error' => lang('Main.xin_error_msg'), 'csrf_hash' => csrf_hash()];

@@ -102,6 +102,10 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     <?= lang('Dashboard.dashboard_helpdesk');?>
     </span></a></li>
   <?php } ?>
+  <!-- Regulation Portal (always visible for staff) -->
+  <li class="pc-item <?php if($router->controllerName() == '\App\Controllers\Erp\Regulation')echo 'active';?>"> <a href="<?= site_url('erp/regulation-portal');?>" class="pc-link"> <span class="pc-micon"><i data-feather="book"></i></span><span class="pc-mtext">
+    Regulation Portal
+    </span> </a> </li>
   <?php if(isset($setup_modules['training'])): if($setup_modules['training']==1):?>
   <?php if(in_array('training1',staff_role_resource()) || in_array('trainer1',staff_role_resource()) || in_array('training_skill1',staff_role_resource()) || in_array('training_calendar',staff_role_resource())) {?> 
   <!-- Training Session -->
@@ -111,10 +115,6 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
   <!-- Training Record (CV) -->
   <li class="pc-item"> <a href="<?= site_url('erp/training-record');?>" class="pc-link"> <span class="pc-micon"><i data-feather="file-text"></i></span><span class="pc-mtext">
     Training Record
-    </span> </a> </li>
-  <!-- Regulation Portal -->
-  <li class="pc-item <?php if($router->controllerName() == '\App\Controllers\Erp\Regulation')echo 'active';?>"> <a href="<?= site_url('erp/regulation-portal');?>" class="pc-link"> <span class="pc-micon"><i data-feather="book"></i></span><span class="pc-mtext">
-    Regulation Portal
     </span> </a> </li>
   <?php } ?>
   <?php

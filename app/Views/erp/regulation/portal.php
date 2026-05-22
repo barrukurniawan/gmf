@@ -308,9 +308,11 @@ $activeDoc = $active_doc ?? null;
                                         <i class="fas fa-search"></i>
                                         <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari dokumen...">
                                     </div>
+                                    <?php if ($can_crud ?? false): ?>
                                     <button type="button" class="btn btn-primary btn-sm btn-add-doc" data-toggle="modal" data-target="#regulation-modal">
                                         <i class="fas fa-plus mr-1"></i> Tambah
                                     </button>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="p-0">
