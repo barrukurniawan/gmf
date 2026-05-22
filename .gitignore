@@ -6,7 +6,6 @@
 /writable/*
 !/writable/.gitkeep
 /public/uploads/
-/public/module_scripts/
 /installation/assets/
 /installation/config/
 
