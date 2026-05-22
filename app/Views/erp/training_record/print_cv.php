@@ -128,7 +128,6 @@
         <td class="company-contact-cell">
           <table class="contact-table">
             <tr><td style="width:35px;">Phone</td><td>: +62 21 809 2019</td></tr>
-            <tr><td>Fax</td><td>: +62 21 809 1993</td></tr>
             <tr><td>Email</td><td>: info@globalmaintenance.co.id</td></tr>
           </table>
         </td>
@@ -275,7 +274,6 @@
           <table class="sig-table">
             <tr>
               <td>
-                Prepared By
                 <?php
                 $prepared_by_sig = null;
                 foreach($signatures ?? [] as $sig) {
@@ -290,6 +288,7 @@
                 } else if(!empty($prepared_by_sig['signature_data'])) {
                     $prepared_sig_src = $prepared_by_sig['signature_data'];
                 }
+                $prepared_date = !empty($prepared_by_sig['created_at']) ? date('d-m-Y', strtotime($prepared_by_sig['created_at'])) : '';
                 // Get assigned name
                 $prepared_by_name = '';
                 if(!empty($header['prepared_by_id'])) {
@@ -297,6 +296,8 @@
                     $prepared_by_name = $pb ? $pb['first_name'].' '.$pb['last_name'] : '';
                 }
                 ?>
+                <div style="font-size:11px; margin-bottom:4px;">Jakarta<?= $prepared_date ? ', '.$prepared_date : ''; ?></div>
+                Prepared By
                 <?php if($prepared_sig_src): ?>
                 <div style="height:60px; display:flex; align-items:center; justify-content:center; margin-top:5px;">
                   <img src="<?= $prepared_sig_src; ?>" alt="Prepared By Signature" style="max-height:55px; max-width:100%; object-fit:contain;">
@@ -317,7 +318,6 @@
                 <?php endif; ?>
               </td>
               <td>
-                Employee Signed
                 <?php
                 $emp_sig_src = null;
                 if(!empty($employee_signature['file_path'])) {
@@ -325,7 +325,10 @@
                 } else if(!empty($employee_signature['signature_data'])) {
                     $emp_sig_src = $employee_signature['signature_data'];
                 }
+                $employee_date = !empty($employee_signature['created_at']) ? date('d-m-Y', strtotime($employee_signature['created_at'])) : '';
                 ?>
+                <div style="font-size:11px; margin-bottom:4px;">Jakarta<?= $employee_date ? ', '.$employee_date : ''; ?></div>
+                Employee Signed
                 <?php if($emp_sig_src): ?>
                 <div style="height:60px; display:flex; align-items:center; justify-content:center; margin-top:5px;">
                   <img src="<?= $emp_sig_src; ?>" alt="Employee Signature" style="max-height:55px; max-width:100%; object-fit:contain;">
@@ -336,7 +339,6 @@
                 <?php endif; ?>
               </td>
               <td>
-                Approved By
                 <?php
                 $approved_by_sig = null;
                 foreach($signatures ?? [] as $sig) {
@@ -351,6 +353,7 @@
                 } else if(!empty($approved_by_sig['signature_data'])) {
                     $approved_sig_src = $approved_by_sig['signature_data'];
                 }
+                $approved_date = !empty($approved_by_sig['created_at']) ? date('d-m-Y', strtotime($approved_by_sig['created_at'])) : '';
                 // Get assigned name
                 $approved_by_name = '';
                 if(!empty($header['approved_by_id'])) {
@@ -358,6 +361,8 @@
                     $approved_by_name = $ab ? $ab['first_name'].' '.$ab['last_name'] : '';
                 }
                 ?>
+                <div style="font-size:11px; margin-bottom:4px;">Jakarta<?= $approved_date ? ', '.$approved_date : ''; ?></div>
+                Approved By
                 <?php if($approved_sig_src): ?>
                 <div style="height:60px; display:flex; align-items:center; justify-content:center; margin-top:5px;">
                   <img src="<?= $approved_sig_src; ?>" alt="Approved By Signature" style="max-height:55px; max-width:100%; object-fit:contain;">
@@ -477,9 +482,10 @@
     };
 
     window.openSignModal = function(type, userId) {
-      document.getElementById('modal_signature_type').value = type;
+      var normalizedType = (type || '').toString().trim().toLowerCase();
+      document.getElementById('modal_signature_type').value = normalizedType;
       document.getElementById('modal_user_id').value = userId;
-      var label = type.replace('_', ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
+      var label = normalizedType.replace('_', ' ').replace(/\b\w/g, function(l){ return l.toUpperCase(); });
       document.getElementById('signModalTitle').textContent = 'Sign as ' + label;
       clearCanvas();
       document.getElementById('modal_sig_file').value = '';
@@ -502,9 +508,24 @@
       }
     });
 
+    function dataURLToBlob(dataURL) {
+      var parts = dataURL.split(',');
+      var mime = parts[0].match(/:(.*?);/)[1];
+      var binary = atob(parts[1]);
+      var array = [];
+      for (var i = 0; i < binary.length; i++) {
+        array.push(binary.charCodeAt(i));
+      }
+      return new Blob([new Uint8Array(array)], { type: mime });
+    }
+
     window.submitSignature = function() {
-      var type = document.getElementById('modal_signature_type').value;
+      var type = (document.getElementById('modal_signature_type').value || '').trim().toLowerCase();
       var userId = document.getElementById('modal_user_id').value;
+      if(!['prepared_by','approved_by'].includes(type)) {
+        alert('Invalid signature type. Please reopen the sign modal and try again.');
+        return;
+      }
       var formData = new FormData();
       formData.append(csrfName, csrfHash);
       formData.append('user_id', userId);
@@ -512,7 +533,14 @@
 
       var drawVisible = document.getElementById('drawPane').style.display !== 'none';
       if(drawVisible && hasDrawn) {
-        formData.append('sig_data', canvas.toDataURL('image/png'));
+        if (typeof canvas.toBlob === 'function') {
+          canvas.toBlob(function(blob) {
+            formData.append('sig_file', blob, 'signature.png');
+            submitSignatureRequest(formData);
+          }, 'image/png');
+          return;
+        }
+        formData.append('sig_file', dataURLToBlob(canvas.toDataURL('image/png')), 'signature.png');
       } else {
         var fileInput = document.getElementById('modal_sig_file');
         if(fileInput.files.length > 0) {
@@ -523,11 +551,20 @@
         }
       }
 
+      submitSignatureRequest(formData);
+    };
+
+    function submitSignatureRequest(formData) {
       fetch('<?= site_url("erp/training-record-sign"); ?>', {
         method: 'POST',
         body: formData
       })
-      .then(function(r){ return r.json(); })
+      .then(function(r) {
+        if (!r.ok) {
+          return r.text().then(function(text) { throw new Error(text || r.statusText); });
+        }
+        return r.json();
+      })
       .then(function(data){
         if(data.csrf_hash) csrfHash = data.csrf_hash;
         if(data.error) {
@@ -539,7 +576,7 @@
         }
       })
       .catch(function(err){ alert('Error: ' + err); });
-    };
+    }
 
     window.deleteSignature = function(type, userId) {
       if(!confirm('Are you sure you want to remove this signature?')) return;
@@ -553,7 +590,12 @@
         method: 'POST',
         body: formData
       })
-      .then(function(r){ return r.json(); })
+      .then(function(r) {
+        if (!r.ok) {
+          return r.text().then(function(text) { throw new Error(text || r.statusText); });
+        }
+        return r.json();
+      })
       .then(function(data){
         if(data.csrf_hash) csrfHash = data.csrf_hash;
         if(data.error) {
