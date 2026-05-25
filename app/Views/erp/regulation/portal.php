@@ -20,53 +20,59 @@ $activeDoc = $active_doc ?? null;
     --portal-border: #e2e8f0;
 }
 
-.reg-sidebar {
-    background: #ffffff;
-    border-right: 1px solid var(--portal-border);
-    min-height: calc(100vh - 200px);
-    padding: 1.5rem 0;
+.reg-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--portal-border);
 }
 
-.reg-sidebar .nav-link {
+.reg-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+.reg-tabs::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.reg-tabs .nav-link {
     color: #475569;
     font-weight: 500;
-    padding: 0.85rem 1.5rem;
-    border-left: 4px solid transparent;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    white-space: nowrap;
     transition: all 0.25s ease;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    background: #ffffff;
 }
 
-.reg-sidebar .nav-link:hover {
+.reg-tabs .nav-link:hover {
     background: #f8fafc;
     color: var(--portal-accent);
-    border-left-color: #cbd5e1;
+    border-color: #e2e8f0;
 }
 
-.reg-sidebar .nav-link.active {
+.reg-tabs .nav-link.active {
     background: #eef2ff;
     color: var(--portal-accent);
-    border-left-color: var(--portal-accent);
+    border-color: var(--portal-accent);
 }
 
-.reg-sidebar .nav-link i {
-    width: 24px;
-    text-align: center;
-    font-size: 1rem;
-}
-
-.reg-sidebar .category-count {
-    margin-left: auto;
+.reg-tabs .category-count {
     background: #e2e8f0;
     color: #475569;
     font-size: 0.75rem;
-    padding: 0.15rem 0.5rem;
+    padding: 0.1rem 0.4rem;
     border-radius: 999px;
     font-weight: 600;
 }
 
-.reg-sidebar .nav-link.active .category-count {
+.reg-tabs .nav-link.active .category-count {
     background: var(--portal-accent);
     color: #fff;
 }
@@ -252,11 +258,6 @@ $activeDoc = $active_doc ?? null;
 
 /* Responsive adjustments */
 @media (max-width: 991.98px) {
-    .reg-sidebar {
-        min-height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--portal-border);
-    }
     .pdf-viewer-panel {
         height: auto;
         min-height: 380px;
@@ -264,66 +265,55 @@ $activeDoc = $active_doc ?? null;
 }
 </style>
 
-<div class="regulation-portal">
-    <div class="row no-gutters">
-        <!-- Sidebar Categories -->
-        <div class="col-lg-2 col-md-3">
-            <div class="reg-sidebar">
-                <div class="px-3 mb-3">
-                    <h6 class="text-uppercase text-muted font-weight-bold" style="font-size:0.75rem; letter-spacing:0.05em;">Kategori Dokumen</h6>
+<div class="regulation-portal reg-content">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-transparent p-0 m-0" style="font-size:0.875rem;">
+            <li class="breadcrumb-item"><a href="<?= site_url('erp/desk') ?>">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Company Manual Publication</li>
+        </ol>
+    </nav>
+
+    <!-- Categories Tabs -->
+    <div class="reg-tabs">
+        <?php foreach ($categories as $key => $cat): ?>
+            <a href="javascript:void(0);" 
+               class="nav-link category-filter <?= $activeCategory === $key ? 'active' : '' ?>" 
+               data-category="<?= $key ?>">
+                <i class="fas <?= $cat['icon'] ?>"></i>
+                <span><?= $cat['label'] ?></span>
+                <span class="category-count" id="count-<?= $key ?>">-</span>
+            </a>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="row" style="align-items:flex-start;">
+        <!-- Document List -->
+        <div class="col-lg-5 mb-3">
+            <div class="reg-card h-100">
+                <div class="reg-card-header" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                    <div class="d-flex align-items-center" style="gap:0.3rem; white-space:nowrap; flex-shrink:0;">
+                        <span style="font-size:0.875rem; color:#475569;">Show</span>
+                        <select id="docLengthSelect" class="form-control form-control-sm" style="width:70px;">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="-1">All</option>
+                        </select>
+                    </div>
+                    <div class="d-flex align-items-center" style="gap:0.5rem; flex-wrap:wrap; flex-shrink:0;">
+                        <div class="reg-search-box" style="max-width:160px;">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari...">
+                        </div>
+                        <?php if ($can_crud ?? false): ?>
+                        <button type="button" class="btn btn-primary btn-sm btn-add-doc" data-toggle="modal" data-target="#regulation-modal" style="white-space:nowrap;">
+                            <i class="fas fa-plus mr-1"></i> Tambah
+                        </button>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <nav class="nav flex-column">
-                    <?php foreach ($categories as $key => $cat): ?>
-                        <a href="javascript:void(0);" 
-                           class="nav-link category-filter <?= $activeCategory === $key ? 'active' : '' ?>" 
-                           data-category="<?= $key ?>">
-                            <i class="fas <?= $cat['icon'] ?>"></i>
-                            <span><?= $cat['label'] ?></span>
-                            <span class="category-count" id="count-<?= $key ?>">-</span>
-                        </a>
-                    <?php endforeach; ?>
-                </nav>
-            </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="col-lg-10 col-md-9">
-            <div class="reg-content">
-                <!-- Breadcrumb -->
-                <nav aria-label="breadcrumb" class="mb-3">
-                    <ol class="breadcrumb bg-transparent p-0 m-0" style="font-size:0.875rem;">
-                        <li class="breadcrumb-item"><a href="<?= site_url('erp/desk') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Company Manual Publication</li>
-                    </ol>
-                </nav>
-
-                <div class="row" style="align-items:flex-start;">
-                    <!-- Document List -->
-                    <div class="col-lg-5 mb-3">
-                        <div class="reg-card h-100">
-                            <div class="reg-card-header" style="display:flex; align-items:center; justify-content:space-between; gap:0.4rem;">
-                                <div class="d-flex align-items-center" style="gap:0.3rem; white-space:nowrap; flex-shrink:0;">
-                                    <span style="font-size:0.875rem; color:#475569;">Show</span>
-                                    <select id="docLengthSelect" class="form-control form-control-sm" style="width:70px;">
-                                        <option value="5">5</option>
-                                        <option value="10" selected>10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="-1">All</option>
-                                    </select>
-                                </div>
-                                <div class="d-flex align-items-center" style="gap:0.35rem; flex-shrink:0;">
-                                    <div class="reg-search-box" style="max-width:160px;">
-                                        <i class="fas fa-search"></i>
-                                        <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari...">
-                                    </div>
-                                    <?php if ($can_crud ?? false): ?>
-                                    <button type="button" class="btn btn-primary btn-sm btn-add-doc" data-toggle="modal" data-target="#regulation-modal" style="white-space:nowrap;">
-                                        <i class="fas fa-plus mr-1"></i> Tambah
-                                    </button>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
                             <div class="p-0">
                                 <div class="table-responsive">
                                     <table class="table table-documents" id="documentsTable" style="width:100% !important;">
@@ -371,7 +361,6 @@ $activeDoc = $active_doc ?? null;
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
