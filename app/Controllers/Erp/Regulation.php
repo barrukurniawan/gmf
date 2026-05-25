@@ -42,7 +42,9 @@ class Regulation extends BaseController
         $data['active_category'] = $request->getGet('category') ?: 'all';
 
         // Role-based CRUD permission: only company/super_user can CRUD
-        $data['can_crud'] = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
+        $data['can_crud']     = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
+        // Download permission: staff cannot download
+        $data['can_download'] = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
 
         // Categories
         $data['categories'] = [
@@ -130,8 +132,9 @@ class Regulation extends BaseController
             if ($canCrud) {
                 $actions .= '<button class="btn btn-sm btn-outline-info btn-edit-doc" data-id="' . $encId . '" title="Edit Dokumen" data-toggle="modal" data-target="#regulation-modal"><i class="fas fa-edit"></i></button>';
                 $actions .= '<button class="btn btn-sm btn-outline-danger btn-delete-doc" data-id="' . $encId . '" title="Hapus Dokumen"><i class="fas fa-trash-alt"></i></button>';
+                // Download button: only for company/super_user
+                $actions .= '<a href="' . site_url('erp/regulation/download/' . $encId) . '" class="btn btn-sm btn-outline-success" title="Download" target="_blank"><i class="fas fa-download"></i></a>';
             }
-            $actions .= '<a href="' . site_url('erp/regulation/download/' . $encId) . '" class="btn btn-sm btn-outline-success" title="Download" target="_blank"><i class="fas fa-download"></i></a>';
             $actions .= '</div>';
 
             $data[] = [
@@ -199,6 +202,15 @@ class Regulation extends BaseController
         $session = \Config\Services::session();
         if (!$session->has('sup_username')) {
             return redirect()->to(site_url('erp/login'));
+        }
+
+        // Block download for staff (employees)
+        $usession   = $session->get('sup_username');
+        $UsersModel = new UsersModel();
+        $user_info  = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+        if ($user_info['user_type'] == 'staff') {
+            $session->setFlashdata('error', 'Anda tidak memiliki izin untuk mengunduh dokumen ini.');
+            return redirect()->to(site_url('erp/regulation-portal'));
         }
 
         $id = udecode($id);

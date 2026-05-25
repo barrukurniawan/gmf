@@ -354,9 +354,11 @@ $activeDoc = $active_doc ?? null;
                             <div class="pdf-viewer-header">
                                 <h6 id="previewTitle"><i class="fas fa-file-pdf mr-2 text-danger"></i>Pratinjau Dokumen</h6>
                                 <div>
+                                    <?php if ($can_download ?? false): ?>
                                     <a href="#" id="previewDownload" class="btn btn-sm btn-outline-primary" style="display:none;" target="_blank">
                                         <i class="fas fa-download mr-1"></i> Download
                                     </a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="pdf-viewer-body" id="previewBody">
@@ -420,6 +422,7 @@ var REGULATION = {
     activeDocId: '<?= $activeDoc ? uencode($activeDoc) : '' ?>',
     csrfName: '<?= csrf_token() ?>',
     csrfHash: '<?= csrf_hash() ?>',
+    canDownload: <?= ($can_download ?? false) ? 'true' : 'false' ?>,
     categories: <?= json_encode(array_map(function($c){return $c['label'];}, $categories)) ?>
 };
 // Global csrf_hash for form submissions (used by modal forms)
