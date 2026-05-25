@@ -61,6 +61,7 @@ $(document).ready(function() {
             },
             processing: '<div class="text-center py-3"><div class="spinner-portal"></div><div class="mt-2 text-muted">' + processing_request + '</div></div>'
         },
+        dom: 'rtip',
         drawCallback: function(settings) {
             attachRowHandlers();
             var activeDocId = $('#activeDocId').val();
@@ -73,6 +74,11 @@ $(document).ready(function() {
     // Custom search binding
     $('#docSearch').on('keyup', function() {
         table.search(this.value).draw();
+    });
+
+    // Custom length select binding
+    $('#docLengthSelect').on('change', function() {
+        table.page.len(parseInt($(this).val())).draw();
     });
 
     // Category filter
