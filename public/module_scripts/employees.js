@@ -88,6 +88,20 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('.custom-file-input').on('change', function() {
+		var fileName = $(this).val().split('\\').pop();
+		var $label = $(this).siblings('.custom-file-label');
+		if (fileName) {
+			$label.addClass('selected').html('<i class="fas fa-check-circle text-success mr-1"></i>' + fileName);
+		} else {
+			$label.removeClass('selected').html($label.data('original'));
+		}
+	});
+
+	$('.custom-file-label').each(function() {
+		$(this).data('original', $(this).html());
+	});
+
 	/* Add data */ /*Form Submit*/
 	$("#xin-form").submit(function(e){
 		var fd = new FormData(this);
@@ -115,6 +129,9 @@ $(document).ready(function() {
 					}, true);
 					$('input[name="csrf_token"]').val(JSON.csrf_hash);
 					$('#xin-form')[0].reset(); // To reset form fields
+					$('.custom-file-label').removeClass('selected').each(function() {
+						$(this).html($(this).data('original'));
+					});
 					$('.add-form').removeClass('show');
 					Ladda.stopAll();
 				}
