@@ -35,9 +35,9 @@ class Regulation extends BaseController
         $xin_system = $SystemModel->where('setting_id', 1)->first();
 
         $request = \Config\Services::request();
-        $data['title']           = 'Regulation Portal | ' . $xin_system['application_name'];
+        $data['title']           = 'Company Manual Publication | ' . $xin_system['application_name'];
         $data['path_url']        = 'regulation';
-        $data['breadcrumbs']     = 'Regulation Portal';
+        $data['breadcrumbs']     = 'Company Manual Publication';
         $data['active_doc']      = $documentId ? udecode($documentId) : null;
         $data['active_category'] = $request->getGet('category') ?: 'all';
 
@@ -48,7 +48,7 @@ class Regulation extends BaseController
         $data['categories'] = [
             'all'             => 'All Documents',
             'sop'             => 'SOP',
-            'draft_regulasi'  => 'Draft Regulasi',
+            'draft_regulasi'  => 'CMM/EMM/Others',
             'policy_letter'   => 'Policy Letter',
             'forms'           => 'Forms',
             'others'          => 'Others',
@@ -114,7 +114,7 @@ class Regulation extends BaseController
 
         $categories = [
             'sop'            => '<span class="badge bg-primary">SOP</span>',
-            'draft_regulasi' => '<span class="badge bg-warning text-dark">Draft Regulasi</span>',
+            'draft_regulasi' => '<span class="badge bg-warning text-dark">CMM/EMM/Others</span>',
             'policy_letter'  => '<span class="badge bg-success">Policy Letter</span>',
             'forms'          => '<span class="badge bg-info text-dark">Forms</span>',
             'others'         => '<span class="badge bg-secondary">Others</span>',

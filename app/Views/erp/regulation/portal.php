@@ -2,7 +2,7 @@
 $categories = [
     'all'            => ['label' => 'All Documents', 'icon' => 'fa-folder-open'],
     'sop'            => ['label' => 'SOP', 'icon' => 'fa-clipboard-check'],
-    'draft_regulasi' => ['label' => 'Draft Regulasi', 'icon' => 'fa-file-signature'],
+    'draft_regulasi' => ['label' => 'CMM/EMM/Others', 'icon' => 'fa-file-signature'],
     'policy_letter'  => ['label' => 'Policy Letter', 'icon' => 'fa-envelope-open-text'],
     'forms'          => ['label' => 'Forms', 'icon' => 'fa-file-alt'],
     'others'         => ['label' => 'Others', 'icon' => 'fa-ellipsis-h'],
@@ -293,7 +293,7 @@ $activeDoc = $active_doc ?? null;
                 <nav aria-label="breadcrumb" class="mb-3">
                     <ol class="breadcrumb bg-transparent p-0 m-0" style="font-size:0.875rem;">
                         <li class="breadcrumb-item"><a href="<?= site_url('erp/desk') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Regulation Portal</li>
+                        <li class="breadcrumb-item active" aria-current="page">Company Manual Publication</li>
                     </ol>
                 </nav>
 

@@ -25,7 +25,7 @@ if ($field_id) {
 
 $categories = [
     'sop'            => 'SOP',
-    'draft_regulasi' => 'Draft Regulasi',
+    'draft_regulasi' => 'CMM/EMM/Others',
     'policy_letter'  => 'Policy Letter',
     'forms'          => 'Forms',
     'others'         => 'Others',
