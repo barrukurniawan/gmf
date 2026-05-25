@@ -233,7 +233,7 @@ class TrainingRecord extends BaseController {
                             'date_completed' => $date_completed,
                             'test_result' => $this->request->getPost('test_result')[$i] ?? '',
                             'total_hours' => $this->request->getPost('total_hours')[$i] ?? '',
-                            'institution' => $this->request->getPost('institution')[$i] ?? '',
+                            'institution' => $this->request->getPost('training_institution')[$i] ?? '',
                             'location' => $this->request->getPost('location')[$i] ?? '',
                             'instructor_name' => $this->request->getPost('instructor_name')[$i] ?? '',
                             'created_at' => $dt,

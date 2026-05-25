@@ -190,7 +190,7 @@ foreach($signatures as $sig) {
                   <td><input type="text" class="form-control date" name="date_completed[]" data-date-format="dd-mm-yyyy" value="<?= !empty($th['date_completed']) && strtotime($th['date_completed']) ? date('d-m-Y', strtotime($th['date_completed'])) : ''; ?>" placeholder="Date"></td>
                   <td><input type="text" class="form-control" name="test_result[]" value="<?= $th['test_result']; ?>" placeholder="Test Result"></td>
                   <td><input type="text" class="form-control" name="total_hours[]" value="<?= $th['total_hours']; ?>" placeholder="Hours"></td>
-                  <td><input type="text" class="form-control" name="institution[]" value="<?= $th['institution'] ?? ''; ?>" placeholder="Institution"></td>
+                  <td><input type="text" class="form-control" name="training_institution[]" value="<?= $th['institution'] ?? ''; ?>" placeholder="Institution"></td>
                   <td><input type="text" class="form-control" name="location[]" value="<?= $th['location']; ?>" placeholder="Location"></td>
                   <td><input type="text" class="form-control" name="instructor_name[]" value="<?= $th['instructor_name']; ?>" placeholder="Instructor"></td>
                   <td class="text-center"><i class="feather icon-trash-2 btn-remove-row"></i></td>
@@ -203,7 +203,7 @@ foreach($signatures as $sig) {
                 <td><input type="text" class="form-control date" name="date_completed[]" data-date-format="dd-mm-yyyy" placeholder="Date"></td>
                 <td><input type="text" class="form-control" name="test_result[]" placeholder="Test Result"></td>
                 <td><input type="text" class="form-control" name="total_hours[]" placeholder="Hours"></td>
-                <td><input type="text" class="form-control" name="institution[]" placeholder="Institution"></td>
+                <td><input type="text" class="form-control" name="training_institution[]" placeholder="Institution"></td>
                 <td><input type="text" class="form-control" name="location[]" placeholder="Location"></td>
                 <td><input type="text" class="form-control" name="instructor_name[]" placeholder="Instructor"></td>
                 <td class="text-center"><i class="feather icon-trash-2 btn-remove-row"></i></td>

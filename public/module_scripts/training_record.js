@@ -56,6 +56,7 @@
           '<td><input type="text" class="form-control date" name="date_completed[]" placeholder="Date"></td>' +
           '<td><input type="text" class="form-control" name="test_result[]" placeholder="Test Result"></td>' +
           '<td><input type="text" class="form-control" name="total_hours[]" placeholder="Hours"></td>' +
+          '<td><input type="text" class="form-control" name="training_institution[]" placeholder="Institution"></td>' +
           '<td><input type="text" class="form-control" name="location[]" placeholder="Location"></td>' +
           '<td><input type="text" class="form-control" name="instructor_name[]" placeholder="Instructor"></td>' +
           '<td class="text-center"><i class="feather icon-trash-2 btn-remove-row"></i></td>' +
