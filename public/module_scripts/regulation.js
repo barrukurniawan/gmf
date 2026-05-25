@@ -169,15 +169,28 @@ $(document).ready(function() {
 
                 var titleHtml = '<i class="fas fa-file mr-2" style="color:var(--portal-accent);"></i>' + escapeHtml(res.title);
                 $previewTitle.html(titleHtml);
-                $previewDownload.attr('href', REGULATION.baseUrl + '/download/' + res.id).show();
+                
+                if (REGULATION.canDownload) {
+                    $previewDownload.attr('href', REGULATION.baseUrl + '/download/' + res.id).show();
+                } else {
+                    $previewDownload.hide();
+                }
 
                 var viewerHtml = '';
                 if (res.is_pdf) {
-                    viewerHtml = '<iframe src="' + res.file_url + '" title="PDF Preview"></iframe>';
+                    var pdfUrl = res.file_url;
+                    if (!REGULATION.canDownload) {
+                        pdfUrl += '#toolbar=0'; // Hide native PDF viewer controls like Print & Download
+                    }
+                    viewerHtml = '<iframe src="' + pdfUrl + '" title="PDF Preview"></iframe>';
                 } else if (['jpg','jpeg','png','gif','webp'].indexOf(res.extension) !== -1) {
                     viewerHtml = '<div class="d-flex align-items-center justify-content-center h-100 bg-light"><img src="' + res.file_url + '" style="max-width:100%; max-height:100%; object-fit:contain;" alt="Preview"></div>';
                 } else {
-                    viewerHtml = '<div class="empty-state"><i class="fas fa-file"></i><p>Pratinjau tidak tersedia untuk format .' + res.extension + '</p><a href="' + REGULATION.baseUrl + '/download/' + res.id + '" class="btn btn-primary btn-sm mt-2"><i class="fas fa-download mr-1"></i> Download File</a></div>';
+                    viewerHtml = '<div class="empty-state"><i class="fas fa-file"></i><p>Pratinjau tidak tersedia untuk format .' + res.extension + '</p>';
+                    if (REGULATION.canDownload) {
+                        viewerHtml += '<a href="' + REGULATION.baseUrl + '/download/' + res.id + '" class="btn btn-primary btn-sm mt-2"><i class="fas fa-download mr-1"></i> Download File</a>';
+                    }
+                    viewerHtml += '</div>';
                 }
 
                 $previewBody.html(viewerHtml);
