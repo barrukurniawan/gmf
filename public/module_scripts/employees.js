@@ -89,9 +89,21 @@ $(document).ready(function() {
 	});
 	
 	$('.custom-file-input').on('change', function() {
-		var fileName = $(this).val().split('\\').pop();
-		var $label = $(this).siblings('.custom-file-label');
+		var $input = $(this);
+		var fileName = $input.val().split('\\').pop();
+		var $label = $input.siblings('.custom-file-label');
+		var maxSizeMb = $input.data('max-size');
 		if (fileName) {
+			if (maxSizeMb) {
+				var maxSizeBytes = maxSizeMb * 1024 * 1024;
+				var file = this.files[0];
+				if (file && file.size > maxSizeBytes) {
+					toastr.error('File terlalu besar. Maksimal ukuran file: ' + maxSizeMb + ' MB');
+					$input.val('');
+					$label.removeClass('selected').html($label.data('original'));
+					return;
+				}
+			}
 			$label.addClass('selected').html('<i class="fas fa-check-circle text-success mr-1"></i>' + fileName);
 		} else {
 			$label.removeClass('selected').html($label.data('original'));

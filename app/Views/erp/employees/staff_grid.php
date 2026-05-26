@@ -320,7 +320,7 @@ $employee_id = generate_random_employeeid();
                   <?= lang('Main.xin_e_details_profile_picture');?>
                   <span class="text-danger">*</span> </label>
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" name="file">
+                  <input type="file" class="custom-file-input" name="file" data-max-size="4">
                   <label class="custom-file-label">
                     <?= lang('Main.xin_choose_file');?>
                   </label>
