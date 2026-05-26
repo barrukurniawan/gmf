@@ -127,6 +127,12 @@ $(document).ready(function() {
 			} else {
 				$('#email-datalist').html('');
 			}
+			/* Auto-fill Username dari email */
+			var username = beforeAt;
+			if (username.length < 6) {
+				username += 'global';
+			}
+			$('input[name="username"]').val(username);
 		} else {
 			$('#email-datalist').html('');
 		}
