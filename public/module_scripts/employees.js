@@ -132,6 +132,15 @@ $(document).ready(function() {
 		}
 	});
 
+	/* Hourly Rate auto-calculate dari Basic Salary (40 jam/minggu × 4 minggu = 160 jam/bulan) */
+	$('input[name="basic_salary"]').on('input', function() {
+		var basicSalary = parseFloat($(this).val().replace(/[^0-9.]/g, ''));
+		if (!isNaN(basicSalary) && basicSalary > 0) {
+			var hourlyRate = Math.round(basicSalary / 160);
+			$('input[name="hourly_rate"]').val(hourlyRate);
+		}
+	});
+
 	/* Add data */ /*Form Submit*/
 	$("#xin-form").submit(function(e){
 		var fd = new FormData(this);
