@@ -114,6 +114,24 @@ $(document).ready(function() {
 		$(this).data('original', $(this).html());
 	});
 
+	/* Email auto-suggestion dengan domain perusahaan */
+	var companyDomain = '@globalmaintenance.co.id';
+	$('input[name="email"]').on('input', function() {
+		var val = $(this).val();
+		var atPos = val.indexOf('@');
+		if (atPos !== -1) {
+			var beforeAt = val.substring(0, atPos);
+			var afterAt = val.substring(atPos);
+			if (companyDomain.startsWith(afterAt) && afterAt.length >= 2) {
+				$('#email-datalist').html('<option value="' + beforeAt + companyDomain + '">');
+			} else {
+				$('#email-datalist').html('');
+			}
+		} else {
+			$('#email-datalist').html('');
+		}
+	});
+
 	/* Add data */ /*Form Submit*/
 	$("#xin-form").submit(function(e){
 		var fd = new FormData(this);

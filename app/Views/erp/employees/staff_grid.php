@@ -156,7 +156,8 @@ $employee_id = generate_random_employeeid();
                     <span class="text-danger">*</span> </label>
                   <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-envelope"></i></span></div>
-                    <input class="form-control" placeholder="<?= lang('Main.xin_email');?>" name="email" type="text">
+                    <input class="form-control" placeholder="<?= lang('Main.xin_email');?>" name="email" type="text" list="email-datalist" autocomplete="off">
+                    <datalist id="email-datalist"></datalist>
                   </div>
                 </div>
               </div>
@@ -192,11 +193,11 @@ $employee_id = generate_random_employeeid();
                     <option value="">
                     <?= lang('Employees.xin_employee_office_shift');?>
                     </option>
-                    <?php foreach($office_shifts as $ioffice_shift):?>
-                    <option value="<?= $ioffice_shift['office_shift_id'];?>">
+                    <?php $firstShift = true; foreach($office_shifts as $ioffice_shift):?>
+                    <option value="<?= $ioffice_shift['office_shift_id'];?>"<?= $firstShift ? ' selected' : ''; ?>>
                     <?= $ioffice_shift['shift_name'];?>
                     </option>
-                    <?php endforeach;?>
+                    <?php $firstShift = false; endforeach;?>
                   </select>
                 </div>
               </div>
