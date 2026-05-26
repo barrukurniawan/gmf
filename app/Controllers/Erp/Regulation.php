@@ -115,11 +115,11 @@ class Regulation extends BaseController
         $documents = $builder->get()->getResultArray();
 
         $categories = [
-            'sop'            => '<span class="badge bg-primary">SOP</span>',
+            'sop'            => '<span class="badge bg-danger">SOP</span>',
             'draft_regulasi' => '<span class="badge bg-warning text-dark">CMM/EMM/Others</span>',
             'policy_letter'  => '<span class="badge bg-success">Policy Letter</span>',
             'forms'          => '<span class="badge bg-info text-dark">Forms</span>',
-            'others'         => '<span class="badge bg-secondary">Others</span>',
+            'others'         => '<span class="badge" style="background-color: #1e3a5f; color: #fff;">Others</span>',
         ];
 
         $data = [];
@@ -141,7 +141,7 @@ class Regulation extends BaseController
                 $no++,
                 '<strong>' . esc($doc['title']) . '</strong>' .
                     ($doc['document_number'] ? '<br><small class="text-muted">No: ' . esc($doc['document_number']) . '</small>' : ''),
-                $categories[$doc['category']] ?? '<span class="badge bg-secondary">Others</span>',
+                $categories[$doc['category']] ?? '<span class="badge" style="background-color: #1e3a5f; color: #fff;">Others</span>',
                 $doc['publish_date'] ? date('d M Y', strtotime($doc['publish_date'])) : '-',
                 $actions,
                 $encId, // hidden column for JS usage
