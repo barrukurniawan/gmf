@@ -44,7 +44,7 @@ return [
 	'dashboard_username' => 'Nama pengguna',
 	'xin_website' => 'Situs web',
 	'xin_employee_password' => "Kata sandi",
-	'xin_company_file_type' => 'Unggah file saja: pdf,gif,png,jpg,jpeg',
+	'xin_company_file_type' => 'Unggah file saja: pdf, gif, png, jpg, jpeg (maks: 4 Mb)',
 	'xin_error_contact_field' => "Bidang nomor kontak wajib diisi.",
 	'xin_error_cemail_field' => "Bidang email wajib diisi.",
 	'xin_error_website_field' => "Bidang situs web wajib diisi.",

@@ -88,6 +88,65 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('.custom-file-input').on('change', function() {
+		var $input = $(this);
+		var fileName = $input.val().split('\\').pop();
+		var $label = $input.siblings('.custom-file-label');
+		var maxSizeMb = $input.data('max-size');
+		if (fileName) {
+			if (maxSizeMb) {
+				var maxSizeBytes = maxSizeMb * 1024 * 1024;
+				var file = this.files[0];
+				if (file && file.size > maxSizeBytes) {
+					toastr.error('File terlalu besar. Maksimal ukuran file: ' + maxSizeMb + ' MB');
+					$input.val('');
+					$label.removeClass('selected').html($label.data('original'));
+					return;
+				}
+			}
+			$label.addClass('selected').html('<i class="fas fa-check-circle text-success mr-1"></i>' + fileName);
+		} else {
+			$label.removeClass('selected').html($label.data('original'));
+		}
+	});
+
+	$('.custom-file-label').each(function() {
+		$(this).data('original', $(this).html());
+	});
+
+	/* Email auto-suggestion dengan domain perusahaan */
+	var companyDomain = '@globalmaintenance.co.id';
+	$('input[name="email"]').on('input', function() {
+		var val = $(this).val();
+		var atPos = val.indexOf('@');
+		if (atPos !== -1) {
+			var beforeAt = val.substring(0, atPos);
+			var afterAt = val.substring(atPos);
+			if (companyDomain.startsWith(afterAt) && afterAt.length >= 2) {
+				$('#email-datalist').html('<option value="' + beforeAt + companyDomain + '">');
+			} else {
+				$('#email-datalist').html('');
+			}
+			/* Auto-fill Username dari email */
+			var username = beforeAt;
+			if (username.length < 6) {
+				username += 'global';
+			}
+			$('input[name="username"]').val(username);
+		} else {
+			$('#email-datalist').html('');
+		}
+	});
+
+	/* Hourly Rate auto-calculate dari Basic Salary (40 jam/minggu × 4 minggu = 160 jam/bulan) */
+	$('input[name="basic_salary"]').on('input', function() {
+		var basicSalary = parseFloat($(this).val().replace(/[^0-9.]/g, ''));
+		if (!isNaN(basicSalary) && basicSalary > 0) {
+			var hourlyRate = Math.round(basicSalary / 160);
+			$('input[name="hourly_rate"]').val(hourlyRate);
+		}
+	});
+
 	/* Add data */ /*Form Submit*/
 	$("#xin-form").submit(function(e){
 		var fd = new FormData(this);
@@ -115,6 +174,9 @@ $(document).ready(function() {
 					}, true);
 					$('input[name="csrf_token"]').val(JSON.csrf_hash);
 					$('#xin-form')[0].reset(); // To reset form fields
+					$('.custom-file-label').removeClass('selected').each(function() {
+						$(this).html($(this).data('original'));
+					});
 					$('.add-form').removeClass('show');
 					Ladda.stopAll();
 				}
