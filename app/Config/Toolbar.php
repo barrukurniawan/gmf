@@ -55,7 +55,7 @@ class Toolbar extends BaseConfig
 	 *
 	 * @var integer
 	 */
-	public $maxHistory = 20;
+	public $maxHistory = 0;
 
 	/**
 	 * --------------------------------------------------------------------------

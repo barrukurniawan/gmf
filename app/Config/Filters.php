@@ -41,7 +41,7 @@ class Filters extends BaseConfig
 			 'csrf',
 		],
 		'after'  => [
-			'toolbar',
+			// 'toolbar', // disabled to prevent sensitive data leaks in production
 			'honeypot'
 		],
 	];

@@ -105,8 +105,17 @@ class Backup_erp {
 	 */
 	private function Connect() {
 		if(!$this->link) {
-			$this->link = mysqli_connect($this->host, $this->user, $this->pass) or die(mysqli_error());
-			mysqli_select_db($this->link, $this->database) or die(mysqli_error());
+			$this->link = @mysqli_connect($this->host, $this->user, $this->pass);
+			if (!$this->link) {
+				log_message('error', 'Backup DB connect failed: ' . mysqli_connect_error());
+				$this->msg = 'Database connection failed. Check error logs.';
+				return false;
+			}
+			if (!@mysqli_select_db($this->link, $this->database)) {
+				log_message('error', 'Backup DB select failed: ' . mysqli_error($this->link));
+				$this->msg = 'Database selection failed. Check error logs.';
+				return false;
+			}
 		}
 		return $this->link;
 	}
@@ -314,17 +323,13 @@ class Backup_erp {
 			//	$line = substr($line, 0, -1);
 
 			//// here we go
-			$result = @mysqli_query($link, $line) or die(mysqli_error($link).$line);
-			////
-
-			if (!$result ) {
-
-				$this->msg =  mysqli_error() ;	die;
+			$result = @mysqli_query($link, $line);
+			if (!$result) {
+				log_message('error', 'Backup restore SQL error: ' . mysqli_error($link));
+				$this->msg = 'SQL restore failed. Check error logs.';
 				return $this->msg;
-				break;
-
-
 			}
+			////
 
 		}
 
