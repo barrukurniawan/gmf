@@ -51,7 +51,7 @@ $result = $WarningModel->where('warning_id', $warning_id)->first();
             <label for="subject">
               <?= lang('Main.xin_subject');?> <span class="text-danger">*</span>
             </label>
-            <input class="form-control" placeholder="<?= lang('Main.xin_subject');?>" name="subject" type="text" value="<?php echo $result['subject'];?>">
+            <input class="form-control" placeholder="<?= lang('Main.xin_subject');?>" name="subject" type="text" value="<?php echo esc($result['subject'], 'attr')?>">
           </div>
         </div>
         <div class="col-md-6">
@@ -60,7 +60,7 @@ $result = $WarningModel->where('warning_id', $warning_id)->first();
               <?= lang('Employees.xin_case_date');?> <span class="text-danger">*</span>
             </label>
             <div class="input-group">
-              <input class="form-control d_date" placeholder="<?= lang('Employees.xin_case_date');?>" name="warning_date" type="text" value="<?php echo $result['warning_date'];?>">
+              <input class="form-control d_date" placeholder="<?= lang('Employees.xin_case_date');?>" name="warning_date" type="text" value="<?php echo esc($result['warning_date'], 'attr')?>">
               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
             </div>
           </div>

@@ -6,8 +6,8 @@
 /writable/*
 !/writable/.gitkeep
 /public/uploads/
-/installation/assets/
-/installation/config/
+/installation/
+AGENTS.md
 
 # Ignore system artifacts
 *.log

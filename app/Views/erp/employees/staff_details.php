@@ -87,15 +87,15 @@ $cmodule_attributes = $Moduleattributes->where('company_id',$company_id)->where(
           <?= $_status?>
         </div>
         <div class="media user-about-block align-items-center mt-0 mb-3">
-          <div class="position-relative d-inline-block"> <img class="img-radius img-fluid wid-80" src="<?= base_url().'/public/uploads/users/'.$result['profile_photo'];?>" alt="<?= $result['first_name'].' '.$result['last_name']; ?>">
+          <div class="position-relative d-inline-block"> <img class="img-radius img-fluid wid-80" src="<?= base_url().'/public/uploads/users/'.$result['profile_photo'];?>" alt="<?= esc($result['first_name'].' '.$result['last_name'], 'attr'); ?>">
             <div class="certificated-badge"> <i class="fas fa-certificate text-primary bg-icon"></i> <i class="fas fa-check front-icon text-white"></i> </div>
           </div>
           <div class="media-body ml-3">
             <h6 class="mb-1">
-              <?= $result['first_name'].' '.$result['last_name']; ?>
+              <?= esc($result['first_name'].' '.$result['last_name']); ?>
             </h6>
             <p class="mb-0 text-muted">
-              <?= $idesignations['designation_name'];?>
+              <?= esc($idesignations['designation_name']);?>
             </p>
           </div>
         </div>
@@ -104,12 +104,12 @@ $cmodule_attributes = $Moduleattributes->where('company_id',$company_id)->where(
         <li class="list-group-item"> <span class="f-w-500"><i class="feather icon-user m-r-10"></i>
           <?= lang('Employees.xin_manager');?>
           <i class="fas fa-question-circle" data-toggle="tooltip" title="Department Head"></i></span> <a href="#" class="float-right text-body">
-          <?= $dep_user ? $dep_user['first_name'].' '.$dep_user['last_name'] : '-'; ?>
+          <?= $dep_user ? esc($dep_user['first_name'].' '.$dep_user['last_name']) : '-'; ?>
           </a> </li>
         <li class="list-group-item border-bottom-0"> <span class="f-w-500"><i class="feather icon-mail m-r-10"></i>
           <?= lang('Main.xin_email');?>
           </span> <span class="float-right">
-          <?= $result['email'];?>
+          <?= esc($result['email']);?>
           </span> </li>
       </ul>
       <div class="nav flex-column nav-pills list-group list-group-flush list-pills" id="user-set-tab" role="tablist" aria-orientation="vertical">

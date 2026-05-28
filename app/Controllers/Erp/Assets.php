@@ -159,20 +159,25 @@ class Assets extends BaseController {
 			} else {
 				// upload file
 				$asset_image = $this->request->getFile('asset_image');
-				$file_name = $asset_image->getName();
+				if (!validate_file_extension($asset_image, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $asset_image->getRandomName();
 				$asset_image->move('public/uploads/asset_image/');
 				
-				$asset_name = $this->request->getPost('asset_name',FILTER_SANITIZE_STRING);
-				$category_id = $this->request->getPost('category_id',FILTER_SANITIZE_STRING);
-				$brand_id = $this->request->getPost('brand_id',FILTER_SANITIZE_STRING);
-				$company_asset_code = $this->request->getPost('company_asset_code',FILTER_SANITIZE_STRING);
-				$is_working = $this->request->getPost('is_working',FILTER_SANITIZE_STRING);
-				$purchase_date = $this->request->getPost('purchase_date',FILTER_SANITIZE_STRING);
-				$invoice_number = $this->request->getPost('invoice_number',FILTER_SANITIZE_STRING);
-				$manufacturer = $this->request->getPost('manufacturer',FILTER_SANITIZE_STRING);
-				$serial_number = $this->request->getPost('serial_number',FILTER_SANITIZE_STRING);
-				$warranty_end_date = $this->request->getPost('warranty_end_date',FILTER_SANITIZE_STRING);
-				$asset_note = $this->request->getPost('asset_note',FILTER_SANITIZE_STRING);
+				$asset_name = $this->request->getPost('asset_name');
+				$category_id = $this->request->getPost('category_id');
+				$brand_id = $this->request->getPost('brand_id');
+				$company_asset_code = $this->request->getPost('company_asset_code');
+				$is_working = $this->request->getPost('is_working');
+				$purchase_date = $this->request->getPost('purchase_date');
+				$invoice_number = $this->request->getPost('invoice_number');
+				$manufacturer = $this->request->getPost('manufacturer');
+				$serial_number = $this->request->getPost('serial_number');
+				$warranty_end_date = $this->request->getPost('warranty_end_date');
+				$asset_note = $this->request->getPost('asset_note');
 				
 				$UsersModel = new UsersModel();
 				$Moduleattributes = new Moduleattributes();
@@ -185,7 +190,7 @@ class Assets extends BaseController {
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',2)->orderBy('custom_field_id', 'ASC')->countAllResults();
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',2)->orderBy('custom_field_id', 'ASC')->findAll();
 				} else {
-					$staff_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$staff_id = $this->request->getPost('employee_id');
 					$company_id = $usession['sup_user_id'];
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',2)->orderBy('custom_field_id', 'ASC')->countAllResults();
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',2)->orderBy('custom_field_id', 'ASC')->findAll();
@@ -291,7 +296,7 @@ class Assets extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$AssetsModel = new AssetsModel();
 			if ($validated) {
 				$data = [
@@ -355,18 +360,18 @@ class Assets extends BaseController {
 					}
 				}
 			} else {
-				$asset_name = $this->request->getPost('asset_name',FILTER_SANITIZE_STRING);
-				$category_id = $this->request->getPost('category_id',FILTER_SANITIZE_STRING);
-				$brand_id = $this->request->getPost('brand_id',FILTER_SANITIZE_STRING);
-				$company_asset_code = $this->request->getPost('company_asset_code',FILTER_SANITIZE_STRING);
-				$is_working = $this->request->getPost('is_working',FILTER_SANITIZE_STRING);
-				$purchase_date = $this->request->getPost('purchase_date',FILTER_SANITIZE_STRING);
-				$invoice_number = $this->request->getPost('invoice_number',FILTER_SANITIZE_STRING);
-				$manufacturer = $this->request->getPost('manufacturer',FILTER_SANITIZE_STRING);
-				$serial_number = $this->request->getPost('serial_number',FILTER_SANITIZE_STRING);
-				$warranty_end_date = $this->request->getPost('warranty_end_date',FILTER_SANITIZE_STRING);
-				$asset_note = $this->request->getPost('asset_note',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$asset_name = $this->request->getPost('asset_name');
+				$category_id = $this->request->getPost('category_id');
+				$brand_id = $this->request->getPost('brand_id');
+				$company_asset_code = $this->request->getPost('company_asset_code');
+				$is_working = $this->request->getPost('is_working');
+				$purchase_date = $this->request->getPost('purchase_date');
+				$invoice_number = $this->request->getPost('invoice_number');
+				$manufacturer = $this->request->getPost('manufacturer');
+				$serial_number = $this->request->getPost('serial_number');
+				$warranty_end_date = $this->request->getPost('warranty_end_date');
+				$asset_note = $this->request->getPost('asset_note');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$Moduleattributes = new Moduleattributes();
 				$Moduleattributesval = new Moduleattributesval();
@@ -379,7 +384,7 @@ class Assets extends BaseController {
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',2)->orderBy('custom_field_id', 'ASC')->findAll();
 				} else {
 					$company_id = $usession['sup_user_id'];
-					$staff_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$staff_id = $this->request->getPost('employee_id');
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',2)->orderBy('custom_field_id', 'ASC')->countAllResults();
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',2)->orderBy('custom_field_id', 'ASC')->findAll();
 				}
@@ -563,7 +568,7 @@ class Assets extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$AssetsModel = new AssetsModel();
 			$UsersModel = new UsersModel();

@@ -101,7 +101,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $meeting['meeting_id']?>',
 				unq: '0',
-				title: '<?php echo $meeting['meeting_title']?>',
+				title: '<?php echo esc($meeting['meeting_title'], 'js')?>',
 				start: '<?php echo $meeting['meeting_date']?>T<?php echo $meeting['meeting_time']?>',
 				color: '<?php echo $meeting['meeting_color']?> !important'
 			},

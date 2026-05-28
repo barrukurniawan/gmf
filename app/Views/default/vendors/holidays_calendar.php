@@ -92,7 +92,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $ntpublished['holiday_id']?>',
 				unq: '0',
-				title: '<?php echo $ntpublished['event_name']?>',
+				title: '<?php echo esc($ntpublished['event_name'], 'js')?>',
 				start: '<?php echo $ntpublished['start_date']?>',
 				end: '<?php echo $ntpublished['end_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($ntpublished['holiday_id']);?>',
@@ -103,7 +103,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $tpublished['holiday_id']?>',
 				unq: '0',
-				title: '<?php echo $tpublished['event_name']?>',
+				title: '<?php echo esc($tpublished['event_name'], 'js')?>',
 				start: '<?php echo $tpublished['start_date']?>',
 				end: '<?php echo $tpublished['end_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($tpublished['holiday_id']);?>',

@@ -282,12 +282,12 @@ class Training extends BaseController {
 					}
 				}
 			} else {
-				$trainer = $this->request->getPost('trainer',FILTER_SANITIZE_STRING);
-				$training_type = $this->request->getPost('training_type',FILTER_SANITIZE_STRING);
-				$training_cost = $this->request->getPost('training_cost',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
+				$trainer = $this->request->getPost('trainer');
+				$training_type = $this->request->getPost('training_type');
+				$training_cost = $this->request->getPost('training_cost');
+				$description = $this->request->getPost('description');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
 				$UsersModel = new UsersModel();
 				$Moduleattributes = new Moduleattributes();
 				$Moduleattributesval = new Moduleattributesval();
@@ -299,7 +299,7 @@ class Training extends BaseController {
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',4)->orderBy('custom_field_id', 'ASC')->countAllResults();
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',4)->orderBy('custom_field_id', 'ASC')->findAll();
 				} else {
-					$employee_ids = implode(',',$this->request->getPost('employee_id',FILTER_SANITIZE_STRING));
+					$employee_ids = implode(',',$this->request->getPost('employee_id'));
 					$staff_id = $employee_ids;
 					$company_id = $usession['sup_user_id'];
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',4)->orderBy('custom_field_id', 'ASC')->countAllResults();
@@ -420,14 +420,14 @@ class Training extends BaseController {
 					}
 				}
 			} else {
-				$trainer = $this->request->getPost('trainer',FILTER_SANITIZE_STRING);
-				$training_type = $this->request->getPost('training_type',FILTER_SANITIZE_STRING);
-				$training_cost = $this->request->getPost('training_cost',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$associated_goals = implode(',',$this->request->getPost('associated_goals',FILTER_SANITIZE_STRING));
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$trainer = $this->request->getPost('trainer');
+				$training_type = $this->request->getPost('training_type');
+				$training_cost = $this->request->getPost('training_cost');
+				$description = $this->request->getPost('description');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$associated_goals = implode(',',$this->request->getPost('associated_goals'));
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$MainModel = new MainModel();
 				$Moduleattributes = new Moduleattributes();
@@ -440,7 +440,7 @@ class Training extends BaseController {
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',4)->orderBy('custom_field_id', 'ASC')->countAllResults();
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',4)->orderBy('custom_field_id', 'ASC')->findAll();
 				} else {
-					$employee_ids = implode(',',$this->request->getPost('employee_id',FILTER_SANITIZE_STRING));
+					$employee_ids = implode(',',$this->request->getPost('employee_id'));
 					$staff_id = $employee_ids;
 					$company_id = $usession['sup_user_id'];
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',4)->orderBy('custom_field_id', 'ASC')->countAllResults();
@@ -545,10 +545,10 @@ class Training extends BaseController {
 					}
 				}
 			} else {
-				$performance = $this->request->getPost('performance',FILTER_SANITIZE_STRING);	
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$remarks = $this->request->getPost('remarks',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$performance = $this->request->getPost('performance');	
+				$status = $this->request->getPost('status');
+				$remarks = $this->request->getPost('remarks');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'training_status'  => $status,
 					'performance' => $performance,
@@ -608,8 +608,8 @@ class Training extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id' => $company_id,
 					'training_id' => $id,
@@ -663,7 +663,7 @@ class Training extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TrainingModel = new TrainingModel();
 			$result = $TrainingModel->where('training_id', $id)->delete($id);
@@ -684,7 +684,7 @@ class Training extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TrainingnotesModel = new TrainingnotesModel();
 			$result = $TrainingnotesModel->where('training_note_id', $id)->delete($id);

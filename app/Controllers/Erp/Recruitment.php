@@ -626,16 +626,16 @@ class Recruitment extends BaseController {
 					}
 				}
 			} else {
-				$job_title = $this->request->getPost('job_title',FILTER_SANITIZE_STRING);
-				$job_type = $this->request->getPost('job_type',FILTER_SANITIZE_STRING);
-				$designation_id = $this->request->getPost('designation_id',FILTER_SANITIZE_STRING);
-				$vacancy = $this->request->getPost('vacancy',FILTER_SANITIZE_STRING);
-				$date_of_closing = $this->request->getPost('date_of_closing',FILTER_SANITIZE_STRING);
-				$short_description = $this->request->getPost('short_description',FILTER_SANITIZE_STRING);
-				$long_description = $this->request->getPost('long_description',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-				$experience = $this->request->getPost('experience',FILTER_SANITIZE_STRING);
+				$job_title = $this->request->getPost('job_title');
+				$job_type = $this->request->getPost('job_type');
+				$designation_id = $this->request->getPost('designation_id');
+				$vacancy = $this->request->getPost('vacancy');
+				$date_of_closing = $this->request->getPost('date_of_closing');
+				$short_description = $this->request->getPost('short_description');
+				$long_description = $this->request->getPost('long_description');
+				$status = $this->request->getPost('status');
+				$gender = $this->request->getPost('gender');
+				$experience = $this->request->getPost('experience');
 							
 				$UsersModel = new UsersModel();
 				$SystemModel = new SystemModel();
@@ -766,17 +766,17 @@ class Recruitment extends BaseController {
 					}
 				}
 			} else {
-				$job_title = $this->request->getPost('job_title',FILTER_SANITIZE_STRING);
-				$job_type = $this->request->getPost('job_type',FILTER_SANITIZE_STRING);
-				$designation_id = $this->request->getPost('designation_id',FILTER_SANITIZE_STRING);
-				$vacancy = $this->request->getPost('vacancy',FILTER_SANITIZE_STRING);
-				$date_of_closing = $this->request->getPost('date_of_closing',FILTER_SANITIZE_STRING);
-				$short_description = $this->request->getPost('short_description',FILTER_SANITIZE_STRING);
-				$long_description = $this->request->getPost('long_description',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-				$experience = $this->request->getPost('experience',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$job_title = $this->request->getPost('job_title');
+				$job_type = $this->request->getPost('job_type');
+				$designation_id = $this->request->getPost('designation_id');
+				$vacancy = $this->request->getPost('vacancy');
+				$date_of_closing = $this->request->getPost('date_of_closing');
+				$short_description = $this->request->getPost('short_description');
+				$long_description = $this->request->getPost('long_description');
+				$status = $this->request->getPost('status');
+				$gender = $this->request->getPost('gender');
+				$experience = $this->request->getPost('experience');
+				$id = udecode($this->request->getPost('token'));
 							
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -825,8 +825,8 @@ class Recruitment extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			if($this->request->getPost('status') == 3){
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);		
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$status = $this->request->getPost('status');		
+				$id = udecode($this->request->getPost('token'));
 							
 				$Return['csrf_hash'] = csrf_hash();	
 					$data2 = [
@@ -897,13 +897,13 @@ class Recruitment extends BaseController {
 						}
 					}
 				} else {
-					$interview_date = $this->request->getPost('interview_date',FILTER_SANITIZE_STRING);
-					$interview_time = $this->request->getPost('interview_time',FILTER_SANITIZE_STRING);
-					$interview_place = $this->request->getPost('interview_place',FILTER_SANITIZE_STRING);
-					$interviewer_id = $this->request->getPost('interviewer_id',FILTER_SANITIZE_STRING);
-					$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-					$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);		
-					$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+					$interview_date = $this->request->getPost('interview_date');
+					$interview_time = $this->request->getPost('interview_time');
+					$interview_place = $this->request->getPost('interview_place');
+					$interviewer_id = $this->request->getPost('interviewer_id');
+					$description = $this->request->getPost('description');
+					$status = $this->request->getPost('status');		
+					$id = udecode($this->request->getPost('token'));
 						
 					$UsersModel = new UsersModel();
 					$JobsModel = new JobsModel();
@@ -989,9 +989,9 @@ class Recruitment extends BaseController {
 					}
 				}
 			} else {
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);		
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$status = $this->request->getPost('status');		
+				$id = udecode($this->request->getPost('token'));
 					
 				$UsersModel = new UsersModel();
 				$JobcandidatesModel = new JobcandidatesModel();
@@ -1074,11 +1074,16 @@ class Recruitment extends BaseController {
 			} else {
 				// upload file
 				$file_cv = $this->request->getFile('file_cv');
-				$file_name = $file_cv->getName();
+				if (!validate_file_extension($file_cv, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $file_cv->getRandomName();
 				$file_cv->move('public/uploads/candidates/');
 				
-				$cover_letter = $this->request->getPost('cover_letter',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$cover_letter = $this->request->getPost('cover_letter');
+				$id = udecode($this->request->getPost('token'));
 				
 				$JobsModel = new JobsModel();
 				$UsersModel = new UsersModel();
@@ -1255,7 +1260,7 @@ class Recruitment extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$JobsModel = new JobsModel();
 			$UsersModel = new UsersModel();

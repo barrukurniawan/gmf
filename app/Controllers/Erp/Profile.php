@@ -134,18 +134,18 @@ class Profile extends BaseController {
 				$this->output($Return);
 			}
 			
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');
+			$contact_number = $this->request->getPost('contact_number');
+			$country = $this->request->getPost('country');
+			$gender = $this->request->getPost('gender');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$city = $this->request->getPost('city');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
 
 			$id = $usession['sup_user_id'];	
 			$data = [
@@ -264,7 +264,7 @@ class Profile extends BaseController {
 			$validation->withRequest($this->request)->run();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 			//check error
-			$new_password = $this->request->getPost('new_password',FILTER_SANITIZE_STRING);
+			$new_password = $this->request->getPost('new_password');
 			if($validation->hasError('new_password')){
 				$Return['error'] = $validation->getError('new_password');
 			} elseif($validation->hasError('confirm_password')){
@@ -333,11 +333,11 @@ class Profile extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$company_name = $this->request->getPost('company_name',FILTER_SANITIZE_STRING);
-			$company_type = $this->request->getPost('company_type',FILTER_SANITIZE_STRING);
-			$trading_name = $this->request->getPost('trading_name',FILTER_SANITIZE_STRING);
-			$registration_no = $this->request->getPost('registration_no',FILTER_SANITIZE_STRING);
-			$xin_gtax = $this->request->getPost('xin_gtax',FILTER_SANITIZE_STRING);
+			$company_name = $this->request->getPost('company_name');
+			$company_type = $this->request->getPost('company_type');
+			$trading_name = $this->request->getPost('trading_name');
+			$registration_no = $this->request->getPost('registration_no');
+			$xin_gtax = $this->request->getPost('xin_gtax');
 			
 			$id = $usession['sup_user_id'];	
 			$data = [
@@ -412,24 +412,24 @@ class Profile extends BaseController {
 				$this->output($Return);
 			}
 			//staff
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$contact_number = $this->request->getPost('contact_number');
+			$gender = $this->request->getPost('gender');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
+			$city = $this->request->getPost('city');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$country = $this->request->getPost('country');
 			
 			// staff details
-			$date_of_birth = $this->request->getPost('date_of_birth',FILTER_SANITIZE_STRING);
-			$marital_status = $this->request->getPost('marital_status',FILTER_SANITIZE_STRING);
-			$religion = $this->request->getPost('religion',FILTER_SANITIZE_STRING);
-			$blood_group = $this->request->getPost('blood_group',FILTER_SANITIZE_STRING);
-			$citizenship_id = $this->request->getPost('citizenship_id',FILTER_SANITIZE_STRING);
-			$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+			$date_of_birth = $this->request->getPost('date_of_birth');
+			$marital_status = $this->request->getPost('marital_status');
+			$religion = $this->request->getPost('religion');
+			$blood_group = $this->request->getPost('blood_group');
+			$citizenship_id = $this->request->getPost('citizenship_id');
+			$employee_id = $this->request->getPost('employee_id');
 			
 			if(empty($country)){
 				$country = 0;
@@ -496,8 +496,8 @@ class Profile extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$bio = $this->request->getPost('bio',FILTER_SANITIZE_STRING);
-			$experience = $this->request->getPost('experience',FILTER_SANITIZE_STRING);
+			$bio = $this->request->getPost('bio');
+			$experience = $this->request->getPost('experience');
 			// set rules
 			$validation->setRules([
 					'bio' => 'required'
@@ -556,10 +556,10 @@ class Profile extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$fb_profile = $this->request->getPost('fb_profile',FILTER_SANITIZE_STRING);
-			$twitter_profile = $this->request->getPost('twitter_profile',FILTER_SANITIZE_STRING);
-			$gplus_profile = $this->request->getPost('gplus_profile',FILTER_SANITIZE_STRING);
-			$linkedin_profile = $this->request->getPost('linkedin_profile',FILTER_SANITIZE_STRING);
+			$fb_profile = $this->request->getPost('fb_profile');
+			$twitter_profile = $this->request->getPost('twitter_profile');
+			$gplus_profile = $this->request->getPost('gplus_profile');
+			$linkedin_profile = $this->request->getPost('linkedin_profile');
 			
 			$id = $usession['sup_user_id'];
 			$UsersModel = new UsersModel();
@@ -601,12 +601,12 @@ class Profile extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$account_title = $this->request->getPost('account_title',FILTER_SANITIZE_STRING);
-			$account_number = $this->request->getPost('account_number',FILTER_SANITIZE_STRING);
-			$bank_name = $this->request->getPost('bank_name',FILTER_SANITIZE_STRING);
-			$iban = $this->request->getPost('iban',FILTER_SANITIZE_STRING);
-			$swift_code = $this->request->getPost('swift_code',FILTER_SANITIZE_STRING);
-			$bank_branch = $this->request->getPost('bank_branch',FILTER_SANITIZE_STRING);
+			$account_title = $this->request->getPost('account_title');
+			$account_number = $this->request->getPost('account_number');
+			$bank_name = $this->request->getPost('bank_name');
+			$iban = $this->request->getPost('iban');
+			$swift_code = $this->request->getPost('swift_code');
+			$bank_branch = $this->request->getPost('bank_branch');
 			
 			// set rules
 			$validation->setRules([
@@ -700,10 +700,10 @@ class Profile extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$contact_full_name = $this->request->getPost('contact_full_name',FILTER_SANITIZE_STRING);
-			$contact_phone_no = $this->request->getPost('contact_phone_no',FILTER_SANITIZE_STRING);
-			$contact_email = $this->request->getPost('contact_email',FILTER_SANITIZE_STRING);
-			$contact_address = $this->request->getPost('contact_address',FILTER_SANITIZE_STRING);
+			$contact_full_name = $this->request->getPost('contact_full_name');
+			$contact_phone_no = $this->request->getPost('contact_phone_no');
+			$contact_email = $this->request->getPost('contact_email');
+			$contact_address = $this->request->getPost('contact_address');
 			// set rules
 			$validation->setRules([
 					'contact_full_name' => 'required',
@@ -808,8 +808,8 @@ class Profile extends BaseController {
 				$this->output($Return);
 			}
 			//staff
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);		
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');		
 			$id = $usession['sup_user_id'];
 			$UsersModel = new UsersModel();
 			$data = [
@@ -1105,14 +1105,14 @@ class Profile extends BaseController {
 			}
 		}
 		
-		$default_currency = $this->request->getPost('default_currency',FILTER_SANITIZE_STRING);
-		$default_currency_symbol = $this->request->getPost('default_currency',FILTER_SANITIZE_STRING);
-		$date_format = $this->request->getPost('date_format',FILTER_SANITIZE_STRING);
-		$system_timezone = $this->request->getPost('system_timezone',FILTER_SANITIZE_STRING);
-		$default_language = $this->request->getPost('default_language',FILTER_SANITIZE_STRING);	
-		$invoice_terms_condition = $this->request->getPost('invoice_terms_condition',FILTER_SANITIZE_STRING);
+		$default_currency = $this->request->getPost('default_currency');
+		$default_currency_symbol = $this->request->getPost('default_currency');
+		$date_format = $this->request->getPost('date_format');
+		$system_timezone = $this->request->getPost('system_timezone');
+		$default_language = $this->request->getPost('default_language');	
+		$invoice_terms_condition = $this->request->getPost('invoice_terms_condition');
 		
-		$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+		$id = udecode($this->request->getPost('token'));
 		$data = [
             'default_currency'  => $default_currency,
 			'default_currency_symbol'  => $default_currency_symbol,
@@ -1175,13 +1175,13 @@ class Profile extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$paypal_email = $this->request->getPost('paypal_email',FILTER_SANITIZE_STRING);
-		$paypal_sandbox = $this->request->getPost('paypal_sandbox',FILTER_SANITIZE_STRING);
-		$paypal_active = $this->request->getPost('paypal_active',FILTER_SANITIZE_STRING);
-		$stripe_secret_key = $this->request->getPost('stripe_secret_key',FILTER_SANITIZE_STRING);
-		$stripe_publishable_key = $this->request->getPost('stripe_publishable_key',FILTER_SANITIZE_STRING);
-		$stripe_active = $this->request->getPost('stripe_active',FILTER_SANITIZE_STRING);
-		$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+		$paypal_email = $this->request->getPost('paypal_email');
+		$paypal_sandbox = $this->request->getPost('paypal_sandbox');
+		$paypal_active = $this->request->getPost('paypal_active');
+		$stripe_secret_key = $this->request->getPost('stripe_secret_key');
+		$stripe_publishable_key = $this->request->getPost('stripe_publishable_key');
+		$stripe_active = $this->request->getPost('stripe_active');
+		$id = udecode($this->request->getPost('token'));
 		$data = [
             'paypal_email' => $paypal_email,
             'paypal_sandbox'  => $paypal_sandbox,
@@ -1232,12 +1232,12 @@ class Profile extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$notification_position = $this->request->getPost('notification_position',FILTER_SANITIZE_STRING);
-		$notification_close = $this->request->getPost('notification_close',FILTER_SANITIZE_STRING);
-		$notification_bar = $this->request->getPost('notification_bar',FILTER_SANITIZE_STRING);
+		$notification_position = $this->request->getPost('notification_position');
+		$notification_close = $this->request->getPost('notification_close');
+		$notification_bar = $this->request->getPost('notification_bar');
 		if($notification_close == ''): $notification_close = 0; endif;
 		if($notification_bar == ''): $notification_bar = 0; endif;
-		$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+		$id = udecode($this->request->getPost('token'));
 		$data = [
             'notification_position' => $notification_position,
             'notification_close_btn'  => $notification_close,
@@ -1267,9 +1267,9 @@ class Profile extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 					
-			$setup_modules = $this->request->getPost('setup_module',FILTER_SANITIZE_STRING);
+			$setup_modules = $this->request->getPost('setup_module');
 			$setup_modules = serialize($setup_modules);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'setup_modules' => $setup_modules,
 			];
@@ -1298,12 +1298,12 @@ class Profile extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 					
-			$header_background = $this->request->getPost('header_background',FILTER_SANITIZE_STRING);
-			$calendar_locale = $this->request->getPost('calendar_locale',FILTER_SANITIZE_STRING);
-			$datepicker_locale = $this->request->getPost('datepicker_locale',FILTER_SANITIZE_STRING);
-			$login_page = $this->request->getPost('login_page',FILTER_SANITIZE_STRING);
-			$login_page_text = $this->request->getPost('login_page_text',FILTER_SANITIZE_STRING);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$header_background = $this->request->getPost('header_background');
+			$calendar_locale = $this->request->getPost('calendar_locale');
+			$datepicker_locale = $this->request->getPost('datepicker_locale');
+			$login_page = $this->request->getPost('login_page');
+			$login_page_text = $this->request->getPost('login_page_text');
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'header_background' => $header_background,
 				'calendar_locale' => $calendar_locale,

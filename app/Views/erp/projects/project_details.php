@@ -61,7 +61,7 @@ $project_discussion = $ProjectdiscussionModel->where('project_id', $project_id)-
 // project files
 $project_files = $ProjectfilesModel->where('project_id', $project_id)->orderBy('project_file_id', 'ASC')->findAll();
 // get type||variable
-$get_type = $request->getVar('type',FILTER_SANITIZE_STRING);
+$get_type = $request->getVar('type');
 $get_animate='';
 ?>
 
@@ -190,7 +190,7 @@ $get_animate='';
     <div class="card">
       <div class="card-header">
         <h5><i class="feather icon-lock mr-1"></i><?php echo lang('Projects.xin_project');?> :
-          <?= $project_data['title'];?>
+          <?= esc($project_data['title']);?>
         </h5>
       </div>
       <div class="tab-content" id="pills-tabContent">
@@ -301,7 +301,7 @@ $get_animate='';
             <div class="m-b-30 m-t-15">
               <h6><?php echo lang('Main.xin_summary');?></h6>
               <hr>
-              <?= $project_data['summary'];?>
+              <?= esc($project_data['summary']);?>
             </div>
             <div class="m-b-20">
               <h6><?php echo lang('Main.xin_description');?></h6>

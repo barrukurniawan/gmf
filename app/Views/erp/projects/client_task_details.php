@@ -41,7 +41,7 @@ $task_discussion = $TaskdiscussionModel->where('task_id', $task_id)->orderBy('ta
 // task files
 $task_files = $TaskfilesModel->where('task_id', $task_id)->orderBy('task_file_id', 'ASC')->findAll();
 // get type||variable
-$get_type = $request->getVar('type',FILTER_SANITIZE_STRING);
+$get_type = $request->getVar('type');
 // task progress
 if($task_data['task_progress'] <= 20) {
 	$progress_class = 'bg-danger';

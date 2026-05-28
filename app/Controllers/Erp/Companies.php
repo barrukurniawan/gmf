@@ -262,25 +262,25 @@ class Companies extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$company_name = $this->request->getPost('company_name',FILTER_SANITIZE_STRING);
-			$company_type = $this->request->getPost('company_type',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$company_name = $this->request->getPost('company_name');
+			$company_type = $this->request->getPost('company_type');
 			$trading_name = '';
 			$registration_no = '';
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
+			$contact_number = $this->request->getPost('contact_number');
+			$email = $this->request->getPost('email');
 			$xin_gtax = '';
-			$membership_type = $this->request->getPost('membership_type',FILTER_SANITIZE_STRING);
-			//$subscription = $this->request->getPost('subscription',FILTER_SANITIZE_STRING);
+			$membership_type = $this->request->getPost('membership_type');
+			//$subscription = $this->request->getPost('subscription');
 			$address_1 = '';
 			$address_2 = '';
 			$city = '';
 			$state = '';
 			$zipcode = '';
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);		
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$password = $this->request->getPost('password',FILTER_SANITIZE_STRING);
+			$country = $this->request->getPost('country');		
+			$username = $this->request->getPost('username');
+			$password = $this->request->getPost('password');
 							
 			$options = array('cost' => 12);
 			$password_hash = password_hash($password, PASSWORD_BCRYPT, $options);
@@ -484,26 +484,26 @@ class Companies extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$company_name = $this->request->getPost('company_name',FILTER_SANITIZE_STRING);
-			$company_type = $this->request->getPost('company_type',FILTER_SANITIZE_STRING);
-			$trading_name = $this->request->getPost('trading_name',FILTER_SANITIZE_STRING);
-			$registration_no = $this->request->getPost('registration_no',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$xin_gtax = $this->request->getPost('xin_gtax',FILTER_SANITIZE_STRING);
-			$membership_type = $this->request->getPost('membership_type',FILTER_SANITIZE_STRING);
-			$subscription = $this->request->getPost('subscription',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);		
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$company_name = $this->request->getPost('company_name');
+			$company_type = $this->request->getPost('company_type');
+			$trading_name = $this->request->getPost('trading_name');
+			$registration_no = $this->request->getPost('registration_no');
+			$contact_number = $this->request->getPost('contact_number');
+			$email = $this->request->getPost('email');
+			$xin_gtax = $this->request->getPost('xin_gtax');
+			$membership_type = $this->request->getPost('membership_type');
+			$subscription = $this->request->getPost('subscription');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$city = $this->request->getPost('city');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
+			$country = $this->request->getPost('country');		
+			$username = $this->request->getPost('username');
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			if ($validated) {
 			$data = [
 				'company_name' => $company_name,
@@ -641,20 +641,20 @@ class Companies extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$company_name = $this->request->getPost('company_name',FILTER_SANITIZE_STRING);
-			$company_type = $this->request->getPost('company_type',FILTER_SANITIZE_STRING);
-			$trading_name = $this->request->getPost('trading_name',FILTER_SANITIZE_STRING);
-			$registration_no = $this->request->getPost('registration_no',FILTER_SANITIZE_STRING);
-			$xin_gtax = $this->request->getPost('xin_gtax',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);	
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$company_name = $this->request->getPost('company_name');
+			$company_type = $this->request->getPost('company_type');
+			$trading_name = $this->request->getPost('trading_name');
+			$registration_no = $this->request->getPost('registration_no');
+			$xin_gtax = $this->request->getPost('xin_gtax');
+			$country = $this->request->getPost('country');
+			$contact_number = $this->request->getPost('contact_number');
+			$email = $this->request->getPost('email');	
+			$username = $this->request->getPost('username');
+			$status = $this->request->getPost('status');
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'company_name' => $company_name,
 				'company_type_id'  => $company_type,
@@ -715,8 +715,8 @@ class Companies extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$membership_type = $this->request->getPost('membership_type',FILTER_SANITIZE_STRING);		
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$membership_type = $this->request->getPost('membership_type');		
+			$id = udecode($this->request->getPost('token'));
 			$MembershipModel = new MembershipModel();
 			$membership_info = $MembershipModel->where('membership_id', $membership_type)->first();
 			$data2 = array(
@@ -772,7 +772,7 @@ class Companies extends BaseController {
 				$image->withFile(filesrc($file_name))
 				->fit(100, 100, 'center')
 				->save('public/uploads/users/thumb/'.$file_name);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$id = udecode($this->request->getPost('token'));
 				
 				$UsersModel = new UsersModel();
 				$Return['result'] = lang('Main.xin_profile_picture_success_updated');
@@ -829,13 +829,13 @@ class Companies extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$company_name = $this->request->getPost('company_name',FILTER_SANITIZE_STRING);
-			$company_type = $this->request->getPost('company_type',FILTER_SANITIZE_STRING);
-			$trading_name = $this->request->getPost('trading_name',FILTER_SANITIZE_STRING);
-			$registration_no = $this->request->getPost('registration_no',FILTER_SANITIZE_STRING);
-			$xin_gtax = $this->request->getPost('xin_gtax',FILTER_SANITIZE_STRING);
+			$company_name = $this->request->getPost('company_name');
+			$company_type = $this->request->getPost('company_type');
+			$trading_name = $this->request->getPost('trading_name');
+			$registration_no = $this->request->getPost('registration_no');
+			$xin_gtax = $this->request->getPost('xin_gtax');
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'company_name' => $company_name,
 				'company_type_id'  => $company_type,
@@ -882,7 +882,7 @@ class Companies extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$UsersModel = new UsersModel();
 			$result = $UsersModel->where('user_id', $id)->delete($id);

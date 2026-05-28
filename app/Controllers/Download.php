@@ -78,14 +78,23 @@ class Download extends BaseController {
 	}	
 	public function index() {	
 		
+		$session = \Config\Services::session();
+		if(!$session->has('sup_username')){ 
+			return redirect()->to(site_url('erp/login'));
+		}
+		$usession = $session->get('sup_username');
+		
 		$request = \Config\Services::request();
 		// type
 		$type = $this->request->getGet('type');
 		
 		if($type) {
+			// prevent directory traversal
+			$type = str_replace(['..', '/', '\\'], '', $type);
 			//Set the time out
 			set_time_limit(0);
 			$filename = udecode($this->request->getGet('filename'));
+			$filename = str_replace(['..', '/', '\\'], '', $filename);
 			$file_path = ROOTPATH . 'public/uploads/'.$type.'/'.$filename;
 			if (file_exists($file_path)) {
 				$data = file_get_contents($file_path);

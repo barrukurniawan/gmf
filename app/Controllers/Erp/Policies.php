@@ -152,6 +152,9 @@ class Policies extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');
+		if(!$session->has('sup_username')){ 
+			return redirect()->to(site_url('erp/login'));
+		}
 		if ($this->request->getPost('type') === 'add_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
@@ -192,11 +195,16 @@ class Policies extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
+				$file_name = $attachment->getRandomName();
+				if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
 				$attachment->move('public/uploads/policy/');
 				
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
+				$title = $this->request->getPost('title');
+				$description = $this->request->getPost('description');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -276,9 +284,9 @@ class Policies extends BaseController {
 						]
 					],
 				]);
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$title = $this->request->getPost('title');
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				if ($validated) {
 					$attachment = $this->request->getFile('attachment');
 					$file_name = $attachment->getName();
@@ -334,7 +342,7 @@ class Policies extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$PolicyModel = new PolicyModel();
 			$result = $PolicyModel->where('policy_id', $id)->delete($id);

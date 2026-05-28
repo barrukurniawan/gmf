@@ -214,11 +214,11 @@ class Events extends BaseController {
 					}
 				}
 			} else {
-				$event_title = $this->request->getPost('event_title',FILTER_SANITIZE_STRING);
-				$event_date = $this->request->getPost('event_date',FILTER_SANITIZE_STRING);
-				$event_time = $this->request->getPost('event_time',FILTER_SANITIZE_STRING);
-				$event_color = $this->request->getPost('event_color',FILTER_SANITIZE_STRING);
-				$event_note = $this->request->getPost('event_note',FILTER_SANITIZE_STRING);
+				$event_title = $this->request->getPost('event_title');
+				$event_date = $this->request->getPost('event_date');
+				$event_time = $this->request->getPost('event_time');
+				$event_color = $this->request->getPost('event_color');
+				$event_note = $this->request->getPost('event_note');
 							
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -226,7 +226,7 @@ class Events extends BaseController {
 					$staff_id = $usession['sup_user_id'];
 					$company_id = $user_info['company_id'];
 				} else {
-					$assigned_ids = implode(',',$this->request->getPost('employee_id',FILTER_SANITIZE_STRING));
+					$assigned_ids = implode(',',$this->request->getPost('employee_id'));
 					$staff_id = $assigned_ids;
 					$company_id = $usession['sup_user_id'];
 				}
@@ -308,12 +308,12 @@ class Events extends BaseController {
 					}
 				}
 			} else {
-				$event_title = $this->request->getPost('event_title',FILTER_SANITIZE_STRING);
-				$event_date = $this->request->getPost('event_date',FILTER_SANITIZE_STRING);
-				$event_time = $this->request->getPost('event_time',FILTER_SANITIZE_STRING);
-				$event_color = $this->request->getPost('event_color',FILTER_SANITIZE_STRING);
-				$event_note = $this->request->getPost('event_note',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$event_title = $this->request->getPost('event_title');
+				$event_date = $this->request->getPost('event_date');
+				$event_time = $this->request->getPost('event_time');
+				$event_color = $this->request->getPost('event_color');
+				$event_note = $this->request->getPost('event_note');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'event_title'  => $event_title,
 					'event_date'  => $event_date,
@@ -365,7 +365,7 @@ class Events extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$EventsModel = new EventsModel();
 			$result = $EventsModel->where('event_id', $id)->delete($id);

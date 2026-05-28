@@ -472,7 +472,7 @@ class Tasks extends BaseController {
 		$ProjectsModel = new ProjectsModel();
 		$MainModel = new MainModel();
 		$TasksModel = new TasksModel();
-		$client_id = udecode($this->request->getVar('client_id',FILTER_SANITIZE_STRING));
+		$client_id = udecode($this->request->getVar('client_id'));
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		if($user_info['user_type'] == 'staff'){
 			$company_id = $user_info['company_id'];
@@ -605,13 +605,13 @@ class Tasks extends BaseController {
 					}
 				}
 			} else {
-				$task_name = $this->request->getPost('task_name',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$project_id = $this->request->getPost('project_id',FILTER_SANITIZE_STRING);
-				$task_hour = $this->request->getPost('task_hour',FILTER_SANITIZE_STRING);
-				$summary = $this->request->getPost('summary',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
+				$task_name = $this->request->getPost('task_name');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$project_id = $this->request->getPost('project_id');
+				$task_hour = $this->request->getPost('task_hour');
+				$summary = $this->request->getPost('summary');
+				$description = $this->request->getPost('description');
 							
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -713,16 +713,16 @@ class Tasks extends BaseController {
 					}
 				}
 			} else {
-				$task_name = $this->request->getPost('task_name',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$project_id = $this->request->getPost('project_id',FILTER_SANITIZE_STRING);
-				$task_hour = $this->request->getPost('task_hour',FILTER_SANITIZE_STRING);
-				$summary = $this->request->getPost('summary',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
-				$assigned_ids = implode(',',$this->request->getPost('assigned_to',FILTER_SANITIZE_STRING));
-				$associated_goals = implode(',',$this->request->getPost('associated_goals',FILTER_SANITIZE_STRING));
+				$task_name = $this->request->getPost('task_name');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$project_id = $this->request->getPost('project_id');
+				$task_hour = $this->request->getPost('task_hour');
+				$summary = $this->request->getPost('summary');
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
+				$assigned_ids = implode(',',$this->request->getPost('assigned_to'));
+				$associated_goals = implode(',',$this->request->getPost('associated_goals'));
 				$employee_ids = $assigned_ids;
 				$data = [
 					'task_name' => $task_name,
@@ -757,7 +757,7 @@ class Tasks extends BaseController {
 						$isubject = $itemplate['subject'];
 						$ibody = html_entity_decode($itemplate['message']);
 						$fbody = str_replace(array("{site_name}","{task_name}","{task_due_date}"),array($company_info['company_name'],$task_name,$end_date),$ibody);
-						foreach($this->request->getPost('assigned_to',FILTER_SANITIZE_STRING) as $_staff_id){
+						foreach($this->request->getPost('assigned_to') as $_staff_id){
 							$staff_info = $UsersModel->where('user_id', $_staff_id)->first();
 							timehrm_mail_data($company_info['email'],$company_info['company_name'],$staff_info['email'],$isubject,$fbody);
 						}
@@ -766,7 +766,7 @@ class Tasks extends BaseController {
 					if($xin_system['enable_sms_notification'] == 1){
 						$stemplate = $SmstemplatesModel->where('template_id', 2)->first();
 						$sbody = html_entity_decode($stemplate['message']);
-						foreach($this->request->getPost('assigned_to',FILTER_SANITIZE_STRING) as $_staff_id){
+						foreach($this->request->getPost('assigned_to') as $_staff_id){
 							$staff_info = $UsersModel->where('user_id', $_staff_id)->first();
 							$fbody = str_replace(array("{firstname}","{task_name}"),array($staff_info['first_name'],$task_name),$sbody);
 							timehrm_sms_data($staff_info['contact_number'],$fbody);
@@ -821,9 +821,9 @@ class Tasks extends BaseController {
 					}
 				}
 			} else {
-				$progres_val = $this->request->getPost('progres_val',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$progres_val = $this->request->getPost('progres_val');
+				$status = $this->request->getPost('status');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'task_progress' => $progres_val,
 					'task_status'  => $status
@@ -882,8 +882,8 @@ class Tasks extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id' => $company_id,
 					'task_id' => $id,
@@ -917,9 +917,9 @@ class Tasks extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$task_id = $this->request->getVar('xfieldid',FILTER_SANITIZE_STRING);	
+			$task_id = $this->request->getVar('xfieldid');	
 			//$task_id = $request->uri->getSegment(4);
-			$task_status = $this->request->getVar('xfieldst',FILTER_SANITIZE_STRING);	
+			$task_status = $this->request->getVar('xfieldst');	
 			$Return['csrf_hash'] = csrf_hash();
 			$UsersModel = new UsersModel();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -978,8 +978,8 @@ class Tasks extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id' => $company_id,
 					'task_id' => $id,
@@ -1011,6 +1011,9 @@ class Tasks extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');
+		if(!$session->has('sup_username')){ 
+			return redirect()->to(site_url('erp/login'));
+		}
 		if ($this->request->getPost('type') === 'add_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
@@ -1044,11 +1047,16 @@ class Tasks extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment_file');
-				$file_name = $attachment->getName();
+				$file_name = $attachment->getRandomName();
+				if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
 				$attachment->move('public/uploads/task_files/');
 				
-				$file_title = $this->request->getPost('file_name',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$file_title = $this->request->getPost('file_name');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1295,7 +1303,7 @@ class Tasks extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TasksModel = new TasksModel();
 			$result = $TasksModel->where('task_id', $id)->delete($id);
@@ -1316,7 +1324,7 @@ class Tasks extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TasknotesModel = new TasknotesModel();
 			$result = $TasknotesModel->where('task_note_id', $id)->delete($id);
@@ -1337,7 +1345,7 @@ class Tasks extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TaskdiscussionModel = new TaskdiscussionModel();
 			$result = $TaskdiscussionModel->where('task_discussion_id', $id)->delete($id);
@@ -1358,7 +1366,7 @@ class Tasks extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TaskfilesModel = new TaskfilesModel();
 			$result = $TaskfilesModel->where('task_file_id', $id)->delete($id);

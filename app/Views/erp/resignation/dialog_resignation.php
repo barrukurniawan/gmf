@@ -42,7 +42,7 @@ $result = $ResignationsModel->where('resignation_id', $resignation_id)->first();
           <?= lang('Employees.xin_notice_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?= lang('Employees.xin_notice_date');?>" name="notice_date" type="text" value="<?php echo $result['notice_date'];?>">
+          <input class="form-control d_date" placeholder="<?= lang('Employees.xin_notice_date');?>" name="notice_date" type="text" value="<?php echo esc($result['notice_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -53,7 +53,7 @@ $result = $ResignationsModel->where('resignation_id', $resignation_id)->first();
           <?= lang('Employees.xin_resignation_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?= lang('Employees.xin_resignation_date');?>" name="resignation_date" type="text" value="<?php echo $result['resignation_date'];?>">
+          <input class="form-control d_date" placeholder="<?= lang('Employees.xin_resignation_date');?>" name="resignation_date" type="text" value="<?php echo esc($result['resignation_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>

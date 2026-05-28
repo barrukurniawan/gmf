@@ -94,7 +94,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $cinvoice['estimate_number']?>',
 				unq: '0',
-				title: '<?php echo $cinvoice['estimate_number']?>',
+				title: '<?php echo esc($cinvoice['estimate_number'], 'js')?>',
 				start: '<?php echo $cinvoice['estimate_date']?>',
 				end: '<?php echo $cinvoice['estimate_date']?>',
 				urllink: '<?php echo site_url().'erp/estimate-detail/'.uencode($cinvoice['estimate_id']);?>',
@@ -105,7 +105,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $pinvoice['estimate_number']?>',
 				unq: '0',
-				title: '<?php echo $pinvoice['estimate_number']?>',
+				title: '<?php echo esc($pinvoice['estimate_number'], 'js')?>',
 				start: '<?php echo $pinvoice['estimate_date']?>',
 				end: '<?php echo $pinvoice['estimate_date']?>',
 				urllink: '<?php echo site_url().'erp/estimate-detail/'.uencode($pinvoice['estimate_id']);?>',
@@ -116,7 +116,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $cinvoice['estimate_number']?>',
 				unq: '0',
-				title: '<?php echo $cinvoice['estimate_number']?>',
+				title: '<?php echo esc($cinvoice['estimate_number'], 'js')?>',
 				start: '<?php echo $cinvoice['estimate_date']?>',
 				end: '<?php echo $cinvoice['estimate_date']?>',
 				urllink: '<?php echo site_url().'erp/estimate-detail/'.uencode($cinvoice['estimate_id']);?>',

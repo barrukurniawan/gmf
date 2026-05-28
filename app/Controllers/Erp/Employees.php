@@ -179,11 +179,7 @@ class Employees extends BaseController {
 			return redirect()->to(site_url('erp/login'));
 		}		
 		$UsersModel = new UsersModel();
-		$config         = new \Config\Encryption();
-		$config->key    = 'aBigsecret_ofAtleast32Characters';
-		$config->driver = 'OpenSSL';
-		
-		$encrypter = \Config\Services::encrypter($config);
+		$encrypter = \Config\Services::encrypter();
 		$RolesModel = new RolesModel();
 		$SystemModel = new SystemModel();
 		$CountryModel = new CountryModel();
@@ -691,21 +687,21 @@ class Employees extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$password = $this->request->getPost('password',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
-			$role = $this->request->getPost('role',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$office_shift_id = $this->request->getPost('office_shift_id',FILTER_SANITIZE_STRING);
-			$department_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
-			$designation_id = $this->request->getPost('designation_id',FILTER_SANITIZE_STRING);
-			$basic_salary = $this->request->getPost('basic_salary',FILTER_SANITIZE_STRING);
-			$hourly_rate = $this->request->getPost('hourly_rate',FILTER_SANITIZE_STRING);
-			$salay_type = $this->request->getPost('salay_type',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');
+			$password = $this->request->getPost('password');
+			$contact_number = $this->request->getPost('contact_number');
+			$employee_id = $this->request->getPost('employee_id');
+			$role = $this->request->getPost('role');
+			$gender = $this->request->getPost('gender');
+			$office_shift_id = $this->request->getPost('office_shift_id');
+			$department_id = $this->request->getPost('department_id');
+			$designation_id = $this->request->getPost('designation_id');
+			$basic_salary = $this->request->getPost('basic_salary');
+			$hourly_rate = $this->request->getPost('hourly_rate');
+			$salay_type = $this->request->getPost('salay_type');
 			$options = array('cost' => 12);
 			$password_hash = password_hash($password, PASSWORD_BCRYPT, $options);
 			
@@ -859,11 +855,11 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$contract_tax_option = $this->request->getPost('contract_tax_option',FILTER_SANITIZE_STRING);
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$contract_tax_option = $this->request->getPost('contract_tax_option');
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -947,11 +943,11 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$contract_tax_option = $this->request->getPost('contract_tax_option',FILTER_SANITIZE_STRING);
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$contract_tax_option = $this->request->getPost('contract_tax_option');
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1034,11 +1030,11 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$contract_tax_option = $this->request->getPost('contract_tax_option',FILTER_SANITIZE_STRING);
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$contract_tax_option = $this->request->getPost('contract_tax_option');
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1122,11 +1118,11 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$contract_tax_option = $this->request->getPost('contract_tax_option',FILTER_SANITIZE_STRING);
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$contract_tax_option = $this->request->getPost('contract_tax_option');
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1202,10 +1198,10 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1282,10 +1278,10 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1367,11 +1363,11 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$contract_tax_option = $this->request->getPost('contract_tax_option',FILTER_SANITIZE_STRING);
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$contract_tax_option = $this->request->getPost('contract_tax_option');
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1455,11 +1451,11 @@ class Employees extends BaseController {
 					}
 				}
 			} else {
-				$contract_tax_option = $this->request->getPost('contract_tax_option',FILTER_SANITIZE_STRING);
-				$is_fixed = $this->request->getPost('is_fixed',FILTER_SANITIZE_STRING);
-				$option_title = $this->request->getPost('option_title',FILTER_SANITIZE_STRING);	
-				$contract_amount = $this->request->getPost('contract_amount',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$contract_tax_option = $this->request->getPost('contract_tax_option');
+				$is_fixed = $this->request->getPost('is_fixed');
+				$option_title = $this->request->getPost('option_title');	
+				$contract_amount = $this->request->getPost('contract_amount');
+				$id = udecode($this->request->getPost('token'));		
 				$UsersModel = new UsersModel();
 				$ContractModel = new ContractModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1541,12 +1537,17 @@ class Employees extends BaseController {
 			} else {
 				// upload file
 				$document_file = $this->request->getFile('document_file');
-				$file_name = $document_file->getName();
+				if (!validate_file_extension($document_file, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $document_file->getRandomName();
 				$document_file->move('public/uploads/documents/');
 				
-				$document_name = $this->request->getPost('document_name',FILTER_SANITIZE_STRING);
-				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$document_name = $this->request->getPost('document_name');
+				$document_type = $this->request->getPost('document_type');
+				$id = udecode($this->request->getPost('token'));
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1636,9 +1637,9 @@ class Employees extends BaseController {
 					$document_file->move('public/uploads/documents/');
 				}
 				
-				$document_name = $this->request->getPost('document_name',FILTER_SANITIZE_STRING);
-				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$document_name = $this->request->getPost('document_name');
+				$document_type = $this->request->getPost('document_type');
+				$id = udecode($this->request->getPost('token'));
 				
 				if ($validated) {
 					$data = [
@@ -1720,26 +1721,26 @@ class Employees extends BaseController {
 				$this->output($Return);
 			}
 			//staff
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$role = $this->request->getPost('role',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$contact_number = $this->request->getPost('contact_number');
+			$role = $this->request->getPost('role');
+			$gender = $this->request->getPost('gender');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
+			$city = $this->request->getPost('city');
+			$status = $this->request->getPost('status');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$country = $this->request->getPost('country');
 			
 			// staff details
-			$date_of_birth = $this->request->getPost('date_of_birth',FILTER_SANITIZE_STRING);
-			$marital_status = $this->request->getPost('marital_status',FILTER_SANITIZE_STRING);
-			$religion = $this->request->getPost('religion',FILTER_SANITIZE_STRING);
-			$blood_group = $this->request->getPost('blood_group',FILTER_SANITIZE_STRING);
-			$citizenship_id = $this->request->getPost('citizenship_id',FILTER_SANITIZE_STRING);
-			$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+			$date_of_birth = $this->request->getPost('date_of_birth');
+			$marital_status = $this->request->getPost('marital_status');
+			$religion = $this->request->getPost('religion');
+			$blood_group = $this->request->getPost('blood_group');
+			$citizenship_id = $this->request->getPost('citizenship_id');
+			$employee_id = $this->request->getPost('employee_id');
 			
 			if(empty($country)){
 				$country = 0;
@@ -1750,7 +1751,7 @@ class Employees extends BaseController {
 			if(empty($citizenship_id)){
 				$citizenship_id = 0;
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$UsersModel = new UsersModel();
 			$Moduleattributes = new Moduleattributes();
 			$Moduleattributesval = new Moduleattributesval();
@@ -1862,8 +1863,8 @@ class Employees extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$bio = $this->request->getPost('bio',FILTER_SANITIZE_STRING);
-			$experience = $this->request->getPost('experience',FILTER_SANITIZE_STRING);
+			$bio = $this->request->getPost('bio');
+			$experience = $this->request->getPost('experience');
 			// set rules
 			$validation->setRules([
 					'bio' => 'required'
@@ -1884,7 +1885,7 @@ class Employees extends BaseController {
 				$this->output($Return);
 			}
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$UsersModel = new UsersModel();
 			$Moduleattributes = new Moduleattributes();
 			$Moduleattributesval = new Moduleattributesval();
@@ -1975,12 +1976,12 @@ class Employees extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$fb_profile = $this->request->getPost('fb_profile',FILTER_SANITIZE_STRING);
-			$twitter_profile = $this->request->getPost('twitter_profile',FILTER_SANITIZE_STRING);
-			$gplus_profile = $this->request->getPost('gplus_profile',FILTER_SANITIZE_STRING);
-			$linkedin_profile = $this->request->getPost('linkedin_profile',FILTER_SANITIZE_STRING);
+			$fb_profile = $this->request->getPost('fb_profile');
+			$twitter_profile = $this->request->getPost('twitter_profile');
+			$gplus_profile = $this->request->getPost('gplus_profile');
+			$linkedin_profile = $this->request->getPost('linkedin_profile');
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$UsersModel = new UsersModel();
 			// employee details
 			$data = [
@@ -2020,12 +2021,12 @@ class Employees extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$account_title = $this->request->getPost('account_title',FILTER_SANITIZE_STRING);
-			$account_number = $this->request->getPost('account_number',FILTER_SANITIZE_STRING);
-			$bank_name = $this->request->getPost('bank_name',FILTER_SANITIZE_STRING);
-			$iban = $this->request->getPost('iban',FILTER_SANITIZE_STRING);
-			$swift_code = $this->request->getPost('swift_code',FILTER_SANITIZE_STRING);
-			$bank_branch = $this->request->getPost('bank_branch',FILTER_SANITIZE_STRING);
+			$account_title = $this->request->getPost('account_title');
+			$account_number = $this->request->getPost('account_number');
+			$bank_name = $this->request->getPost('bank_name');
+			$iban = $this->request->getPost('iban');
+			$swift_code = $this->request->getPost('swift_code');
+			$bank_branch = $this->request->getPost('bank_branch');
 			
 			// set rules
 			$validation->setRules([
@@ -2077,7 +2078,7 @@ class Employees extends BaseController {
 				$this->output($Return);
 			}
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$UsersModel = new UsersModel();
 			// employee details
 			$data = [
@@ -2119,10 +2120,10 @@ class Employees extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			//staff details
-			$contact_full_name = $this->request->getPost('contact_full_name',FILTER_SANITIZE_STRING);
-			$contact_phone_no = $this->request->getPost('contact_phone_no',FILTER_SANITIZE_STRING);
-			$contact_email = $this->request->getPost('contact_email',FILTER_SANITIZE_STRING);
-			$contact_address = $this->request->getPost('contact_address',FILTER_SANITIZE_STRING);
+			$contact_full_name = $this->request->getPost('contact_full_name');
+			$contact_phone_no = $this->request->getPost('contact_phone_no');
+			$contact_email = $this->request->getPost('contact_email');
+			$contact_address = $this->request->getPost('contact_address');
 			// set rules
 			$validation->setRules([
 					'contact_full_name' => 'required',
@@ -2160,7 +2161,7 @@ class Employees extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$UsersModel = new UsersModel();
 			// employee details
 			$data = [
@@ -2269,36 +2270,36 @@ class Employees extends BaseController {
 				$this->output($Return);
 			}
 			//staff
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$role = $this->request->getPost('role',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$country_id = $this->request->getPost('country',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');
+			$contact_number = $this->request->getPost('contact_number');
+			$role = $this->request->getPost('role');
+			$gender = $this->request->getPost('gender');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
+			$city = $this->request->getPost('city');
+			$status = $this->request->getPost('status');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$country_id = $this->request->getPost('country');
 			
 			// staff details
-			$cat_ids = implode(',',$this->request->getPost('leave_categories',FILTER_SANITIZE_STRING));
-			$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
-			$office_shift_id = $this->request->getPost('office_shift_id',FILTER_SANITIZE_STRING);
-			$department_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
-			$designation_id = $this->request->getPost('designation_id',FILTER_SANITIZE_STRING);
-			$date_of_joining = $this->request->getPost('date_of_joining',FILTER_SANITIZE_STRING);
-			$date_of_leaving = $this->request->getPost('date_of_leaving',FILTER_SANITIZE_STRING);
-			$date_of_birth = $this->request->getPost('date_of_birth',FILTER_SANITIZE_STRING);
-			$marital_status = $this->request->getPost('marital_status',FILTER_SANITIZE_STRING);
-			$religion = $this->request->getPost('religion',FILTER_SANITIZE_STRING);
-			$blood_group = $this->request->getPost('blood_group',FILTER_SANITIZE_STRING);
-			$citizenship_id = $this->request->getPost('citizenship_id',FILTER_SANITIZE_STRING);
+			$cat_ids = implode(',',$this->request->getPost('leave_categories'));
+			$employee_id = $this->request->getPost('employee_id');
+			$office_shift_id = $this->request->getPost('office_shift_id');
+			$department_id = $this->request->getPost('department_id');
+			$designation_id = $this->request->getPost('designation_id');
+			$date_of_joining = $this->request->getPost('date_of_joining');
+			$date_of_leaving = $this->request->getPost('date_of_leaving');
+			$date_of_birth = $this->request->getPost('date_of_birth');
+			$marital_status = $this->request->getPost('marital_status');
+			$religion = $this->request->getPost('religion');
+			$blood_group = $this->request->getPost('blood_group');
+			$citizenship_id = $this->request->getPost('citizenship_id');
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$UsersModel = new UsersModel();
 			$data = [
 				'first_name' => $first_name,
@@ -2418,18 +2419,18 @@ class Employees extends BaseController {
 				$this->output($Return);
 			}
 			//staff details
-			$date_of_joining = $this->request->getPost('contract_date',FILTER_SANITIZE_STRING);
-			$department_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
-			$designation_id = $this->request->getPost('designation_id',FILTER_SANITIZE_STRING);
-			$basic_salary = $this->request->getPost('basic_salary',FILTER_SANITIZE_STRING);
-			$hourly_rate = $this->request->getPost('hourly_rate',FILTER_SANITIZE_STRING);
-			$salay_type = $this->request->getPost('salay_type',FILTER_SANITIZE_STRING);
-			$office_shift_id = $this->request->getPost('office_shift_id',FILTER_SANITIZE_STRING);
-			$role_description = $this->request->getPost('role_description',FILTER_SANITIZE_STRING);
-			$date_of_leaving = $this->request->getPost('contract_end',FILTER_SANITIZE_STRING);
+			$date_of_joining = $this->request->getPost('contract_date');
+			$department_id = $this->request->getPost('department_id');
+			$designation_id = $this->request->getPost('designation_id');
+			$basic_salary = $this->request->getPost('basic_salary');
+			$hourly_rate = $this->request->getPost('hourly_rate');
+			$salay_type = $this->request->getPost('salay_type');
+			$office_shift_id = $this->request->getPost('office_shift_id');
+			$role_description = $this->request->getPost('role_description');
+			$date_of_leaving = $this->request->getPost('contract_end');
 			$cat_ids = implode(',',$this->request->getPost('leave_categories'));
 			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$MainModel = new MainModel();
 			$UsersModel = new UsersModel();
 			$Moduleattributes = new Moduleattributes();
@@ -2557,9 +2558,9 @@ class Employees extends BaseController {
 				$this->output($Return);
 			}
 			//staff
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);			
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');			
+			$id = udecode($this->request->getPost('token'));
 			$UsersModel = new UsersModel();
 			$data = [
 				'email'  => $email,
@@ -2615,7 +2616,7 @@ class Employees extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			if ($validated) {
 				$UsersModel = new UsersModel();
 				$Return['result'] = lang('Main.xin_profile_picture_success_updated');
@@ -2669,7 +2670,7 @@ class Employees extends BaseController {
 			$validation->withRequest($this->request)->run();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 			//check error
-			$new_password = $this->request->getPost('new_password',FILTER_SANITIZE_STRING);
+			$new_password = $this->request->getPost('new_password');
 			if($validation->hasError('new_password')){
 				$Return['error'] = $validation->getError('new_password');
 			} elseif($validation->hasError('confirm_password')){
@@ -2682,7 +2683,7 @@ class Employees extends BaseController {
 			
 			$options = array('cost' => 12);
 			$password_hash = password_hash($new_password, PASSWORD_BCRYPT, $options);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'password' => $password_hash,
 			];
@@ -2748,7 +2749,7 @@ class Employees extends BaseController {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ContractModel = new ContractModel();
 			$result = $ContractModel->where('contract_option_id', $id)->delete($id);
@@ -2771,7 +2772,7 @@ class Employees extends BaseController {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ContractModel = new ContractModel();
 			$result = $ContractModel->where('contract_option_id', $id)->delete($id);
@@ -2794,7 +2795,7 @@ class Employees extends BaseController {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ContractModel = new ContractModel();
 			$result = $ContractModel->where('contract_option_id', $id)->delete($id);
@@ -2817,7 +2818,7 @@ class Employees extends BaseController {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ContractModel = new ContractModel();
 			$result = $ContractModel->where('contract_option_id', $id)->delete($id);
@@ -2840,7 +2841,7 @@ class Employees extends BaseController {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$UserdocumentsModel = new UserdocumentsModel();
 			$result = $UserdocumentsModel->where('document_id', $id)->delete($id);
@@ -2862,7 +2863,7 @@ class Employees extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$UsersModel = new UsersModel();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();

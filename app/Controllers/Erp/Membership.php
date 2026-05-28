@@ -175,11 +175,11 @@ class Membership extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$membership_type = $this->request->getPost('membership_type',FILTER_SANITIZE_STRING);
-		$price = $this->request->getPost('price',FILTER_SANITIZE_STRING);
-		$plan_duration = $this->request->getPost('plan_duration',FILTER_SANITIZE_STRING);
-		$total_employees = $this->request->getPost('total_employees',FILTER_SANITIZE_STRING);
-		$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);	
+		$membership_type = $this->request->getPost('membership_type');
+		$price = $this->request->getPost('price');
+		$plan_duration = $this->request->getPost('plan_duration');
+		$total_employees = $this->request->getPost('total_employees');
+		$description = $this->request->getPost('description');	
 		//$ar_role_resources = serialize($role_resources);
 		$subscription_id = generate_subscription_id();
 		$data = [
@@ -248,12 +248,12 @@ class Membership extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$membership_type = $this->request->getPost('membership_type',FILTER_SANITIZE_STRING);
-			$price = $this->request->getPost('price',FILTER_SANITIZE_STRING);
-			$plan_duration = $this->request->getPost('plan_duration',FILTER_SANITIZE_STRING);
-			$total_employees = $this->request->getPost('total_employees',FILTER_SANITIZE_STRING);
-			$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);		
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));			
+			$membership_type = $this->request->getPost('membership_type');
+			$price = $this->request->getPost('price');
+			$plan_duration = $this->request->getPost('plan_duration');
+			$total_employees = $this->request->getPost('total_employees');
+			$description = $this->request->getPost('description');		
+			$id = udecode($this->request->getPost('token'));			
 			$data = [
 				'membership_type' => $membership_type,
 				'price' => $price,
@@ -360,7 +360,7 @@ class Membership extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$MembershipModel = new MembershipModel();
 			$result = $MembershipModel->where('membership_id', $id)->delete($id);

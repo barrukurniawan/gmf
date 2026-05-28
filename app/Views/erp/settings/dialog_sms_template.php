@@ -29,7 +29,7 @@ $result = $SmstemplatesModel->where('template_id', $template_id)->first();
         <label for="subject">
           <?= lang('Main.xin_subject');?>
           <span class="text-danger">*</span></label>
-        <input class="form-control" name="subject" type="text" value="<?php echo $result['subject'];?>">
+        <input class="form-control" name="subject" type="text" value="<?php echo esc($result['subject'], 'attr')?>">
       </div>
     </div>
   </div>

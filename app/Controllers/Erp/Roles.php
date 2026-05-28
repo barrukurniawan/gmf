@@ -86,9 +86,9 @@ class Roles extends BaseController {
 					}
 				}
 			} else {
-				$role_name = $this->request->getPost('role_name',FILTER_SANITIZE_STRING);
-				$role_access = $this->request->getPost('role_access',FILTER_SANITIZE_STRING);
-				$role_resources = implode(',',$this->request->getPost('role_resources',FILTER_SANITIZE_STRING));
+				$role_name = $this->request->getPost('role_name');
+				$role_access = $this->request->getPost('role_access');
+				$role_resources = implode(',',$this->request->getPost('role_resources'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -158,10 +158,10 @@ class Roles extends BaseController {
 					}
 				}
 			} else {
-				$role_name = $this->request->getPost('role_name',FILTER_SANITIZE_STRING);
-				$role_access = $this->request->getPost('role_access',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
-				$role_resources = implode(',',$this->request->getPost('role_resources',FILTER_SANITIZE_STRING));
+				$role_name = $this->request->getPost('role_name');
+				$role_access = $this->request->getPost('role_access');
+				$id = udecode($this->request->getPost('token'));
+				$role_resources = implode(',',$this->request->getPost('role_resources'));
 				$data = [
 					'role_name' => $role_name,
 					'role_access'  => $role_access,
@@ -264,7 +264,7 @@ class Roles extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$RolesModel = new RolesModel();
 			$UsersModel = new UsersModel();

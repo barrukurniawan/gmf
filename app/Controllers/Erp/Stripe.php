@@ -40,8 +40,8 @@ class Stripe extends BaseController {
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');
 		// get order info
-		$token = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
-		$stripe_info = udecode($this->request->getPost('stripe_info',FILTER_SANITIZE_STRING));
+		$token = udecode($this->request->getPost('token'));
+		$stripe_info = udecode($this->request->getPost('stripe_info'));
 		
 		// Membership details
 		$UsersModel = new UsersModel();
@@ -61,7 +61,7 @@ class Stripe extends BaseController {
                 "amount" => $converted * 100,
 				//"customer" => $company_id['company_name'],
                 "currency" => $xin_system['default_currency'],
-                "source" => $this->request->getPost('stripeToken',FILTER_SANITIZE_STRING),
+                "source" => $this->request->getPost('stripeToken'),
                 "description" => $result['membership_type']
         ]);
 		$chargeJson = $charge->jsonSerialize();

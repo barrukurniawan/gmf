@@ -41,7 +41,7 @@ $result = $ComplaintsModel->where('complaint_id', $complaint_id)->first();
         <label for="title">
           <?= lang('Employees.xin_complaint_title');?> <span class="text-danger">*</span>
         </label>
-        <input class="form-control" placeholder="<?= lang('Employees.xin_complaint_title');?>" name="title" type="text" value="<?php echo $result['title'];?>">
+        <input class="form-control" placeholder="<?= lang('Employees.xin_complaint_title');?>" name="title" type="text" value="<?php echo esc($result['title'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-6">
@@ -68,7 +68,7 @@ $result = $ComplaintsModel->where('complaint_id', $complaint_id)->first();
           <?= lang('Employees.xin_complaint_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?= lang('Employees.xin_complaint_date');?>" name="complaint_date" type="text" value="<?php echo $result['complaint_date'];?>">
+          <input class="form-control d_date" placeholder="<?= lang('Employees.xin_complaint_date');?>" name="complaint_date" type="text" value="<?php echo esc($result['complaint_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>

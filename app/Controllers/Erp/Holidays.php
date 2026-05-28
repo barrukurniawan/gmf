@@ -212,11 +212,11 @@ class Holidays extends BaseController {
 					}
 				}
 			} else {
-				$event_name = $this->request->getPost('event_name',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$is_publish = $this->request->getPost('is_publish',FILTER_SANITIZE_STRING);
+				$event_name = $this->request->getPost('event_name');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$description = $this->request->getPost('description');
+				$is_publish = $this->request->getPost('is_publish');
 							
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -302,12 +302,12 @@ class Holidays extends BaseController {
 					}
 				}
 			} else {
-				$event_name = $this->request->getPost('event_name',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$is_publish = $this->request->getPost('is_publish',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));				
+				$event_name = $this->request->getPost('event_name');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$description = $this->request->getPost('description');
+				$is_publish = $this->request->getPost('is_publish');
+				$id = udecode($this->request->getPost('token'));				
 				$data = [
 					'event_name' => $event_name,
 					'start_date'  => $start_date,
@@ -359,7 +359,7 @@ class Holidays extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$HolidaysModel = new HolidaysModel();
 			$result = $HolidaysModel->where('holiday_id', $id)->delete($id);

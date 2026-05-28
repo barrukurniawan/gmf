@@ -347,7 +347,7 @@ class Regulation extends BaseController
                 'errors' => ['required' => 'Kategori wajib dipilih.']
             ],
             'document_file' => [
-                'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
                 'errors' => ['uploaded' => 'File dokumen wajib diupload.']
             ]
         ];
@@ -392,10 +392,10 @@ class Regulation extends BaseController
 
         $document_file->move($this->uploadPath, $file_name);
 
-        $title           = $this->request->getPost('title', FILTER_SANITIZE_STRING);
-        $document_number = $this->request->getPost('document_number', FILTER_SANITIZE_STRING);
-        $category        = $this->request->getPost('category', FILTER_SANITIZE_STRING);
-        $publish_date    = $this->request->getPost('publish_date', FILTER_SANITIZE_STRING);
+        $title           = $this->request->getPost('title');
+        $document_number = $this->request->getPost('document_number');
+        $category        = $this->request->getPost('category');
+        $publish_date    = $this->request->getPost('publish_date');
 
         $RegulationDocumentsModel = new RegulationDocumentsModel();
         $data = [
@@ -477,11 +477,11 @@ class Regulation extends BaseController
             }
         }
 
-        $id = udecode($this->request->getPost('token', FILTER_SANITIZE_STRING));
-        $title           = $this->request->getPost('title', FILTER_SANITIZE_STRING);
-        $document_number = $this->request->getPost('document_number', FILTER_SANITIZE_STRING);
-        $category        = $this->request->getPost('category', FILTER_SANITIZE_STRING);
-        $publish_date    = $this->request->getPost('publish_date', FILTER_SANITIZE_STRING);
+        $id = udecode($this->request->getPost('token'));
+        $title           = $this->request->getPost('title');
+        $document_number = $this->request->getPost('document_number');
+        $category        = $this->request->getPost('category');
+        $publish_date    = $this->request->getPost('publish_date');
 
         $RegulationDocumentsModel = new RegulationDocumentsModel();
         $document = $RegulationDocumentsModel->find($id);
@@ -505,7 +505,7 @@ class Regulation extends BaseController
         if ($document_file && $document_file->isValid() && !$document_file->hasMoved()) {
             $validated = $this->validate([
                 'document_file' => [
-                    'rules'  => 'max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                    'rules'  => 'max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
                 ]
             ]);
 
@@ -576,7 +576,7 @@ class Regulation extends BaseController
             exit;
         }
 
-        $id = udecode($this->request->getPost('_token', FILTER_SANITIZE_STRING));
+        $id = udecode($this->request->getPost('_token'));
         $Return = ['result' => '', 'error' => '', 'csrf_hash' => csrf_hash()];
 
         $RegulationDocumentsModel = new RegulationDocumentsModel();

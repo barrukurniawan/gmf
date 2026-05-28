@@ -35,7 +35,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
     <label for="title">
       <?= lang('Dashboard.xin_title');?> <span class="text-danger">*</span>
     </label>
-    <input type="text" class="form-control" name="title" placeholder="<?= lang('Dashboard.xin_title');?>" value="<?php echo $result['title'];?>">
+    <input type="text" class="form-control" name="title" placeholder="<?= lang('Dashboard.xin_title');?>" value="<?php echo esc($result['title'], 'attr')?>">
   </div>
   <div class="form-group">
     <label for="message">

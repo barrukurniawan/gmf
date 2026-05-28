@@ -94,7 +94,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $tpending['travel_id']?>',
 				unq: '0',
-				title: '<?php echo $tpending['visit_purpose']?>',
+				title: '<?php echo esc($tpending['visit_purpose'], 'js')?>',
 				start: '<?php echo $tpending['start_date']?>',
 				end: '<?php echo $tpending['end_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($tpending['travel_id']);?>',
@@ -105,7 +105,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $trejected['travel_id']?>',
 				unq: '0',
-				title: '<?php echo $trejected['visit_purpose']?>',
+				title: '<?php echo esc($trejected['visit_purpose'], 'js')?>',
 				start: '<?php echo $trejected['start_date']?>',
 				end: '<?php echo $trejected['end_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($trejected['travel_id']);?>',
@@ -116,7 +116,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $taccepted['travel_id']?>',
 				unq: '0',
-				title: '<?php echo $taccepted['visit_purpose']?>',
+				title: '<?php echo esc($taccepted['visit_purpose'], 'js')?>',
 				start: '<?php echo $taccepted['start_date']?>',
 				end: '<?php echo $taccepted['end_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($taccepted['travel_id']);?>',

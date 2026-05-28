@@ -129,9 +129,11 @@ class MainModel extends Model {
 		$usession = $session->get('sup_username');
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$builder = $db->table('ci_mailbox');
-		$where = "mail_to='".$usession['sup_user_id']."' OR sent_by='".$usession['sup_user_id']."'";
 		$builder->where('company_id', $user_info['company_id']);
-		$builder->where($where);
+		$builder->groupStart()
+			->where('mail_to', $usession['sup_user_id'])
+			->orWhere('sent_by', $usession['sup_user_id'])
+			->groupEnd();
 		$query = $builder->get();
 		return $query->getResult();
 	}
@@ -212,9 +214,9 @@ class MainModel extends Model {
 	
 		$db      = \Config\Database::connect();	
 		$builder = $db->table('ci_holidays');
-		$where = "('".$attendance_date."' between start_date and end_date)";
+		$builder->where('start_date <=', $attendance_date);
+		$builder->where('end_date >=', $attendance_date);
 		$builder->where('is_publish', 1);
-		$builder->where($where);
 		$builder->limit(1);
 		$query = $builder->get();
 		$holidays = $query->getResult();
@@ -232,7 +234,8 @@ class MainModel extends Model {
 	
 		$db      = \Config\Database::connect();	
 		$builder = $db->table('ci_leave_applications');
-		$where = "('".$leave_date."' between from_date and to_date)";
+		$builder->where('from_date <=', $leave_date);
+		$builder->where('to_date >=', $leave_date);
 		$builder->where('employee_id', $staff_id);
 		$builder->where('status', 2);
 		$builder->where($where);

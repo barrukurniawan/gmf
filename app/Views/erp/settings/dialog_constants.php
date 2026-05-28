@@ -144,7 +144,7 @@ $row = $ConstantsModel->where('constants_id', $ifield_id)->where('type','company
     <label for="name" class="form-control-label">
       <?= lang('Main.xin_company_type');?>
       <span class="text-danger">*</span></label>
-    <input type="text" class="form-control" name="name" placeholder="<?= lang('Main.xin_company_type');?>" value="<?php echo $row['category_name'];?>">
+    <input type="text" class="form-control" name="name" placeholder="<?= lang('Main.xin_company_type');?>" value="<?php echo esc($row['category_name'], 'attr')?>">
   </div>
 </div>
 <div class="modal-footer">
@@ -240,7 +240,7 @@ $row = $ConstantsModel->where('constants_id', $ifield_id)->where('type','religio
     <label for="name" class="form-control-label">
       <?= lang('Main.xin_ethnicity_type_title');?>
       <span class="text-danger">*</span></label>
-    <input type="text" class="form-control" name="religion" placeholder="<?= lang('Main.xin_ethnicity_type_title');?>" value="<?php echo $row['category_name'];?>">
+    <input type="text" class="form-control" name="religion" placeholder="<?= lang('Main.xin_ethnicity_type_title');?>" value="<?php echo esc($row['category_name'], 'attr')?>">
   </div>
 </div>
 <div class="modal-footer">

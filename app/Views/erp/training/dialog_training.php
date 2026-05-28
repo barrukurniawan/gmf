@@ -68,7 +68,7 @@ $xin_com_system = erp_company_settings();
         <select class="form-control" name="training_type" data-plugin="select_hrm" data-placeholder="<?= lang('Dashboard.left_training_skill');?>">
           <option value=""></option>
           <?php foreach($training_types as $itraining_type) {?>
-          <option value="<?php echo $itraining_type['constants_id']?>" <?php if($result['training_type_id']==$itraining_type['constants_id']):?> selected="selected" <?php endif;?>><?php echo $itraining_type['category_name']?></option>
+          <option value="<?php echo esc($itraining_type['constants_id'], 'attr')?>" <?php if($result['training_type_id']==$itraining_type['constants_id']):?> selected="selected" <?php endif;?>><?php echo $itraining_type['category_name']?></option>
           <?php } ?>
         </select>
       </div>
@@ -97,7 +97,7 @@ $xin_com_system = erp_company_settings();
           <div class="input-group-prepend"><span class="input-group-text">
             <?= $xin_system['default_currency'];?>
             </span></div>
-          <input class="form-control" placeholder="<?= lang('Main.xin_training_cost');?>" name="training_cost" type="text" value="<?php echo $result['training_cost'];?>">
+          <input class="form-control" placeholder="<?= lang('Main.xin_training_cost');?>" name="training_cost" type="text" value="<?php echo esc($result['training_cost'], 'attr')?>">
         </div>
       </div>
     </div>
@@ -129,7 +129,7 @@ $xin_com_system = erp_company_settings();
           <?= lang('Projects.xin_start_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?= lang('Projects.xin_start_date');?>" name="start_date" type="text" value="<?php echo $result['start_date'];?>">
+          <input class="form-control d_date" placeholder="<?= lang('Projects.xin_start_date');?>" name="start_date" type="text" value="<?php echo esc($result['start_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -140,7 +140,7 @@ $xin_com_system = erp_company_settings();
           <?= lang('Projects.xin_end_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?= lang('Projects.xin_end_date');?>" name="end_date" type="text" value="<?php echo $result['finish_date'];?>">
+          <input class="form-control d_date" placeholder="<?= lang('Projects.xin_end_date');?>" name="end_date" type="text" value="<?php echo esc($result['finish_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -211,7 +211,7 @@ $xin_com_system = erp_company_settings();
           <label for="<?php echo $mattribute['attribute'];?>"><?php echo $mattribute['attribute_label'];?> <?= $validate_opt;?></label>
           <select class="form-control" name="<?php echo $mattribute['attribute'];?>" data-plugin="select_hrm" data-placeholder="<?php echo $mattribute['attribute_label'];?>">
             <?php foreach($iselc_val as $selc_val) {?>
-            <option value="<?php echo $selc_val['attributes_select_value_id']?>" <?php if($attr_val==$selc_val['attributes_select_value_id']):?> selected="selected"<?php endif;?>><?php echo $selc_val['select_label']?></option>
+            <option value="<?php echo esc($selc_val['attributes_select_value_id'], 'attr')?>" <?php if($attr_val==$selc_val['attributes_select_value_id']):?> selected="selected"<?php endif;?>><?php echo $selc_val['select_label']?></option>
             <?php } ?>
           </select>
         </div>

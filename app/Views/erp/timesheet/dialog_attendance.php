@@ -223,7 +223,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
               <?= lang('Attendance.xin_attendance_date');?> <span class="text-danger">*</span>
             </label>
             <div class="input-group">
-              <input class="form-control attendance_date_e" placeholder="<?= lang('Attendance.xin_attendance_date');?>" name="attendance_date_m" type="text" value="<?php echo $result['attendance_date'];?>">
+              <input class="form-control attendance_date_e" placeholder="<?= lang('Attendance.xin_attendance_date');?>" name="attendance_date_m" type="text" value="<?php echo esc($result['attendance_date'], 'attr')?>">
               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
             </div>
           </div>
@@ -240,7 +240,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
               <?= lang('Employees.xin_shift_in_time');?> <span class="text-danger">*</span>
             </label>
             <div class="input-group">
-              <input class="form-control timepicker" placeholder="<?= lang('Employees.xin_shift_in_time');?>" readonly="true" name="clock_in_m" type="text" value="<?php echo $fclckIn;?>">
+              <input class="form-control timepicker" placeholder="<?= lang('Employees.xin_shift_in_time');?>" readonly="true" name="clock_in_m" type="text" value="<?php echo esc($fclckIn, 'attr')?>">
               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
             </div>
           </div>
@@ -255,7 +255,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
               <?= lang('Employees.xin_shift_out_time');?> <span class="text-danger">*</span>
             </label>
             <div class="input-group">
-              <input class="form-control timepicker" placeholder="<?= lang('Employees.xin_shift_out_time');?>" readonly="true" name="clock_out_m" type="text" value="<?php echo $fclckOut;?>">
+              <input class="form-control timepicker" placeholder="<?= lang('Employees.xin_shift_out_time');?>" readonly="true" name="clock_out_m" type="text" value="<?php echo esc($fclckOut, 'attr')?>">
               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
             </div>
           </div>

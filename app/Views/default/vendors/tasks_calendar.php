@@ -98,7 +98,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $nttasks['task_id']?>',
 				unq: '0',
-				title: '<?php echo $nttasks['task_name']?>',
+				title: '<?php echo esc($nttasks['task_name'], 'js')?>',
 				start: '<?php echo $nttasks['start_date']?>',
 				end: '<?php echo $nttasks['end_date']?>',
 				urllink: '<?php echo site_url().'erp/task-detail/'.uencode($nttasks['task_id']);?>',
@@ -109,7 +109,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $intasks['task_id']?>',
 				unq: '0',
-				title: '<?php echo $intasks['task_name']?>',
+				title: '<?php echo esc($intasks['task_name'], 'js')?>',
 				start: '<?php echo $intasks['start_date']?>',
 				end: '<?php echo $intasks['end_date']?>',
 				urllink: '<?php echo site_url().'erp/task-detail/'.uencode($intasks['task_id']);?>',
@@ -120,7 +120,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $ctasks['task_id']?>',
 				unq: '0',
-				title: '<?php echo $ctasks['task_name']?>',
+				title: '<?php echo esc($ctasks['task_name'], 'js')?>',
 				start: '<?php echo $ctasks['start_date']?>',
 				end: '<?php echo $ctasks['end_date']?>',
 				urllink: '<?php echo site_url().'erp/task-detail/'.uencode($ctasks['task_id']);?>',
@@ -131,7 +131,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $cntasks['task_id']?>',
 				unq: '0',
-				title: '<?php echo $cntasks['task_name']?>',
+				title: '<?php echo esc($cntasks['task_name'], 'js')?>',
 				start: '<?php echo $cntasks['start_date']?>',
 				end: '<?php echo $cntasks['end_date']?>',
 				urllink: '<?php echo site_url().'erp/task-detail/'.uencode($cntasks['task_id']);?>',
@@ -142,7 +142,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $hltasks['task_id']?>',
 				unq: '0',
-				title: '<?php echo $hltasks['task_name']?>',
+				title: '<?php echo esc($hltasks['task_name'], 'js')?>',
 				start: '<?php echo $hltasks['start_date']?>',
 				end: '<?php echo $hltasks['end_date']?>',
 				urllink: '<?php echo site_url().'erp/task-detail/'.uencode($hltasks['task_id']);?>',

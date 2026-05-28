@@ -122,11 +122,11 @@ class Transfers extends BaseController {
 					}
 				}
 			} else {
-				$staff_id = $this->request->getPost('employee',FILTER_SANITIZE_STRING);
-				$department = $this->request->getPost('department',FILTER_SANITIZE_STRING);
-				$designation = $this->request->getPost('designation',FILTER_SANITIZE_STRING);
-				$transfer_date = $this->request->getPost('transfer_date',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);			
+				$staff_id = $this->request->getPost('employee');
+				$department = $this->request->getPost('department');
+				$designation = $this->request->getPost('designation');
+				$transfer_date = $this->request->getPost('transfer_date');
+				$reason = $this->request->getPost('reason');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -169,7 +169,7 @@ class Transfers extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');	
-		if ($this->request->getPost('type',FILTER_SANITIZE_STRING) === 'edit_record') {
+		if ($this->request->getPost('type') === 'edit_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			// set rules
@@ -220,13 +220,13 @@ class Transfers extends BaseController {
 					}
 				}
 			} else {
-				$staff_id = $this->request->getPost('employee',FILTER_SANITIZE_STRING);
-				$department = $this->request->getPost('department',FILTER_SANITIZE_STRING);
-				$designation = $this->request->getPost('designation',FILTER_SANITIZE_STRING);
-				$transfer_date = $this->request->getPost('transfer_date',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);	
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);		
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$staff_id = $this->request->getPost('employee');
+				$department = $this->request->getPost('department');
+				$designation = $this->request->getPost('designation');
+				$transfer_date = $this->request->getPost('transfer_date');
+				$reason = $this->request->getPost('reason');	
+				$status = $this->request->getPost('status');		
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'employee_id' => $staff_id,
 					'transfer_date'  => $transfer_date,
@@ -460,7 +460,7 @@ class Transfers extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TransfersModel = new TransfersModel();
 			$result = $TransfersModel->where('transfer_id', $id)->delete($id);

@@ -47,7 +47,7 @@ $result = $TravelModel->where('travel_id', $travel_id)->first();
           <div class="form-group">
             <label for="start_date"><?= lang('xin_start_date');?> <span class="text-danger">*</span></label>
             <div class="input-group">
-            <input class="form-control d_date" placeholder="<?= lang('xin_start_date');?>" name="start_date" type="text" value="<?php echo $result['start_date'];?>">
+            <input class="form-control d_date" placeholder="<?= lang('xin_start_date');?>" name="start_date" type="text" value="<?php echo esc($result['start_date'], 'attr')?>">
               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
             </div>
           </div>
@@ -56,7 +56,7 @@ $result = $TravelModel->where('travel_id', $travel_id)->first();
           <div class="form-group">
             <label for="end_date"><?= lang('xin_end_date');?> <span class="text-danger">*</span></label>
             <div class="input-group">
-            	<input class="form-control d_date" placeholder="<?= lang('xin_end_date');?>" name="end_date" type="text" value="<?php echo $result['end_date'];?>">
+            	<input class="form-control d_date" placeholder="<?= lang('xin_end_date');?>" name="end_date" type="text" value="<?php echo esc($result['end_date'], 'attr')?>">
               <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
             </div>
           </div>
@@ -64,13 +64,13 @@ $result = $TravelModel->where('travel_id', $travel_id)->first();
         <div class="col-md-4">
           <div class="form-group">
             <label for="visit_purpose"><?= lang('xin_visit_purpose');?> <span class="text-danger">*</span></label>
-            <input class="form-control" placeholder="<?= lang('xin_visit_purpose');?>" name="visit_purpose" type="text" value="<?php echo $result['visit_purpose'];?>">
+            <input class="form-control" placeholder="<?= lang('xin_visit_purpose');?>" name="visit_purpose" type="text" value="<?php echo esc($result['visit_purpose'], 'attr')?>">
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <label for="visit_place"><?= lang('xin_visit_place');?> <span class="text-danger">*</span></label>
-            <input class="form-control" placeholder="<?= lang('xin_visit_place');?>" name="visit_place" type="text" value="<?php echo $result['visit_place'];?>">
+            <input class="form-control" placeholder="<?= lang('xin_visit_place');?>" name="visit_place" type="text" value="<?php echo esc($result['visit_place'], 'attr')?>">
           </div>
         </div>
         <div class="col-md-4">
@@ -114,7 +114,7 @@ $result = $TravelModel->where('travel_id', $travel_id)->first();
                   <div class="input-group-prepend"><span class="input-group-text">
                     <?= $xin_system['default_currency'];?>
                     </span></div>
-                  <input class="form-control" placeholder="<?= lang('xin_expected_travel_budget');?>" name="expected_budget" type="text" value="<?php echo $result['expected_budget'];?>">
+                  <input class="form-control" placeholder="<?= lang('xin_expected_travel_budget');?>" name="expected_budget" type="text" value="<?php echo esc($result['expected_budget'], 'attr')?>">
                 </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ $result = $TravelModel->where('travel_id', $travel_id)->first();
               <div class="input-group-prepend"><span class="input-group-text">
                 <?= $xin_system['default_currency'];?>
                 </span></div>
-              <input class="form-control" placeholder="<?= lang('xin_actual_travel_budget');?>" name="actual_budget" type="text" value="<?php echo $result['actual_budget'];?>">
+              <input class="form-control" placeholder="<?= lang('xin_actual_travel_budget');?>" name="actual_budget" type="text" value="<?php echo esc($result['actual_budget'], 'attr')?>">
             </div>
           </div>
         </div>

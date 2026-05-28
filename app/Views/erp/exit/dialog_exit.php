@@ -50,7 +50,7 @@ $result = $OffModel->where('exit_id', $exit_id)->first();
         <label for="exit_date">
           <?= lang('Employees.xin_exit_date');?>
           <span class="text-danger">*</span></label>
-        <input class="form-control d_date" placeholder="<?= lang('Employees.xin_exit_date');?>" readonly name="exit_date" type="text" value="<?php echo $result['exit_date'];?>">
+        <input class="form-control d_date" placeholder="<?= lang('Employees.xin_exit_date');?>" readonly name="exit_date" type="text" value="<?php echo esc($result['exit_date'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-6">

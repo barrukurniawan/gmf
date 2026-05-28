@@ -625,11 +625,11 @@ class Finance extends BaseController {
 					}
 				}
 			} else {
-				$account_name = $this->request->getPost('account_name',FILTER_SANITIZE_STRING);		
-				$account_balance = $this->request->getPost('account_balance',FILTER_SANITIZE_STRING);	
-				$account_number = $this->request->getPost('account_number',FILTER_SANITIZE_STRING);
-				$branch_code = $this->request->getPost('branch_code',FILTER_SANITIZE_STRING);
-				$bank_branch = $this->request->getPost('bank_branch',FILTER_SANITIZE_STRING);
+				$account_name = $this->request->getPost('account_name');		
+				$account_balance = $this->request->getPost('account_balance');	
+				$account_number = $this->request->getPost('account_number');
+				$branch_code = $this->request->getPost('branch_code');
+				$bank_branch = $this->request->getPost('bank_branch');
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -742,17 +742,22 @@ class Finance extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
+				$file_name = $attachment->getRandomName();
+				if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
 				$attachment->move('public/uploads/transactions/');
 				
-				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);
-				$amount = $this->request->getPost('amount',FILTER_SANITIZE_STRING);
-				$deposit_date = $this->request->getPost('deposit_date',FILTER_SANITIZE_STRING);
-				$category_id = $this->request->getPost('category_id',FILTER_SANITIZE_STRING);
-				$payer_id = $this->request->getPost('payer_id',FILTER_SANITIZE_STRING);
-				$payment_method = $this->request->getPost('payment_method',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$reference = $this->request->getPost('reference',FILTER_SANITIZE_STRING);
+				$account_id = $this->request->getPost('account_id');
+				$amount = $this->request->getPost('amount');
+				$deposit_date = $this->request->getPost('deposit_date');
+				$category_id = $this->request->getPost('category_id');
+				$payer_id = $this->request->getPost('payer_id');
+				$payment_method = $this->request->getPost('payment_method');
+				$description = $this->request->getPost('description');
+				$reference = $this->request->getPost('reference');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -874,17 +879,22 @@ class Finance extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
+				$file_name = $attachment->getRandomName();
+				if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
 				$attachment->move('public/uploads/transactions/');
 				
-				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);
-				$amount = $this->request->getPost('amount',FILTER_SANITIZE_STRING);
-				$deposit_date = $this->request->getPost('deposit_date',FILTER_SANITIZE_STRING);
-				$category_id = $this->request->getPost('category_id',FILTER_SANITIZE_STRING);
-				$payer_id = $this->request->getPost('payer_id',FILTER_SANITIZE_STRING);
-				$payment_method = $this->request->getPost('payment_method',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$reference = $this->request->getPost('reference',FILTER_SANITIZE_STRING);
+				$account_id = $this->request->getPost('account_id');
+				$amount = $this->request->getPost('amount');
+				$deposit_date = $this->request->getPost('deposit_date');
+				$category_id = $this->request->getPost('category_id');
+				$payer_id = $this->request->getPost('payer_id');
+				$payment_method = $this->request->getPost('payment_method');
+				$description = $this->request->getPost('description');
+				$reference = $this->request->getPost('reference');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1008,19 +1018,24 @@ class Finance extends BaseController {
 				]);
 				if ($validated) {
 					$attachment = $this->request->getFile('attachment');
-					$file_name = $attachment->getName();
+					if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+						$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+						$this->output($Return);
+						exit;
+					}
+					$file_name = $attachment->getRandomName();
 					$attachment->move('public/uploads/transactions/');
 				}
 				
-				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);
-				$amount = $this->request->getPost('amount',FILTER_SANITIZE_STRING);
-				$deposit_date = $this->request->getPost('deposit_date',FILTER_SANITIZE_STRING);
-				$category_id = $this->request->getPost('category_id',FILTER_SANITIZE_STRING);
-				$payer_id = $this->request->getPost('payer_id',FILTER_SANITIZE_STRING);
-				$payment_method = $this->request->getPost('payment_method',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$reference = $this->request->getPost('reference',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$account_id = $this->request->getPost('account_id');
+				$amount = $this->request->getPost('amount');
+				$deposit_date = $this->request->getPost('deposit_date');
+				$category_id = $this->request->getPost('category_id');
+				$payer_id = $this->request->getPost('payer_id');
+				$payment_method = $this->request->getPost('payment_method');
+				$description = $this->request->getPost('description');
+				$reference = $this->request->getPost('reference');
+				$id = udecode($this->request->getPost('token'));
 				
 				if ($validated) {
 					$data = [
@@ -1144,19 +1159,24 @@ class Finance extends BaseController {
 				]);
 				if ($validated) {
 					$attachment = $this->request->getFile('attachment');
-					$file_name = $attachment->getName();
+					if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+						$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+						$this->output($Return);
+						exit;
+					}
+					$file_name = $attachment->getRandomName();
 					$attachment->move('public/uploads/transactions/');
 				}
 				
-				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);
-				$amount = $this->request->getPost('amount',FILTER_SANITIZE_STRING);
-				$deposit_date = $this->request->getPost('deposit_date',FILTER_SANITIZE_STRING);
-				$category_id = $this->request->getPost('category_id',FILTER_SANITIZE_STRING);
-				$payer_id = $this->request->getPost('payer_id',FILTER_SANITIZE_STRING);
-				$payment_method = $this->request->getPost('payment_method',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$reference = $this->request->getPost('reference',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$account_id = $this->request->getPost('account_id');
+				$amount = $this->request->getPost('amount');
+				$deposit_date = $this->request->getPost('deposit_date');
+				$category_id = $this->request->getPost('category_id');
+				$payer_id = $this->request->getPost('payer_id');
+				$payment_method = $this->request->getPost('payment_method');
+				$description = $this->request->getPost('description');
+				$reference = $this->request->getPost('reference');
+				$id = udecode($this->request->getPost('token'));
 				
 				if ($validated) {
 					$data = [
@@ -1244,12 +1264,12 @@ class Finance extends BaseController {
 					}
 				}
 			} else {
-				$account_name = $this->request->getPost('account_name',FILTER_SANITIZE_STRING);		
-				$account_balance = $this->request->getPost('account_balance',FILTER_SANITIZE_STRING);	
-				$account_number = $this->request->getPost('account_number',FILTER_SANITIZE_STRING);
-				$branch_code = $this->request->getPost('branch_code',FILTER_SANITIZE_STRING);
-				$bank_branch = $this->request->getPost('bank_branch',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$account_name = $this->request->getPost('account_name');		
+				$account_balance = $this->request->getPost('account_balance');	
+				$account_number = $this->request->getPost('account_number');
+				$branch_code = $this->request->getPost('branch_code');
+				$bank_branch = $this->request->getPost('bank_branch');
+				$id = udecode($this->request->getPost('token'));
 				
 				$data = [
 					'account_name' => $account_name,
@@ -1321,7 +1341,7 @@ class Finance extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$AccountsModel = new AccountsModel();
 			$UsersModel = new UsersModel();
@@ -1349,7 +1369,7 @@ class Finance extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TransactionsModel = new TransactionsModel();
 			$UsersModel = new UsersModel();

@@ -119,12 +119,12 @@ class Leaving extends BaseController {
 					}
 				}
 			} else {
-				$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);		
-				$exit_date = $this->request->getPost('exit_date',FILTER_SANITIZE_STRING);
-				$exit_type = $this->request->getPost('exit_type',FILTER_SANITIZE_STRING);
-				$exit_interview = $this->request->getPost('exit_interview',FILTER_SANITIZE_STRING);
-				$is_inactivate_account = $this->request->getPost('is_inactivate_account',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
+				$employee_id = $this->request->getPost('employee_id');		
+				$exit_date = $this->request->getPost('exit_date');
+				$exit_type = $this->request->getPost('exit_type');
+				$exit_interview = $this->request->getPost('exit_interview');
+				$is_inactivate_account = $this->request->getPost('is_inactivate_account');
+				$reason = $this->request->getPost('reason');
 					
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -213,12 +213,12 @@ class Leaving extends BaseController {
 					}
 				}
 			} else {	
-				$exit_date = $this->request->getPost('exit_date',FILTER_SANITIZE_STRING);
-				$exit_type = $this->request->getPost('exit_type',FILTER_SANITIZE_STRING);
-				$exit_interview = $this->request->getPost('exit_interview',FILTER_SANITIZE_STRING);
-				$is_inactivate_account = $this->request->getPost('is_inactivate_account',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$exit_date = $this->request->getPost('exit_date');
+				$exit_type = $this->request->getPost('exit_type');
+				$exit_interview = $this->request->getPost('exit_interview');
+				$is_inactivate_account = $this->request->getPost('is_inactivate_account');
+				$reason = $this->request->getPost('reason');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'exit_date'  => $exit_date,
 					'exit_type_id' => $exit_type,
@@ -366,7 +366,7 @@ class Leaving extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$OffModel = new OffModel();
 			$result = $OffModel->where('exit_id', $id)->delete($id);

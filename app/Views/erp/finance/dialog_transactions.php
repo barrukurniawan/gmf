@@ -81,7 +81,7 @@ if($user_info['user_type'] == 'staff'){
           <div class="input-group-prepend"><span class="input-group-text">
             <?= $xin_system['default_currency'];?>
             </span></div>
-          <input class="form-control" name="amount" type="text" data-placeholder="<?= lang('Invoices.xin_amount');?>" value="<?php echo $result['amount'];?>">
+          <input class="form-control" name="amount" type="text" data-placeholder="<?= lang('Invoices.xin_amount');?>" value="<?php echo esc($result['amount'], 'attr')?>">
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@ if($user_info['user_type'] == 'staff'){
           <?= lang('Main.xin_e_details_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?php echo date('Y-m-d');?>" name="deposit_date" type="text" value="<?php echo $result['transaction_date'];?>">
+          <input class="form-control d_date" placeholder="<?php echo date('Y-m-d');?>" name="deposit_date" type="text" value="<?php echo esc($result['transaction_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -117,7 +117,7 @@ if($user_info['user_type'] == 'staff'){
         <select name="payer_id" class="form-control" data-plugin="select_hrm" data-placeholder="<?= lang('Dashboard.xin_acc_payer');?>">
           <option value=""></option>
           <?php foreach($payers_info as $payer) {?>
-          <option value="<?php echo $payer['user_id'];?>" <?php if($result['entity_id']==$payer['user_id']):?> selected="selected"<?php endif;?>> <?php echo $payer['first_name'].' '.$payer['last_name'];?></option>
+          <option value="<?php echo esc($payer['user_id'], 'attr')?>" <?php if($result['entity_id']==$payer['user_id']):?> selected="selected"<?php endif;?>> <?php echo $payer['first_name'].' '.$payer['last_name'];?></option>
           <?php } ?>
         </select>
       </div>
@@ -130,7 +130,7 @@ if($user_info['user_type'] == 'staff'){
         <select name="payment_method" class="form-control" data-plugin="select_hrm" data-placeholder="<?= lang('Main.xin_payment_method');?>">
           <option value=""></option>
           <?php foreach($payment_method as $ipayment_method) {?>
-          <option value="<?php echo $ipayment_method['constants_id'];?>" <?php if($result['payment_method_id']==$ipayment_method['constants_id']):?> selected="selected"<?php endif;?>> <?php echo $ipayment_method['category_name'];?></option>
+          <option value="<?php echo esc($ipayment_method['constants_id'], 'attr')?>" <?php if($result['payment_method_id']==$ipayment_method['constants_id']):?> selected="selected"<?php endif;?>> <?php echo $ipayment_method['category_name'];?></option>
           <?php } ?>
         </select>
       </div>
@@ -140,7 +140,7 @@ if($user_info['user_type'] == 'staff'){
         <label for="employee">
           <?= lang('Finance.xin_acc_ref_no');?>
         </label>
-        <input class="form-control" placeholder="<?= lang('Finance.xin_acc_ref_example');?>" name="reference" type="text" value="<?php echo $result['reference'];?>">
+        <input class="form-control" placeholder="<?= lang('Finance.xin_acc_ref_example');?>" name="reference" type="text" value="<?php echo esc($result['reference'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-4">
@@ -327,7 +327,7 @@ if($user_info['user_type'] == 'staff'){
           <div class="input-group-prepend"><span class="input-group-text">
             <?= $xin_system['default_currency'];?>
             </span></div>
-          <input class="form-control" name="amount" type="text" data-placeholder="<?= lang('Invoices.xin_amount');?>" value="<?php echo $result['amount'];?>">
+          <input class="form-control" name="amount" type="text" data-placeholder="<?= lang('Invoices.xin_amount');?>" value="<?php echo esc($result['amount'], 'attr')?>">
         </div>
       </div>
     </div>
@@ -337,7 +337,7 @@ if($user_info['user_type'] == 'staff'){
           <?= lang('Main.xin_e_details_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?php echo date('Y-m-d');?>" name="deposit_date" type="text" value="<?php echo $result['transaction_date'];?>">
+          <input class="form-control d_date" placeholder="<?php echo date('Y-m-d');?>" name="deposit_date" type="text" value="<?php echo esc($result['transaction_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -363,7 +363,7 @@ if($user_info['user_type'] == 'staff'){
         <select name="payer_id" class="form-control" data-plugin="select_hrm" data-placeholder="<?= lang('Dashboard.xin_acc_payee');?>">
           <option value=""></option>
           <?php foreach($payers_info as $payer) {?>
-          <option value="<?php echo $payer['user_id'];?>" <?php if($result['entity_id']==$payer['user_id']):?> selected="selected"<?php endif;?>> <?php echo $payer['first_name'].' '.$payer['last_name'];?></option>
+          <option value="<?php echo esc($payer['user_id'], 'attr')?>" <?php if($result['entity_id']==$payer['user_id']):?> selected="selected"<?php endif;?>> <?php echo $payer['first_name'].' '.$payer['last_name'];?></option>
           <?php } ?>
         </select>
       </div>
@@ -376,7 +376,7 @@ if($user_info['user_type'] == 'staff'){
         <select name="payment_method" class="form-control" data-plugin="select_hrm" data-placeholder="<?= lang('Main.xin_payment_method');?>">
           <option value=""></option>
           <?php foreach($payment_method as $ipayment_method) {?>
-          <option value="<?php echo $ipayment_method['constants_id'];?>" <?php if($result['payment_method_id']==$ipayment_method['constants_id']):?> selected="selected"<?php endif;?>> <?php echo $ipayment_method['category_name'];?></option>
+          <option value="<?php echo esc($ipayment_method['constants_id'], 'attr')?>" <?php if($result['payment_method_id']==$ipayment_method['constants_id']):?> selected="selected"<?php endif;?>> <?php echo $ipayment_method['category_name'];?></option>
           <?php } ?>
         </select>
       </div>
@@ -386,7 +386,7 @@ if($user_info['user_type'] == 'staff'){
         <label for="employee">
           <?= lang('Finance.xin_acc_ref_no');?>
         </label>
-        <input class="form-control" placeholder="<?= lang('Finance.xin_acc_ref_example');?>" name="reference" type="text" value="<?php echo $result['reference'];?>">
+        <input class="form-control" placeholder="<?= lang('Finance.xin_acc_ref_example');?>" name="reference" type="text" value="<?php echo esc($result['reference'], 'attr')?>">
         <br />
       </div>
     </div>

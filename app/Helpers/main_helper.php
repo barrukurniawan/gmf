@@ -377,6 +377,33 @@ if( !function_exists('select_module_class') ){
 		}
 	}
 }
+
+if (!function_exists('validate_file_extension')) {
+	function validate_file_extension($file, $allowed_extensions) {
+		$file_ext = $file->getClientExtension();
+		if ($file_ext === '' || $file_ext === null) {
+			$file_ext = $file->guessExtension();
+		}
+		if ($file_ext === '' || $file_ext === null) {
+			$file_ext = $file->getExtension();
+		}
+		$file_ext = strtolower($file_ext);
+		$allowed = array_map('strtolower', $allowed_extensions);
+		return in_array($file_ext, $allowed);
+	}
+}
+
+if (!function_exists('safe_file_move')) {
+	function safe_file_move($file, $target_dir, $allowed_extensions, &$error_msg = '') {
+		if (!validate_file_extension($file, $allowed_extensions)) {
+			$error_msg = 'Invalid file extension. Allowed: ' . implode(', ', $allowed_extensions);
+			return false;
+		}
+		$new_name = $file->getRandomName();
+		$file->move($target_dir, $new_name);
+		return $new_name;
+	}
+}
 // get timezone
 if( !function_exists('all_timezones') ){	
 	function all_timezones() {

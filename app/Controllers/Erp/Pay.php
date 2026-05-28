@@ -47,8 +47,8 @@ class Pay extends BaseController {
 		if ($param1 == '') {
          
             /****TRANSFERRING USER TO PAYPAL****/
-			$token = $this->request->getPost('token',FILTER_SANITIZE_STRING);
-			$paypal_info = $this->request->getPost('paypal_info',FILTER_SANITIZE_STRING);
+			$token = $this->request->getPost('token');
+			$paypal_info = $this->request->getPost('paypal_info');
 			
 			$pay_token = udecode($token);
 			$user_id = udecode($paypal_info);

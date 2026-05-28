@@ -95,7 +95,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $plve['leave_id']?>',
 				unq: '0',
-				title: '<?php echo $ltype['category_name']?>',
+				title: '<?php echo esc($ltype['category_name'], 'js')?>',
 				start: '<?php echo $plve['from_date']?>',
 				end: '<?php echo $plve['to_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($plve['leave_id']);?>',
@@ -107,7 +107,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $aplve['leave_id']?>',
 				unq: '0',
-				title: '<?php echo $ltype['category_name']?>',
+				title: '<?php echo esc($ltype['category_name'], 'js')?>',
 				start: '<?php echo $aplve['from_date']?>',
 				end: '<?php echo $aplve['to_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($aplve['leave_id']);?>',
@@ -119,7 +119,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $relve['leave_id']?>',
 				unq: '0',
-				title: '<?php echo $ltype['category_name']?>',
+				title: '<?php echo esc($ltype['category_name'], 'js')?>',
 				start: '<?php echo $relve['from_date']?>',
 				end: '<?php echo $relve['to_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($relve['leave_id']);?>',

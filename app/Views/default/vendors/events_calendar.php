@@ -102,7 +102,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $events['event_id']?>',
 				unq: '0',
-				title: '<?php echo $events['event_title']?>',
+				title: '<?php echo esc($events['event_title'], 'js')?>',
 				start: '<?php echo $events['event_date']?>T<?php echo $events['event_time']?>',
 				color: '<?php echo $events['event_color']?> !important'
 			},

@@ -227,10 +227,10 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$application_name = $this->request->getPost('application_name',FILTER_SANITIZE_STRING);
-		$company_name = $this->request->getPost('company_name',FILTER_SANITIZE_STRING);
-		$auth_background = $this->request->getPost('auth_background',FILTER_SANITIZE_STRING);
-		$is_ssl_available = $this->request->getPost('is_ssl_available',FILTER_SANITIZE_STRING);
+		$application_name = $this->request->getPost('application_name');
+		$company_name = $this->request->getPost('company_name');
+		$auth_background = $this->request->getPost('auth_background');
+		$is_ssl_available = $this->request->getPost('is_ssl_available');
 		if($is_ssl_available == ''){
 			$is_ssl_available = 0;
 		}
@@ -487,12 +487,12 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$paypal_email = $this->request->getPost('paypal_email',FILTER_SANITIZE_STRING);
-		$paypal_sandbox = $this->request->getPost('paypal_sandbox',FILTER_SANITIZE_STRING);
-		$paypal_active = $this->request->getPost('paypal_active',FILTER_SANITIZE_STRING);
-		$stripe_secret_key = $this->request->getPost('stripe_secret_key',FILTER_SANITIZE_STRING);
-		$stripe_publishable_key = $this->request->getPost('stripe_publishable_key',FILTER_SANITIZE_STRING);
-		$stripe_active = $this->request->getPost('stripe_active',FILTER_SANITIZE_STRING);
+		$paypal_email = $this->request->getPost('paypal_email');
+		$paypal_sandbox = $this->request->getPost('paypal_sandbox');
+		$paypal_active = $this->request->getPost('paypal_active');
+		$stripe_secret_key = $this->request->getPost('stripe_secret_key');
+		$stripe_publishable_key = $this->request->getPost('stripe_publishable_key');
+		$stripe_active = $this->request->getPost('stripe_active');
 		$id = 1;
 		$data = [
             'paypal_email' => $paypal_email,
@@ -543,8 +543,8 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$email_type = $this->request->getPost('email_type',FILTER_SANITIZE_STRING);
-		$email_notification = $this->request->getPost('email_notification',FILTER_SANITIZE_STRING);
+		$email_type = $this->request->getPost('email_type');
+		$email_notification = $this->request->getPost('email_notification');
 		if($email_notification == ''): $email_notification = 0; endif;
 		$id = 1;
 		$data = [
@@ -604,10 +604,10 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$service_plan_id = $this->request->getPost('service_plan_id',FILTER_SANITIZE_STRING);
-		$bearer_token = $this->request->getPost('bearer_token',FILTER_SANITIZE_STRING);
-		$sms_from = $this->request->getPost('sms_from',FILTER_SANITIZE_STRING);
-		$sms_notification = $this->request->getPost('sms_notification',FILTER_SANITIZE_STRING);
+		$service_plan_id = $this->request->getPost('service_plan_id');
+		$bearer_token = $this->request->getPost('bearer_token');
+		$sms_from = $this->request->getPost('sms_from');
+		$sms_notification = $this->request->getPost('sms_notification');
 		if($sms_notification == ''): $sms_notification = 0; endif;
 		$id = 1;
 		$data = [
@@ -639,7 +639,7 @@ class Settings extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 		
-			$currency_val = $this->request->getPost('currency_val',FILTER_SANITIZE_STRING);
+			$currency_val = $this->request->getPost('currency_val');
 			$currency_val = serialize($currency_val);
 			$id = 1;
 			$data = [
@@ -687,9 +687,9 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$notification_position = $this->request->getPost('notification_position',FILTER_SANITIZE_STRING);
-		$notification_close = $this->request->getPost('notification_close',FILTER_SANITIZE_STRING);
-		$notification_bar = $this->request->getPost('notification_bar',FILTER_SANITIZE_STRING);
+		$notification_position = $this->request->getPost('notification_position');
+		$notification_close = $this->request->getPost('notification_close');
+		$notification_bar = $this->request->getPost('notification_bar');
 		if($notification_close == ''): $notification_close = 0; endif;
 		if($notification_bar == ''): $notification_bar = 0; endif;
 		$id = 1;
@@ -889,9 +889,9 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-		$currency_name = $this->request->getPost('currency_name',FILTER_SANITIZE_STRING);
-		$currency_code = $this->request->getPost('currency_code',FILTER_SANITIZE_STRING);
+		$country = $this->request->getPost('country');
+		$currency_name = $this->request->getPost('currency_name');
+		$currency_code = $this->request->getPost('currency_code');
 		$data = [
 			'country_name' => $country,
             'currency_name'  => $currency_name,
@@ -952,10 +952,10 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-		$currency_name = $this->request->getPost('currency_name',FILTER_SANITIZE_STRING);
-		$currency_code = $this->request->getPost('currency_code',FILTER_SANITIZE_STRING);
-		$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+		$country = $this->request->getPost('country');
+		$currency_name = $this->request->getPost('currency_name');
+		$currency_code = $this->request->getPost('currency_code');
+		$id = udecode($this->request->getPost('token'));
 		$data = [
 			'country_name' => $country,
             'currency_name'  => $currency_name,
@@ -1011,7 +1011,7 @@ class Settings extends BaseController {
 					}
 				}
 			} else {
-				$company_type = $this->request->getPost('company_type',FILTER_SANITIZE_STRING);
+				$company_type = $this->request->getPost('company_type');
 				$data = [
 					'category_name' => $company_type,
 					'company_id'  => $usession['sup_user_id'],
@@ -1077,7 +1077,7 @@ class Settings extends BaseController {
 					}
 				}
 			} else {
-				$religion = $this->request->getPost('religion',FILTER_SANITIZE_STRING);
+				$religion = $this->request->getPost('religion');
 				$data = [
 					'category_name' => $religion,
 					'company_id'  => $usession['sup_user_id'],
@@ -1130,8 +1130,8 @@ class Settings extends BaseController {
 					$this->output($Return);
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$name = $this->request->getPost('name');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'category_name' => $name
 				];
@@ -1176,8 +1176,8 @@ class Settings extends BaseController {
 					$this->output($Return);
 				}
 			} else {
-				$religion = $this->request->getPost('religion',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$religion = $this->request->getPost('religion');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'category_name' => $religion
 				];
@@ -1219,7 +1219,7 @@ class Settings extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ConstantsModel = new ConstantsModel();
 			$result = $ConstantsModel->where('constants_id', $id)->delete($id);
@@ -1239,7 +1239,7 @@ class Settings extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ConstantsModel = new ConstantsModel();
 			$result = $ConstantsModel->where('constants_id', $id)->delete($id);
@@ -1259,7 +1259,7 @@ class Settings extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ConstantsModel = new ConstantsModel();
 			$result = $ConstantsModel->where('constants_id', $id)->delete($id);
@@ -1377,7 +1377,7 @@ class Settings extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$DatabasebackupModel = new DatabasebackupModel();
 			$row = $DatabasebackupModel->where('backup_id', $id)->first();
@@ -1542,11 +1542,11 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-		$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);
-		$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-		$message = $this->request->getPost('message',FILTER_SANITIZE_STRING);
-		$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+		$name = $this->request->getPost('name');
+		$subject = $this->request->getPost('subject');
+		$status = $this->request->getPost('status');
+		$message = $this->request->getPost('message');
+		$id = udecode($this->request->getPost('token'));
 		$data = [
             'name' => $name,
 			'subject' => $subject,
@@ -1600,9 +1600,9 @@ class Settings extends BaseController {
 				$this->output($Return);
 			}
 		}
-		$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);
-		$message = $this->request->getPost('message',FILTER_SANITIZE_STRING);
-		$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+		$subject = $this->request->getPost('subject');
+		$message = $this->request->getPost('message');
+		$id = udecode($this->request->getPost('token'));
 		$data = [
 			'subject' => $subject,
 			'message' => $message

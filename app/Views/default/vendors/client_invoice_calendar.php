@@ -89,7 +89,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $cinvoice['invoice_number']?>',
 				unq: '0',
-				title: '<?php echo $cinvoice['invoice_number']?>',
+				title: '<?php echo esc($cinvoice['invoice_number'], 'js')?>',
 				start: '<?php echo $cinvoice['invoice_date']?>',
 				end: '<?php echo $cinvoice['invoice_date']?>',
 				urllink: '<?php echo site_url().'erp/invoice-detail/'.uencode($cinvoice['invoice_id']);?>',
@@ -100,7 +100,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $pinvoice['invoice_number']?>',
 				unq: '0',
-				title: '<?php echo $pinvoice['invoice_number']?>',
+				title: '<?php echo esc($pinvoice['invoice_number'], 'js')?>',
 				start: '<?php echo $pinvoice['invoice_date']?>',
 				end: '<?php echo $pinvoice['invoice_date']?>',
 				urllink: '<?php echo site_url().'erp/invoice-detail/'.uencode($pinvoice['invoice_id']);?>',

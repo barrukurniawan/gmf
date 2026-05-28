@@ -55,7 +55,7 @@ $xin_com_system = erp_company_settings();
         <label for="title">
           <?= lang('Dashboard.xin_title');?>
           <span class="text-danger">*</span> </label>
-        <input class="form-control" placeholder="<?= lang('Dashboard.xin_title');?>" name="title" type="text" value="<?php echo $result['title'];?>">
+        <input class="form-control" placeholder="<?= lang('Dashboard.xin_title');?>" name="title" type="text" value="<?php echo esc($result['title'], 'attr');?>">
       </div>
     </div>
     <div class="col-md-3">
@@ -64,7 +64,7 @@ $xin_com_system = erp_company_settings();
           <?= lang('Projects.xin_start_date');?>
           <span class="text-danger">*</span> </label>
         <div class="input-group">
-          <input class="form-control d_date" name="start_date" type="text" placeholder="<?= lang('Projects.xin_start_date');?>" value="<?php echo $result['start_date'];?>">
+          <input class="form-control d_date" name="start_date" type="text" placeholder="<?= lang('Projects.xin_start_date');?>" value="<?php echo esc($result['start_date'], 'attr');?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -75,7 +75,7 @@ $xin_com_system = erp_company_settings();
           <?= lang('Projects.xin_end_date');?>
           <span class="text-danger">*</span> </label>
         <div class="input-group">
-          <input class="form-control d_date" placeholder="<?= lang('Projects.xin_end_date');?>" name="end_date" type="text" value="<?php echo $result['end_date'];?>">
+          <input class="form-control d_date" placeholder="<?= lang('Projects.xin_end_date');?>" name="end_date" type="text" value="<?php echo esc($result['end_date'], 'attr');?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -102,7 +102,7 @@ $xin_com_system = erp_company_settings();
         <label for="summary">
           <?= lang('Main.xin_summary');?>
           <span class="text-danger">*</span> </label>
-        <textarea class="form-control" placeholder="<?= lang('Main.xin_summary');?>" name="summary" cols="30" rows="1" id="summary"><?php echo $result['summary'];?></textarea>
+        <textarea class="form-control" placeholder="<?= lang('Main.xin_summary');?>" name="summary" cols="30" rows="1" id="summary"><?php echo esc($result['summary']);?></textarea>
       </div>
     </div>
     <div class="col-md-12">
@@ -155,7 +155,7 @@ $xin_com_system = erp_company_settings();
           <label for="<?php echo $mattribute['attribute'];?>"><?php echo $mattribute['attribute_label'];?> <?= $validate_opt;?></label>
           <select class="form-control" name="<?php echo $mattribute['attribute'];?>" data-plugin="select_hrm" data-placeholder="<?php echo $mattribute['attribute_label'];?>">
             <?php foreach($iselc_val as $selc_val) {?>
-            <option value="<?php echo $selc_val['attributes_select_value_id']?>" <?php if($attr_val==$selc_val['attributes_select_value_id']):?> selected="selected"<?php endif;?>><?php echo $selc_val['select_label']?></option>
+            <option value="<?php echo esc($selc_val['attributes_select_value_id'], 'attr')?>" <?php if($attr_val==$selc_val['attributes_select_value_id']):?> selected="selected"<?php endif;?>><?php echo $selc_val['select_label']?></option>
             <?php } ?>
           </select>
         </div>

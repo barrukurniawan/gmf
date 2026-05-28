@@ -448,15 +448,15 @@ class Crm extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$password = $this->request->getPost('password',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-			$role = $this->request->getPost('role',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');
+			$password = $this->request->getPost('password');
+			$contact_number = $this->request->getPost('contact_number');
+			$country = $this->request->getPost('country');
+			$role = $this->request->getPost('role');
+			$gender = $this->request->getPost('gender');
 			$address_1 = '';
 			$address_2 = '';
 			$city = '';
@@ -595,21 +595,21 @@ class Crm extends BaseController {
 				$this->output($Return);
 			}
 
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-			$role = $this->request->getPost('role',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-			$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');
+			$contact_number = $this->request->getPost('contact_number');
+			$country = $this->request->getPost('country');
+			$role = $this->request->getPost('role');
+			$gender = $this->request->getPost('gender');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$city = $this->request->getPost('city');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
+			$status = $this->request->getPost('status');
+			$id = udecode($this->request->getPost('token'));	
 			$data = [
 				'first_name' => $first_name,
 				'last_name'  => $last_name,
@@ -674,7 +674,7 @@ class Crm extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			if ($validated) {
 				$UsersModel = new UsersModel();
 					
@@ -704,7 +704,7 @@ class Crm extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$UsersModel = new UsersModel();
 			$result = $UsersModel->where('user_id', $id)->delete($id);

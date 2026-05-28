@@ -228,12 +228,12 @@ class Announcements extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$summary = $this->request->getPost('summary',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$dep_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
+				$title = $this->request->getPost('title');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$summary = $this->request->getPost('summary');
+				$description = $this->request->getPost('description');
+				$dep_id = $this->request->getPost('department_id');
 				$department_ids = implode(',',$dep_id);				
 				$department_id = $department_ids;
 								
@@ -363,15 +363,15 @@ class Announcements extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$summary = $this->request->getPost('summary',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$dep_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
+				$title = $this->request->getPost('title');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$summary = $this->request->getPost('summary');
+				$description = $this->request->getPost('description');
+				$dep_id = $this->request->getPost('department_id');
 				$department_ids = implode(',',$dep_id);
 				$department_id = $department_ids;
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$id = udecode($this->request->getPost('token'));
 				$MainModel = new MainModel();
 				$UsersModel = new UsersModel();
 				$Moduleattributes = new Moduleattributes();
@@ -482,7 +482,7 @@ class Announcements extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$AnnouncementModel = new AnnouncementModel();
 			$result = $AnnouncementModel->where('announcement_id', $id)->delete($id);

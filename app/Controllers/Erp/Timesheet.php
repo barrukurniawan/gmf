@@ -793,9 +793,9 @@ class Timesheet extends BaseController {
 					}
 				}
 			} else {
-				$attendance_date = $this->request->getPost('attendance_date_m',FILTER_SANITIZE_STRING);
-				$clock_in = $this->request->getPost('clock_in_m',FILTER_SANITIZE_STRING);
-				$clock_out = $this->request->getPost('clock_out_m',FILTER_SANITIZE_STRING);
+				$attendance_date = $this->request->getPost('attendance_date_m');
+				$clock_in = $this->request->getPost('clock_in_m');
+				$clock_out = $this->request->getPost('clock_out_m');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -804,7 +804,7 @@ class Timesheet extends BaseController {
 					$employee_id = $usession['sup_user_id'];
 				} else {
 					$company_id = $usession['sup_user_id'];
-					$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$employee_id = $this->request->getPost('employee_id');
 				}
 				$clock_in2 = $attendance_date.' '.$clock_in.':00';
 				$clock_out2 = $attendance_date.' '.$clock_out.':00';
@@ -905,10 +905,10 @@ class Timesheet extends BaseController {
 					}
 				}
 			} else {
-				$attendance_date = $this->request->getPost('attendance_date_m',FILTER_SANITIZE_STRING);
-				$clock_in = $this->request->getPost('clock_in_m',FILTER_SANITIZE_STRING);
-				$clock_out = $this->request->getPost('clock_out_m',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
+				$attendance_date = $this->request->getPost('attendance_date_m');
+				$clock_in = $this->request->getPost('clock_in_m');
+				$clock_out = $this->request->getPost('clock_out_m');
+				$reason = $this->request->getPost('reason');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -917,7 +917,7 @@ class Timesheet extends BaseController {
 					$employee_id = $usession['sup_user_id'];
 				} else {
 					$company_id = $usession['sup_user_id'];
-					$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$employee_id = $this->request->getPost('employee_id');
 				}
 				$clock_in2 = $attendance_date.' '.$clock_in.':00';
 				$clock_out2 = $attendance_date.' '.$clock_out.':00';
@@ -1003,10 +1003,10 @@ class Timesheet extends BaseController {
 					}
 				}
 			} else {
-				$attendance_date = $this->request->getPost('attendance_date_m',FILTER_SANITIZE_STRING);
-				$clock_in = $this->request->getPost('clock_in_m',FILTER_SANITIZE_STRING);
-				$clock_out = $this->request->getPost('clock_out_m',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$attendance_date = $this->request->getPost('attendance_date_m');
+				$clock_in = $this->request->getPost('clock_in_m');
+				$clock_out = $this->request->getPost('clock_out_m');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1014,7 +1014,7 @@ class Timesheet extends BaseController {
 					$employee_id = $usession['sup_user_id'];
 				} else {
 					$company_id = $usession['sup_user_id'];
-					$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$employee_id = $this->request->getPost('employee_id');
 				}
 				$clock_in2 = $attendance_date.' '.$clock_in.':00';
 				$clock_out2 = $attendance_date.' '.$clock_out.':00';
@@ -1107,12 +1107,12 @@ class Timesheet extends BaseController {
 					}
 				}
 			} else {
-				$attendance_date = $this->request->getPost('attendance_date_m',FILTER_SANITIZE_STRING);
-				$clock_in = $this->request->getPost('clock_in_m',FILTER_SANITIZE_STRING);
-				$clock_out = $this->request->getPost('clock_out_m',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$attendance_date = $this->request->getPost('attendance_date_m');
+				$clock_in = $this->request->getPost('clock_in_m');
+				$clock_out = $this->request->getPost('clock_out_m');
+				$reason = $this->request->getPost('reason');
+				$status = $this->request->getPost('status');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1120,7 +1120,7 @@ class Timesheet extends BaseController {
 					$employee_id = $usession['sup_user_id'];
 				} else {
 					$company_id = $usession['sup_user_id'];
-					$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$employee_id = $this->request->getPost('employee_id');
 				}
 				$clock_in2 = $attendance_date.' '.$clock_in.':00';
 				$clock_out2 = $attendance_date.' '.$clock_out.':00';
@@ -1203,7 +1203,7 @@ class Timesheet extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$OvertimerequestModel = new OvertimerequestModel();
 			$result = $OvertimerequestModel->where('time_request_id', $id)->delete($id);
@@ -1260,7 +1260,7 @@ class Timesheet extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TimesheetModel = new TimesheetModel();
 			$result = $TimesheetModel->where('time_attendance_id', $id)->delete($id);
@@ -1287,10 +1287,10 @@ class Timesheet extends BaseController {
 			$company_id = $user_info['company_id'];
 			$employee_id = $usession['sup_user_id'];
 			
-			$clock_state = $this->request->getPost('clock_state',FILTER_SANITIZE_STRING);
-			$latitude = $this->request->getPost('latitude',FILTER_SANITIZE_STRING);
-			$longitude = $this->request->getPost('longitude',FILTER_SANITIZE_STRING);
-			$time_id = $this->request->getPost('time_id',FILTER_SANITIZE_STRING);
+			$clock_state = $this->request->getPost('clock_state');
+			$latitude = $this->request->getPost('latitude');
+			$longitude = $this->request->getPost('longitude');
+			$time_id = $this->request->getPost('time_id');
 			$ip_address = $request->getIPAddress();
 			//time|today
 			$nowtime = date("Y-m-d H:i:s");

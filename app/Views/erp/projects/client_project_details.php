@@ -45,7 +45,7 @@ $project_discussion = $ProjectdiscussionModel->where('project_id', $project_id)-
 // project files
 $project_files = $ProjectfilesModel->where('project_id', $project_id)->orderBy('project_file_id', 'ASC')->findAll();
 // get type||variable
-$get_type = $request->getVar('type',FILTER_SANITIZE_STRING);
+$get_type = $request->getVar('type');
 
 // project progress
 if($project_data['project_progress'] <= 20) {

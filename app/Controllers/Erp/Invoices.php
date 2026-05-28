@@ -434,7 +434,7 @@ class Invoices extends BaseController {
 		$SystemModel = new SystemModel();
 		$UsersModel = new UsersModel();
 		$ProjectsModel = new ProjectsModel();
-		$client_id = udecode($this->request->getVar('client_id',FILTER_SANITIZE_STRING));
+		$client_id = udecode($this->request->getVar('client_id'));
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		if($user_info['user_type'] == 'staff'){
 			$company_id = $user_info['company_id'];
@@ -657,19 +657,19 @@ class Invoices extends BaseController {
 					}
 				}
 			} else {
-				$invoice_number = $this->request->getPost('invoice_number',FILTER_SANITIZE_STRING);
-				$project_id = $this->request->getPost('project',FILTER_SANITIZE_STRING);
-				$invoice_date = $this->request->getPost('invoice_date',FILTER_SANITIZE_STRING);
-				$invoice_due_date = $this->request->getPost('invoice_due_date',FILTER_SANITIZE_STRING);
+				$invoice_number = $this->request->getPost('invoice_number');
+				$project_id = $this->request->getPost('project');
+				$invoice_date = $this->request->getPost('invoice_date');
+				$invoice_due_date = $this->request->getPost('invoice_due_date');
 				$j=0;
-				foreach($this->request->getPost('item_name',FILTER_SANITIZE_STRING) as $items){
-					$item_name = $this->request->getPost('item_name',FILTER_SANITIZE_STRING);
+				foreach($this->request->getPost('item_name') as $items){
+					$item_name = $this->request->getPost('item_name');
 					$iname = $item_name[$j];
 					// item qty
-					$qty = $this->request->getPost('qty_hrs',FILTER_SANITIZE_STRING);
+					$qty = $this->request->getPost('qty_hrs');
 					$qtyhrs = $qty[$j];
 					// item price
-					$unit_price = $this->request->getPost('unit_price',FILTER_SANITIZE_STRING);
+					$unit_price = $this->request->getPost('unit_price');
 					$price = $unit_price[$j];
 					
 					if($iname==='') {
@@ -684,14 +684,14 @@ class Invoices extends BaseController {
 				if($Return['error']!=''){
 					$this->output($Return);
 				}
-				$items_sub_total = $this->request->getPost('items_sub_total',FILTER_SANITIZE_STRING);
-				$discount_type = $this->request->getPost('discount_type',FILTER_SANITIZE_STRING);
-				$discount_figure = $this->request->getPost('discount_figure',FILTER_SANITIZE_STRING);
-				$discount_amount = $this->request->getPost('discount_amount',FILTER_SANITIZE_STRING);
-				$tax_type = $this->request->getPost('tax_type',FILTER_SANITIZE_STRING);
-				$tax_rate = $this->request->getPost('tax_rate',FILTER_SANITIZE_STRING);
-				$fgrand_total = $this->request->getPost('fgrand_total',FILTER_SANITIZE_STRING);
-				$invoice_note = $this->request->getPost('invoice_note',FILTER_SANITIZE_STRING);
+				$items_sub_total = $this->request->getPost('items_sub_total');
+				$discount_type = $this->request->getPost('discount_type');
+				$discount_figure = $this->request->getPost('discount_figure');
+				$discount_amount = $this->request->getPost('discount_amount');
+				$tax_type = $this->request->getPost('tax_type');
+				$tax_rate = $this->request->getPost('tax_rate');
+				$fgrand_total = $this->request->getPost('fgrand_total');
+				$invoice_note = $this->request->getPost('invoice_note');
 							
 				$UsersModel = new UsersModel();
 				$ProjectsModel = new ProjectsModel();
@@ -732,20 +732,20 @@ class Invoices extends BaseController {
 				$Return['csrf_hash'] = csrf_hash();	
 				if ($result == TRUE) {
 					$key=0;
-					foreach($this->request->getPost('item_name',FILTER_SANITIZE_STRING) as $items){
+					foreach($this->request->getPost('item_name') as $items){
 		
 						/* get items info */
 						// item name
-						$item_name = $this->request->getPost('item_name',FILTER_SANITIZE_STRING);
+						$item_name = $this->request->getPost('item_name');
 						$iname = $item_name[$key]; 
 						// item qty
-						$qty = $this->request->getPost('qty_hrs',FILTER_SANITIZE_STRING);
+						$qty = $this->request->getPost('qty_hrs');
 						$qtyhrs = $qty[$key]; 
 						// item price
-						$unit_price = $this->request->getPost('unit_price',FILTER_SANITIZE_STRING);
+						$unit_price = $this->request->getPost('unit_price');
 						$price = $unit_price[$key]; 
 						// item sub_total
-						$sub_total_item = $this->request->getPost('sub_total_item',FILTER_SANITIZE_STRING);
+						$sub_total_item = $this->request->getPost('sub_total_item');
 						$item_sub_total = $sub_total_item[$key];
 						// add values  
 						$data2 = array(
@@ -824,19 +824,19 @@ class Invoices extends BaseController {
 					}
 				}
 			} else {
-				$invoice_number = $this->request->getPost('invoice_number',FILTER_SANITIZE_STRING);
-				$project_id = $this->request->getPost('project',FILTER_SANITIZE_STRING);
-				$invoice_date = $this->request->getPost('invoice_date',FILTER_SANITIZE_STRING);
-				$invoice_due_date = $this->request->getPost('invoice_due_date',FILTER_SANITIZE_STRING);
+				$invoice_number = $this->request->getPost('invoice_number');
+				$project_id = $this->request->getPost('project');
+				$invoice_date = $this->request->getPost('invoice_date');
+				$invoice_due_date = $this->request->getPost('invoice_due_date');
 				$j=0;
-				foreach($this->request->getPost('eitem_name',FILTER_SANITIZE_STRING) as $eitem_id=>$key_val){
-					$item_name = $this->request->getPost('eitem_name',FILTER_SANITIZE_STRING);
+				foreach($this->request->getPost('eitem_name') as $eitem_id=>$key_val){
+					$item_name = $this->request->getPost('eitem_name');
 					$iname = $item_name[$eitem_id];
 					// item qty
-					$qty = $this->request->getPost('eqty_hrs',FILTER_SANITIZE_STRING);
+					$qty = $this->request->getPost('eqty_hrs');
 					$qtyhrs = $qty[$eitem_id];
 					// item price
-					$unit_price = $this->request->getPost('eunit_price',FILTER_SANITIZE_STRING);
+					$unit_price = $this->request->getPost('eunit_price');
 					$price = $unit_price[$eitem_id];
 					
 					if($iname==='') {
@@ -847,16 +847,16 @@ class Invoices extends BaseController {
 						$Return['error'] = $j. " ".lang('Success.xin_price_field_error');
 					}
 					// item name
-					$item_name = $this->request->getPost('eitem_name',FILTER_SANITIZE_STRING);
+					$item_name = $this->request->getPost('eitem_name');
 					$iname = $item_name[$eitem_id]; 
 					// item qty
-					$qty = $this->request->getPost('eqty_hrs',FILTER_SANITIZE_STRING);
+					$qty = $this->request->getPost('eqty_hrs');
 					$qtyhrs = $qty[$eitem_id]; 
 					// item price
-					$unit_price = $this->request->getPost('eunit_price',FILTER_SANITIZE_STRING);
+					$unit_price = $this->request->getPost('eunit_price');
 					$price = $unit_price[$eitem_id]; 
 					// item sub_total
-					$sub_total_item = $this->request->getPost('esub_total_item',FILTER_SANITIZE_STRING);
+					$sub_total_item = $this->request->getPost('esub_total_item');
 					$item_sub_total = $sub_total_item[$eitem_id];
 					
 					// add values  
@@ -877,13 +877,13 @@ class Invoices extends BaseController {
 				if($this->request->getPost('item_name')) {
 					$k=0;
 					foreach($this->request->getPost('item_name') as $items){
-						$item_name = $this->request->getPost('item_name',FILTER_SANITIZE_STRING);
+						$item_name = $this->request->getPost('item_name');
 						$iname = $item_name[$k];
 						// item qty
-						$qty = $this->request->getPost('qty_hrs',FILTER_SANITIZE_STRING);
+						$qty = $this->request->getPost('qty_hrs');
 						$qtyhrs = $qty[$k];
 						// item price
-						$unit_price = $this->request->getPost('unit_price',FILTER_SANITIZE_STRING);
+						$unit_price = $this->request->getPost('unit_price');
 						$price = $unit_price[$k];
 						
 						if($iname==='') {
@@ -900,15 +900,15 @@ class Invoices extends BaseController {
 					}
 				}
 				
-				$items_sub_total = $this->request->getPost('items_sub_total',FILTER_SANITIZE_STRING);
-				$discount_type = $this->request->getPost('discount_type',FILTER_SANITIZE_STRING);
-				$discount_figure = $this->request->getPost('discount_figure',FILTER_SANITIZE_STRING);
-				$discount_amount = $this->request->getPost('discount_amount',FILTER_SANITIZE_STRING);
-				$tax_type = $this->request->getPost('tax_type',FILTER_SANITIZE_STRING);
-				$tax_rate = $this->request->getPost('tax_rate',FILTER_SANITIZE_STRING);
-				$fgrand_total = $this->request->getPost('fgrand_total',FILTER_SANITIZE_STRING);
-				$invoice_note = $this->request->getPost('invoice_note',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$items_sub_total = $this->request->getPost('items_sub_total');
+				$discount_type = $this->request->getPost('discount_type');
+				$discount_figure = $this->request->getPost('discount_figure');
+				$discount_amount = $this->request->getPost('discount_amount');
+				$tax_type = $this->request->getPost('tax_type');
+				$tax_rate = $this->request->getPost('tax_rate');
+				$fgrand_total = $this->request->getPost('fgrand_total');
+				$invoice_note = $this->request->getPost('invoice_note');
+				$id = udecode($this->request->getPost('token'));
 							
 				$UsersModel = new UsersModel();
 				$ProjectsModel = new ProjectsModel();
@@ -947,20 +947,20 @@ class Invoices extends BaseController {
 				if ($result == TRUE) {
 					if($this->request->getPost('item_name')) {
 					$ik=0;
-					foreach($this->request->getPost('item_name',FILTER_SANITIZE_STRING) as $items){
+					foreach($this->request->getPost('item_name') as $items){
 		
 						/* get items info */
 						// item name
-						$item_name = $this->request->getPost('item_name',FILTER_SANITIZE_STRING);
+						$item_name = $this->request->getPost('item_name');
 						$iname = $item_name[$ik]; 
 						// item qty
-						$qty = $this->request->getPost('qty_hrs',FILTER_SANITIZE_STRING);
+						$qty = $this->request->getPost('qty_hrs');
 						$qtyhrs = $qty[$ik]; 
 						// item price
-						$unit_price = $this->request->getPost('unit_price',FILTER_SANITIZE_STRING);
+						$unit_price = $this->request->getPost('unit_price');
 						$price = $unit_price[$ik]; 
 						// item sub_total
-						$sub_total_item = $this->request->getPost('sub_total_item',FILTER_SANITIZE_STRING);
+						$sub_total_item = $this->request->getPost('sub_total_item');
 						$item_sub_total = $sub_total_item[$ik];
 						// add values  
 						$data3 = array(
@@ -999,7 +999,7 @@ class Invoices extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$record_id = udecode($this->request->getVar('record_id',FILTER_SANITIZE_STRING));
+			$record_id = udecode($this->request->getVar('record_id'));
 			$Return['csrf_hash'] = csrf_hash();
 			$InvoiceitemsModel = new InvoiceitemsModel();
 			$result = $InvoiceitemsModel->where('invoice_item_id', $record_id)->delete($record_id);
@@ -1184,9 +1184,9 @@ class Invoices extends BaseController {
 					}
 				}
 			} else {
-				$payment_method = $this->request->getPost('payment_method',FILTER_SANITIZE_STRING);	
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+				$payment_method = $this->request->getPost('payment_method');	
+				$status = $this->request->getPost('status');
+				$id = udecode($this->request->getPost('token'));	
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1224,7 +1224,7 @@ class Invoices extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$InvoicesModel = new InvoicesModel();
 			$UsersModel = new UsersModel();

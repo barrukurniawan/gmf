@@ -168,7 +168,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $events['event_id']?>',
 				unq: '0',
-				title: '<?php echo $events['event_title']?>',
+				title: '<?php echo esc($events['event_title'], 'js')?>',
 				start: '<?php echo $events['event_date']?>T<?php echo $events['event_time']?>',
 				color: '#1de9b6 !important'
 			},
@@ -179,7 +179,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $track_goal['tracking_id']?>',
 				unq: '0',
-				title: '<?php echo $track_goal['subject']?>',
+				title: '<?php echo esc($track_goal['subject'], 'js')?>',
 				start: '<?php echo $track_goal['start_date']?>',
 				end: '<?php echo $track_goal['end_date']?>',
 				urllink: '<?php echo site_url().'erp/goal-details/'.uencode($track_goal['tracking_id']);?>',
@@ -192,7 +192,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $holiday['holiday_id']?>',
 				unq: '0',
-				title: '<?php echo $holiday['event_name']?>',
+				title: '<?php echo esc($holiday['event_name'], 'js')?>',
 				start: '<?php echo $holiday['start_date']?>',
 				end: '<?php echo $holiday['end_date']?>',
 				color: '#dd8030 !important'
@@ -204,7 +204,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $invoice['invoice_number']?>',
 				unq: '0',
-				title: '<?php echo $invoice['invoice_number']?>',
+				title: '<?php echo esc($invoice['invoice_number'], 'js')?>',
 				start: '<?php echo $invoice['invoice_date']?>',
 				end: '<?php echo $invoice['invoice_date']?>',
 				urllink: '<?php echo site_url().'erp/invoice-detail/'.uencode($invoice['invoice_id']);?>',
@@ -225,7 +225,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $leave['leave_id']?>',
 				unq: '0',
-				title: '<?php echo $category_name?>',
+				title: '<?php echo esc($category_name, 'js')?>',
 				start: '<?php echo $leave['from_date']?>',
 				end: '<?php echo $leave['to_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($leave['leave_id']);?>',
@@ -238,7 +238,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $meeting['meeting_id']?>',
 				unq: '0',
-				title: '<?php echo $meeting['meeting_title']?>',
+				title: '<?php echo esc($meeting['meeting_title'], 'js')?>',
 				start: '<?php echo $meeting['meeting_date']?>T<?php echo $meeting['meeting_time']?>',
 				color: '#f44236 !important'
 			},
@@ -249,7 +249,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $project['project_id']?>',
 				unq: '0',
-				title: '<?php echo $project['title']?>',
+				title: '<?php echo esc($project['title'], 'js')?>',
 				start: '<?php echo $project['start_date']?>',
 				end: '<?php echo $project['end_date']?>',
 				urllink: '<?php echo site_url().'erp/project-detail/'.uencode($project['project_id']);?>',
@@ -262,7 +262,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $task['task_id']?>',
 				unq: '0',
-				title: '<?php echo $task['task_name']?>',
+				title: '<?php echo esc($task['task_name'], 'js')?>',
 				start: '<?php echo $task['start_date']?>',
 				end: '<?php echo $task['end_date']?>',
 				urllink: '<?php echo site_url().'erp/task-detail/'.uencode($task['task_id']);?>',
@@ -283,7 +283,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $training['training_id']?>',
 				unq: '0',
-				title: '<?php echo $pcategory_name?>',
+				title: '<?php echo esc($pcategory_name, 'js')?>',
 				start: '<?php echo $training['start_date']?>',
 				end: '<?php echo $training['finish_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($training['training_id']);?>',
@@ -296,7 +296,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $travel['travel_id']?>',
 				unq: '0',
-				title: '<?php echo $travel['visit_purpose']?>',
+				title: '<?php echo esc($travel['visit_purpose'], 'js')?>',
 				start: '<?php echo $travel['start_date']?>',
 				end: '<?php echo $travel['end_date']?>',
 				urllink: '<?php echo site_url().'erp/view-travel-info/'.uencode($travel['travel_id']);?>',

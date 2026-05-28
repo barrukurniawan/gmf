@@ -398,8 +398,8 @@ class Talent extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);	
-				$designation_id = $this->request->getPost('designation_id',FILTER_SANITIZE_STRING);			
+				$title = $this->request->getPost('title');	
+				$designation_id = $this->request->getPost('designation_id');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -420,7 +420,7 @@ class Talent extends BaseController {
 				$indicator_id = $KpiModel->insertID();
 				$Return['csrf_hash'] = csrf_hash();	
 				if ($result == TRUE) {
-					foreach($this->request->getPost('technical_competencies_value',FILTER_SANITIZE_STRING) as $key=>$tech_value){
+					foreach($this->request->getPost('technical_competencies_value') as $key=>$tech_value){
 						$data_ind = array(
 						'company_id' => $company_id,
 						'indicator_id' => $indicator_id,
@@ -430,7 +430,7 @@ class Talent extends BaseController {
 						);
 						$KpioptionsModel->insert($data_ind);
 					}
-					foreach($this->request->getPost('organizational_competencies_value',FILTER_SANITIZE_STRING) as $ikey=>$org_value){
+					foreach($this->request->getPost('organizational_competencies_value') as $ikey=>$org_value){
 						$data_org = array(
 						'company_id' => $company_id,
 						'indicator_id' => $indicator_id,
@@ -491,9 +491,9 @@ class Talent extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);	
-				$designation_id = $this->request->getPost('designation_id',FILTER_SANITIZE_STRING);		
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+				$title = $this->request->getPost('title');	
+				$designation_id = $this->request->getPost('designation_id');		
+				$id = udecode($this->request->getPost('token'));	
 				$data = [
 					'title' => $title,
 					'designation_id' => $designation_id
@@ -503,7 +503,7 @@ class Talent extends BaseController {
 				$result = $KpiModel->update($id,$data);
 				$Return['csrf_hash'] = csrf_hash();	
 				if ($result == TRUE) {
-					foreach($this->request->getPost('technical_competencies_value',FILTER_SANITIZE_STRING) as $key=>$tech_value){
+					foreach($this->request->getPost('technical_competencies_value') as $key=>$tech_value){
 						foreach($tech_value as $option_id => $star_data)
 						{
 							$data_ind = array(
@@ -513,7 +513,7 @@ class Talent extends BaseController {
 							$KpioptionsModel->update($key,$data_ind);
 						}
 					}
-					foreach($this->request->getPost('organizational_competencies_value',FILTER_SANITIZE_STRING) as $ikey=>$org_value){
+					foreach($this->request->getPost('organizational_competencies_value') as $ikey=>$org_value){
 						foreach($org_value as $org_option_id => $star_data_org)
 						{
 							$data_org = array(
@@ -580,10 +580,10 @@ class Talent extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);	
-				$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);	
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$remarks = $this->request->getPost('remarks',FILTER_SANITIZE_STRING);		
+				$title = $this->request->getPost('title');	
+				$employee_id = $this->request->getPost('employee_id');	
+				$month_year = $this->request->getPost('month_year');
+				$remarks = $this->request->getPost('remarks');		
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -606,7 +606,7 @@ class Talent extends BaseController {
 				$appraisal_id = $KpaModel->insertID();
 				$Return['csrf_hash'] = csrf_hash();	
 				if ($result == TRUE) {
-					foreach($this->request->getPost('technical_competencies_value',FILTER_SANITIZE_STRING) as $key=>$tech_value){
+					foreach($this->request->getPost('technical_competencies_value') as $key=>$tech_value){
 						$data_ind = array(
 						'company_id' => $company_id,
 						'appraisal_id' => $appraisal_id,
@@ -616,7 +616,7 @@ class Talent extends BaseController {
 						);
 						$KpaoptionsModel->insert($data_ind);
 					}
-					foreach($this->request->getPost('organizational_competencies_value',FILTER_SANITIZE_STRING) as $ikey=>$org_value){
+					foreach($this->request->getPost('organizational_competencies_value') as $ikey=>$org_value){
 						$data_org = array(
 						'company_id' => $company_id,
 						'appraisal_id' => $appraisal_id,
@@ -684,11 +684,11 @@ class Talent extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);	
-				$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);	
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$remarks = $this->request->getPost('remarks',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));		
+				$title = $this->request->getPost('title');	
+				$employee_id = $this->request->getPost('employee_id');	
+				$month_year = $this->request->getPost('month_year');
+				$remarks = $this->request->getPost('remarks');
+				$id = udecode($this->request->getPost('token'));		
 				
 				$data = [
 					'title' => $title,
@@ -702,7 +702,7 @@ class Talent extends BaseController {
 				
 				$Return['csrf_hash'] = csrf_hash();	
 				if ($result == TRUE) {
-					foreach($this->request->getPost('technical_competencies_value',FILTER_SANITIZE_STRING) as $key=>$tech_value){
+					foreach($this->request->getPost('technical_competencies_value') as $key=>$tech_value){
 						foreach($tech_value as $option_id => $star_data)
 						{
 							$data_ind = array(
@@ -712,7 +712,7 @@ class Talent extends BaseController {
 							$KpaoptionsModel->update($key,$data_ind);
 						}
 					}
-					foreach($this->request->getPost('organizational_competencies_value',FILTER_SANITIZE_STRING) as $ikey=>$org_value){
+					foreach($this->request->getPost('organizational_competencies_value') as $ikey=>$org_value){
 						foreach($org_value as $org_option_id => $star_data_org)
 						{
 							$data_org = array(
@@ -744,7 +744,7 @@ class Talent extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$KpiModel = new KpiModel();
 			$result = $KpiModel->where('performance_indicator_id', $id)->delete($id);
@@ -767,7 +767,7 @@ class Talent extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$KpaModel = new KpaModel();
 			$result = $KpaModel->where('performance_appraisal_id', $id)->delete($id);

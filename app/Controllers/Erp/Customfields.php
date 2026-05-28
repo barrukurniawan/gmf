@@ -201,13 +201,13 @@ class Customfields extends BaseController {
 					}
 				}
 			} else {
-				$module = $this->request->getPost('module',FILTER_SANITIZE_STRING);
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$field_label = $this->request->getPost('field_label',FILTER_SANITIZE_STRING);
-				$priority = $this->request->getPost('priority',FILTER_SANITIZE_STRING);
-				$validation = $this->request->getPost('validation',FILTER_SANITIZE_STRING);
-				$field_type = $this->request->getPost('field_type',FILTER_SANITIZE_STRING);
-				$column = $this->request->getPost('column',FILTER_SANITIZE_STRING);
+				$module = $this->request->getPost('module');
+				$name = $this->request->getPost('name');
+				$field_label = $this->request->getPost('field_label');
+				$priority = $this->request->getPost('priority');
+				$validation = $this->request->getPost('validation');
+				$field_type = $this->request->getPost('field_type');
+				$column = $this->request->getPost('column');
 
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -307,12 +307,12 @@ class Customfields extends BaseController {
 					}
 				}
 			} else {
-				$module = $this->request->getPost('module',FILTER_SANITIZE_STRING);
-				$field_label = $this->request->getPost('field_label',FILTER_SANITIZE_STRING);
-				$priority = $this->request->getPost('priority',FILTER_SANITIZE_STRING);
-				$validation = $this->request->getPost('validation',FILTER_SANITIZE_STRING);
-				$column = $this->request->getPost('column',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$module = $this->request->getPost('module');
+				$field_label = $this->request->getPost('field_label');
+				$priority = $this->request->getPost('priority');
+				$validation = $this->request->getPost('validation');
+				$column = $this->request->getPost('column');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				$data = [
@@ -366,7 +366,7 @@ class Customfields extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$Moduleattributes = new Moduleattributes();
 			$result = $Moduleattributes->where('custom_field_id', $id)->delete($id);

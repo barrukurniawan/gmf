@@ -41,7 +41,7 @@ $data = array();
             <?php $i=1;foreach($get_data as $r): ?>
             <li class="nav-item"><a href="#policy_<?= $r['policy_id'];?>" class="nav-link <?php if($i==1):?>active<?php else:?><?php endif;?>" data-toggle="tab"><i class="feather icon-check-square"></i><span>
               <h6>
-                <?= $r['title'];?>
+                <?= esc($r['title']);?>
               </h6>
               </span></a></li>
             <?php $i++;endforeach;?>
@@ -52,7 +52,7 @@ $data = array();
             <div class="tab-content">
               <?php $j=1;foreach($get_data as $r) { ?>
               <div class="tab-pane show <?php if($j==1):?>active<?php else:?><?php endif;?>" id="policy_<?php echo $r['policy_id'];?>">
-                <h5 class="mt-3"><?php echo $r['title'];?></h5>
+                <h5 class="mt-3"><?php echo esc($r['title']);?></h5>
                 <div><?php echo html_entity_decode($r['description']);?></div>
                 <?php if($r['attachment']!='' || $r['attachment']!='no-file'){?>
 				<?php

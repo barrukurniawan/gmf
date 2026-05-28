@@ -270,7 +270,7 @@ class Documents extends BaseController {
 					]
 				],
 				'document_file' => [
-					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
 					'errors' => [
 						'uploaded' => lang('Main.xin_error_field_text')
 					]
@@ -317,9 +317,9 @@ class Documents extends BaseController {
 				// $file_name = 'file_1.pdf'; // Define the new file name here
 				$document_file->move('public/uploads/system_documents/', $file_name);
 				
-				$department_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
-				$document_name = $this->request->getPost('document_name',FILTER_SANITIZE_STRING);
-				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);
+				$department_id = $this->request->getPost('department_id');
+				$document_name = $this->request->getPost('document_name');
+				$document_type = $this->request->getPost('document_type');
 				
 				
 				$UsersModel = new UsersModel();
@@ -394,7 +394,7 @@ class Documents extends BaseController {
 					]
 				],
 				'document_file' => [
-					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
 					'errors' => [
 						'uploaded' => lang('Main.xin_error_field_text')
 					]
@@ -430,10 +430,10 @@ class Documents extends BaseController {
 				$file_name = $document_file->getName();
 				$document_file->move('public/uploads/official_documents/');
 				
-				$license_name = $this->request->getPost('license_name',FILTER_SANITIZE_STRING);
-				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);
-				$expiry_date = $this->request->getPost('expiry_date',FILTER_SANITIZE_STRING);
-				$license_number = $this->request->getPost('license_number',FILTER_SANITIZE_STRING);
+				$license_name = $this->request->getPost('license_name');
+				$document_type = $this->request->getPost('document_type');
+				$expiry_date = $this->request->getPost('expiry_date');
+				$license_number = $this->request->getPost('license_number');
 				
 				
 				$UsersModel = new UsersModel();
@@ -526,7 +526,7 @@ class Documents extends BaseController {
 				// upload file
 				$validated = $this->validate([
 					'document_file' => [
-						'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+				'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
 						'errors' => [
 							'uploaded' => lang('Main.xin_error_field_text')
 						]
@@ -548,11 +548,11 @@ class Documents extends BaseController {
 					$document_file->move('public/uploads/official_documents/');
 				}
 				
-				$license_name = $this->request->getPost('license_name',FILTER_SANITIZE_STRING);
-				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);
-				$expiry_date = $this->request->getPost('expiry_date',FILTER_SANITIZE_STRING);
-				$license_number = $this->request->getPost('license_number',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$license_name = $this->request->getPost('license_name');
+				$document_type = $this->request->getPost('document_type');
+				$expiry_date = $this->request->getPost('expiry_date');
+				$license_number = $this->request->getPost('license_number');
+				$id = udecode($this->request->getPost('token'));
 				
 				if ($validated) {
 					$data = [
@@ -627,9 +627,9 @@ class Documents extends BaseController {
 					}
 				}
 			} else {				
-				$document_name = $this->request->getPost('document_name',FILTER_SANITIZE_STRING);
-				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$document_name = $this->request->getPost('document_name');
+				$document_type = $this->request->getPost('document_type');
+				$id = udecode($this->request->getPost('token'));
 
 				$data = [
 					'document_name'  => $document_name,
@@ -698,7 +698,7 @@ class Documents extends BaseController {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$DocumentsModel = new DocumentsModel();
 			$result = $DocumentsModel->where('document_id', $id)->delete($id);
@@ -721,7 +721,7 @@ class Documents extends BaseController {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$OfficialdocumentsModel = new OfficialdocumentsModel();
 			$result = $OfficialdocumentsModel->where('document_id', $id)->delete($id);

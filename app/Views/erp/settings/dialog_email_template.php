@@ -29,7 +29,7 @@ $result = $EmailtemplatesModel->where('template_id', $template_id)->first();
         <label for="name">
           <?= lang('Main.xin_template_name');?>
           <span class="text-danger">*</span></label>
-        <input class="form-control" name="name" type="text" value="<?php echo $result['name'];?>">
+        <input class="form-control" name="name" type="text" value="<?php echo esc($result['name'], 'attr')?>">
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ $result = $EmailtemplatesModel->where('template_id', $template_id)->first();
         <label for="subject">
           <?= lang('Main.xin_subject');?>
           <span class="text-danger">*</span></label>
-        <input class="form-control" name="subject" type="text" value="<?php echo $result['subject'];?>">
+        <input class="form-control" name="subject" type="text" value="<?php echo esc($result['subject'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-6">

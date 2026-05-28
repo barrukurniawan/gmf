@@ -106,9 +106,9 @@ class Complaints extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$complaint_date = $this->request->getPost('complaint_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);			
+				$title = $this->request->getPost('title');
+				$complaint_date = $this->request->getPost('complaint_date');
+				$description = $this->request->getPost('description');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -118,7 +118,7 @@ class Complaints extends BaseController {
 					$sup_user_id = $usession['sup_user_id'];
 					$company_id = $usession['sup_user_id'];
 				}
-				$complaint_against = implode(',',$this->request->getPost('complaint_against',FILTER_SANITIZE_STRING));
+				$complaint_against = implode(',',$this->request->getPost('complaint_against'));
 				$staff_ids = $complaint_against;
 				$data = [
 					'company_id'  => $company_id,
@@ -198,11 +198,11 @@ class Complaints extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$complaint_date = $this->request->getPost('complaint_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);			
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$title = $this->request->getPost('title');
+				$complaint_date = $this->request->getPost('complaint_date');
+				$description = $this->request->getPost('description');
+				$status = $this->request->getPost('status');			
+				$id = udecode($this->request->getPost('token'));
 				
 				$data = [
 					'title'  => $title,
@@ -327,7 +327,7 @@ class Complaints extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ComplaintsModel = new ComplaintsModel();
 			$result = $ComplaintsModel->where('complaint_id', $id)->delete($id);

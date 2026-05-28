@@ -175,14 +175,14 @@ class Department extends BaseController {
 					}
 				}
 			} else {
-				$department_name = $this->request->getPost('department_name',FILTER_SANITIZE_STRING);			
+				$department_name = $this->request->getPost('department_name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
 					$staff_id = 0;
 					$company_id = $user_info['company_id'];
 				} else {
-					$staff_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$staff_id = $this->request->getPost('employee_id');
 					$company_id = $usession['sup_user_id'];
 				}
 				if(empty($staff_id)){
@@ -242,20 +242,20 @@ class Department extends BaseController {
 					}
 				}
 			} else {
-				$department_name = $this->request->getPost('department_name',FILTER_SANITIZE_STRING);			
+				$department_name = $this->request->getPost('department_name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
 					$staff_id = 0;
 					$company_id = $user_info['company_id'];
 				} else {
-					$staff_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$staff_id = $this->request->getPost('employee_id');
 					$company_id = $usession['sup_user_id'];
 				}
 				if(empty($staff_id)){
 					$staff_id = 0;
 				}
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id'  => $company_id,
 					'department_name' => $department_name,
@@ -342,7 +342,7 @@ class Department extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$DepartmentModel = new DepartmentModel();
 			$result = $DepartmentModel->where('department_id', $id)->delete($id);

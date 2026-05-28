@@ -180,12 +180,12 @@ class Trainers extends BaseController {
 					}
 				}
 			} else {
-				$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-				$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-				$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-				$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-				$expertise = $this->request->getPost('expertise',FILTER_SANITIZE_STRING);
-				$address = $this->request->getPost('address',FILTER_SANITIZE_STRING);
+				$first_name = $this->request->getPost('first_name');
+				$last_name = $this->request->getPost('last_name');
+				$contact_number = $this->request->getPost('contact_number');
+				$email = $this->request->getPost('email');
+				$expertise = $this->request->getPost('expertise');
+				$address = $this->request->getPost('address');
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -278,13 +278,13 @@ class Trainers extends BaseController {
 					}
 				}
 			} else {
-				$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-				$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-				$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-				$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-				$expertise = $this->request->getPost('expertise',FILTER_SANITIZE_STRING);
-				$address = $this->request->getPost('address',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$first_name = $this->request->getPost('first_name');
+				$last_name = $this->request->getPost('last_name');
+				$contact_number = $this->request->getPost('contact_number');
+				$email = $this->request->getPost('email');
+				$expertise = $this->request->getPost('expertise');
+				$address = $this->request->getPost('address');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -345,7 +345,7 @@ class Trainers extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TrainersModel = new TrainersModel();
 			$result = $TrainersModel->where('trainer_id', $id)->delete($id);

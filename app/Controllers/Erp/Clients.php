@@ -402,7 +402,7 @@ class Clients extends BaseController {
 		$SystemModel = new SystemModel();
 		$CountryModel = new CountryModel();
 		
-		$lead_id = udecode($this->request->getVar('xlead_id',FILTER_SANITIZE_STRING));
+		$lead_id = udecode($this->request->getVar('xlead_id'));
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		if($user_info['user_type'] == 'staff'){
 			$followup = $LeadsfollowupModel->where('company_id',$user_info['company_id'])->where('lead_id',$lead_id)->orderBy('followup_id', 'ASC')->findAll();
@@ -479,9 +479,9 @@ class Clients extends BaseController {
 					}
 				}
 			} else {
-				$lead_id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
-				$next_follow_up = $this->request->getPost('next_follow_up',FILTER_SANITIZE_STRING);	
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);		
+				$lead_id = udecode($this->request->getPost('token'));
+				$next_follow_up = $this->request->getPost('next_follow_up');	
+				$description = $this->request->getPost('description');		
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -550,9 +550,9 @@ class Clients extends BaseController {
 					}
 				}
 			} else {
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
-				$next_follow_up = $this->request->getPost('next_follow_up',FILTER_SANITIZE_STRING);	
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);		
+				$id = udecode($this->request->getPost('token'));
+				$next_follow_up = $this->request->getPost('next_follow_up');	
+				$description = $this->request->getPost('description');		
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				$data = [
@@ -665,13 +665,13 @@ class Clients extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$password = $this->request->getPost('password',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');
+			$password = $this->request->getPost('password');
+			$contact_number = $this->request->getPost('contact_number');
+			$gender = $this->request->getPost('gender');
 			$options = array('cost' => 12);
 			$password_hash = password_hash($password, PASSWORD_BCRYPT, $options);
 			
@@ -819,11 +819,11 @@ class Clients extends BaseController {
 			}
 			
 				
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$contact_number = $this->request->getPost('contact_number');
+			$gender = $this->request->getPost('gender');
 			
 			$UsersModel = new UsersModel();
 			$LeadsModel = new LeadsModel();
@@ -926,18 +926,18 @@ class Clients extends BaseController {
 				$this->output($Return);
 			}
 
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$contact_number = $this->request->getPost('contact_number');
+			$country = $this->request->getPost('country');
+			$gender = $this->request->getPost('gender');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$city = $this->request->getPost('city');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
+			$id = udecode($this->request->getPost('token'));	
 			$data = [
 				'first_name' => $first_name,
 				'last_name'  => $last_name,
@@ -1035,20 +1035,20 @@ class Clients extends BaseController {
 				$this->output($Return);
 			}
 
-			$first_name = $this->request->getPost('first_name',FILTER_SANITIZE_STRING);
-			$last_name = $this->request->getPost('last_name',FILTER_SANITIZE_STRING);
-			$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-			$username = $this->request->getPost('username',FILTER_SANITIZE_STRING);
-			$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-			$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-			$gender = $this->request->getPost('gender',FILTER_SANITIZE_STRING);
-			$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-			$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-			$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-			$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+			$first_name = $this->request->getPost('first_name');
+			$last_name = $this->request->getPost('last_name');
+			$email = $this->request->getPost('email');
+			$username = $this->request->getPost('username');
+			$contact_number = $this->request->getPost('contact_number');
+			$country = $this->request->getPost('country');
+			$gender = $this->request->getPost('gender');
+			$address_1 = $this->request->getPost('address_1');
+			$address_2 = $this->request->getPost('address_2');
+			$city = $this->request->getPost('city');
+			$state = $this->request->getPost('state');
+			$zipcode = $this->request->getPost('zipcode');
+			$status = $this->request->getPost('status');
+			$id = udecode($this->request->getPost('token'));	
 			$data = [
 				'first_name' => $first_name,
 				'last_name'  => $last_name,
@@ -1110,8 +1110,8 @@ class Clients extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+			$status = $this->request->getPost('status');
+			$id = udecode($this->request->getPost('token'));	
 			$data = [
 				'is_active'  => $status,
 			];
@@ -1166,7 +1166,7 @@ class Clients extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			if ($validated) {
 				$UsersModel = new UsersModel();
 				$Return['result'] = lang('Main.xin_profile_picture_success_updated');
@@ -1221,7 +1221,7 @@ class Clients extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			if ($validated) {
 				$LeadsModel = new LeadsModel();
 				$Return['result'] = lang('Main.xin_profile_picture_success_updated');
@@ -1275,7 +1275,7 @@ class Clients extends BaseController {
 			$validation->withRequest($this->request)->run();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 			//check error
-			$new_password = $this->request->getPost('new_password',FILTER_SANITIZE_STRING);
+			$new_password = $this->request->getPost('new_password');
 			if($validation->hasError('new_password')){
 				$Return['error'] = $validation->getError('new_password');
 			} elseif($validation->hasError('confirm_password')){
@@ -1288,7 +1288,7 @@ class Clients extends BaseController {
 			
 			$options = array('cost' => 12);
 			$password_hash = password_hash($new_password, PASSWORD_BCRYPT, $options);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'password' => $password_hash,
 			];
@@ -1342,7 +1342,7 @@ class Clients extends BaseController {
 			$validation->withRequest($this->request)->run();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 			//check error
-			$new_password = $this->request->getPost('new_password',FILTER_SANITIZE_STRING);
+			$new_password = $this->request->getPost('new_password');
 			if($validation->hasError('new_password')){
 				$Return['error'] = $validation->getError('new_password');
 			} elseif($validation->hasError('confirm_password')){
@@ -1355,7 +1355,7 @@ class Clients extends BaseController {
 			
 			$options = array('cost' => 12);
 			$password_hash = password_hash($new_password, PASSWORD_BCRYPT, $options);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'password' => $password_hash,
 			];
@@ -1383,10 +1383,10 @@ class Clients extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');	
-		if ($this->request->getPost('type',FILTER_SANITIZE_STRING) === 'edit_record') {
+		if ($this->request->getPost('type') === 'edit_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();	
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$data = [
 				'status'  => 2,
 			];
@@ -1488,7 +1488,7 @@ class Clients extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$UsersModel = new UsersModel();
 			$result = $UsersModel->where('user_id', $id)->delete($id);
@@ -1509,7 +1509,7 @@ class Clients extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$LeadsModel = new LeadsModel();
 			$result = $LeadsModel->where('lead_id', $id)->delete($id);
@@ -1530,7 +1530,7 @@ class Clients extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$LeadsfollowupModel = new LeadsfollowupModel();
 			$result = $LeadsfollowupModel->where('followup_id', $id)->delete($id);

@@ -459,6 +459,9 @@ class Products extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');	
+		if(!$session->has('sup_username')){ 
+			return redirect()->to(site_url('erp/login'));
+		}
 		if ($this->request->getPost('type') === 'add_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
@@ -541,22 +544,27 @@ class Products extends BaseController {
 			} else {
 				// upload file
 				$product_image = $this->request->getFile('product_image');
-				$file_name = $product_image->getName();
+				$file_name = $product_image->getRandomName();
+				if (!validate_file_extension($product_image, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
 				$product_image->move('public/uploads/products/');
 				
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$category = $this->request->getPost('category',FILTER_SANITIZE_STRING);
-				$warehouse = $this->request->getPost('warehouse',FILTER_SANITIZE_STRING);
-				$barcode_type = $this->request->getPost('barcode_type',FILTER_SANITIZE_STRING);
-				$barcode = $this->request->getPost('barcode',FILTER_SANITIZE_STRING);
-				$sku = $this->request->getPost('sku',FILTER_SANITIZE_STRING);
-				$serial_number = $this->request->getPost('serial_number',FILTER_SANITIZE_STRING);
-				$qty = $this->request->getPost('qty',FILTER_SANITIZE_STRING);
-				$reorder_stock = $this->request->getPost('reorder_stock',FILTER_SANITIZE_STRING);
-				$expiration_date = $this->request->getPost('expiration_date',FILTER_SANITIZE_STRING);
-				$purchase_price = $this->request->getPost('purchase_price',FILTER_SANITIZE_STRING);
-				$selling_price = $this->request->getPost('selling_price',FILTER_SANITIZE_STRING);
-				$product_description = $this->request->getPost('product_description',FILTER_SANITIZE_STRING);
+				$name = $this->request->getPost('name');
+				$category = $this->request->getPost('category');
+				$warehouse = $this->request->getPost('warehouse');
+				$barcode_type = $this->request->getPost('barcode_type');
+				$barcode = $this->request->getPost('barcode');
+				$sku = $this->request->getPost('sku');
+				$serial_number = $this->request->getPost('serial_number');
+				$qty = $this->request->getPost('qty');
+				$reorder_stock = $this->request->getPost('reorder_stock');
+				$expiration_date = $this->request->getPost('expiration_date');
+				$purchase_price = $this->request->getPost('purchase_price');
+				$selling_price = $this->request->getPost('selling_price');
+				$product_description = $this->request->getPost('product_description');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -640,7 +648,7 @@ class Products extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
 			$ProductsModel = new ProductsModel();
 			if ($validated) {
 				$data = [
@@ -739,19 +747,19 @@ class Products extends BaseController {
 					}
 				}
 			} else {				
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$category = $this->request->getPost('category',FILTER_SANITIZE_STRING);
-				$warehouse = $this->request->getPost('warehouse',FILTER_SANITIZE_STRING);
-				$barcode_type = $this->request->getPost('barcode_type',FILTER_SANITIZE_STRING);
-				$barcode = $this->request->getPost('barcode',FILTER_SANITIZE_STRING);
-				$sku = $this->request->getPost('sku',FILTER_SANITIZE_STRING);
-				$serial_number = $this->request->getPost('serial_number',FILTER_SANITIZE_STRING);
-				$reorder_stock = $this->request->getPost('reorder_stock',FILTER_SANITIZE_STRING);
-				$expiration_date = $this->request->getPost('expiration_date',FILTER_SANITIZE_STRING);
-				$purchase_price = $this->request->getPost('purchase_price',FILTER_SANITIZE_STRING);
-				$selling_price = $this->request->getPost('selling_price',FILTER_SANITIZE_STRING);
-				$product_description = $this->request->getPost('product_description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$name = $this->request->getPost('name');
+				$category = $this->request->getPost('category');
+				$warehouse = $this->request->getPost('warehouse');
+				$barcode_type = $this->request->getPost('barcode_type');
+				$barcode = $this->request->getPost('barcode');
+				$sku = $this->request->getPost('sku');
+				$serial_number = $this->request->getPost('serial_number');
+				$reorder_stock = $this->request->getPost('reorder_stock');
+				$expiration_date = $this->request->getPost('expiration_date');
+				$purchase_price = $this->request->getPost('purchase_price');
+				$selling_price = $this->request->getPost('selling_price');
+				$product_description = $this->request->getPost('product_description');
+				$id = udecode($this->request->getPost('token'));
 				
 				$UsersModel = new UsersModel();
 				$MainModel = new MainModel();
@@ -871,8 +879,8 @@ class Products extends BaseController {
 					}
 				}
 			} else {
-				$product_rating = $this->request->getPost('product_rating',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$product_rating = $this->request->getPost('product_rating');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'product_rating' => $product_rating,
 				];
@@ -920,7 +928,7 @@ class Products extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ProductsModel = new ProductsModel();
 			$result = $ProductsModel->where('product_id', $id)->delete($id);

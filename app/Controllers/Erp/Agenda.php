@@ -738,11 +738,7 @@ class Agenda extends BaseController {
 			return redirect()->to(site_url('erp/login'));
 		}		
 		$UsersModel = new UsersModel();
-		$config         = new \Config\Encryption();
-		$config->key    = 'aBigsecret_ofAtleast32Characters';
-		$config->driver = 'OpenSSL';
-		
-		$encrypter = \Config\Services::encrypter($config);
+		$encrypter = \Config\Services::encrypter();
 		$RolesModel = new RolesModel();
 		$SystemModel = new SystemModel();
 		$ContractModel = new ContractModel();

@@ -176,16 +176,21 @@ class Awards extends BaseController {
 			} else {
 				// upload file
 				$award_picture = $this->request->getFile('award_picture');
-				$file_name = $award_picture->getName();
+				if (!validate_file_extension($award_picture, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $award_picture->getRandomName();
 				$award_picture->move('public/uploads/awards/');
 				
-				$award_type_id = $this->request->getPost('award_type_id',FILTER_SANITIZE_STRING);
-				$award_date = $this->request->getPost('award_date',FILTER_SANITIZE_STRING);
-				$gift = $this->request->getPost('gift',FILTER_SANITIZE_STRING);
-				$cash = $this->request->getPost('cash',FILTER_SANITIZE_STRING);
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$award_information = $this->request->getPost('award_information',FILTER_SANITIZE_STRING);
+				$award_type_id = $this->request->getPost('award_type_id');
+				$award_date = $this->request->getPost('award_date');
+				$gift = $this->request->getPost('gift');
+				$cash = $this->request->getPost('cash');
+				$month_year = $this->request->getPost('month_year');
+				$description = $this->request->getPost('description');
+				$award_information = $this->request->getPost('award_information');
 				
 				$UsersModel = new UsersModel();
 				$SystemModel = new SystemModel();
@@ -204,7 +209,7 @@ class Awards extends BaseController {
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',1)->orderBy('custom_field_id', 'ASC')->countAllResults();
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',1)->orderBy('custom_field_id', 'ASC')->findAll();
 				} else {
-					$staff_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$staff_id = $this->request->getPost('employee_id');
 					$company_id = $usession['sup_user_id'];
 					$company_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',1)->orderBy('custom_field_id', 'ASC')->countAllResults();
@@ -371,15 +376,15 @@ class Awards extends BaseController {
 					$award_picture->move('public/uploads/awards/');
 				}
 				
-				$award_type_id = $this->request->getPost('award_type_id',FILTER_SANITIZE_STRING);
-				$award_date = $this->request->getPost('award_date',FILTER_SANITIZE_STRING);
-				$gift = $this->request->getPost('gift',FILTER_SANITIZE_STRING);
-				$cash = $this->request->getPost('cash',FILTER_SANITIZE_STRING);
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$award_information = $this->request->getPost('award_information',FILTER_SANITIZE_STRING);
-				$associated_goals = implode(',',$this->request->getPost('associated_goals',FILTER_SANITIZE_STRING));
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$award_type_id = $this->request->getPost('award_type_id');
+				$award_date = $this->request->getPost('award_date');
+				$gift = $this->request->getPost('gift');
+				$cash = $this->request->getPost('cash');
+				$month_year = $this->request->getPost('month_year');
+				$description = $this->request->getPost('description');
+				$award_information = $this->request->getPost('award_information');
+				$associated_goals = implode(',',$this->request->getPost('associated_goals'));
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$Moduleattributes = new Moduleattributes();
 				$Moduleattributesval = new Moduleattributesval();
@@ -578,7 +583,7 @@ class Awards extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$AwardsModel = new AwardsModel();
 			$result = $AwardsModel->where('award_id', $id)->delete($id);

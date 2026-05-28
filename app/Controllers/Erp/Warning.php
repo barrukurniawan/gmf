@@ -132,14 +132,19 @@ class Warning extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
+				if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $attachment->getRandomName();
 				$attachment->move('public/uploads/warning/');
 				
-				$warning_type = $this->request->getPost('warning_type',FILTER_SANITIZE_STRING);
-				$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);
-				$warning_date = $this->request->getPost('warning_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$warning_to = $this->request->getPost('warning_to',FILTER_SANITIZE_STRING);
+				$warning_type = $this->request->getPost('warning_type');
+				$subject = $this->request->getPost('subject');
+				$warning_date = $this->request->getPost('warning_date');
+				$description = $this->request->getPost('description');
+				$warning_to = $this->request->getPost('warning_to');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -226,10 +231,10 @@ class Warning extends BaseController {
 					}
 				}
 			} else {				
-				$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);
-				$warning_date = $this->request->getPost('warning_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$subject = $this->request->getPost('subject');
+				$warning_date = $this->request->getPost('warning_date');
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				
 				$data = [
 					'warning_date'  => $warning_date,
@@ -369,7 +374,7 @@ class Warning extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$WarningModel = new WarningModel();
 			$result = $WarningModel->where('warning_id', $id)->delete($id);

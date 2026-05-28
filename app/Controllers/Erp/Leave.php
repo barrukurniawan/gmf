@@ -315,13 +315,13 @@ class Leave extends BaseController {
 						]
 					],
 				]);
-				$leave_type = $this->request->getPost('leave_type',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
-				$leave_half_day = $this->request->getPost('leave_half_day',FILTER_SANITIZE_STRING);
-				$remarks = $this->request->getPost('remarks',FILTER_SANITIZE_STRING);
-				$luser_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+				$leave_type = $this->request->getPost('leave_type');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$reason = $this->request->getPost('reason');
+				$leave_half_day = $this->request->getPost('leave_half_day');
+				$remarks = $this->request->getPost('remarks');
+				$luser_id = $this->request->getPost('employee_id');
 				$UsersModel = new UsersModel();
 				$ConstantsModel = new ConstantsModel();
 				$leave_user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -367,7 +367,7 @@ class Leave extends BaseController {
 					$company_id = $user_info['company_id'];
 					$company_info = $UsersModel->where('company_id', $company_id)->first();
 				} else {
-					$staff_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$staff_id = $this->request->getPost('employee_id');
 					$company_id = $usession['sup_user_id'];
 					$company_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				}
@@ -380,7 +380,12 @@ class Leave extends BaseController {
 				}
 				if ($validated) {
 					$attachment = $this->request->getFile('attachment');
-					$file_name = $attachment->getName();
+					if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+						$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+						$this->output($Return);
+						exit;
+					}
+					$file_name = $attachment->getRandomName();
 					$attachment->move('public/uploads/leave/');
 					$data = [
 						'company_id' => $company_id,
@@ -547,9 +552,9 @@ class Leave extends BaseController {
 					}
 				}
 			} else {
-				$remarks = $this->request->getPost('remarks',FILTER_SANITIZE_STRING);	
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);	
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+				$remarks = $this->request->getPost('remarks');	
+				$reason = $this->request->getPost('reason');	
+				$id = udecode($this->request->getPost('token'));	
 				$data = [
 					'remarks' => $remarks,
 					'reason'  => $reason
@@ -608,9 +613,9 @@ class Leave extends BaseController {
 					}
 				}
 			} else {
-				$remarks = $this->request->getPost('remarks',FILTER_SANITIZE_STRING);	
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);	
-				$id = udecode($this->request->getPost('token_status',FILTER_SANITIZE_STRING));	
+				$remarks = $this->request->getPost('remarks');	
+				$status = $this->request->getPost('status');	
+				$id = udecode($this->request->getPost('token_status'));	
 				$data = [
 					'remarks' => $remarks,
 					'status'  => $status
@@ -740,7 +745,7 @@ class Leave extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$LeaveModel = new LeaveModel();
 			$result = $LeaveModel->where('leave_id', $id)->delete($id);

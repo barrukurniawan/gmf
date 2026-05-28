@@ -218,15 +218,15 @@ class Visitors extends BaseController {
 					}
 				}
 			} else {
-				$department_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
-				$visit_purpose = $this->request->getPost('visit_purpose',FILTER_SANITIZE_STRING);
-				$visitor_name = $this->request->getPost('visitor_name',FILTER_SANITIZE_STRING);
-				$visit_date = $this->request->getPost('visit_date',FILTER_SANITIZE_STRING);
-				$check_in = $this->request->getPost('check_in',FILTER_SANITIZE_STRING);
-				$phone = $this->request->getPost('phone',FILTER_SANITIZE_STRING);
-				$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-				$address = $this->request->getPost('address',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
+				$department_id = $this->request->getPost('department_id');
+				$visit_purpose = $this->request->getPost('visit_purpose');
+				$visitor_name = $this->request->getPost('visitor_name');
+				$visit_date = $this->request->getPost('visit_date');
+				$check_in = $this->request->getPost('check_in');
+				$phone = $this->request->getPost('phone');
+				$email = $this->request->getPost('email');
+				$address = $this->request->getPost('address');
+				$description = $this->request->getPost('description');
 				
 								
 				$UsersModel = new UsersModel();
@@ -354,17 +354,17 @@ class Visitors extends BaseController {
 					}
 				}
 			} else {
-				$department_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
-				$visit_purpose = $this->request->getPost('visit_purpose',FILTER_SANITIZE_STRING);
-				$visitor_name = $this->request->getPost('visitor_name',FILTER_SANITIZE_STRING);
-				$visit_date = $this->request->getPost('visit_date',FILTER_SANITIZE_STRING);
-				$check_in = $this->request->getPost('check_in',FILTER_SANITIZE_STRING);
-				$check_out = $this->request->getPost('check_out',FILTER_SANITIZE_STRING);
-				$phone = $this->request->getPost('phone',FILTER_SANITIZE_STRING);
-				$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
-				$address = $this->request->getPost('address',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$department_id = $this->request->getPost('department_id');
+				$visit_purpose = $this->request->getPost('visit_purpose');
+				$visitor_name = $this->request->getPost('visitor_name');
+				$visit_date = $this->request->getPost('visit_date');
+				$check_in = $this->request->getPost('check_in');
+				$check_out = $this->request->getPost('check_out');
+				$phone = $this->request->getPost('phone');
+				$email = $this->request->getPost('email');
+				$address = $this->request->getPost('address');
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 								
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -429,7 +429,7 @@ class Visitors extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$VisitorsModel = new VisitorsModel();
 			$result = $VisitorsModel->where('visitor_id', $id)->delete($id);

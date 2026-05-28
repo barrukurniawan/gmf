@@ -95,7 +95,7 @@ if($request->getGet('data') === 'payroll' && $request->getGet('field_id')){
         <div class="input-group mb-3"> <span class="input-group-prepend">
         <label class="input-group-text"><i class="fas fa-money-check"></i></label>
         </span>
-        <input type="text" class="form-control" placeholder="<?= lang('Employees.xin_basic_salary');?>" readonly="readonly" value="<?php echo $ibasic_salary;?>">
+        <input type="text" class="form-control" placeholder="<?= lang('Employees.xin_basic_salary');?>" readonly="readonly" value="<?php echo esc($ibasic_salary, 'attr')?>">
       </div>
       </div>
     </div>

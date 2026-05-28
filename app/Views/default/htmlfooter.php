@@ -349,7 +349,7 @@ $user_info = $UsersModel->where('user_id', $session['sup_user_id'])->first();
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script> 
     <script type="text/javascript">
 	//set your publishable key
-	Stripe.setPublishableKey('<?= $xin_system['stripe_publishable_key'];?>');
+	Stripe.setPublishableKey('<?= esc($xin_system['stripe_publishable_key'], 'js');?>');
 	//callback to handle the response from stripe
 	function stripeResponseHandler(status, response) {
 		if (response.error) {

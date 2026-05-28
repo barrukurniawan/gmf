@@ -276,12 +276,12 @@ class Trackgoals extends BaseController {
 					}
 				}
 			} else {
-				$tracking_type = $this->request->getPost('tracking_type',FILTER_SANITIZE_STRING);
-				$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);
-				$target_achiement = $this->request->getPost('target_achiement',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
+				$tracking_type = $this->request->getPost('tracking_type');
+				$subject = $this->request->getPost('subject');
+				$target_achiement = $this->request->getPost('target_achiement');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$description = $this->request->getPost('description');
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -377,15 +377,15 @@ class Trackgoals extends BaseController {
 					}
 				}
 			} else {
-				$tracking_type = $this->request->getPost('tracking_type',FILTER_SANITIZE_STRING);
-				$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);
-				$target_achiement = $this->request->getPost('target_achiement',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$progres_val = $this->request->getPost('progres_val',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$tracking_type = $this->request->getPost('tracking_type');
+				$subject = $this->request->getPost('subject');
+				$target_achiement = $this->request->getPost('target_achiement');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$description = $this->request->getPost('description');
+				$status = $this->request->getPost('status');
+				$progres_val = $this->request->getPost('progres_val');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'tracking_type_id' => $tracking_type,
 					'start_date'  => $start_date,
@@ -443,8 +443,8 @@ class Trackgoals extends BaseController {
 					}
 				}
 			} else {
-				$goal_rating = $this->request->getPost('goal_rating',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$goal_rating = $this->request->getPost('goal_rating');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'goal_rating' => $goal_rating,
 				];
@@ -476,10 +476,10 @@ class Trackgoals extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
 			
-			$goal_work = $this->request->getPost('goal_work',FILTER_SANITIZE_STRING);	
+			$goal_work = $this->request->getPost('goal_work');	
 			//$goal_work = implode(',',$this->request->getPost('goal_work'));
 			$goal_work = serialize($goal_work);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+			$id = udecode($this->request->getPost('token'));	
 			$UsersModel = new UsersModel();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 			
@@ -511,7 +511,7 @@ class Trackgoals extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TrackgoalsModel = new TrackgoalsModel();
 			$result = $TrackgoalsModel->where('tracking_id', $id)->delete($id);

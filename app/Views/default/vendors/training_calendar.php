@@ -97,7 +97,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $tpending['training_id']?>',
 				unq: '0',
-				title: '<?php echo $ptype['category_name']?>',
+				title: '<?php echo esc($ptype['category_name'], 'js')?>',
 				start: '<?php echo $tpending['start_date']?>',
 				end: '<?php echo $tpending['finish_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($tpending['training_id']);?>',
@@ -109,7 +109,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $tstarted['training_id']?>',
 				unq: '0',
-				title: '<?php echo $stype['category_name']?>',
+				title: '<?php echo esc($stype['category_name'], 'js')?>',
 				start: '<?php echo $tstarted['start_date']?>',
 				end: '<?php echo $tstarted['finish_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($tstarted['training_id']);?>',
@@ -121,7 +121,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $tcompleted['training_id']?>',
 				unq: '0',
-				title: '<?php echo $ctype['category_name']?>',
+				title: '<?php echo esc($ctype['category_name'], 'js')?>',
 				start: '<?php echo $tcompleted['start_date']?>',
 				end: '<?php echo $tcompleted['finish_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($tcompleted['training_id']);?>',
@@ -133,7 +133,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $tterminated['training_id']?>',
 				unq: '0',
-				title: '<?php echo $ctype['category_name']?>',
+				title: '<?php echo esc($ctype['category_name'], 'js')?>',
 				start: '<?php echo $tterminated['start_date']?>',
 				end: '<?php echo $tterminated['finish_date']?>',
 				urllink: '<?php echo site_url().'erp/training-details/'.uencode($tterminated['training_id']);?>',

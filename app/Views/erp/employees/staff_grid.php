@@ -402,7 +402,7 @@ $employee_id = generate_random_employeeid();
             <div class="col text-left pb-3">
               <?= $status;?>
             </div>
-            <div class="col"><img class="img-radius img-fluid wid-80" src="<?= base_url().'/public/uploads/users/thumb/'.$r['profile_photo'];?>" alt="<?= $r['first_name'].' '.$r['last_name'];?>"></div>
+            <div class="col"><img class="img-radius img-fluid wid-80" src="<?= base_url().'/public/uploads/users/thumb/'.$r['profile_photo'];?>" alt="<?= esc($r['first_name'].' '.$r['last_name'], 'attr');?>"></div>
             <div class="col text-right pb-3">
               <?php if(in_array('staff4',staff_role_resource()) || in_array('staff5',staff_role_resource()) || $user_info['user_type'] == 'company') { ?>
               <div class="dropdown"> <a class="drp-icon dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
@@ -425,16 +425,16 @@ $employee_id = generate_random_employeeid();
         </div>
         <div class="text-center"> <a href="#!" data-toggle="modal" data-target="#modal-report">
           <h4 class="mb-1 mt-3">
-            <?= $r['first_name'].' '.$r['last_name'];?>
+            <?= esc($r['first_name'].' '.$r['last_name']);?>
           </h4>
           </a>
           <p class="mb-3 text-muted">
-            <?= $designation_name;?>
+            <?= esc($designation_name);?>
           </p>
           <p class="mb-1"><b>
             <?= lang('Main.xin_email');?>
-            : </b><a href="mailto:<?= $r['email'];?>">
-            <?= $r['email'];?>
+            : </b><a href="mailto:<?= esc($r['email'], 'attr');?>">
+            <?= esc($r['email']);?>
             </a></p>
           <p class="mb-0"><b>
             <?= lang('Main.xin_employee_role');?>

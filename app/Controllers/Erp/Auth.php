@@ -72,8 +72,8 @@ class Auth extends BaseController
 					}
 				}
 			} else {
-				$username = $this->request->getPost('iusername',FILTER_SANITIZE_STRING);
-				$password = $this->request->getPost('password',FILTER_SANITIZE_STRING);		
+				$username = $this->request->getPost('iusername');
+				$password = $this->request->getPost('password');		
 				
 				$data = array(
 					'username' => $username,
@@ -164,7 +164,7 @@ class Auth extends BaseController
 			$iuser = $UsersModel->where('email', $email, 'is_active',1)->first();
 			$username = $iuser['username'];
 			$options = array('cost' => 12);
-			$password = 'Hu2k4JHik42ol4hH32';
+			$password = bin2hex(random_bytes(6));
 			$password_hash = password_hash($password, PASSWORD_BCRYPT, $options);
 			
 			$xin_system = $SystemModel->where('setting_id', 1)->first();
@@ -220,7 +220,7 @@ class Auth extends BaseController
 					}
 				}
 			} else {
-				$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
+				$email = $this->request->getPost('email');
 				$check_user = $UsersModel->where('email', $email, 'is_active',1)->countAllResults();
 				if($check_user > 0){
 					$Return['result'] = lang('Main.xin_error_msg__available');
@@ -293,7 +293,7 @@ class Auth extends BaseController
 				$throttler = \Config\Services::throttler();
 				$is_allow = $throttler->check('auth',5,MINUTE);
 				$iuser = $UsersModel->where('user_id', $usession['sup_user_id'], 'is_active',1)->first();
-				$password = $this->request->getPost('password',FILTER_SANITIZE_STRING);
+				$password = $this->request->getPost('password');
 				$username = $iuser['username'];
 				$user_info = $UsersModel->where('username', $username)->where('is_active',1)->first();
 				$data = array(

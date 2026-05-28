@@ -33,11 +33,11 @@ $result = $PayeesModel->where('entity_id', $entity_id)->where('type','payer')->f
     <div class="col-md-12">
       <div class="form-group">
         <label for="payer_name"><?= lang('xin_acc_payer');?></label>
-        <input type="text" class="form-control" name="name" placeholder="<?= lang('xin_acc_payer_name');?>" value="<?php echo $result['name'];?>">
+        <input type="text" class="form-control" name="name" placeholder="<?= lang('xin_acc_payer_name');?>" value="<?php echo esc($result['name'], 'attr')?>">
       </div>
       <div class="form-group">
         <label for="contact_number"><?= lang('xin_contact_number');?></label>
-        <input type="text" class="form-control" name="contact_number" placeholder="<?= lang('xin_contact_number');?>" value="<?php echo $result['contact_number'];?>">
+        <input type="text" class="form-control" name="contact_number" placeholder="<?= lang('xin_contact_number');?>" value="<?php echo esc($result['contact_number'], 'attr')?>">
       </div>
     </div>
   </div>
@@ -111,11 +111,11 @@ $result = $PayeesModel->where('entity_id', $entity_id)->where('type','payee')->f
     <div class="col-md-12">
       <div class="form-group">
         <label for="payee_name"><?= lang('xin_acc_payee');?></label>
-        <input type="text" class="form-control" name="name" placeholder="<?= lang('xin_acc_payee_name');?>" value="<?php echo $result['name'];?>">
+        <input type="text" class="form-control" name="name" placeholder="<?= lang('xin_acc_payee_name');?>" value="<?php echo esc($result['name'], 'attr')?>">
       </div>
       <div class="form-group">
         <label for="contact_number"><?= lang('xin_contact_number');?></label>
-        <input type="number" class="form-control" name="contact_number" placeholder="<?= lang('xin_contact_number');?>" value="<?php echo $result['contact_number'];?>">
+        <input type="number" class="form-control" name="contact_number" placeholder="<?= lang('xin_contact_number');?>" value="<?php echo esc($result['contact_number'], 'attr')?>">
       </div>
     </div>
   </div>

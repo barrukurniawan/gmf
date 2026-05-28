@@ -531,7 +531,7 @@ class Projects extends BaseController {
 		$SystemModel = new SystemModel();
 		//$AssetsModel = new AssetsModel();
 		$ProjecttimelogsModel = new ProjecttimelogsModel();
-		$segment_id = $this->request->getVar('project_val',FILTER_SANITIZE_STRING);
+		$segment_id = $this->request->getVar('project_val');
 		$ifield_id = udecode($segment_id);
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		if($user_info['user_type'] == 'staff'){
@@ -605,7 +605,7 @@ class Projects extends BaseController {
 		$UsersModel = new UsersModel();
 		$SystemModel = new SystemModel();
 		$TasksModel = new TasksModel();		
-		$segment_id = $this->request->getVar('project_val',FILTER_SANITIZE_STRING);
+		$segment_id = $this->request->getVar('project_val');
 		$ifield_id = udecode($segment_id);
 		
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -793,7 +793,7 @@ class Projects extends BaseController {
 		$SystemModel = new SystemModel();
 		//$AssetsModel = new AssetsModel();
 		$ProjectsModel = new ProjectsModel();
-		$client_id = udecode($this->request->getVar('client_id',FILTER_SANITIZE_STRING));
+		$client_id = udecode($this->request->getVar('client_id'));
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		if($user_info['user_type'] == 'staff'){
 			$company_id = $user_info['company_id'];
@@ -934,15 +934,15 @@ class Projects extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$client_id = $this->request->getPost('client_id',FILTER_SANITIZE_STRING);
-				$summary = $this->request->getPost('summary',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$priority = $this->request->getPost('priority',FILTER_SANITIZE_STRING);
-				$budget_hours = $this->request->getPost('budget_hours',FILTER_SANITIZE_STRING);
-				$assigned_ids = implode(',',$this->request->getPost('assigned_to',FILTER_SANITIZE_STRING));
+				$title = $this->request->getPost('title');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$client_id = $this->request->getPost('client_id');
+				$summary = $this->request->getPost('summary');
+				$description = $this->request->getPost('description');
+				$priority = $this->request->getPost('priority');
+				$budget_hours = $this->request->getPost('budget_hours');
+				$assigned_ids = implode(',',$this->request->getPost('assigned_to'));
 				$employee_ids = $assigned_ids;			
 				$UsersModel = new UsersModel();
 				$SystemModel = new SystemModel();
@@ -1072,17 +1072,17 @@ class Projects extends BaseController {
 					}
 				}
 			} else {
-				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$client_id = $this->request->getPost('client_id',FILTER_SANITIZE_STRING);
-				$summary = $this->request->getPost('summary',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$budget_hours = $this->request->getPost('budget_hours',FILTER_SANITIZE_STRING);
-				$assigned_ids = implode(',',$this->request->getPost('assigned_to',FILTER_SANITIZE_STRING));
-				$associated_goals = implode(',',$this->request->getPost('associated_goals',FILTER_SANITIZE_STRING));
+				$title = $this->request->getPost('title');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$client_id = $this->request->getPost('client_id');
+				$summary = $this->request->getPost('summary');
+				$description = $this->request->getPost('description');
+				$budget_hours = $this->request->getPost('budget_hours');
+				$assigned_ids = implode(',',$this->request->getPost('assigned_to'));
+				$associated_goals = implode(',',$this->request->getPost('associated_goals'));
 				$employee_ids = $assigned_ids;
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));			
+				$id = udecode($this->request->getPost('token'));			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1162,10 +1162,10 @@ class Projects extends BaseController {
 					}
 				}
 			} else {
-				$progres_val = $this->request->getPost('progres_val',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$priority = $this->request->getPost('priority',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$progres_val = $this->request->getPost('progres_val');
+				$status = $this->request->getPost('status');
+				$priority = $this->request->getPost('priority');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'project_progress' => $progres_val,
 					'status'  => $status,
@@ -1225,8 +1225,8 @@ class Projects extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id' => $company_id,
 					'project_id' => $id,
@@ -1288,8 +1288,8 @@ class Projects extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id' => $company_id,
 					'project_id' => $id,
@@ -1379,14 +1379,14 @@ class Projects extends BaseController {
 					$employee_id = $usession['sup_user_id'];
 				} else {
 					$company_id = $usession['sup_user_id'];
-					$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$employee_id = $this->request->getPost('employee_id');
 				}
-				$start_time = $this->request->getPost('start_time',FILTER_SANITIZE_STRING);
-				$end_time = $this->request->getPost('end_time',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$memo = $this->request->getPost('memo',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$start_time = $this->request->getPost('start_time');
+				$end_time = $this->request->getPost('end_time');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$memo = $this->request->getPost('memo');
+				$id = udecode($this->request->getPost('token'));
 				// total hours
 				$start_time_opt = Time::parse($start_date.' '.$start_time);
 				$end_time_opt    = Time::parse($end_date.' '.$end_time);
@@ -1490,14 +1490,14 @@ class Projects extends BaseController {
 					$employee_id = $usession['sup_user_id'];
 				} else {
 					$company_id = $usession['sup_user_id'];
-					$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$employee_id = $this->request->getPost('employee_id');
 				}
-				$start_time = $this->request->getPost('start_time',FILTER_SANITIZE_STRING);
-				$end_time = $this->request->getPost('end_time',FILTER_SANITIZE_STRING);
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$memo = $this->request->getPost('memo',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$start_time = $this->request->getPost('start_time');
+				$end_time = $this->request->getPost('end_time');
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$memo = $this->request->getPost('memo');
+				$id = udecode($this->request->getPost('token'));
 				// total hours
 				$start_time_opt = Time::parse($start_date.' '.$start_time);
 				$end_time_opt    = Time::parse($end_date.' '.$end_time);
@@ -1570,8 +1570,8 @@ class Projects extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id' => $company_id,
 					'project_id' => $id,
@@ -1603,6 +1603,9 @@ class Projects extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');
+		if(!$session->has('sup_username')){ 
+			return redirect()->to(site_url('erp/login'));
+		}
 		if ($this->request->getPost('type') === 'add_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
@@ -1636,11 +1639,16 @@ class Projects extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment_file');
-				$file_name = $attachment->getName();
+				$file_name = $attachment->getRandomName();
+				if (!validate_file_extension($attachment, ['jpg', 'jpeg', 'gif', 'png'])) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
 				$attachment->move('public/uploads/project_files/');
 				
-				$file_title = $this->request->getPost('file_name',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$file_title = $this->request->getPost('file_name');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1682,8 +1690,8 @@ class Projects extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('xfieldid',FILTER_SANITIZE_STRING);
-			$status = $this->request->getVar('xfieldst',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('xfieldid');
+			$status = $this->request->getVar('xfieldst');
 			$Return['csrf_hash'] = csrf_hash();
 			$UsersModel = new UsersModel();
 			$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -1943,7 +1951,7 @@ class Projects extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ProjectsModel = new ProjectsModel();
 			$result = $ProjectsModel->where('project_id', $id)->delete($id);
@@ -1964,7 +1972,7 @@ class Projects extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$ProjectnotesModel = new ProjectnotesModel();
 			$result = $ProjectnotesModel->where('project_note_id', $id)->delete($id);
@@ -1985,7 +1993,7 @@ class Projects extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$ProjectbugsModel = new ProjectbugsModel();
 			$result = $ProjectbugsModel->where('project_bug_id', $id)->delete($id);
@@ -2006,7 +2014,7 @@ class Projects extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$ProjectdiscussionModel = new ProjectdiscussionModel();
 			$result = $ProjectdiscussionModel->where('project_discussion_id', $id)->delete($id);
@@ -2027,7 +2035,7 @@ class Projects extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ProjecttimelogsModel = new ProjecttimelogsModel();
 			$result = $ProjecttimelogsModel->where('timelogs_id', $id)->delete($id);
@@ -2048,7 +2056,7 @@ class Projects extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$ProjectfilesModel = new ProjectfilesModel();
 			$result = $ProjectfilesModel->where('project_file_id', $id)->delete($id);

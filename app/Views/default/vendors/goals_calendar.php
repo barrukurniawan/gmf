@@ -94,7 +94,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $goals_not_started['tracking_id']?>',
 				unq: '0',
-				title: '<?php echo $goals_not_started['subject']?>',
+				title: '<?php echo esc($goals_not_started['subject'], 'js')?>',
 				start: '<?php echo $goals_not_started['start_date']?>',
 				end: '<?php echo $goals_not_started['end_date']?>',
 				urllink: '<?php echo site_url().'erp/goal-details/'.uencode($goals_not_started['tracking_id']);?>',
@@ -105,7 +105,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $goals_inprogress['tracking_id']?>',
 				unq: '0',
-				title: '<?php echo $goals_inprogress['subject']?>',
+				title: '<?php echo esc($goals_inprogress['subject'], 'js')?>',
 				start: '<?php echo $goals_inprogress['start_date']?>',
 				end: '<?php echo $goals_inprogress['end_date']?>',
 				urllink: '<?php echo site_url().'erp/goal-details/'.uencode($goals_inprogress['tracking_id']);?>',
@@ -116,7 +116,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $goals_completed['tracking_id']?>',
 				unq: '0',
-				title: '<?php echo $goals_completed['subject']?>',
+				title: '<?php echo esc($goals_completed['subject'], 'js')?>',
 				start: '<?php echo $goals_completed['start_date']?>',
 				end: '<?php echo $goals_completed['end_date']?>',
 				urllink: '<?php echo site_url().'erp/goal-details/'.uencode($goals_completed['tracking_id']);?>',

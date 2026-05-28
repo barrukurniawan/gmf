@@ -208,11 +208,7 @@ class Payroll extends BaseController {
 			return redirect()->to(site_url('erp/login'));
 		}		
 		$UsersModel = new UsersModel();
-		$config         = new \Config\Encryption();
-		$config->key    = 'aBigsecret_ofAtleast32Characters';
-		$config->driver = 'OpenSSL';
-		
-		$encrypter = \Config\Services::encrypter($config);
+		$encrypter = \Config\Services::encrypter();
 		$RolesModel = new RolesModel();
 		$SystemModel = new SystemModel();
 		$ContractModel = new ContractModel();
@@ -220,8 +216,8 @@ class Payroll extends BaseController {
 		$PayrollModel = new PayrollModel();
 		$StaffdetailsModel = new StaffdetailsModel();
 		$AdvancesalaryModel = new AdvancesalaryModel();
-		$payment_date = $this->request->getVar('payment_date',FILTER_SANITIZE_STRING);
-		$employee_id = $this->request->getVar('staff_id',FILTER_SANITIZE_STRING);
+		$payment_date = $this->request->getVar('payment_date');
+		$employee_id = $this->request->getVar('staff_id');
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		if($user_info['user_type'] == 'staff'){
 			if($employee_id == 0){
@@ -613,11 +609,7 @@ class Payroll extends BaseController {
 			return redirect()->to(site_url('erp/login'));
 		}		
 		$UsersModel = new UsersModel();
-		$config         = new \Config\Encryption();
-		$config->key    = 'aBigsecret_ofAtleast32Characters';
-		$config->driver = 'OpenSSL';
-		
-		$encrypter = \Config\Services::encrypter($config);
+		$encrypter = \Config\Services::encrypter();
 		$RolesModel = new RolesModel();
 		$SystemModel = new SystemModel();
 		$ContractModel = new ContractModel();
@@ -732,19 +724,19 @@ class Payroll extends BaseController {
 					}
 				}
 			} else {
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$advance_amount = $this->request->getPost('advance_amount',FILTER_SANITIZE_STRING);
-				$one_time_deduct = $this->request->getPost('one_time_deduct',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
+				$month_year = $this->request->getPost('month_year');
+				$advance_amount = $this->request->getPost('advance_amount');
+				$one_time_deduct = $this->request->getPost('one_time_deduct');
+				$reason = $this->request->getPost('reason');
 				// get one time value
 				if($one_time_deduct==1){
 					$emi_amount = $advance_amount;
 				} else {
-					$iemi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+					$iemi_amount = $this->request->getPost('emi_amount');
 					if($iemi_amount == ''){
 						$emi_amount = 0;
 					} else {
-						$emi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+						$emi_amount = $this->request->getPost('emi_amount');
 					}
 				}
 							
@@ -754,7 +746,7 @@ class Payroll extends BaseController {
 					$staff_id = $usession['sup_user_id'];
 					$company_id = $user_info['company_id'];
 				} else {
-					$assigned_ids = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$assigned_ids = $this->request->getPost('employee_id');
 					$staff_id = $assigned_ids;
 					$company_id = $usession['sup_user_id'];
 				}
@@ -840,21 +832,21 @@ class Payroll extends BaseController {
 					}
 				}
 			} else {
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$advance_amount = $this->request->getPost('advance_amount',FILTER_SANITIZE_STRING);
-				$one_time_deduct = $this->request->getPost('one_time_deduct',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$month_year = $this->request->getPost('month_year');
+				$advance_amount = $this->request->getPost('advance_amount');
+				$one_time_deduct = $this->request->getPost('one_time_deduct');
+				$reason = $this->request->getPost('reason');
+				$status = $this->request->getPost('status');
+				$id = udecode($this->request->getPost('token'));
 				// get one time value
 				if($one_time_deduct==1){
 					$emi_amount = $advance_amount;
 				} else {
-					$iemi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+					$iemi_amount = $this->request->getPost('emi_amount');
 					if($iemi_amount == ''){
 						$emi_amount = 0;
 					} else {
-						$emi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+						$emi_amount = $this->request->getPost('emi_amount');
 					}
 				}
 							
@@ -864,7 +856,7 @@ class Payroll extends BaseController {
 					$staff_id = $usession['sup_user_id'];
 					$company_id = $user_info['company_id'];
 				} else {
-					$assigned_ids = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$assigned_ids = $this->request->getPost('employee_id');
 					$staff_id = $assigned_ids;
 					$company_id = $usession['sup_user_id'];
 				}
@@ -950,19 +942,19 @@ class Payroll extends BaseController {
 					}
 				}
 			} else {
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$advance_amount = $this->request->getPost('advance_amount',FILTER_SANITIZE_STRING);
-				$one_time_deduct = $this->request->getPost('one_time_deduct',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
+				$month_year = $this->request->getPost('month_year');
+				$advance_amount = $this->request->getPost('advance_amount');
+				$one_time_deduct = $this->request->getPost('one_time_deduct');
+				$reason = $this->request->getPost('reason');
 				// get one time value
 				if($one_time_deduct==1){
 					$emi_amount = $advance_amount;
 				} else {
-					$iemi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+					$iemi_amount = $this->request->getPost('emi_amount');
 					if($iemi_amount == ''){
 						$emi_amount = 0;
 					} else {
-						$emi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+						$emi_amount = $this->request->getPost('emi_amount');
 					}
 				}
 							
@@ -972,7 +964,7 @@ class Payroll extends BaseController {
 					$staff_id = $usession['sup_user_id'];
 					$company_id = $user_info['company_id'];
 				} else {
-					$assigned_ids = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$assigned_ids = $this->request->getPost('employee_id');
 					$staff_id = $assigned_ids;
 					$company_id = $usession['sup_user_id'];
 				}
@@ -1058,21 +1050,21 @@ class Payroll extends BaseController {
 					}
 				}
 			} else {
-				$month_year = $this->request->getPost('month_year',FILTER_SANITIZE_STRING);
-				$advance_amount = $this->request->getPost('advance_amount',FILTER_SANITIZE_STRING);
-				$one_time_deduct = $this->request->getPost('one_time_deduct',FILTER_SANITIZE_STRING);
-				$reason = $this->request->getPost('reason',FILTER_SANITIZE_STRING);
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$month_year = $this->request->getPost('month_year');
+				$advance_amount = $this->request->getPost('advance_amount');
+				$one_time_deduct = $this->request->getPost('one_time_deduct');
+				$reason = $this->request->getPost('reason');
+				$status = $this->request->getPost('status');
+				$id = udecode($this->request->getPost('token'));
 				// get one time value
 				if($one_time_deduct==1){
 					$emi_amount = $advance_amount;
 				} else {
-					$iemi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+					$iemi_amount = $this->request->getPost('emi_amount');
 					if($iemi_amount == ''){
 						$emi_amount = 0;
 					} else {
-						$emi_amount = $this->request->getPost('emi_amount',FILTER_SANITIZE_STRING);
+						$emi_amount = $this->request->getPost('emi_amount');
 					}
 				}
 							
@@ -1082,7 +1074,7 @@ class Payroll extends BaseController {
 					$staff_id = $usession['sup_user_id'];
 					$company_id = $user_info['company_id'];
 				} else {
-					$assigned_ids = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$assigned_ids = $this->request->getPost('employee_id');
 					$staff_id = $assigned_ids;
 					$company_id = $usession['sup_user_id'];
 				}
@@ -1137,8 +1129,8 @@ class Payroll extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
-			$salary_month = udecode($this->request->getPost('token2',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('token'));
+			$salary_month = udecode($this->request->getPost('token2'));
 			$MainModel = new MainModel();
 			$ContractModel = new ContractModel();
 			$AdvancesalaryModel = new AdvancesalaryModel();
@@ -1280,7 +1272,7 @@ class Payroll extends BaseController {
 			// net salary
 			$inet_salary = $ibasic_salary + $allowance_amount + $commissions_amount + $other_payments_amount - $statutory_deductions_amount;
 			// add info
-			$payslip_comments = $this->request->getPost('payslip_comments',FILTER_SANITIZE_STRING);
+			$payslip_comments = $this->request->getPost('payslip_comments');
 			$data = [
 				'payslip_key'  => $generate_key,
 				'company_id'  => $company_id,
@@ -1553,7 +1545,7 @@ class Payroll extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$AdvancesalaryModel = new AdvancesalaryModel();
 			$result = $AdvancesalaryModel->where('advance_salary_id', $id)->delete($id);
@@ -1574,7 +1566,7 @@ class Payroll extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$AdvancesalaryModel = new AdvancesalaryModel();
 			$result = $AdvancesalaryModel->where('advance_salary_id', $id)->delete($id);
@@ -1595,7 +1587,7 @@ class Payroll extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$PayrollModel = new PayrollModel();
 			$UsersModel = new UsersModel();

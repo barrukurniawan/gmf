@@ -66,7 +66,7 @@ $result = $AwardsModel->where('award_id', $award_id)->first();
         </label>
         <div class="input-group">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-gift"></i></span></div>
-          <input class="form-control" placeholder="<?= lang('Employees.xin_award_gift');?>" name="gift" type="text" value="<?php echo $result['gift_item'];?>">
+          <input class="form-control" placeholder="<?= lang('Employees.xin_award_gift');?>" name="gift" type="text" value="<?php echo esc($result['gift_item'], 'attr')?>">
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@ $result = $AwardsModel->where('award_id', $award_id)->first();
           <?= lang('Main.xin_e_details_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_award_date" placeholder="<?= lang('Employees.xin_award_date');?>" name="award_date" type="text" value="<?php echo $result['created_at'];?>">
+          <input class="form-control d_award_date" placeholder="<?= lang('Employees.xin_award_date');?>" name="award_date" type="text" value="<?php echo esc($result['created_at'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -90,7 +90,7 @@ $result = $AwardsModel->where('award_id', $award_id)->first();
           <div class="input-group-append"><span class="input-group-text">
             <?= $xin_system['default_currency'];?>
             </span></div>
-          <input class="form-control" placeholder="<?= lang('Employees.xin_award_cash');?>" name="cash" type="text" value="<?php echo $result['cash_price'];?>">
+          <input class="form-control" placeholder="<?= lang('Employees.xin_award_cash');?>" name="cash" type="text" value="<?php echo esc($result['cash_price'], 'attr')?>">
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@ $result = $AwardsModel->where('award_id', $award_id)->first();
           <?= lang('Employees.xin_award_month_year');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control d_month_year" placeholder="<?= lang('Employees.xin_award_month_year');?>" name="month_year" type="text" value="<?php echo $result['award_month_year'];?>">
+          <input class="form-control d_month_year" placeholder="<?= lang('Employees.xin_award_month_year');?>" name="month_year" type="text" value="<?php echo esc($result['award_month_year'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>

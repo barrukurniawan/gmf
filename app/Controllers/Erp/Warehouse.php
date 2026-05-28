@@ -181,15 +181,15 @@ class Warehouse extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-				$pickup_location = $this->request->getPost('pickup_location',FILTER_SANITIZE_STRING);
-				$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-				$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-				$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-				$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-				$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-				$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
+				$name = $this->request->getPost('name');
+				$contact_number = $this->request->getPost('contact_number');
+				$pickup_location = $this->request->getPost('pickup_location');
+				$country = $this->request->getPost('country');
+				$address_1 = $this->request->getPost('address_1');
+				$address_2 = $this->request->getPost('address_2');
+				$city = $this->request->getPost('city');
+				$state = $this->request->getPost('state');
+				$zipcode = $this->request->getPost('zipcode');
 								
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -274,16 +274,16 @@ class Warehouse extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$contact_number = $this->request->getPost('contact_number',FILTER_SANITIZE_STRING);
-				$pickup_location = $this->request->getPost('pickup_location',FILTER_SANITIZE_STRING);
-				$country = $this->request->getPost('country',FILTER_SANITIZE_STRING);
-				$address_1 = $this->request->getPost('address_1',FILTER_SANITIZE_STRING);
-				$address_2 = $this->request->getPost('address_2',FILTER_SANITIZE_STRING);
-				$city = $this->request->getPost('city',FILTER_SANITIZE_STRING);
-				$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
-				$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$name = $this->request->getPost('name');
+				$contact_number = $this->request->getPost('contact_number');
+				$pickup_location = $this->request->getPost('pickup_location');
+				$country = $this->request->getPost('country');
+				$address_1 = $this->request->getPost('address_1');
+				$address_2 = $this->request->getPost('address_2');
+				$city = $this->request->getPost('city');
+				$state = $this->request->getPost('state');
+				$zipcode = $this->request->getPost('zipcode');
+				$id = udecode($this->request->getPost('token'));
 								
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -347,7 +347,7 @@ class Warehouse extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$WarehouseModel = new WarehouseModel();
 			$result = $WarehouseModel->where('warehouse_id', $id)->delete($id);

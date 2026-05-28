@@ -87,7 +87,7 @@ class Todo extends BaseController {
 					}
 				}
 			} else {
-				$task_insert = $this->request->getPost('task_insert',FILTER_SANITIZE_STRING);			
+				$task_insert = $this->request->getPost('task_insert');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -129,7 +129,7 @@ class Todo extends BaseController {
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
 			//$id = udecode($this->request->getGet('field_id'));
-			$id = $request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TodoModel = new TodoModel();
 			$UsersModel = new UsersModel();
@@ -158,8 +158,8 @@ class Todo extends BaseController {
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
 			//$id = udecode($this->request->getGet('field_id'));
-			$id = $request->getVar('field_id',FILTER_SANITIZE_STRING);
-			$is_done = $request->getVar('task_done',FILTER_SANITIZE_STRING);
+			$id = $request->getVar('field_id');
+			$is_done = $request->getVar('task_done');
 			$Return['csrf_hash'] = csrf_hash();
 			$TodoModel = new TodoModel();
 			$UsersModel = new UsersModel();

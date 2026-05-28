@@ -38,7 +38,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
         <label for="title">
           <?= lang('Conference.xin_hr_meeting_title');?> <span class="text-danger">*</span>
         </label>
-        <input class="form-control" placeholder="<?= lang('Conference.xin_hr_meeting_title');?>" name="conference_title" type="text" value="<?php echo $result['meeting_title'];?>">
+        <input class="form-control" placeholder="<?= lang('Conference.xin_hr_meeting_title');?>" name="conference_title" type="text" value="<?php echo esc($result['meeting_title'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-6">
@@ -46,7 +46,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
         <label for="meeting_room">
           <?= lang('Conference.xin_meeting_room');?> <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="conference_room" placeholder="<?= lang('Conference.xin_meeting_room');?>" value="<?php echo $result['meeting_room'];?>">
+        <input type="text" class="form-control" name="conference_room" placeholder="<?= lang('Conference.xin_meeting_room');?>" value="<?php echo esc($result['meeting_room'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-4">
@@ -55,7 +55,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
           <?= lang('Main.xin_e_details_date');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control mdate" name="conference_date" type="text" value="<?php echo $result['meeting_date'];?>">
+          <input class="form-control mdate" name="conference_date" type="text" value="<?php echo esc($result['meeting_date'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -66,7 +66,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
           <?= lang('Conference.xin_hr_meeting_time');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group">
-          <input class="form-control mtimepicker" name="conference_time" type="text" value="<?php echo $result['meeting_time'];?>">
+          <input class="form-control mtimepicker" name="conference_time" type="text" value="<?php echo esc($result['meeting_time'], 'attr')?>">
           <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
         </div>
       </div>
@@ -77,7 +77,7 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
           <?= lang('Conference.xin_meeting_color');?> <span class="text-danger">*</span>
         </label>
         <div class="input-group mhr_color" title="<?= lang('Conference.xin_meeting_color');?>"> <span class="input-group-append"> <span class="input-group-text colorpicker-input-addon"><i></i></span> </span>
-          <input class="form-control mhr_color" type="text" value="<?php echo $result['meeting_color'];?>" name="conference_color">
+          <input class="form-control mhr_color" type="text" value="<?php echo esc($result['meeting_color'], 'attr')?>" name="conference_color">
         </div>
       </div>
     </div>

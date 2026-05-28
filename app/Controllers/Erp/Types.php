@@ -1840,7 +1840,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1903,7 +1903,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -1966,7 +1966,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2029,7 +2029,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2099,9 +2099,9 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);		
-				$days_per_year = $this->request->getPost('days_per_year',FILTER_SANITIZE_STRING);	
-				$requires_approval = $this->request->getPost('requires_approval',FILTER_SANITIZE_STRING);		
+				$name = $this->request->getPost('name');		
+				$days_per_year = $this->request->getPost('days_per_year');	
+				$requires_approval = $this->request->getPost('requires_approval');		
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2164,7 +2164,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2227,7 +2227,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2290,7 +2290,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2353,7 +2353,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2416,7 +2416,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2479,7 +2479,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2542,7 +2542,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2605,7 +2605,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2668,7 +2668,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2745,9 +2745,9 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);	
-				$fieldone = $this->request->getPost('fieldone',FILTER_SANITIZE_STRING);	
-				$fieldtwo = $this->request->getPost('fieldtwo',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');	
+				$fieldone = $this->request->getPost('fieldone');	
+				$fieldtwo = $this->request->getPost('fieldtwo');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2810,7 +2810,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2873,7 +2873,7 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);			
+				$name = $this->request->getPost('name');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -2936,9 +2936,9 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);	
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
-				$erp_constant = udecode($this->request->getPost('erp_constant',FILTER_SANITIZE_STRING));
+				$name = $this->request->getPost('name');	
+				$id = udecode($this->request->getPost('token'));	
+				$erp_constant = udecode($this->request->getPost('erp_constant'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -3011,10 +3011,10 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$fieldone = $this->request->getPost('fieldone',FILTER_SANITIZE_STRING);
-				$fieldtwo = $this->request->getPost('fieldtwo',FILTER_SANITIZE_STRING);	
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+				$name = $this->request->getPost('name');
+				$fieldone = $this->request->getPost('fieldone');
+				$fieldtwo = $this->request->getPost('fieldtwo');	
+				$id = udecode($this->request->getPost('token'));	
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -3081,10 +3081,10 @@ class Types extends BaseController {
 					}
 				}
 			} else {
-				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
-				$days_per_year = $this->request->getPost('days_per_year',FILTER_SANITIZE_STRING);	
-				$requires_approval = $this->request->getPost('requires_approval',FILTER_SANITIZE_STRING);	
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+				$name = $this->request->getPost('name');
+				$days_per_year = $this->request->getPost('days_per_year');	
+				$requires_approval = $this->request->getPost('requires_approval');	
+				$id = udecode($this->request->getPost('token'));	
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -3123,7 +3123,7 @@ class Types extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ConstantsModel = new ConstantsModel();
 			$UsersModel = new UsersModel();

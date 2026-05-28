@@ -166,9 +166,9 @@ class Designation extends BaseController {
 					}
 				}
 			} else {
-				$department = $this->request->getPost('department',FILTER_SANITIZE_STRING);
-				$designation_name = $this->request->getPost('designation_name',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);			
+				$department = $this->request->getPost('department');
+				$designation_name = $this->request->getPost('designation_name');
+				$description = $this->request->getPost('description');			
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -237,10 +237,10 @@ class Designation extends BaseController {
 					}
 				}
 			} else {
-				$department = $this->request->getPost('department',FILTER_SANITIZE_STRING);
-				$designation_name = $this->request->getPost('designation_name',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$department = $this->request->getPost('department');
+				$designation_name = $this->request->getPost('designation_name');
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'department_id' => $department,
 					'designation_name'  => $designation_name,
@@ -327,7 +327,7 @@ class Designation extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$DesignationModel = new DesignationModel();
 			$result = $DesignationModel->where('designation_id', $id)->delete($id);

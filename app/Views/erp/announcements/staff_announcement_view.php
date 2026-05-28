@@ -44,7 +44,7 @@ if($user_info['user_type'] == 'staff'){
             <tr>
               <td><i class="fas fa-adjust m-r-5"></i> <?php echo lang('Dashboard.xin_title');?>:</td>
               <td class="text-right"><span class="float-right">
-                <?= $result['title'];?>
+                <?= esc($result['title']);?>
                 </span></td>
             </tr>
             <tr>
@@ -84,7 +84,7 @@ if($user_info['user_type'] == 'staff'){
     <div class="card">
       <div class="card-header">
         <h5 class=""><i class="fas fa-ticket-alt m-r-5"></i>
-          <?= $result['title'];?>
+          <?= esc($result['title']);?>
         </h5>
         
       </div>
@@ -95,7 +95,7 @@ if($user_info['user_type'] == 'staff'){
           </h6>
           <hr>
           <p>
-            <?= $result['summary'];?>
+            <?= esc($result['summary']);?>
           </p>
         </div>
         <div class="m-b-20">

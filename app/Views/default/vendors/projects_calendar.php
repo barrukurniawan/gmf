@@ -97,7 +97,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $ntprojects['project_id']?>',
 				unq: '0',
-				title: '<?php echo $ntprojects['title']?>',
+				title: '<?php echo esc($ntprojects['title'], 'js')?>',
 				start: '<?php echo $ntprojects['start_date']?>',
 				end: '<?php echo $ntprojects['end_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($ntprojects['project_id']);?>',
@@ -108,7 +108,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $inprojects['project_id']?>',
 				unq: '0',
-				title: '<?php echo $inprojects['title']?>',
+				title: '<?php echo esc($inprojects['title'], 'js')?>',
 				start: '<?php echo $inprojects['start_date']?>',
 				end: '<?php echo $inprojects['end_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($inprojects['project_id']);?>',
@@ -119,7 +119,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $cprojects['project_id']?>',
 				unq: '0',
-				title: '<?php echo $cprojects['title']?>',
+				title: '<?php echo esc($cprojects['title'], 'js')?>',
 				start: '<?php echo $cprojects['start_date']?>',
 				end: '<?php echo $cprojects['end_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($cprojects['project_id']);?>',
@@ -130,7 +130,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $cnprojects['project_id']?>',
 				unq: '0',
-				title: '<?php echo $cnprojects['title']?>',
+				title: '<?php echo esc($cnprojects['title'], 'js')?>',
 				start: '<?php echo $cnprojects['start_date']?>',
 				end: '<?php echo $cnprojects['end_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($cnprojects['project_id']);?>',
@@ -141,7 +141,7 @@ $(document).ready(function(){
 			{
 				event_id: '<?php echo $hlprojects['project_id']?>',
 				unq: '0',
-				title: '<?php echo $hlprojects['title']?>',
+				title: '<?php echo esc($hlprojects['title'], 'js')?>',
 				start: '<?php echo $hlprojects['start_date']?>',
 				end: '<?php echo $hlprojects['end_date']?>',
 				urllink: '<?php echo site_url().'erp/view-leave-info/'.uencode($hlprojects['project_id']);?>',

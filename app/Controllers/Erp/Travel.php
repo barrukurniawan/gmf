@@ -205,15 +205,15 @@ class Travel extends BaseController {
 					}
 				}
 			} else {
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$visit_purpose = $this->request->getPost('visit_purpose',FILTER_SANITIZE_STRING);		
-				$visit_place = $this->request->getPost('visit_place',FILTER_SANITIZE_STRING);
-				$expected_budget = $this->request->getPost('expected_budget',FILTER_SANITIZE_STRING);
-				$actual_budget = $this->request->getPost('actual_budget',FILTER_SANITIZE_STRING);	
-				$arrangement_type = $this->request->getPost('arrangement_type',FILTER_SANITIZE_STRING);
-				$travel_mode = $this->request->getPost('travel_mode',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$visit_purpose = $this->request->getPost('visit_purpose');		
+				$visit_place = $this->request->getPost('visit_place');
+				$expected_budget = $this->request->getPost('expected_budget');
+				$actual_budget = $this->request->getPost('actual_budget');	
+				$arrangement_type = $this->request->getPost('arrangement_type');
+				$travel_mode = $this->request->getPost('travel_mode');
+				$description = $this->request->getPost('description');
 				
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -221,7 +221,7 @@ class Travel extends BaseController {
 					$staff_id = $usession['sup_user_id'];
 					$company_id = $user_info['company_id'];
 				} else {
-					$staff_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$staff_id = $this->request->getPost('employee_id');
 					$company_id = $usession['sup_user_id'];
 				}
 				$data = [
@@ -329,17 +329,17 @@ class Travel extends BaseController {
 					}
 				}
 			} else {
-				$start_date = $this->request->getPost('start_date',FILTER_SANITIZE_STRING);
-				$end_date = $this->request->getPost('end_date',FILTER_SANITIZE_STRING);
-				$visit_purpose = $this->request->getPost('visit_purpose',FILTER_SANITIZE_STRING);		
-				$visit_place = $this->request->getPost('visit_place',FILTER_SANITIZE_STRING);
-				$expected_budget = $this->request->getPost('expected_budget',FILTER_SANITIZE_STRING);
-				$actual_budget = $this->request->getPost('actual_budget',FILTER_SANITIZE_STRING);	
-				$arrangement_type = $this->request->getPost('arrangement_type',FILTER_SANITIZE_STRING);
-				$travel_mode = $this->request->getPost('travel_mode',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$associated_goals = implode(',',$this->request->getPost('associated_goals',FILTER_SANITIZE_STRING));
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$start_date = $this->request->getPost('start_date');
+				$end_date = $this->request->getPost('end_date');
+				$visit_purpose = $this->request->getPost('visit_purpose');		
+				$visit_place = $this->request->getPost('visit_place');
+				$expected_budget = $this->request->getPost('expected_budget');
+				$actual_budget = $this->request->getPost('actual_budget');	
+				$arrangement_type = $this->request->getPost('arrangement_type');
+				$travel_mode = $this->request->getPost('travel_mode');
+				$description = $this->request->getPost('description');
+				$associated_goals = implode(',',$this->request->getPost('associated_goals'));
+				$id = udecode($this->request->getPost('token'));
 				
 				$data = [
 					'start_date'  => $start_date,
@@ -400,8 +400,8 @@ class Travel extends BaseController {
 					}
 				}
 			} else {
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$status = $this->request->getPost('status');
+				$id = udecode($this->request->getPost('token'));
 				
 				$data = [
 					'status'  => $status,
@@ -534,7 +534,7 @@ class Travel extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TravelModel = new TravelModel();
 			$result = $TravelModel->where('travel_id', $id)->delete($id);

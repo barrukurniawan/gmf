@@ -301,9 +301,9 @@ class Tickets extends BaseController {
 				}
 			} else {
 				// upload file			
-				$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);
-				$ticket_priority = $this->request->getPost('ticket_priority',FILTER_SANITIZE_STRING);
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
+				$subject = $this->request->getPost('subject');
+				$ticket_priority = $this->request->getPost('ticket_priority');
+				$description = $this->request->getPost('description');
 				$UsersModel = new UsersModel();
 				$Moduleattributes = new Moduleattributes();
 				$Moduleattributesval = new Moduleattributesval();
@@ -320,16 +320,16 @@ class Tickets extends BaseController {
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',3)->orderBy('custom_field_id', 'ASC')->countAllResults();
 					$module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',3)->orderBy('custom_field_id', 'ASC')->findAll();
 				} else {
-					if($this->request->getPost('department_id',FILTER_SANITIZE_STRING) === ''){
+					if($this->request->getPost('department_id') === ''){
 						$Return['error'] = lang('Employees.xin_employee_error_department');
-					} else if($this->request->getPost('employee_id',FILTER_SANITIZE_STRING) === ''){
+					} else if($this->request->getPost('employee_id') === ''){
 						$Return['error'] = lang('Success.xin_employee_field_error');
 					}
 					if($Return['error']!=''){
 						$this->output($Return);
 					}
-					$department_id = $this->request->getPost('department_id',FILTER_SANITIZE_STRING);
-					$employee_id = $this->request->getPost('employee_id',FILTER_SANITIZE_STRING);
+					$department_id = $this->request->getPost('department_id');
+					$employee_id = $this->request->getPost('employee_id');
 					$company_id = $usession['sup_user_id'];
 					$company_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 					$count_module_attributes = $Moduleattributes->where('company_id',$company_id)->where('module_id',3)->orderBy('custom_field_id', 'ASC')->countAllResults();
@@ -459,9 +459,9 @@ class Tickets extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
-				$token2 = udecode($this->request->getPost('token2',FILTER_SANITIZE_STRING));	
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
+				$token2 = udecode($this->request->getPost('token2'));	
 				$data = [
 					'company_id' => $company_id,
 					'ticket_id' => $id,
@@ -524,8 +524,8 @@ class Tickets extends BaseController {
 				} else {
 					$company_id = $usession['sup_user_id'];
 				}
-				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$description = $this->request->getPost('description');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'company_id' => $company_id,
 					'ticket_id' => $id,
@@ -593,8 +593,8 @@ class Tickets extends BaseController {
 				$file_name = $attachment->getName();
 				$attachment->move('public/uploads/tickets/');
 				
-				$file_title = $this->request->getPost('file_name',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$file_title = $this->request->getPost('file_name');
+				$id = udecode($this->request->getPost('token'));
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 				if($user_info['user_type'] == 'staff'){
@@ -664,9 +664,9 @@ class Tickets extends BaseController {
 					}
 				}
 			} else {
-				$remarks = $this->request->getPost('remarks',FILTER_SANITIZE_STRING);	
-				$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);	
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+				$remarks = $this->request->getPost('remarks');	
+				$status = $this->request->getPost('status');	
+				$id = udecode($this->request->getPost('token'));	
 				
 				$MainModel = new MainModel();
 				$UsersModel = new UsersModel();
@@ -783,9 +783,9 @@ class Tickets extends BaseController {
 					}
 				}
 			} else {
-				$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);	
-				$ticket_priority = $this->request->getPost('ticket_priority',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+				$subject = $this->request->getPost('subject');	
+				$ticket_priority = $this->request->getPost('ticket_priority');
+				$id = udecode($this->request->getPost('token'));	
 				$data = [
 					'subject' => $subject,
 					'ticket_priority'  => $ticket_priority
@@ -1000,7 +1000,7 @@ class Tickets extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$TicketsModel = new TicketsModel();
 			$result = $TicketsModel->where('ticket_id', $id)->delete($id);
@@ -1021,7 +1021,7 @@ class Tickets extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TicketnotesModel = new TicketnotesModel();
 			$result = $TicketnotesModel->where('ticket_note_id', $id)->delete($id);
@@ -1042,7 +1042,7 @@ class Tickets extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TicketreplyModel = new TicketreplyModel();
 			$result = $TicketreplyModel->where('ticket_reply_id', $id)->delete($id);
@@ -1063,7 +1063,7 @@ class Tickets extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = $this->request->getVar('field_id',FILTER_SANITIZE_STRING);
+			$id = $this->request->getVar('field_id');
 			$Return['csrf_hash'] = csrf_hash();
 			$TicketfilesModel = new TicketfilesModel();
 			$result = $TicketfilesModel->where('ticket_file_id', $id)->delete($id);

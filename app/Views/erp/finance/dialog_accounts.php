@@ -38,7 +38,7 @@ $result = $AccountsModel->where('account_id', $account_id)->first();
         <label for="account_name">
           <?= lang('Employees.xin_account_title');?> <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="account_name" placeholder="<?= lang('Employees.xin_account_title');?>" value="<?php echo $result['account_name'];?>">
+        <input type="text" class="form-control" name="account_name" placeholder="<?= lang('Employees.xin_account_title');?>" value="<?php echo esc($result['account_name'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-6">
@@ -50,7 +50,7 @@ $result = $AccountsModel->where('account_id', $account_id)->first();
           <div class="input-group-prepend"><span class="input-group-text">
             <?= $xin_system['default_currency'];?>
             </span></div>
-          <input type="text" class="form-control" name="account_balance" placeholder="<?= lang('Finance.xin_acc_initial_balance');?>" value="<?php echo $result['account_balance'];?>">
+          <input type="text" class="form-control" name="account_balance" placeholder="<?= lang('Finance.xin_acc_initial_balance');?>" value="<?php echo esc($result['account_balance'], 'attr')?>">
         </div>
       </div>
     </div>
@@ -59,7 +59,7 @@ $result = $AccountsModel->where('account_id', $account_id)->first();
         <label for="account_number">
           <?= lang('Employees.xin_account_number');?> <span class="text-danger">*</span>
         </label>
-        <input type="text" class="form-control" name="account_number" placeholder="<?= lang('Employees.xin_account_number');?>" value="<?php echo $result['account_number'];?>">
+        <input type="text" class="form-control" name="account_number" placeholder="<?= lang('Employees.xin_account_number');?>" value="<?php echo esc($result['account_number'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-6">
@@ -67,7 +67,7 @@ $result = $AccountsModel->where('account_id', $account_id)->first();
         <label for="branch_code">
           <?= lang('Finance.xin_acc_branch_code');?>
         </label>
-        <input type="text" class="form-control" name="branch_code" placeholder="<?= lang('Finance.xin_acc_branch_code');?>" value="<?php echo $result['branch_code'];?>">
+        <input type="text" class="form-control" name="branch_code" placeholder="<?= lang('Finance.xin_acc_branch_code');?>" value="<?php echo esc($result['branch_code'], 'attr')?>">
       </div>
     </div>
     <div class="col-md-12">

@@ -218,21 +218,21 @@ class Officeshifts extends BaseController {
 					}
 				}
 			} else {
-				$shift_name = $this->request->getPost('shift_name',FILTER_SANITIZE_STRING);
-				$monday_in_time = $this->request->getPost('monday_in_time',FILTER_SANITIZE_STRING);
-				$monday_out_time = $this->request->getPost('monday_out_time',FILTER_SANITIZE_STRING);
-				$tuesday_in_time = $this->request->getPost('tuesday_in_time',FILTER_SANITIZE_STRING);
-				$tuesday_out_time = $this->request->getPost('tuesday_out_time',FILTER_SANITIZE_STRING);
-				$wednesday_in_time = $this->request->getPost('wednesday_in_time',FILTER_SANITIZE_STRING);
-				$wednesday_out_time = $this->request->getPost('wednesday_out_time',FILTER_SANITIZE_STRING);
-				$thursday_in_time = $this->request->getPost('thursday_in_time',FILTER_SANITIZE_STRING);
-				$thursday_out_time = $this->request->getPost('thursday_out_time',FILTER_SANITIZE_STRING);
-				$friday_in_time = $this->request->getPost('friday_in_time',FILTER_SANITIZE_STRING);
-				$friday_out_time = $this->request->getPost('friday_out_time',FILTER_SANITIZE_STRING);
-				$saturday_in_time = $this->request->getPost('saturday_in_time',FILTER_SANITIZE_STRING);
-				$saturday_out_time = $this->request->getPost('saturday_out_time',FILTER_SANITIZE_STRING);
-				$sunday_in_time = $this->request->getPost('sunday_in_time',FILTER_SANITIZE_STRING);
-				$sunday_out_time = $this->request->getPost('sunday_out_time',FILTER_SANITIZE_STRING);
+				$shift_name = $this->request->getPost('shift_name');
+				$monday_in_time = $this->request->getPost('monday_in_time');
+				$monday_out_time = $this->request->getPost('monday_out_time');
+				$tuesday_in_time = $this->request->getPost('tuesday_in_time');
+				$tuesday_out_time = $this->request->getPost('tuesday_out_time');
+				$wednesday_in_time = $this->request->getPost('wednesday_in_time');
+				$wednesday_out_time = $this->request->getPost('wednesday_out_time');
+				$thursday_in_time = $this->request->getPost('thursday_in_time');
+				$thursday_out_time = $this->request->getPost('thursday_out_time');
+				$friday_in_time = $this->request->getPost('friday_in_time');
+				$friday_out_time = $this->request->getPost('friday_out_time');
+				$saturday_in_time = $this->request->getPost('saturday_in_time');
+				$saturday_out_time = $this->request->getPost('saturday_out_time');
+				$sunday_in_time = $this->request->getPost('sunday_in_time');
+				$sunday_out_time = $this->request->getPost('sunday_out_time');
 							
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -307,22 +307,22 @@ class Officeshifts extends BaseController {
 					}
 				}
 			} else {
-				$shift_name = $this->request->getPost('shift_name',FILTER_SANITIZE_STRING);
-				$monday_in_time = $this->request->getPost('monday_in_time',FILTER_SANITIZE_STRING);
-				$monday_out_time = $this->request->getPost('monday_out_time',FILTER_SANITIZE_STRING);
-				$tuesday_in_time = $this->request->getPost('tuesday_in_time',FILTER_SANITIZE_STRING);
-				$tuesday_out_time = $this->request->getPost('tuesday_out_time',FILTER_SANITIZE_STRING);
-				$wednesday_in_time = $this->request->getPost('wednesday_in_time',FILTER_SANITIZE_STRING);
-				$wednesday_out_time = $this->request->getPost('wednesday_out_time',FILTER_SANITIZE_STRING);
-				$thursday_in_time = $this->request->getPost('thursday_in_time',FILTER_SANITIZE_STRING);
-				$thursday_out_time = $this->request->getPost('thursday_out_time',FILTER_SANITIZE_STRING);
-				$friday_in_time = $this->request->getPost('friday_in_time',FILTER_SANITIZE_STRING);
-				$friday_out_time = $this->request->getPost('friday_out_time',FILTER_SANITIZE_STRING);
-				$saturday_in_time = $this->request->getPost('saturday_in_time',FILTER_SANITIZE_STRING);
-				$saturday_out_time = $this->request->getPost('saturday_out_time',FILTER_SANITIZE_STRING);
-				$sunday_in_time = $this->request->getPost('sunday_in_time',FILTER_SANITIZE_STRING);
-				$sunday_out_time = $this->request->getPost('sunday_out_time',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$shift_name = $this->request->getPost('shift_name');
+				$monday_in_time = $this->request->getPost('monday_in_time');
+				$monday_out_time = $this->request->getPost('monday_out_time');
+				$tuesday_in_time = $this->request->getPost('tuesday_in_time');
+				$tuesday_out_time = $this->request->getPost('tuesday_out_time');
+				$wednesday_in_time = $this->request->getPost('wednesday_in_time');
+				$wednesday_out_time = $this->request->getPost('wednesday_out_time');
+				$thursday_in_time = $this->request->getPost('thursday_in_time');
+				$thursday_out_time = $this->request->getPost('thursday_out_time');
+				$friday_in_time = $this->request->getPost('friday_in_time');
+				$friday_out_time = $this->request->getPost('friday_out_time');
+				$saturday_in_time = $this->request->getPost('saturday_in_time');
+				$saturday_out_time = $this->request->getPost('saturday_out_time');
+				$sunday_in_time = $this->request->getPost('sunday_in_time');
+				$sunday_out_time = $this->request->getPost('sunday_out_time');
+				$id = udecode($this->request->getPost('token'));
 				
 				$data = [
 					'shift_name' => $shift_name,
@@ -385,7 +385,7 @@ class Officeshifts extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$ShiftModel = new ShiftModel();
 			$result = $ShiftModel->where('office_shift_id', $id)->delete($id);

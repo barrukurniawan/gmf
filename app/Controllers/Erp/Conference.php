@@ -226,12 +226,12 @@ class Conference extends BaseController {
 					}
 				}
 			} else {
-				$conference_title = $this->request->getPost('conference_title',FILTER_SANITIZE_STRING);
-				$conference_date = $this->request->getPost('conference_date',FILTER_SANITIZE_STRING);
-				$conference_time = $this->request->getPost('conference_time',FILTER_SANITIZE_STRING);
-				$conference_room = $this->request->getPost('conference_room',FILTER_SANITIZE_STRING);
-				$conference_color = $this->request->getPost('conference_color',FILTER_SANITIZE_STRING);
-				$conference_note = $this->request->getPost('conference_note',FILTER_SANITIZE_STRING);
+				$conference_title = $this->request->getPost('conference_title');
+				$conference_date = $this->request->getPost('conference_date');
+				$conference_time = $this->request->getPost('conference_time');
+				$conference_room = $this->request->getPost('conference_room');
+				$conference_color = $this->request->getPost('conference_color');
+				$conference_note = $this->request->getPost('conference_note');
 							
 				$UsersModel = new UsersModel();
 				$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
@@ -239,7 +239,7 @@ class Conference extends BaseController {
 					$staff_id = $usession['sup_user_id'];
 					$company_id = $user_info['company_id'];
 				} else {
-					$assigned_ids = implode(',',$this->request->getPost('employee_id',FILTER_SANITIZE_STRING));
+					$assigned_ids = implode(',',$this->request->getPost('employee_id'));
 					$staff_id = $assigned_ids;
 					$company_id = $usession['sup_user_id'];
 				}
@@ -336,13 +336,13 @@ class Conference extends BaseController {
 					}
 				}
 			} else {
-				$conference_title = $this->request->getPost('conference_title',FILTER_SANITIZE_STRING);
-				$conference_date = $this->request->getPost('conference_date',FILTER_SANITIZE_STRING);
-				$conference_time = $this->request->getPost('conference_time',FILTER_SANITIZE_STRING);
-				$conference_room = $this->request->getPost('conference_room',FILTER_SANITIZE_STRING);
-				$conference_color = $this->request->getPost('conference_color',FILTER_SANITIZE_STRING);
-				$conference_note = $this->request->getPost('conference_note',FILTER_SANITIZE_STRING);
-				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+				$conference_title = $this->request->getPost('conference_title');
+				$conference_date = $this->request->getPost('conference_date');
+				$conference_time = $this->request->getPost('conference_time');
+				$conference_room = $this->request->getPost('conference_room');
+				$conference_color = $this->request->getPost('conference_color');
+				$conference_note = $this->request->getPost('conference_note');
+				$id = udecode($this->request->getPost('token'));
 				$data = [
 					'meeting_title'  => $conference_title,
 					'meeting_date'  => $conference_date,
@@ -395,7 +395,7 @@ class Conference extends BaseController {
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$usession = $session->get('sup_username');
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$MeetingModel = new MeetingModel();
 			$result = $MeetingModel->where('meeting_id', $id)->delete($id);

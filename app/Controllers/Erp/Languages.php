@@ -151,8 +151,8 @@ class Languages extends BaseController {
 			if($Return['error']!=''){
 				$this->output($Return);
 			}
-			$language_name = $this->request->getPost('language_name',FILTER_SANITIZE_STRING);
-			$language_code = $this->request->getPost('language_code',FILTER_SANITIZE_STRING);
+			$language_name = $this->request->getPost('language_name');
+			$language_code = $this->request->getPost('language_code');
 			
 			$new_dir 	= 'app/Language/'.$language_code;
 			$directoryName 	= $new_dir.'/Company.php';
@@ -349,7 +349,7 @@ class Languages extends BaseController {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$session = \Config\Services::session();
 			$request = \Config\Services::request();
-			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
+			$id = udecode($this->request->getPost('_token'));
 			$Return['csrf_hash'] = csrf_hash();
 			$LanguageModel = new LanguageModel();
 			$result = $LanguageModel->where('language_id', $id)->delete($id);
