@@ -79,12 +79,10 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     Company Manual Publication
     </span> </a> </li>
     <?php if(isset($setup_modules['training'])): if($setup_modules['training']==1):?>
-    <?php if(in_array('training_record1',staff_role_resource())) { ?>
     <!-- Training Record (CV) -->
     <li class="pc-item"> <a href="<?= site_url('erp/training-record');?>" class="pc-link"> <span class="pc-micon"><i data-feather="file-text"></i></span><span class="pc-mtext">
       Training Record
       </span> </a> </li>
-    <?php } ?>
     <?php endif; endif;?>
   <!-- Attendance -->
   <li class="pc-item pc-hasmenu <?php if(!empty($arr_mod['attendance_open']))echo $arr_mod['attendance_open'];?>"> <a href="#" class="pc-link sidenav-toggle"><span class="pc-micon"><i data-feather="clock"></i></span><span class="pc-mtext">
