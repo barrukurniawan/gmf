@@ -107,11 +107,13 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     Company Manual Publication
     </span> </a> </li>
   <?php if(isset($setup_modules['training'])): if($setup_modules['training']==1):?>
-  <?php if(in_array('training1',staff_role_resource()) || in_array('trainer1',staff_role_resource()) || in_array('training_skill1',staff_role_resource()) || in_array('training_calendar',staff_role_resource())) {?> 
+  <?php if(in_array('training1',staff_role_resource()) || in_array('trainer1',staff_role_resource()) || in_array('training_skill1',staff_role_resource()) || in_array('training_calendar',staff_role_resource())) {?>
   <!-- Training Session -->
   <li class="pc-item"> <a href="<?= site_url('erp/training-sessions');?>" class="pc-link"> <span class="pc-micon"><i data-feather="target"></i></span><span class="pc-mtext">
     <?= lang('Dashboard.left_training');?>
     </span> </a> </li>
+  <?php } ?>
+  <?php if(in_array('training_record1',staff_role_resource())) { ?>
   <!-- Training Record (CV) -->
   <li class="pc-item"> <a href="<?= site_url('erp/training-record');?>" class="pc-link"> <span class="pc-micon"><i data-feather="file-text"></i></span><span class="pc-mtext">
     Training Record
@@ -136,7 +138,7 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     ->groupEnd()
     ->countAllResults();
   ?>
-  <?php if($has_approval_records > 0) { ?>
+  <?php if(in_array('training_record1',staff_role_resource()) && $has_approval_records > 0) { ?>
   <!-- Record Approvals -->
   <li class="pc-item"> <a href="<?= site_url('erp/training-record-approvals'); ?>" class="pc-link"> <span class="pc-micon"><i data-feather="check-square"></i></span><span class="pc-mtext">
     Record Approvals

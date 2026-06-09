@@ -49,3 +49,5 @@ yarn-error.log*
 
 # Keep sample env in source control
 !.env.example
+
+AGENTS.md
