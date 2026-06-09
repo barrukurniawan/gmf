@@ -123,7 +123,7 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
   $TrainingRecordHeaderModel = new \App\Models\TrainingRecordHeaderModel();
   $has_training_record = $TrainingRecordHeaderModel->where('user_id', $usession['sup_user_id'])->first();
   ?>
-  <?php if(in_array('training_record1',staff_role_resource()) && $has_training_record) { ?>
+  <?php if($has_training_record) { ?>
   <!-- My Training Record -->
   <li class="pc-item"> <a href="<?= site_url('erp/training-record-my/' . uencode($usession['sup_user_id'])); ?>" class="pc-link"> <span class="pc-micon"><i data-feather="file-text"></i></span><span class="pc-mtext">
     My Training Record
@@ -138,7 +138,7 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     ->groupEnd()
     ->countAllResults();
   ?>
-  <?php if(in_array('training_record1',staff_role_resource()) && $has_approval_records > 0) { ?>
+  <?php if($has_approval_records > 0) { ?>
   <!-- Record Approvals -->
   <li class="pc-item"> <a href="<?= site_url('erp/training-record-approvals'); ?>" class="pc-link"> <span class="pc-micon"><i data-feather="check-square"></i></span><span class="pc-mtext">
     Record Approvals
