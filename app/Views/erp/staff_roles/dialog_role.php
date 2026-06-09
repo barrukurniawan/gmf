@@ -749,9 +749,6 @@ $(document).ready(function(){
 	<?php /*?>//Company Settings
 	{ id: "", class: "role-checkbox-modal custom-control-input input-light-primary", text: "<?= lang('Main.xin_company_settings');?>", value: "company_settings", check: "<?php if(isset($role_id)) { if(in_array('company_settings',$role_resources_ids)): echo 'checked'; else: echo ''; endif; }?>",},<?php */?>
 	
-	// Training Record
-	{ id: "", class: "role-checkbox-modal custom-control-input input-light-primary", text: "Training Record", value: "training_record1", check: "<?php if(isset($role_id)) { if(in_array('training_record1',$role_resources_ids)): echo 'checked'; else: echo ''; endif; }?>",},
-	
 	//Todo List
 	{ id: "", class: "role-checkbox-modal custom-control-input input-light-primary", text: "<?= lang('Main.xin_todo_ist');?>", value: "todo_ist", check: "<?php if(isset($role_id)) { if(in_array('todo_ist',$role_resources_ids)): echo 'checked'; else: echo ''; endif; }?>",},
 	//System Calendar

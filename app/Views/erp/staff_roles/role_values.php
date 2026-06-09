@@ -578,9 +578,6 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 	//Company Settings
 	{ id: "", class: "role-checkbox custom-control-input input-light-primary", text: "<?= lang('Main.xin_company_settings');?>", value: "company_settings",},<?php */?>
 	
-	// Training Record
-	{ id: "", class: "role-checkbox custom-control-input input-light-primary", text: "Training Record", value: "training_record1",},
-	
 	//Todo List
 	{ id: "", class: "role-checkbox custom-control-input input-light-primary", text: "<?= lang('Main.xin_todo_ist');?>", value: "todo_ist",},
 	//System Calendar
