@@ -2,6 +2,9 @@
 .env
 .env.*
 
+# Ignore .htaccess — managed by cPanel on server (PHP limits via MultiPHP INI Editor)
+.htaccess
+
 # Ignore writable directories and generated files
 /writable/*
 !/writable/.gitkeep
