@@ -350,6 +350,9 @@ $routes->get('erp/quote-detail/(:segment)', 'Orderquotes::quote_details', ['name
 $routes->get('erp/edit-quote/(:segment)', 'Orderquotes::edit_quote', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/print-quote/(:segment)', 'Orderquotes::view_quote_order', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 
+// Capability Evaluation
+$routes->get('erp/capability-evaluation/', 'CapabilityEvaluation::index', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+
 // Regulation Portal
 $routes->get('erp/regulation-portal/', 'Regulation::index', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/regulation-portal/(:segment)', 'Regulation::index/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);

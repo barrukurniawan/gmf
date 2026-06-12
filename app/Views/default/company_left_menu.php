@@ -83,6 +83,10 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     <li class="pc-item"> <a href="<?= site_url('erp/training-record');?>" class="pc-link"> <span class="pc-micon"><i data-feather="file-text"></i></span><span class="pc-mtext">
       Training Record
       </span> </a> </li>
+    <!-- Capability Evaluation -->
+    <li class="pc-item <?php if($router->controllerName() == '\App\Controllers\Erp\CapabilityEvaluation')echo 'active';?>"> <a href="<?= site_url('erp/capability-evaluation');?>" class="pc-link"> <span class="pc-micon"><i data-feather="send"></i></span><span class="pc-mtext">
+      Capability Evaluation
+      </span> </a> </li>
     <?php endif; endif;?>
   <!-- Attendance -->
   <li class="pc-item pc-hasmenu <?php if(!empty($arr_mod['attendance_open']))echo $arr_mod['attendance_open'];?>"> <a href="#" class="pc-link sidenav-toggle"><span class="pc-micon"><i data-feather="clock"></i></span><span class="pc-mtext">
