@@ -263,6 +263,23 @@ $activeDoc = $active_doc ?? null;
         min-height: 380px;
     }
 }
+
+/* DataTables pagination & info center */
+.dataTables_info {
+    text-align: center !important;
+    padding: 0.75rem 1rem 0.25rem !important;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.dataTables_paginate {
+    text-align: center !important;
+    padding: 0.5rem 1rem 1rem !important;
+}
+
+.dataTables_paginate .paginate_button {
+    display: inline-block;
+}
 </style>
 
 <div class="regulation-portal reg-content">
@@ -291,10 +308,10 @@ $activeDoc = $active_doc ?? null;
         <!-- Document List -->
         <div class="col-lg-5 mb-3">
             <div class="reg-card h-100">
-                <div class="reg-card-header" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
-                    <div class="d-flex align-items-center" style="gap:0.3rem; white-space:nowrap; flex-shrink:0;">
-                        <span style="font-size:0.875rem; color:#475569;">Show</span>
-                        <select id="docLengthSelect" class="form-control form-control-sm" style="width:70px;">
+                <div class="reg-card-header" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:nowrap; gap:0.4rem; padding:0.75rem 1rem;">
+                    <div class="d-flex align-items-center flex-shrink-0" style="gap:0.3rem;">
+                        <span style="font-size:0.8rem; color:#475569; white-space:nowrap;">Show</span>
+                        <select id="docLengthSelect" class="form-control form-control-sm" style="width:58px; font-size:0.8rem;">
                             <option value="5">5</option>
                             <option value="10" selected>10</option>
                             <option value="25">25</option>
@@ -302,13 +319,13 @@ $activeDoc = $active_doc ?? null;
                             <option value="-1">All</option>
                         </select>
                     </div>
-                    <div class="d-flex align-items-center" style="gap:0.5rem; flex-wrap:wrap; flex-shrink:0;">
-                        <div class="reg-search-box" style="max-width:160px;">
+                    <div class="d-flex align-items-center flex-shrink-0" style="gap:0.35rem;">
+                        <div class="reg-search-box" style="max-width:130px;">
                             <i class="fas fa-search"></i>
-                            <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari...">
+                            <input type="text" id="docSearch" class="form-control form-control-sm" placeholder="Cari..." style="font-size:0.8rem;">
                         </div>
                         <?php if ($can_crud ?? false): ?>
-                        <button type="button" class="btn btn-primary btn-sm btn-add-doc" data-toggle="modal" data-target="#regulation-modal" style="white-space:nowrap;">
+                        <button type="button" class="btn btn-primary btn-sm btn-add-doc" data-toggle="modal" data-target="#regulation-modal" style="white-space:nowrap; font-size:0.8rem; padding:0.25rem 0.6rem;">
                             <i class="fas fa-plus mr-1"></i> Tambah
                         </button>
                         <?php endif; ?>
