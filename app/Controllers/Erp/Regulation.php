@@ -347,7 +347,7 @@ class Regulation extends BaseController
                 'errors' => ['required' => 'Kategori wajib dipilih.']
             ],
             'document_file' => [
-                'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                'rules'  => 'uploaded[document_file]|max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
                 'errors' => ['uploaded' => 'File dokumen wajib diupload.']
             ]
         ];
@@ -505,7 +505,7 @@ class Regulation extends BaseController
         if ($document_file && $document_file->isValid() && !$document_file->hasMoved()) {
             $validated = $this->validate([
                 'document_file' => [
-                    'rules'  => 'max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                    'rules'  => 'max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
                 ]
             ]);
 
