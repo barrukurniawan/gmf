@@ -273,7 +273,7 @@ $activeDoc = $active_doc ?? null;
 }
 
 .dataTables_paginate {
-    text-align: center !important;
+    text-align: left !important;
     padding: 0.5rem 1rem 1rem !important;
 }
 
