@@ -153,6 +153,20 @@ class Users extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');
+		
+		// AUTH CHECK: require login
+		if(!$session->has('sup_username')){
+			return redirect()->to(site_url('erp/login'));
+		}
+		// PERMISSION CHECK: only super_user can add users
+		$UsersModel = new UsersModel();
+		$current_user = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+		if(!$current_user || $current_user['user_type'] !== 'super_user'){
+			$Return = array('result'=>'', 'error'=>lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash'=>csrf_hash());
+			$this->output($Return);
+			exit;
+		}
+		
 		if ($this->request->getPost('type') === 'add_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
@@ -234,9 +248,9 @@ class Users extends BaseController {
 				$Return['error'] = lang('Users.xin_user_photo_field');
 			} else {
 				$avatar = $this->request->getFile('file');
-				$file_name = $avatar->getName();
-				$avatar->move('public/uploads/users/');
-				$image->withFile(filesrc($file_name))
+				$file_name = $avatar->getRandomName();
+				$avatar->move('public/uploads/users/', $file_name);
+				$image->withFile('public/uploads/users/'.$file_name)
 				->fit(100, 100, 'center')
 				->save('public/uploads/users/thumb/'.$file_name);
 			}
@@ -334,7 +348,21 @@ class Users extends BaseController {
 		$validation =  \Config\Services::validation();
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
-		$usession = $session->get('sup_username');	
+		$usession = $session->get('sup_username');
+		
+		// AUTH CHECK: require login
+		if(!$session->has('sup_username')){
+			return redirect()->to(site_url('erp/login'));
+		}
+		// PERMISSION CHECK: only super_user can update users
+		$UsersModel = new UsersModel();
+		$current_user = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+		if(!$current_user || $current_user['user_type'] !== 'super_user'){
+			$Return = array('result'=>'', 'error'=>lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash'=>csrf_hash());
+			$this->output($Return);
+			exit;
+		}
+		
 		if ($this->request->getPost('type') === 'edit_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
@@ -416,7 +444,23 @@ class Users extends BaseController {
 			$state = $this->request->getPost('state',FILTER_SANITIZE_STRING);
 			$zipcode = $this->request->getPost('zipcode',FILTER_SANITIZE_STRING);
 			$status = $this->request->getPost('status',FILTER_SANITIZE_STRING);
-			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));	
+			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			
+			// SECURITY: Prevent editing the primary super admin (user_id=1) unless you ARE user_id=1
+			if($id == 1 && $usession['sup_user_id'] != 1){
+				$Return['error'] = lang('Dashboard.xin_error_unauthorized_module');
+				$this->output($Return);
+				exit;
+			}
+			
+			// SECURITY: Verify the target user exists and is a super_user (prevent cross-type editing)
+			$target_user = $UsersModel->where('user_id', $id)->first();
+			if(!$target_user || $target_user['user_type'] !== 'super_user'){
+				$Return['error'] = lang('Dashboard.xin_error_unauthorized_module');
+				$this->output($Return);
+				exit;
+			}
+			
 			$data = [
 				'first_name' => $first_name,
 				'last_name'  => $last_name,
@@ -432,8 +476,8 @@ class Users extends BaseController {
 				'zipcode' => $zipcode,
 				'gender' => $gender,
 				'is_active'  => $status,
+				// NOTE: user_type is NOT editable from this form — prevents privilege escalation
 			];
-			$UsersModel = new UsersModel();
 			$result = $UsersModel->update($id, $data);	
 			$Return['csrf_hash'] = csrf_hash();	
 			if ($result == TRUE) {
@@ -518,6 +562,20 @@ class Users extends BaseController {
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
 		$usession = $session->get('sup_username');
+		
+		// AUTH CHECK: require login
+		if(!$session->has('sup_username')){
+			return redirect()->to(site_url('erp/login'));
+		}
+		// PERMISSION CHECK: only super_user can update profile photos
+		$UsersModel = new UsersModel();
+		$current_user = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+		if(!$current_user || $current_user['user_type'] !== 'super_user'){
+			$Return = array('result'=>'', 'error'=>lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash'=>csrf_hash());
+			$this->output($Return);
+			exit;
+		}
+		
 		if ($this->request->getPost('type') === 'edit_record') {
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
 			$Return['csrf_hash'] = csrf_hash();
@@ -534,9 +592,9 @@ class Users extends BaseController {
 				$Return['error'] = lang('Main.xin_error_profile_picture_field');
 			} else {
 				$avatar = $this->request->getFile('file');
-				$file_name = $avatar->getName();
-				$avatar->move('public/uploads/users/');
-				$image->withFile(filesrc($file_name))
+				$file_name = $avatar->getRandomName();
+				$avatar->move('public/uploads/users/', $file_name);
+				$image->withFile('public/uploads/users/'.$file_name)
 				->fit(100, 100, 'center')
 				->save('public/uploads/users/thumb/'.$file_name);
 			}
@@ -544,10 +602,16 @@ class Users extends BaseController {
 				$this->output($Return);
 			}
 			$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));
+			
+			// SECURITY: Verify target user is a super_user
+			$target_user = $UsersModel->where('user_id', $id)->first();
+			if(!$target_user || $target_user['user_type'] !== 'super_user'){
+				$Return['error'] = lang('Dashboard.xin_error_unauthorized_module');
+				$this->output($Return);
+				exit;
+			}
+			
 			if ($validated) {
-				$UsersModel = new UsersModel();
-					
-				
 				$Return['result'] = lang('Main.xin_profile_picture_success_updated');
 				$data = [
 					'profile_photo'  => $file_name
@@ -703,14 +767,50 @@ class Users extends BaseController {
 	 // delete record
 	public function delete_user() {
 		
+		$session = \Config\Services::session();
+		// AUTH CHECK: require login
+		if(!$session->has('sup_username')){
+			return redirect()->to(site_url('erp/login'));
+		}
+		// PERMISSION CHECK: only super_user can delete users
+		$usession = $session->get('sup_username');
+		$UsersModel = new UsersModel();
+		$current_user = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+		if(!$current_user || $current_user['user_type'] !== 'super_user'){
+			$Return = array('result'=>'', 'error'=>lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash'=>csrf_hash());
+			$this->output($Return);
+			exit;
+		}
+		
 		if($this->request->getPost('type')=='delete_record') {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
-			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
 			$Return['csrf_hash'] = csrf_hash();
-			$UsersModel = new UsersModel();
+			
+			// SECURITY: Prevent deleting primary super admin (user_id=1)
+			if($id == 1){
+				$Return['error'] = lang('Dashboard.xin_error_unauthorized_module');
+				$this->output($Return);
+				exit;
+			}
+			
+			// SECURITY: Prevent deleting yourself
+			if($id == $usession['sup_user_id']){
+				$Return['error'] = 'You cannot delete your own account.';
+				$this->output($Return);
+				exit;
+			}
+			
+			// SECURITY: Only allow deleting super_user type
+			$target_user = $UsersModel->where('user_id', $id)->first();
+			if(!$target_user || $target_user['user_type'] !== 'super_user'){
+				$Return['error'] = lang('Dashboard.xin_error_unauthorized_module');
+				$this->output($Return);
+				exit;
+			}
+			
 			$result = $UsersModel->where('user_id', $id)->delete($id);
 			if ($result == TRUE) {
 				$Return['result'] = lang('Users.xin_success_delete_user');
@@ -723,13 +823,35 @@ class Users extends BaseController {
 	// delete record
 	public function delete_role() {
 		
+		$session = \Config\Services::session();
+		// AUTH CHECK: require login
+		if(!$session->has('sup_username')){
+			return redirect()->to(site_url('erp/login'));
+		}
+		// PERMISSION CHECK: only super_user can delete roles
+		$usession = $session->get('sup_username');
+		$UsersModel = new UsersModel();
+		$current_user = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+		if(!$current_user || $current_user['user_type'] !== 'super_user'){
+			$Return = array('result'=>'', 'error'=>lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash'=>csrf_hash());
+			$this->output($Return);
+			exit;
+		}
+		
 		if($this->request->getPost('type')=='delete_record') {
 			/* Define return | here result is used to return user data and error for error message */
 			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
-			$session = \Config\Services::session();
 			$request = \Config\Services::request();
 			$id = udecode($this->request->getPost('_token',FILTER_SANITIZE_STRING));
 			$Return['csrf_hash'] = csrf_hash();
+			
+			// SECURITY: Prevent deleting primary role (role_id=1)
+			if($id == 1){
+				$Return['error'] = lang('Dashboard.xin_error_unauthorized_module');
+				$this->output($Return);
+				exit;
+			}
+			
 			$SuperroleModel = new SuperroleModel();
 			$result = $SuperroleModel->where('role_id', $id)->delete($id);
 			if ($result == TRUE) {

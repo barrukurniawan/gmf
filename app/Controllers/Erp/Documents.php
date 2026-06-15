@@ -736,35 +736,66 @@ class Documents extends BaseController {
 	}
 
 
-	public function view_pdf($type, $filename) {
+	public function view_pdf($type = '', $filename = '') {
 		$session = \Config\Services::session();
 		if(!$session->has('sup_username')){ 
 			return redirect()->to(site_url('erp/login'));
 		}
 		
+		if (empty($type) || empty($filename)) {
+			die('Invalid request');
+		}
+		
+		// Path traversal protection: sanitize type and filename
+		$type = basename(str_replace(['..', '/', '\\'], '', $type));
 		$filename = udecode($filename);
+		$filename = basename(str_replace(['..', '/', '\\'], '', $filename));
+		
+		// Whitelist allowed subdirectories
+		$allowed_types = ['system_documents', 'official_documents', 'employees', 'training', 'regulation_documents', 'announcements', 'tickets', 'awards', 'travel', 'projects', 'company', 'assets', 'tasks', 'recruitment'];
+		if (!in_array($type, $allowed_types)) {
+			die('Invalid document type');
+		}
+		
 		$path = ROOTPATH . 'public/uploads/' . $type . '/' . $filename;
+		
+		// Verify resolved path stays within uploads directory
+		$real_path = realpath($path);
+		$uploads_dir = realpath(ROOTPATH . 'public/uploads/');
+		if ($real_path === false || strpos($real_path, $uploads_dir) !== 0) {
+			die('Access denied');
+		}
 		
 		if (file_exists($path)) {
 			$ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-			if ($ext == 'pdf') {
-				header('Content-Type: application/pdf');
-				header('Content-Disposition: inline; filename="' . basename($path) . '"');
-				header('Cache-Control: private, max-age=0, must-revalidate');
-				header('Pragma: public');
-				readfile($path);
-				exit;
-			} else {
-				if(function_exists('mime_content_type')) {
-					$mime = mime_content_type($path);
-				} else {
-					$mime = 'application/octet-stream';
-				}
-				header('Content-Type: ' . $mime);
-				header('Content-Disposition: inline; filename="' . basename($path) . '"');
-				readfile($path);
-				exit;
+			
+			// Whitelist allowed file extensions
+			$allowed_exts = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
+			if (!in_array($ext, $allowed_exts)) {
+				die('File type not allowed');
 			}
+			
+			// Set content type based on extension
+			$mime_map = [
+				'pdf'  => 'application/pdf',
+				'png'  => 'image/png',
+				'jpg'  => 'image/jpeg',
+				'jpeg' => 'image/jpeg',
+				'gif'  => 'image/gif',
+				'txt'  => 'text/plain',
+				'xls'  => 'application/vnd.ms-excel',
+				'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+				'doc'  => 'application/msword',
+				'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+			];
+			
+			$mime = $mime_map[$ext] ?? 'application/octet-stream';
+			header('Content-Type: ' . $mime);
+			header('Content-Disposition: inline; filename="' . basename($path) . '"');
+			header('Cache-Control: private, max-age=0, must-revalidate');
+			header('Pragma: public');
+			readfile($path);
+			exit;
 		} else {
 			die('File not found');
 		}

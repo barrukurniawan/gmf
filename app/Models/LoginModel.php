@@ -152,19 +152,40 @@ class LoginModel extends Model
 		}
 	}
 	
-	// Read data using username and password
 	public function pincode_login($data) {
 	
-		//$system = $this->read_setting_info(1);	
-		$sql = 'SELECT * FROM xin_employees WHERE pincode = ? AND is_active = ?';
-		$binds = array($data['pincode'],1);
-		$query = $this->db->query($sql, $binds);
-		if ($query->getRow() > 0) {
-			$res_pic = $query->getResult();
-			return true;
-		} else {
+		// Validate pincode format: must be 4-8 digits only
+		if (!isset($data['pincode']) || !preg_match('/^\d{4,8}$/', $data['pincode'])) {
 			return false;
 		}
+		
+		//$system = $this->read_setting_info(1);	
+		// First try: hash-based lookup (for migrated pins)
+		$sql = 'SELECT * FROM xin_employees WHERE is_active = ?';
+		$binds = array(1);
+		$query = $this->db->query($sql, $binds);
+		if ($query->getNumRows() > 0) {
+			$employees = $query->getResultArray();
+			foreach ($employees as $emp) {
+				if (!empty($emp['pincode']) && password_verify($data['pincode'], $emp['pincode'])) {
+					return true;
+				}
+			}
+		}
+		
+		// Fallback: plaintext match for unmigrated pins (log warning)
+		$sql2 = 'SELECT * FROM xin_employees WHERE pincode = ? AND is_active = ?';
+		$binds2 = array($data['pincode'], 1);
+		$query2 = $this->db->query($sql2, $binds2);
+		if ($query2->getNumRows() > 0) {
+			// Auto-migrate: hash the plaintext pin
+			$row = $query2->getRowArray();
+			$hashed = password_hash($data['pincode'], PASSWORD_BCRYPT, ['cost' => 10]);
+			$this->db->query('UPDATE xin_employees SET pincode = ? WHERE user_id = ?', [$hashed, $row['user_id']]);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	// Read data using email and password > frontend user
@@ -211,12 +232,35 @@ class LoginModel extends Model
 	// Read data from database to show data in admin page
 	public function read_user_info_pin($pincode) {
 	
+		// Validate pincode format: must be 4-8 digits only
+		if (!preg_match('/^\d{4,8}$/', $pincode)) {
+			return false;
+		}
+		
 		$system = $this->read_setting_info(1);
-		$sql = 'SELECT * FROM xin_employees WHERE pincode = ?';
-		$binds = array($pincode);
+		
+		// Try hash-based lookup first
+		$sql = 'SELECT * FROM xin_employees WHERE is_active = ?';
+		$binds = array(1);
 		$query = $this->db->query($sql, $binds);
-		if ($query->num_rows() > 0) {
-			return $query->result();
+		if ($query->getNumRows() > 0) {
+			$employees = $query->getResultArray();
+			foreach ($employees as $emp) {
+				if (!empty($emp['pincode']) && password_verify($pincode, $emp['pincode'])) {
+					// Return as object array for compatibility
+					$sql2 = 'SELECT * FROM xin_employees WHERE user_id = ?';
+					$q2 = $this->db->query($sql2, [$emp['user_id']]);
+					return $q2->getResult();
+				}
+			}
+		}
+		
+		// Fallback: plaintext match for unmigrated pins
+		$sql3 = 'SELECT * FROM xin_employees WHERE pincode = ?';
+		$binds3 = array($pincode);
+		$query3 = $this->db->query($sql3, $binds3);
+		if ($query3->getNumRows() > 0) {
+			return $query3->getResult();
 		} else {
 			return false;
 		}
