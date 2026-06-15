@@ -590,8 +590,18 @@ class Tickets extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment_file');
-				$file_name = $attachment->getName();
-				$attachment->move('public/uploads/tickets/');
+				$file_ext = $attachment->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $attachment->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $attachment->getRandomName();
+				$attachment->move('public/uploads/tickets/', $file_name);
 				
 				$file_title = $this->request->getPost('file_name',FILTER_SANITIZE_STRING);
 				$id = udecode($this->request->getPost('token',FILTER_SANITIZE_STRING));

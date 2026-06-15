@@ -21,7 +21,7 @@ $locale = service('request')->getLocale();
 $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 if($user_info['user_type'] == 'staff'){
 	$id = $usession['sup_user_id'];
-	$get_tasks = $TasksModel->where('company_id',$user_info['company_id'])->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id' or created_by = '$id'")->paginate(9);
+	$get_tasks = $TasksModel->where('company_id',$user_info['company_id'])->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->orWhere('created_by', $id)->groupEnd()->paginate(9);
 	$total_tasks = $TasksModel->where('company_id',$user_info['company_id'])->orderBy('task_id', 'ASC')->countAllResults();
 	$not_started = $TasksModel->where('company_id',$user_info['company_id'])->where('task_status', 0)->countAllResults();
 	$in_progress = $TasksModel->where('company_id',$user_info['company_id'])->where('task_status', 1)->countAllResults();

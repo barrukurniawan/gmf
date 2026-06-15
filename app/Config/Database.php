@@ -30,11 +30,11 @@ class Database extends \CodeIgniter\Database\Config
 	 * @var array
 	 */
 	public $default = [
-		'DSN'      => 'mysql:host=localhost;dbname=globaldb',
+		'DSN'      => '',
 		'hostname' => 'localhost',
-		'username' => 'root',
+		'username' => '',
 		'password' => '',
-		'database' => 'globalmaintenanc_dashboard',
+		'database' => '',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => true,

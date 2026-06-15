@@ -215,7 +215,8 @@ class MainModel extends Model {
 		$db      = \Config\Database::connect();	
 		$builder = $db->table('ci_holidays');
 		$builder->where('is_publish', 1);
-		$builder->where("? BETWEEN start_date AND end_date", [$attendance_date]);
+		$builder->where('start_date <=', $attendance_date);
+		$builder->where('end_date >=', $attendance_date);
 		$builder->limit(1);
 		$query = $builder->get();
 		$holidays = $query->getResult();
@@ -235,7 +236,8 @@ class MainModel extends Model {
 		$builder = $db->table('ci_leave_applications');
 		$builder->where('employee_id', $staff_id);
 		$builder->where('status', 2);
-		$builder->where("? BETWEEN from_date AND to_date", [$leave_date]);
+		$builder->where('from_date <=', $leave_date);
+		$builder->where('to_date >=', $leave_date);
 		$builder->limit(1);
 		$query = $builder->get();
 		$leave_info = $query->getResult();

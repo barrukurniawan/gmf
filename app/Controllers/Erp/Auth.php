@@ -29,7 +29,8 @@ use App\Models\CompanymembershipModel;
 class Auth extends BaseController
 {	
 	 
-	protected $request;	
+	protected $request;
+	protected $noAuth = true;	
 	 
 	public function login() {
 			

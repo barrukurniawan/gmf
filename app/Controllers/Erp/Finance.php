@@ -666,7 +666,7 @@ class Finance extends BaseController {
 	}
 	// |||add record|||
 	public function add_deposit() {
-			
+
 		$validation =  \Config\Services::validation();
 		$session = \Config\Services::session();
 		$request = \Config\Services::request();
@@ -740,10 +740,19 @@ class Finance extends BaseController {
 					}
 				}
 			} else {
-				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
-				$attachment->move('public/uploads/transactions/');
+				$file_ext = $attachment->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $attachment->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $attachment->getRandomName();
+				$attachment->move('public/uploads/transactions/', $file_name);
 				
 				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);
 				$amount = $this->request->getPost('amount',FILTER_SANITIZE_STRING);
@@ -872,10 +881,19 @@ class Finance extends BaseController {
 					}
 				}
 			} else {
-				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
-				$attachment->move('public/uploads/transactions/');
+				$file_ext = $attachment->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $attachment->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $attachment->getRandomName();
+				$attachment->move('public/uploads/transactions/', $file_name);
 				
 				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);
 				$amount = $this->request->getPost('amount',FILTER_SANITIZE_STRING);
@@ -1008,8 +1026,18 @@ class Finance extends BaseController {
 				]);
 				if ($validated) {
 					$attachment = $this->request->getFile('attachment');
-					$file_name = $attachment->getName();
-					$attachment->move('public/uploads/transactions/');
+					$file_ext = $attachment->getClientExtension();
+					if ($file_ext === '' || $file_ext === null) {
+						$file_ext = $attachment->getExtension();
+					}
+					$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+					if(!in_array(strtolower($file_ext), $allowed_exts)) {
+						$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+						$this->output($Return);
+						exit;
+					}
+					$file_name = $attachment->getRandomName();
+					$attachment->move('public/uploads/transactions/', $file_name);
 				}
 				
 				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);
@@ -1144,8 +1172,18 @@ class Finance extends BaseController {
 				]);
 				if ($validated) {
 					$attachment = $this->request->getFile('attachment');
-					$file_name = $attachment->getName();
-					$attachment->move('public/uploads/transactions/');
+					$file_ext = $attachment->getClientExtension();
+					if ($file_ext === '' || $file_ext === null) {
+						$file_ext = $attachment->getExtension();
+					}
+					$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+					if(!in_array(strtolower($file_ext), $allowed_exts)) {
+						$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+						$this->output($Return);
+						exit;
+					}
+					$file_name = $attachment->getRandomName();
+					$attachment->move('public/uploads/transactions/', $file_name);
 				}
 				
 				$account_id = $this->request->getPost('account_id',FILTER_SANITIZE_STRING);

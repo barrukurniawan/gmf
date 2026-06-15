@@ -21,7 +21,7 @@ if($user_info['user_type'] == 'staff'){
 	$id = $usession['sup_user_id'];
 	$staff_info = $UsersModel->where('company_id', $user_info['company_id'])->where('user_type','staff')->findAll();
 	$all_clients = $UsersModel->where('company_id', $user_info['company_id'])->where('user_type','customer')->findAll();
-	$get_projects = $ProjectsModel->where('company_id',$user_info['company_id'])->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id' or added_by = '$id'")->paginate(9);
+	$get_projects = $ProjectsModel->where('company_id',$user_info['company_id'])->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->orWhere('added_by', $id)->groupEnd()->paginate(9);
 	$total_projects = $ProjectsModel->where('company_id',$user_info['company_id'])->countAllResults();
 	$not_started = $ProjectsModel->where('company_id',$user_info['company_id'])->where('status', 0)->countAllResults();
 	$in_progress = $ProjectsModel->where('company_id',$user_info['company_id'])->where('status', 1)->countAllResults();

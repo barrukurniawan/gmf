@@ -176,8 +176,18 @@ class Awards extends BaseController {
 			} else {
 				// upload file
 				$award_picture = $this->request->getFile('award_picture');
-				$file_name = $award_picture->getName();
-				$award_picture->move('public/uploads/awards/');
+				$file_ext = $award_picture->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $award_picture->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $award_picture->getRandomName();
+				$award_picture->move('public/uploads/awards/', $file_name);
 				
 				$award_type_id = $this->request->getPost('award_type_id',FILTER_SANITIZE_STRING);
 				$award_date = $this->request->getPost('award_date',FILTER_SANITIZE_STRING);

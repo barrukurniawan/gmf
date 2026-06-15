@@ -1541,8 +1541,18 @@ class Employees extends BaseController {
 			} else {
 				// upload file
 				$document_file = $this->request->getFile('document_file');
-				$file_name = $document_file->getName();
-				$document_file->move('public/uploads/documents/');
+				$file_ext = $document_file->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $document_file->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $document_file->getRandomName();
+				$document_file->move('public/uploads/documents/', $file_name);
 				
 				$document_name = $this->request->getPost('document_name',FILTER_SANITIZE_STRING);
 				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);

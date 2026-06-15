@@ -541,8 +541,18 @@ class Products extends BaseController {
 			} else {
 				// upload file
 				$product_image = $this->request->getFile('product_image');
-				$file_name = $product_image->getName();
-				$product_image->move('public/uploads/products/');
+				$file_ext = $product_image->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $product_image->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $product_image->getRandomName();
+				$product_image->move('public/uploads/products/', $file_name);
 				
 				$name = $this->request->getPost('name',FILTER_SANITIZE_STRING);
 				$category = $this->request->getPost('category',FILTER_SANITIZE_STRING);

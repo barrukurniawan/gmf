@@ -28,6 +28,14 @@ class BaseController extends Controller
 	protected $helpers = ['form','html','inflector','number','security','text','url','string','main','filesystem','encrypt','timehr'];
 
 	/**
+	 * Set to true in controllers that do not require authentication
+	 * (e.g. Auth, Logout, Home, Subscription).
+	 *
+	 * @var bool
+	 */
+	protected $noAuth = false;
+
+	/**
 	 * Constructor.
 	 */
 	public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
@@ -36,6 +44,15 @@ class BaseController extends Controller
 		parent::initController($request, $response, $logger);
 
 		$session = \Config\Services::session();
+		if (!$this->noAuth && !$session->has('sup_username')) {
+			if ($request->isAJAX()) {
+				header("Content-Type: application/json; charset=UTF-8");
+				echo json_encode(['error' => 'Session expired, please login again.']);
+				exit;
+			}
+			header('Location: ' . site_url('erp/login'));
+			exit;
+		}
 		$usession = $session->get('sup_username');
 		$language = \Config\Services::language();
 		

@@ -132,8 +132,18 @@ class Warning extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
-				$attachment->move('public/uploads/warning/');
+				$file_ext = $attachment->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $attachment->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $attachment->getRandomName();
+				$attachment->move('public/uploads/warning/', $file_name);
 				
 				$warning_type = $this->request->getPost('warning_type',FILTER_SANITIZE_STRING);
 				$subject = $this->request->getPost('subject',FILTER_SANITIZE_STRING);

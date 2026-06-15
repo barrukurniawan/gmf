@@ -192,8 +192,18 @@ class Policies extends BaseController {
 			} else {
 				// upload file
 				$attachment = $this->request->getFile('attachment');
-				$file_name = $attachment->getName();
-				$attachment->move('public/uploads/policy/');
+				$file_ext = $attachment->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $attachment->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $attachment->getRandomName();
+				$attachment->move('public/uploads/policy/', $file_name);
 				
 				$title = $this->request->getPost('title',FILTER_SANITIZE_STRING);
 				$description = $this->request->getPost('description',FILTER_SANITIZE_STRING);

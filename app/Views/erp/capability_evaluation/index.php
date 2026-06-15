@@ -113,7 +113,7 @@ $xin_system = erp_company_settings();
 
 <div class="card ce-card">
     <div class="card-header" style="background: transparent; border-bottom: none;">
-        <h4 class="ce-title">Pick the persona</h4>
+        <h4 class="ce-title">Pick capability evaluation</h4>
     </div>
     <div class="card-body">
         <div class="ce-container">

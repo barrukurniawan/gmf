@@ -538,7 +538,8 @@ if( !function_exists('account_statement_report') ){
 		}
 		
 		$builder = $db->table('ci_finance_transactions');
-		$builder->where('transaction_date BETWEEN "'. $start_date. '" and "'. $end_date.'"');
+		$builder->where("transaction_date >=", $start_date);
+		$builder->where("transaction_date <=", $end_date);
 		$builder->where('account_id', $get_id);
 		$builder->where('company_id', $company_id);
 		$query = $builder->get();
@@ -626,10 +627,12 @@ if( !function_exists('purchases_report') ){
 		
 		$builder = $db->table('ci_stock_purchases');
 		if($status == 'all_status'){
-			$builder->where('purchase_date BETWEEN "'. $start_date. '" and "'. $end_date.'"');
+			$builder->where("purchase_date >=", $start_date);
+			$builder->where("purchase_date <=", $end_date);
 			$builder->where('company_id', $company_id);
 		} else {
-			$builder->where('purchase_date BETWEEN "'. $start_date. '" and "'. $end_date.'"');
+			$builder->where("purchase_date >=", $start_date);
+			$builder->where("purchase_date <=", $end_date);
 			$builder->where('status', $status);
 			$builder->where('company_id', $company_id);
 		}
@@ -663,10 +666,12 @@ if( !function_exists('invoice_report') ){
 		
 		$builder = $db->table('ci_invoices');
 		if($status == 'all_status'){
-			$builder->where('invoice_date BETWEEN "'. $start_date. '" and "'. $end_date.'"');
+			$builder->where("invoice_date >=", $start_date);
+			$builder->where("invoice_date <=", $end_date);
 			$builder->where('company_id', $company_id);
 		} else {
-			$builder->where('invoice_date BETWEEN "'. $start_date. '" and "'. $end_date.'"');
+			$builder->where("invoice_date >=", $start_date);
+			$builder->where("invoice_date <=", $end_date);
 			$builder->where('status', $status);
 			$builder->where('company_id', $company_id);
 		}
@@ -700,10 +705,12 @@ if( !function_exists('sales_report') ){
 		
 		$builder = $db->table('ci_stock_orders');
 		if($status == 'all_status'){
-			$builder->where('invoice_date BETWEEN "'. $start_date. '" and "'. $end_date.'"');
+			$builder->where("invoice_date >=", $start_date);
+			$builder->where("invoice_date <=", $end_date);
 			$builder->where('company_id', $company_id);
 		} else {
-			$builder->where('invoice_date BETWEEN "'. $start_date. '" and "'. $end_date.'"');
+			$builder->where("invoice_date >=", $start_date);
+			$builder->where("invoice_date <=", $end_date);
 			$builder->where('status', $status);
 			$builder->where('company_id', $company_id);
 		}
@@ -797,7 +804,7 @@ if( !function_exists('staff_projects') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$data = $ProjectsModel->where('company_id',$company_id)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
+		$data = $ProjectsModel->where('company_id',$company_id)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
 		
 		return $data;
 	}
@@ -818,7 +825,7 @@ if( !function_exists('assigned_staff_projects') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$data = $ProjectsModel->where('company_id',$company_id)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id' or added_by = '$id'")->findAll();
+		$data = $ProjectsModel->where('company_id',$company_id)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->orWhere('added_by', $id)->groupEnd()->findAll();
 		
 		return $data;
 	}
@@ -839,11 +846,11 @@ if( !function_exists('assigned_staff_projects_board') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$not_started_projects = $ProjectsModel->where('company_id',$company_id)->where('status',0)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$inprogress_projects = $ProjectsModel->where('company_id',$company_id)->where('status',1)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$completed_projects = $ProjectsModel->where('company_id',$company_id)->where('status',2)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$cancelled_projects = $ProjectsModel->where('company_id',$company_id)->where('status',3)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$hold_projects = $ProjectsModel->where('company_id',$company_id)->where('status',4)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
+		$not_started_projects = $ProjectsModel->where('company_id',$company_id)->where('status',0)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$inprogress_projects = $ProjectsModel->where('company_id',$company_id)->where('status',1)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$completed_projects = $ProjectsModel->where('company_id',$company_id)->where('status',2)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$cancelled_projects = $ProjectsModel->where('company_id',$company_id)->where('status',3)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$hold_projects = $ProjectsModel->where('company_id',$company_id)->where('status',4)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
 		$data = array('not_started_projects'=>$not_started_projects,'inprogress_projects'=>$inprogress_projects,'completed_projects'=>$completed_projects,'cancelled_projects'=>$cancelled_projects,'hold_projects'=>$hold_projects);
 		return $data;
 	}
@@ -864,7 +871,7 @@ if( !function_exists('assigned_staff_tasks') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$data = $TasksModel->where('company_id',$company_id)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id' or created_by = '$id'")->findAll();
+		$data = $TasksModel->where('company_id',$company_id)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->orWhere('created_by', $id)->groupEnd()->findAll();
 		
 		return $data;
 	}
@@ -885,11 +892,11 @@ if( !function_exists('assigned_staff_tasks_board') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$not_started_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',0)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$inprogress_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',1)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$completed_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',2)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$cancelled_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',3)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
-		$hold_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',4)->where("assigned_to like '%$id,%' or assigned_to like '%,$id%' or assigned_to = '$id'")->findAll();
+		$not_started_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',0)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$inprogress_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',1)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$completed_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',2)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$cancelled_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',3)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
+		$hold_tasks = $TasksModel->where('company_id',$company_id)->where('task_status',4)->groupStart()->like('assigned_to', "$id,")->orLike('assigned_to', ",$id")->orWhere('assigned_to', $id)->groupEnd()->findAll();
 		$data = array('not_started_tasks'=>$not_started_tasks,'inprogress_tasks'=>$inprogress_tasks,'completed_tasks'=>$completed_tasks,'cancelled_tasks'=>$cancelled_tasks,'hold_tasks'=>$hold_tasks);
 		
 		return $data;
@@ -911,7 +918,7 @@ if( !function_exists('assigned_staff_training') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$data = $TrainingModel->where('company_id',$company_id)->where("employee_id like '%$id,%' or employee_id like '%,$id%' or employee_id = '$id'")->findAll();
+		$data = $TrainingModel->where('company_id',$company_id)->groupStart()->like('employee_id', "$id,")->orLike('employee_id', ",$id")->orWhere('employee_id', $id)->groupEnd()->findAll();
 		
 		return $data;
 	}
@@ -932,7 +939,7 @@ if( !function_exists('assigned_staff_events') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$data = $EventsModel->where('company_id',$company_id)->where("employee_id like '%$id,%' or employee_id like '%,$id%' or employee_id = '$id'")->findAll();
+		$data = $EventsModel->where('company_id',$company_id)->groupStart()->like('employee_id', "$id,")->orLike('employee_id', ",$id")->orWhere('employee_id', $id)->groupEnd()->findAll();
 		
 		return $data;
 	}
@@ -953,7 +960,7 @@ if( !function_exists('assigned_staff_conference') ){
 		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 		$company_id = $user_info['company_id'];
 		
-		$data = $MeetingModel->where('company_id',$company_id)->where("employee_id like '%$id,%' or employee_id like '%,$id%' or employee_id = '$id'")->findAll();
+		$data = $MeetingModel->where('company_id',$company_id)->groupStart()->like('employee_id', "$id,")->orLike('employee_id', ",$id")->orWhere('employee_id', $id)->groupEnd()->findAll();
 		
 		return $data;
 	}

@@ -21,6 +21,7 @@ use App\Models\UsersModel;
 
 class Logout extends BaseController
 {	 
+	protected $noAuth = true;
 	public function index() {
 	
 		$UsersModel = new UsersModel();

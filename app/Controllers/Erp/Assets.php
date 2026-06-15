@@ -159,8 +159,18 @@ class Assets extends BaseController {
 			} else {
 				// upload file
 				$asset_image = $this->request->getFile('asset_image');
-				$file_name = $asset_image->getName();
-				$asset_image->move('public/uploads/asset_image/');
+				$file_ext = $asset_image->getClientExtension();
+				if ($file_ext === '' || $file_ext === null) {
+					$file_ext = $asset_image->getExtension();
+				}
+				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
+				if(!in_array(strtolower($file_ext), $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $asset_image->getRandomName();
+				$asset_image->move('public/uploads/asset_image/', $file_name);
 				
 				$asset_name = $this->request->getPost('asset_name',FILTER_SANITIZE_STRING);
 				$category_id = $this->request->getPost('category_id',FILTER_SANITIZE_STRING);

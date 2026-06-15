@@ -27,6 +27,8 @@ use App\Models\MembershipModel;
 
 class Subscription extends BaseController {
 	
+	protected $noAuth = true;
+
 	public function index()
 	{		
 		$session = \Config\Services::session();
