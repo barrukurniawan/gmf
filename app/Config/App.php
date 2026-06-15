@@ -189,7 +189,7 @@ class App extends BaseConfig
 	public $sessionSavePath          = WRITEPATH . 'session';
 	public $sessionMatchIP           = false;
 	public $sessionTimeToUpdate      = 300;
-	public $sessionRegenerateDestroy = false;
+	public $sessionRegenerateDestroy = true;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -209,8 +209,8 @@ class App extends BaseConfig
 	public $cookiePrefix   = '';
 	public $cookieDomain   = '';
 	public $cookiePath     = '/';
-	public $cookieSecure   = false;
-	public $cookieHTTPOnly = false;
+	public $cookieSecure   = true;
+	public $cookieHTTPOnly = true;
 
 	/*
 	|--------------------------------------------------------------------------

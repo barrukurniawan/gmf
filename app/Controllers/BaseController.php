@@ -65,7 +65,7 @@ class BaseController extends Controller
 	/*Function to set JSON output*/
 	public function output($Return=array()){
 		/*Set response header*/
-		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Origin: " . rtrim(config('App')->baseURL, '/'));
 		header("Content-Type: application/json; charset=UTF-8");
 		/*Final JSON response*/
 		exit(json_encode($Return));

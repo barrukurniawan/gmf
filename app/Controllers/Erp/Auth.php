@@ -93,6 +93,8 @@ class Auth extends BaseController
 							'sup_username' => $iuser['username'],
 							'sup_email' => $iuser['email'],
 							);
+							// Regenerate session ID to prevent session fixation
+							$session->regenerate(true);
 							// Add user data in session
 							$session->set('sup_username', $session_data);
 							$session->set('sup_user_id', $session_data);
@@ -156,32 +158,45 @@ class Auth extends BaseController
 		$UsersModel = new UsersModel();
 		$SystemModel = new SystemModel();
 		$EmailtemplatesModel = new EmailtemplatesModel();
-		$email = udecode($_GET['v']);
+		
+		// Rate limiting: max 3 attempts per 5 minutes
+		$throttler = \Config\Services::throttler();
+		if (!$throttler->check('reset_password', 3, 5 * MINUTE)) {
+			$data['title'] = lang('Verified');
+			return view('erp/auth/verified_password', $data);
+		}
+		
+		$request = \Config\Services::request();
+		$email = udecode($request->getGet('v'));
 		$data['title'] = lang('Verified');
 		
 		$check_user = $UsersModel->where('email', $email)->countAllResults();
 		if($check_user > 0) {
-			$iuser = $UsersModel->where('email', $email, 'is_active',1)->first();
-			$username = $iuser['username'];
-			$options = array('cost' => 12);
-			$password = 'Hu2k4JHik42ol4hH32';
-			$password_hash = password_hash($password, PASSWORD_BCRYPT, $options);
-			
-			$xin_system = $SystemModel->where('setting_id', 1)->first();
-			$data = [
-				'password' => $password_hash,
-			];
-			$UsersModel->update($iuser['user_id'], $data);	
-			// Send mail start
-			$template = $EmailtemplatesModel->where('template_id', 2)->first();
-			$subject = $template['subject'];
-			$body = html_entity_decode($template['message']);
-			$body = str_replace(array("{site_name}","{password}","{username}"),array($xin_system['company_name'],$password,$username),$body);
-			timehrm_mail_data($xin_system['email'],$xin_system['company_name'],$email,$subject,$body);
-			// Send mail end
+			$iuser = $UsersModel->where('email', $email)->where('is_active', 1)->first();
+			if ($iuser) {
+				$username = $iuser['username'];
+				$options = array('cost' => 12);
+				// Generate a secure random password instead of hardcoded
+				$password = bin2hex(random_bytes(8)); // 16-char random password
+				$password_hash = password_hash($password, PASSWORD_BCRYPT, $options);
+				
+				$xin_system = $SystemModel->where('setting_id', 1)->first();
+				$data = [
+					'password' => $password_hash,
+				];
+				$UsersModel->update($iuser['user_id'], $data);	
+				// Send mail start
+				$template = $EmailtemplatesModel->where('template_id', 2)->first();
+				$subject = $template['subject'];
+				$body = html_entity_decode($template['message']);
+				$body = str_replace(array("{site_name}","{password}","{username}"),array($xin_system['company_name'],$password,$username),$body);
+				timehrm_mail_data($xin_system['email'],$xin_system['company_name'],$email,$subject,$body);
+				// Send mail end
+			}
 		}
 		
-					
+		// Always show same page regardless of whether email exists (prevent enumeration)
+		$data['title'] = lang('Verified');
 		return view('erp/auth/verified_password', $data);
 	}
 	
@@ -222,26 +237,32 @@ class Auth extends BaseController
 			} else {
 				$email = $this->request->getPost('email',FILTER_SANITIZE_STRING);
 				$check_user = $UsersModel->where('email', $email, 'is_active',1)->countAllResults();
-				if($check_user > 0){
-					$Return['result'] = lang('Main.xin_error_msg__available');
-					$iuser = $UsersModel->where('email', $email, 'is_active',1)->first();
-					$username = $iuser['username'];
-					$password = $iuser['password'];
-					
-					$xin_system = $SystemModel->where('setting_id', 1)->first();
-					$template = $EmailtemplatesModel->where('template_id', 1)->first();
-		
-					$subject = $template['subject'];
-					$body = html_entity_decode($template['message']);
-					$body = str_replace(array("{site_name}","{site_url}","{user_id}"),array($xin_system['company_name'],site_url(),uencode($email)),$body);
-					timehrm_mail_data($xin_system['email'],$xin_system['company_name'],$email,$subject,$body);
-					$this->output($Return);
-					exit;
-				} else {
-					$Return['error'] = lang('Main.xin_error_msg_not');
+				// Rate limiting: max 3 attempts per 5 minutes
+				$throttler = \Config\Services::throttler();
+				if (!$throttler->check('forgot_password', 3, 5 * MINUTE)) {
+					$Return['error'] = lang('Login.xin_error_max_attempts');
 					$this->output($Return);
 					exit;
 				}
+				
+				if($check_user > 0){
+					$iuser = $UsersModel->where('email', $email)->where('is_active', 1)->first();
+					if ($iuser) {
+						$username = $iuser['username'];
+						
+						$xin_system = $SystemModel->where('setting_id', 1)->first();
+						$template = $EmailtemplatesModel->where('template_id', 1)->first();
+			
+						$subject = $template['subject'];
+						$body = html_entity_decode($template['message']);
+						$body = str_replace(array("{site_name}","{site_url}","{user_id}"),array($xin_system['company_name'],site_url(),uencode($email)),$body);
+						timehrm_mail_data($xin_system['email'],$xin_system['company_name'],$email,$subject,$body);
+					}
+				}
+				// Always show same success message to prevent email enumeration
+				$Return['result'] = lang('Main.xin_error_msg__available');
+				$this->output($Return);
+				exit;
 				/*$username = $iuser['username'];
 				$user_info = $UsersModel->where('username', $username)->where('is_active',1)->first();
 				$data = array(
@@ -307,6 +328,8 @@ class Auth extends BaseController
 						'sup_username' => $iuser['username'],
 						'sup_email' => $user_info['email'],
 						);
+						// Regenerate session ID to prevent session fixation
+						$session->regenerate(true);
 						// Add user data in session
 						$session->set('sup_username', $session_data);
 						$session->set('sup_user_id', $session_data);

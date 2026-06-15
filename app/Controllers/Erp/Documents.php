@@ -270,7 +270,7 @@ class Documents extends BaseController {
 					]
 				],
 				'document_file' => [
-					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
 					'errors' => [
 						'uploaded' => lang('Main.xin_error_field_text')
 					]
@@ -394,7 +394,7 @@ class Documents extends BaseController {
 					]
 				],
 				'document_file' => [
-					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+					'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
 					'errors' => [
 						'uploaded' => lang('Main.xin_error_field_text')
 					]
@@ -427,8 +427,8 @@ class Documents extends BaseController {
 					$this->output($Return);
 					exit;
 				}
-				$file_name = $document_file->getName();
-				$document_file->move('public/uploads/official_documents/');
+				$file_name = $document_file->getRandomName();
+				$document_file->move('public/uploads/official_documents/', $file_name);
 				
 				$license_name = $this->request->getPost('license_name',FILTER_SANITIZE_STRING);
 				$document_type = $this->request->getPost('document_type',FILTER_SANITIZE_STRING);
@@ -526,7 +526,7 @@ class Documents extends BaseController {
 				// upload file
 				$validated = $this->validate([
 					'document_file' => [
-						'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+						'rules'  => 'uploaded[document_file]|max_size[document_file,10240]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
 						'errors' => [
 							'uploaded' => lang('Main.xin_error_field_text')
 						]
@@ -544,8 +544,8 @@ class Documents extends BaseController {
 						$this->output($Return);
 						exit;
 					}
-					$file_name = $document_file->getName();
-					$document_file->move('public/uploads/official_documents/');
+					$file_name = $document_file->getRandomName();
+					$document_file->move('public/uploads/official_documents/', $file_name);
 				}
 				
 				$license_name = $this->request->getPost('license_name',FILTER_SANITIZE_STRING);

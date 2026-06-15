@@ -78,15 +78,44 @@ class Download extends BaseController {
 	}	
 	public function index() {	
 		
+		// AUTH CHECK: Require login for file downloads
+		$session = \Config\Services::session();
+		if(!$session->has('sup_username')){
+			return redirect()->to(site_url('erp/login'));
+		}
+		
 		$request = \Config\Services::request();
 		// type
 		$type = $this->request->getGet('type');
 		
 		if($type) {
+			// Path traversal protection: strip dangerous characters
+			$type = basename(str_replace(['..', '/', '\\'], '', $type));
+			
+			// Whitelist allowed subdirectories
+			$allowed_types = ['system_documents', 'official_documents', 'employees', 'training', 'regulation_documents', 'announcements', 'tickets', 'awards', 'travel', 'projects', 'company', 'assets', 'tasks', 'recruitment'];
+			if (!in_array($type, $allowed_types)) {
+				echo "Invalid file type.";
+				return;
+			}
+			
 			//Set the time out
 			set_time_limit(0);
 			$filename = udecode($this->request->getGet('filename'));
+			
+			// Path traversal protection on filename
+			$filename = basename(str_replace(['..', '/', '\\'], '', $filename));
+			
 			$file_path = ROOTPATH . 'public/uploads/'.$type.'/'.$filename;
+			
+			// Ensure the resolved path stays within uploads directory
+			$real_path = realpath($file_path);
+			$uploads_dir = realpath(ROOTPATH . 'public/uploads/');
+			if ($real_path === false || strpos($real_path, $uploads_dir) !== 0) {
+				echo "Access denied.";
+				return;
+			}
+			
 			if (file_exists($file_path)) {
 				$data = file_get_contents($file_path);
 				$this->force_download($filename, $data);

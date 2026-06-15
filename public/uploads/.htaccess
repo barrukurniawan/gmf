@@ -1,6 +1,30 @@
+# Block execution of scripts in uploads directory
+<FilesMatch "\.(php|php3|php4|php5|php7|php8|phtml|pht|phps|cgi|pl|py|sh|bash|exe|shtml|shtm)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Disable PHP execution entirely
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# Block .htaccess manipulation
+<Files ".ht*">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+# Rewrite rules
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L] 
+RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>

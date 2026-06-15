@@ -12,12 +12,12 @@ class Noauth implements FilterInterface
 		$session = \Config\Services::session();
 		$usession = $session->get('sup_username');
 		if($session->has('sup_username')){
+			// User IS logged in - redirect them away from unauthenticated pages
 			$session->setFlashdata('unauthorized_module',lang('Dashboard.err_already_logged_in_to_system').$usession['sup_username'].lang('Dashboard.err_you_need_to_loggin_in_as_different_user'));
 			return redirect()->to(site_url('erp/desk'));
-		} else {
-			$session->setFlashdata('unauthorized_module',lang('Dashboard.xin_error_unauthorized_module'));
-			return redirect()->to(site_url('erp/desk'));
 		}
+		// User is NOT logged in - allow access to the page (login, forgot password, etc.)
+		return;
     }
 
     //--------------------------------------------------------------------

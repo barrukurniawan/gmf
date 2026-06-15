@@ -102,8 +102,11 @@ class Regulation extends BaseController
         // Order
         $orderColumn = $request->getGet('order')[0]['column'] ?? 0;
         $orderDir    = $request->getGet('order')[0]['dir'] ?? 'desc';
+        // Whitelist ORDER BY direction to prevent SQL injection
+        $orderDir    = in_array(strtolower($orderDir), ['asc', 'desc']) ? $orderDir : 'desc';
         $columns     = ['id', 'title', 'document_number', 'category', 'publish_date'];
-        $builder->orderBy($columns[$orderColumn] ?? 'publish_date', $orderDir);
+        $orderCol    = (int)($orderColumn);
+        $builder->orderBy($columns[$orderCol] ?? 'publish_date', $orderDir);
 
         // Pagination
         $start  = (int) ($request->getGet('start') ?? 0);
@@ -347,7 +350,7 @@ class Regulation extends BaseController
                 'errors' => ['required' => 'Kategori wajib dipilih.']
             ],
             'document_file' => [
-                'rules'  => 'uploaded[document_file]|max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                'rules'  => 'uploaded[document_file]|max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
                 'errors' => ['uploaded' => 'File dokumen wajib diupload.']
             ]
         ];
@@ -383,8 +386,8 @@ class Regulation extends BaseController
 
         $original_name = $document_file->getName();
         $random_number = mt_rand(10000, 99999);
-        $file_extension = pathinfo($original_name, PATHINFO_EXTENSION);
-        $file_name = 'reg_' . $random_number . '_' . time() . '.' . $file_extension;
+        // Use validated extension from whitelist, NOT from user-controlled pathinfo()
+        $file_name = 'reg_' . $random_number . '_' . time() . '.' . strtolower($file_ext);
 
         if (!is_dir($this->uploadPath)) {
             mkdir($this->uploadPath, 0755, true);
@@ -505,7 +508,7 @@ class Regulation extends BaseController
         if ($document_file && $document_file->isValid() && !$document_file->hasMoved()) {
             $validated = $this->validate([
                 'document_file' => [
-                    'rules'  => 'max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,application/octet-stream,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                    'rules'  => 'max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
                 ]
             ]);
 
@@ -527,8 +530,8 @@ class Regulation extends BaseController
             }
 
             $random_number = mt_rand(10000, 99999);
-            $file_extension = pathinfo($document_file->getName(), PATHINFO_EXTENSION);
-            $file_name = 'reg_' . $random_number . '_' . time() . '.' . $file_extension;
+            // Use validated extension from whitelist, NOT from user-controlled pathinfo()
+            $file_name = 'reg_' . $random_number . '_' . time() . '.' . strtolower($file_ext);
             $document_file->move($this->uploadPath, $file_name);
 
             // Delete old file
