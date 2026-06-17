@@ -21,6 +21,8 @@ use App\Models\SystemModel;
 
 class Login extends BaseController {
 
+	protected $noAuth = true;
+
 	public function index()
 	{		
 		$SystemModel = new SystemModel();
