@@ -352,6 +352,14 @@ $routes->get('erp/print-quote/(:segment)', 'Orderquotes::view_quote_order', ['na
 
 // Capability Evaluation
 $routes->get('erp/capability-evaluation/', 'CapabilityEvaluation::index', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/capability-evaluation/maintenance', 'CapabilityEvaluation::maintenance', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/capability-evaluation/component', 'CapabilityEvaluation::component', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/capability-evaluation/form/(:any)/(:num)', 'CapabilityEvaluation::form/$1/$2', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/capability-evaluation/form/(:any)', 'CapabilityEvaluation::form/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->post('erp/capability-evaluation/save', 'CapabilityEvaluation::save', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/capability-evaluation/approvals', 'CapabilityEvaluation::approvals', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->post('erp/capability-evaluation/sign-record', 'CapabilityEvaluation::sign_record', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->get('erp/capability-evaluation/print-pdf/(:num)', 'CapabilityEvaluation::print_pdf/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 
 // Regulation Portal
 $routes->get('erp/regulation-portal/', 'Regulation::index', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
