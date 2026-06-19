@@ -45,13 +45,13 @@ $xin_system = erp_company_settings();
 
 .ce-action-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border-color: #d1d5db;
+    box-shadow: 0 10px 15px -3px rgba(114, 103, 239, 0.15), 0 4px 6px -2px rgba(114, 103, 239, 0.05);
+    border-color: #7267EF;
 }
 
 .ce-action-card:active {
     transform: translateY(0);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(114, 103, 239, 0.1);
 }
 
 .ce-icon-wrapper {
@@ -64,12 +64,22 @@ $xin_system = erp_company_settings();
     align-items: center;
     justify-content: center;
     margin-right: 24px;
+    transition: all 0.2s ease-in-out;
 }
 
 .ce-icon-wrapper svg {
     width: 32px;
     height: 32px;
     fill: #2563eb;
+    transition: fill 0.2s ease-in-out;
+}
+
+.ce-action-card:hover .ce-icon-wrapper {
+    background-color: #f4f3fe;
+}
+
+.ce-action-card:hover .ce-icon-wrapper svg {
+    fill: #7267EF;
 }
 
 .ce-content {
@@ -99,6 +109,7 @@ $xin_system = erp_company_settings();
     color: #2563eb;
     font-weight: 600;
     font-size: 16px;
+    transition: color 0.2s ease-in-out;
 }
 
 .ce-action-indicator svg {
@@ -107,6 +118,10 @@ $xin_system = erp_company_settings();
     margin-left: 8px;
     stroke: currentColor;
     transition: transform 0.2s ease;
+}
+
+.ce-action-card:hover .ce-action-indicator {
+    color: #7267EF;
 }
 
 .ce-action-card:hover .ce-action-indicator svg {
