@@ -168,6 +168,8 @@ class CapabilityEvaluation extends BaseController {
 			'capability_no' => $this->request->getPost('capability_no'),
 			'evaluation_date' => $this->request->getPost('evaluation_date'),
 			'type_of_aircraft' => $this->request->getPost('type_of_aircraft'),
+			'part_number' => $this->request->getPost('part_number'),
+			'component_type' => $this->request->getPost('component_type'),
 			'manufacture' => $this->request->getPost('manufacture'),
 			'ata_chapter' => $this->request->getPost('ata_chapter'),
 			'rating' => $this->request->getPost('rating'),
@@ -451,10 +453,28 @@ class CapabilityEvaluation extends BaseController {
 		}
 		$data['signatures'] = $sigs;
 
-		// Get Users details for signatures
-		$data['prep1_user'] = $header['prepared_by_1_id'] ? $UsersModel->find($header['prepared_by_1_id']) : null;
-		$data['prep2_user'] = $header['prepared_by_2_id'] ? $UsersModel->find($header['prepared_by_2_id']) : null;
-		$data['appv_user'] = $header['approved_by_id'] ? $UsersModel->find($header['approved_by_id']) : null;
+		$StaffdetailsModel = new \App\Models\StaffdetailsModel();
+		$DesignationModel = new \App\Models\DesignationModel();
+
+		$getSignerInfo = function($user_id) use ($UsersModel, $StaffdetailsModel, $DesignationModel) {
+			if (!$user_id) return null;
+			$u = $UsersModel->find($user_id);
+			if (!$u) return null;
+			$staff = $StaffdetailsModel->where('user_id', $user_id)->first();
+			$designation_name = 'Manajer'; 
+			if ($staff && !empty($staff['designation_id'])) {
+				$desg = $DesignationModel->find($staff['designation_id']);
+				if ($desg) {
+					$designation_name = $desg['designation_name'];
+				}
+			}
+			$u['designation_name'] = $designation_name;
+			return $u;
+		};
+
+		$data['prep1_user'] = $getSignerInfo($header['prepared_by_1_id']);
+		$data['prep2_user'] = $getSignerInfo($header['prepared_by_2_id']);
+		$data['appv_user'] = $getSignerInfo($header['approved_by_id']);
 
 		return view('erp/capability_evaluation/print_pdf', $data);
 	}

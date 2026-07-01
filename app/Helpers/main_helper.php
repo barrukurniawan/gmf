@@ -1243,3 +1243,16 @@ if( !function_exists('all_timezones') ){
 		}
 	}
 }
+
+if (!function_exists('validate_file_extension')) {
+	function validate_file_extension($file, $allowed_exts) {
+		$ext = strtolower($file->getClientExtension());
+		if (empty($ext)) {
+			$ext = strtolower($file->guessExtension());
+		}
+		if (empty($ext)) {
+			$ext = strtolower($file->getExtension());
+		}
+		return in_array($ext, $allowed_exts);
+	}
+}

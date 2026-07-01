@@ -159,10 +159,22 @@
 
             <table class="data-table">
                 <thead>
+                    <?php if($type == 'maintenance'): ?>
+                    <tr>
+                        <th style="width: 3%;">NO</th>
+                        <th style="width: 12%;">CAPABILITY NO.</th>
+                        <th style="width: 10%;">DATE</th>
+                        <th style="width: 15%;">TYPE OF AIRCRAFT</th>
+                        <th style="width: 10%;">ATA CHAPTER</th>
+                        <th style="width: 10%;">RATING</th>
+                        <th style="width: 30%;">PROPOSED SCOPE OF WORK</th>
+                        <th style="width: 10%;">STATUS</th>
+                    </tr>
+                    <?php else: ?>
                     <tr>
                         <th style="width: 3%;">NO</th>
                         <th style="width: 10%;">CAPABILITY NO.</th>
-                        <th style="width: 12%;"><?= $type == 'maintenance' ? 'AIRCRAFT TYPE' : 'COMPONENT NAME' ?></th>
+                        <th style="width: 12%;">COMPONENT NAME</th>
                         <th style="width: 10%;">PART NUMBER</th>
                         <th style="width: 8%;">TYPE</th>
                         <th style="width: 10%;">MANUFACTURE</th>
@@ -170,27 +182,41 @@
                         <th style="width: 32%;">SCOPE OF WORK</th>
                         <th style="width: 10%;">STATUS</th>
                     </tr>
+                    <?php endif; ?>
                 </thead>
                 <tbody>
                     <?php 
                     $no = 1;
                     foreach($records as $r): 
                     ?>
+                    <?php if($type == 'maintenance'): ?>
+                    <tr>
+                        <td class="center"><?= $no++ ?></td>
+                        <td><?= $r['capability_no'] ?></td>
+                        <td><?= date('d/m/Y', strtotime($r['evaluation_date'])) ?></td>
+                        <td><?= strtoupper($r['type_of_aircraft']) ?></td>
+                        <td class="center"><?= strtoupper($r['ata_chapter']) ?></td>
+                        <td><?= strtoupper($r['rating']) ?></td>
+                        <td><?= strtoupper(str_replace(["\r\n", "\r", "\n"], ", ", $r['scope_of_work'] ?: '-')) ?></td>
+                        <td class="center"><?= $r['decision_status'] ? strtoupper($r['decision_status']) : '-' ?></td>
+                    </tr>
+                    <?php else: ?>
                     <tr>
                         <td class="center"><?= $no++ ?></td>
                         <td><?= $r['capability_no'] ?></td>
                         <td><?= strtoupper($r['type_of_aircraft']) ?></td>
                         <td><?= strtoupper($r['part_number']) ?></td>
-                        <td><?= strtoupper($r['tool_type']) ?></td>
+                        <td><?= strtoupper($r['component_type']) ?></td>
                         <td><?= strtoupper($r['manufacture']) ?></td>
                         <td class="center"><?= $r['ata_chapter'] ?: '-' ?></td>
                         <td><?= strtoupper(str_replace(["\r\n", "\r", "\n"], ", ", $r['scope_of_work'] ?: '-')) ?></td>
                         <td class="center"><?= $r['decision_status'] ? strtoupper($r['decision_status']) : '-' ?></td>
                     </tr>
+                    <?php endif; ?>
                     <?php endforeach; ?>
                     <?php if(empty($records)): ?>
                     <tr>
-                        <td colspan="9" class="center">No Data Available</td>
+                        <td colspan="<?= $type == 'maintenance' ? '8' : '9' ?>" class="center">No Data Available</td>
                     </tr>
                     <?php endif; ?>
                 </tbody>

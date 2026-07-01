@@ -1519,10 +1519,9 @@ class Employees extends BaseController {
 					]
 				],
 				'document_file' => [
-					'rules'  => 'uploaded[document_file]|mime_in[document_file,image/jpg,image/jpeg,image/gif,image/png]|max_size[document_file,5120]',
+					'rules'  => 'uploaded[document_file]|max_size[document_file,30720]',
 					'errors' => [
-						'uploaded' => lang('Main.xin_error_field_text'),
-						'mime_in' => 'wrong size'
+						'uploaded' => lang('Main.xin_error_field_text')
 					]
 				]
 			];
@@ -1541,13 +1540,9 @@ class Employees extends BaseController {
 			} else {
 				// upload file
 				$document_file = $this->request->getFile('document_file');
-				$file_ext = $document_file->getClientExtension();
-				if ($file_ext === '' || $file_ext === null) {
-					$file_ext = $document_file->getExtension();
-				}
-				$allowed_exts = ['jpg', 'jpeg', 'gif', 'png'];
-				if(!in_array(strtolower($file_ext), $allowed_exts)) {
-					$Return['error'] = 'Invalid file extension. Allowed: jpg, jpeg, gif, png';
+				$allowed_exts = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
+				if(!validate_file_extension($document_file, $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: pdf, png, jpg, jpeg, gif, txt, xls, xlsx, doc, docx';
 					$this->output($Return);
 					exit;
 				}

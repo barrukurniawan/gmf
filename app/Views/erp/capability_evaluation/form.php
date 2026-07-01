@@ -23,7 +23,7 @@ $h = $header;
                             <input type="date" class="form-control" name="evaluation_date" value="<?= $h['evaluation_date'] ?? '' ?>">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Type of Aircraft / Component Name</label>
+                            <label><?= $type == 'component' ? 'Component Name' : 'Type of Aircraft' ?></label>
                             <input type="text" class="form-control" name="type_of_aircraft" value="<?= $h['type_of_aircraft'] ?? '' ?>">
                         </div>
                         <div class="col-md-6 mb-3">
@@ -38,6 +38,16 @@ $h = $header;
                             <label>Rating</label>
                             <input type="text" class="form-control" name="rating" value="<?= $h['rating'] ?? '' ?>">
                         </div>
+                        <?php if($type == 'component'): ?>
+                        <div class="col-md-6 mb-3">
+                            <label>Part Number</label>
+                            <input type="text" class="form-control" name="part_number" value="<?= $h['part_number'] ?? '' ?>">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Type</label>
+                            <input type="text" class="form-control" name="component_type" value="<?= $h['component_type'] ?? '' ?>">
+                        </div>
+                        <?php endif; ?>
                         <div class="col-md-12 mb-3">
                             <label>Proposed Scope of Work</label>
                             <textarea class="form-control" name="scope_of_work" rows="3"><?= $h['scope_of_work'] ?? '' ?></textarea>
@@ -63,7 +73,9 @@ $h = $header;
                             </thead>
                             <tbody>
                                 <?php 
-                                $default_reqs = ['Latest AMM', 'IPC', 'Service Bulletin', 'Airworthiness Directive', 'Standard Practices'];
+                                $default_reqs = $type == 'component' 
+                                    ? ['Latest CMM', 'IPC', 'Service Bulletin', 'Airworthiness Directive', 'Standard Practices']
+                                    : ['Latest AMM', 'IPC', 'Service Bulletin', 'Airworthiness Directive', 'Standard Practices'];
                                 $td_idx = 0;
                                 foreach($default_reqs as $req): 
                                     $t_avail = ''; $t_ref = '';
@@ -108,7 +120,9 @@ $h = $header;
                             </thead>
                             <tbody>
                                 <?php 
-                                $fac_reqs = ['Dedicated Hangar Area', 'Environmental Control', 'Lighting', 'Storage Area', 'Quarantine Area'];
+                                $fac_reqs = $type == 'component'
+                                    ? ['Dedicated Shop Area', 'Environmental Control', 'Lighting', 'Storage Area', 'Quarantine Area']
+                                    : ['Dedicated Hangar Area', 'Environmental Control', 'Lighting', 'Storage Area', 'Quarantine Area'];
                                 $fac_idx = 0;
                                 foreach($fac_reqs as $req): 
                                     $f_avail = ''; $f_rem = '';
@@ -190,9 +204,9 @@ $h = $header;
                                 <tr>
                                     <th>Name</th>
                                     <th>Position</th>
-                                    <th>Year of Exp</th>
-                                    <th>Rating</th>
-                                    <th>AMEL No</th>
+                                    <th><?= $type == 'component' ? 'EXPERIENCE' : 'Year of Exp' ?></th>
+                                    <th><?= $type == 'component' ? 'TRAINING' : 'Rating' ?></th>
+                                    <th><?= $type == 'component' ? 'COMA No.' : 'AMEL No' ?></th>
                                     <th></th>
                                 </tr>
                             </thead>
