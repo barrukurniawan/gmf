@@ -162,7 +162,7 @@
                     <tr>
                         <th style="width: 3%;">NO</th>
                         <th style="width: 10%;">CAPABILITY NO.</th>
-                        <th style="width: 12%;">COMPONENT NAME</th>
+                        <th style="width: 12%;"><?= $type == 'maintenance' ? 'AIRCRAFT TYPE' : 'COMPONENT NAME' ?></th>
                         <th style="width: 10%;">PART NUMBER</th>
                         <th style="width: 8%;">TYPE</th>
                         <th style="width: 10%;">MANUFACTURE</th>

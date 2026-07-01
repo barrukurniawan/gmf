@@ -477,12 +477,7 @@ class CapabilityEvaluation extends BaseController {
 		$expanded_records = [];
 		foreach($records as $r) {
 			if(empty($r['decision_status'])) {
-				$comp = $CapabilityEvaluationModel->where('form_type', 'component')->where('capability_no', $r['capability_no'])->first();
-				if($comp && !empty($comp['decision_status'])) {
-					$r['decision_status'] = $comp['decision_status'];
-				} else {
-					$r['decision_status'] = 'pending';
-				}
+				$r['decision_status'] = 'pending';
 			}
 
 			$tools = $CapabilityEvalToolsModel->where('eval_id', $r['id'])->findAll();
