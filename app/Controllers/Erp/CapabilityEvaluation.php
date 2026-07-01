@@ -72,6 +72,13 @@ class CapabilityEvaluation extends BaseController {
 		$data['breadcrumbs'] = $title_prefix . ' Records';
 		$data['type'] = $type;
 
+		if($user_info['user_type'] == 'company'){
+			$company_id = $usession['sup_user_id'];
+		} else {
+			$company_id = $user_info['company_id'];
+		}
+		$data['all_staff'] = $UsersModel->where('company_id', $company_id)->where('user_type', 'staff')->orderBy('first_name', 'ASC')->findAll();
+
 		$data['records'] = $CapabilityEvaluationModel->where('form_type', $type)->orderBy('id', 'DESC')->findAll();
 
 		$data['subview'] = view('erp/capability_evaluation/list', $data);
@@ -450,5 +457,101 @@ class CapabilityEvaluation extends BaseController {
 		$data['appv_user'] = $header['approved_by_id'] ? $UsersModel->find($header['approved_by_id']) : null;
 
 		return view('erp/capability_evaluation/print_pdf', $data);
+	}
+
+	public function print_recap($type)
+	{
+		$session = \Config\Services::session();
+		$usession = $session->get('sup_username');
+
+		if(!$session->has('sup_username')){
+			return redirect()->to(site_url('erp/login'));
+		}
+
+		$CapabilityEvaluationModel = new CapabilityEvaluationModel();
+		$CapabilityEvalToolsModel = new CapabilityEvalToolsModel();
+		
+		$records = $CapabilityEvaluationModel->where('form_type', $type)->orderBy('id', 'ASC')->findAll();
+
+		// Fetch part_number and tool type for each record (expand if multiple tools exist)
+		$expanded_records = [];
+		foreach($records as $r) {
+			if(empty($r['decision_status'])) {
+				$comp = $CapabilityEvaluationModel->where('form_type', 'component')->where('capability_no', $r['capability_no'])->first();
+				if($comp && !empty($comp['decision_status'])) {
+					$r['decision_status'] = $comp['decision_status'];
+				} else {
+					$r['decision_status'] = 'pending';
+				}
+			}
+
+			$tools = $CapabilityEvalToolsModel->where('eval_id', $r['id'])->findAll();
+			if($tools && count($tools) > 0) {
+				foreach($tools as $t) {
+					$row = $r;
+					$row['part_number'] = $t['part_number'];
+					$row['tool_type'] = $t['type'];
+					$expanded_records[] = $row;
+				}
+			} else {
+				$row = $r;
+				$row['part_number'] = '';
+				$row['tool_type'] = '';
+				$expanded_records[] = $row;
+			}
+		}
+
+		$data['records'] = $expanded_records;
+		$data['type'] = $type;
+
+		$prep_by_id = $this->request->getGet('prep_by');
+		$check_by_id = $this->request->getGet('check_by');
+		$appv_by_id = $this->request->getGet('appv_by');
+
+		$UsersModel = new \App\Models\UsersModel();
+		$StaffdetailsModel = new \App\Models\StaffdetailsModel();
+		$DesignationModel = new \App\Models\DesignationModel();
+
+		$getSigner = function($user_id) use ($UsersModel, $StaffdetailsModel, $DesignationModel) {
+			if (!$user_id) return null;
+			$u = $UsersModel->find($user_id);
+			if (!$u) return null;
+			$staff = $StaffdetailsModel->where('user_id', $user_id)->first();
+			$designation_name = 'Manajer'; 
+			if ($staff && $staff['designation_id']) {
+				$desig = $DesignationModel->find($staff['designation_id']);
+				if ($desig) {
+					$designation_name = $desig['designation_name'];
+				}
+			}
+			return [
+				'name' => $u['first_name'] . ' ' . $u['last_name'],
+				'designation' => $designation_name
+			];
+		};
+
+		$data['prep'] = $getSigner($prep_by_id) ?? ['name' => 'Gema Usman', 'designation' => 'Manajer'];
+		$data['check'] = $getSigner($check_by_id) ?? ['name' => 'Ajat Suhernajat', 'designation' => 'Manajer'];
+		$data['appv'] = $getSigner($appv_by_id) ?? ['name' => 'Bambang Widyantoro', 'designation' => 'Manajer'];
+
+		return view('erp/capability_evaluation/print_recap', $data);
+	}
+
+	public function debug_data() {
+		$CapabilityEvaluationModel = new CapabilityEvaluationModel();
+		$CapabilityEvalToolsModel = new CapabilityEvalToolsModel();
+		
+		$r = $CapabilityEvaluationModel->where('capability_no', 'SE-38247727')->first();
+		echo "<pre>";
+		echo "EVAL RECORD:\n";
+		print_r($r);
+		
+		if($r) {
+			echo "\nTOOLS:\n";
+			$tools = $CapabilityEvalToolsModel->where('eval_id', $r['id'])->findAll();
+			print_r($tools);
+		}
+		echo "</pre>";
+		exit;
 	}
 }

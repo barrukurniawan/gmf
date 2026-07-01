@@ -8,9 +8,14 @@ $UsersModel = new UsersModel();
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5><?= $title ?></h5>
-                <a href="<?= site_url('erp/capability-evaluation/form/'.$type) ?>" class="btn btn-primary btn-sm">
-                    <i class="feather icon-plus"></i> Add New Record
-                </a>
+                <div>
+                    <button type="button" class="btn btn-info btn-sm mr-2" data-toggle="modal" data-target="#printRecapModal">
+                        <i class="feather icon-download"></i> Download Recap
+                    </button>
+                    <a href="<?= site_url('erp/capability-evaluation/form/'.$type) ?>" class="btn btn-primary btn-sm">
+                        <i class="feather icon-plus"></i> Add New Record
+                    </a>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -80,6 +85,54 @@ $UsersModel = new UsersModel();
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="printRecapModal" tabindex="-1" role="dialog" aria-labelledby="printRecapModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="printRecapModalLabel">Print Recap Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= site_url('erp/capability-evaluation/print-recap/'.$type) ?>" method="GET" target="_blank">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Prepared By</label>
+                    <select name="prep_by" class="form-control" data-plugin="select_hrm">
+                        <option value="">-- Select Employee --</option>
+                        <?php foreach($all_staff as $staff): ?>
+                        <option value="<?= $staff['user_id'] ?>"><?= $staff['first_name'] . ' ' . $staff['last_name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Checked By</label>
+                    <select name="check_by" class="form-control" data-plugin="select_hrm">
+                        <option value="">-- Select Employee --</option>
+                        <?php foreach($all_staff as $staff): ?>
+                        <option value="<?= $staff['user_id'] ?>"><?= $staff['first_name'] . ' ' . $staff['last_name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Approved By</label>
+                    <select name="appv_by" class="form-control" data-plugin="select_hrm">
+                        <option value="">-- Select Employee --</option>
+                        <?php foreach($all_staff as $staff): ?>
+                        <option value="<?= $staff['user_id'] ?>"><?= $staff['first_name'] . ' ' . $staff['last_name'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" onclick="$('#printRecapModal').modal('hide');">Print</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
