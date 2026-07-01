@@ -28,7 +28,7 @@
         }
         .content-wrapper {
             border: 2px solid #000;
-            padding: 10px;
+            padding: 0;
             flex: 1; /* Take up all available space in the page */
             display: flex;
             flex-direction: column;
@@ -38,11 +38,12 @@
         .main-table { 
             width: 100%; 
             border-collapse: collapse; 
-            border: 1.5px solid #000; 
+            border: none;
+            border-bottom: 2px solid #000;
         }
         .main-table > tbody > tr > td { 
-            border: 1.5px solid #000; 
-            padding: 3px; 
+            border: none; 
+            padding: 0; 
         }
         
         .inner-table { 
@@ -58,7 +59,7 @@
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            border-bottom: 2px solid #000;
         }
         .data-table th, .data-table td {
             border: 1px solid #000;
@@ -66,6 +67,12 @@
             text-align: left;
             vertical-align: top;
             font-size: 8px; /* Shrink data font for portrait */
+        }
+        .data-table th:first-child, .data-table td:first-child {
+            border-left: none;
+        }
+        .data-table th:last-child, .data-table td:last-child {
+            border-right: none;
         }
         .data-table th {
             text-align: center;
@@ -81,18 +88,19 @@
             margin-top: auto; 
             margin-bottom: 20px; /* Push slightly up from the bottom border */
             width: 100%;
-            padding-top: 20px;
+            padding: 20px 10px 0 10px;
+            box-sizing: border-box;
         }
         .signature-table {
-            width: 100%;
-            text-align: center; /* Center the text */
-            border-collapse: collapse;
-            font-size: 9px; 
+            width: 100%; 
+            border-collapse: collapse; 
+            text-align: center; 
         }
         .signature-table td {
             width: 33.33%;
             vertical-align: bottom; 
             padding: 5px 5px;
+            font-size: 12px;
         }
         
         @media print {
@@ -120,7 +128,7 @@
 
     <div class="page">
         <div class="content-wrapper">
-            <table class="main-table" style="margin-bottom: 10px;">
+            <table class="main-table">
                 <tr>
                     <td style="padding: 0;">
                         <table class="inner-table" style="border: none;">
