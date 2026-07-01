@@ -493,30 +493,13 @@ class CapabilityEvaluation extends BaseController {
 		
 		$records = $CapabilityEvaluationModel->where('form_type', $type)->orderBy('id', 'ASC')->findAll();
 
-		// Fetch part_number and tool type for each record (expand if multiple tools exist)
-		$expanded_records = [];
-		foreach($records as $r) {
+		foreach($records as &$r) {
 			if(empty($r['decision_status'])) {
 				$r['decision_status'] = 'pending';
 			}
-
-			$tools = $CapabilityEvalToolsModel->where('eval_id', $r['id'])->findAll();
-			if($tools && count($tools) > 0) {
-				foreach($tools as $t) {
-					$row = $r;
-					$row['part_number'] = $t['part_number'];
-					$row['tool_type'] = $t['type'];
-					$expanded_records[] = $row;
-				}
-			} else {
-				$row = $r;
-				$row['part_number'] = '';
-				$row['tool_type'] = '';
-				$expanded_records[] = $row;
-			}
 		}
 
-		$data['records'] = $expanded_records;
+		$data['records'] = $records;
 		$data['type'] = $type;
 
 		$prep_by_id = $this->request->getGet('prep_by');
@@ -550,6 +533,40 @@ class CapabilityEvaluation extends BaseController {
 		$data['appv'] = $getSigner($appv_by_id) ?? ['name' => 'Bambang Widyantoro', 'designation' => 'Manajer'];
 
 		return view('erp/capability_evaluation/print_recap', $data);
+	}
+
+	public function delete_evaluation() {
+		if($this->request->getPost('type') == 'delete_record') {
+			$Return = array('result'=>'', 'error'=>'', 'csrf_hash'=>'');
+			$session = \Config\Services::session();
+			if(!$session->has('sup_username')){
+				$Return['error'] = 'Session expired.';
+				$this->output($Return);
+				return;
+			}
+			$Return['csrf_hash'] = csrf_hash();
+			$id = udecode($this->request->getPost('_token', FILTER_SANITIZE_STRING));
+			
+			$CapabilityEvaluationModel = new CapabilityEvaluationModel();
+			$result = $CapabilityEvaluationModel->where('id', $id)->delete($id);
+			
+			if ($result) {
+				// Also delete children (tech data, tools, etc)
+				$CapabilityEvalTechDataModel = new CapabilityEvalTechDataModel();
+				$CapabilityEvalTechDataModel->where('eval_id', $id)->delete();
+				$CapabilityEvalFacilitiesModel = new CapabilityEvalFacilitiesModel();
+				$CapabilityEvalFacilitiesModel->where('eval_id', $id)->delete();
+				$CapabilityEvalToolsModel = new CapabilityEvalToolsModel();
+				$CapabilityEvalToolsModel->where('eval_id', $id)->delete();
+				$CapabilityEvalPersonnelModel = new CapabilityEvalPersonnelModel();
+				$CapabilityEvalPersonnelModel->where('eval_id', $id)->delete();
+				
+				$Return['result'] = 'Evaluation deleted successfully.';
+			} else {
+				$Return['error'] = 'Failed to delete record.';
+			}
+			$this->output($Return);
+		}
 	}
 
 	public function debug_data() {

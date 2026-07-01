@@ -78,6 +78,7 @@ $UsersModel = new UsersModel();
                                 <td>
                                     <a href="<?= site_url('erp/capability-evaluation/form/'.$type.'/'.$r['id']) ?>" class="btn btn-sm btn-icon btn-light-primary" title="Edit"><i class="feather icon-edit"></i></a>
                                     <a href="<?= site_url('erp/capability-evaluation/print-pdf/'.$r['id']) ?>" class="btn btn-sm btn-icon btn-light-info" target="_blank" title="Print PDF"><i class="feather icon-printer"></i></a>
+                                    <a href="#!" class="btn btn-sm btn-icon btn-light-danger delete" data-id="<?= uencode($r['id']) ?>" data-type="<?= $type ?>" title="Delete"><i class="feather icon-trash-2"></i></a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -136,3 +137,10 @@ $UsersModel = new UsersModel();
         </div>
     </div>
 </div>
+
+<!-- Hidden Delete Form -->
+<form id="delete_record" name="delete_eval" action="<?= site_url('erp/capability-evaluation/delete_evaluation') ?>" method="post" style="display:none;">
+    <input type="hidden" name="csrf_token" value="<?= csrf_hash() ?>">
+    <input type="hidden" name="_token" value="" id="delete_token">
+    <input type="hidden" name="type" value="delete_record">
+</form>

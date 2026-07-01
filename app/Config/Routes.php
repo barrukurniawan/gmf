@@ -361,6 +361,7 @@ $routes->get('erp/capability-evaluation/approvals', 'CapabilityEvaluation::appro
 $routes->post('erp/capability-evaluation/sign-record', 'CapabilityEvaluation::sign_record', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/capability-evaluation/print-pdf/(:num)', 'CapabilityEvaluation::print_pdf/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/capability-evaluation/print-recap/(:any)', 'CapabilityEvaluation::print_recap/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->post('erp/capability-evaluation/delete_evaluation', 'CapabilityEvaluation::delete_evaluation', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 // Regulation Portal
 $routes->get('erp/regulation-portal/', 'Regulation::index', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->get('erp/regulation-portal/(:segment)', 'Regulation::index/$1', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
