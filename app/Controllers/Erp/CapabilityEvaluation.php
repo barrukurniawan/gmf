@@ -173,11 +173,11 @@ class CapabilityEvaluation extends BaseController {
 			'rating' => $this->request->getPost('rating'),
 			'scope_of_work' => $this->request->getPost('scope_of_work'),
 			'form_type' => $type,
-			'decision_status' => $type == 'component' ? $this->request->getPost('decision_status') : null,
-			'decision_remarks' => $type == 'component' ? $this->request->getPost('decision_remarks') : null,
-			'prepared_by_1_id' => $type == 'component' ? ($this->request->getPost('prepared_by_1_id') ?: null) : null,
-			'prepared_by_2_id' => $type == 'component' ? ($this->request->getPost('prepared_by_2_id') ?: null) : null,
-			'approved_by_id' => $type == 'component' ? ($this->request->getPost('approved_by_id') ?: null) : null,
+			'decision_status' => $this->request->getPost('decision_status'),
+			'decision_remarks' => $this->request->getPost('decision_remarks'),
+			'prepared_by_1_id' => $this->request->getPost('prepared_by_1_id') ?: null,
+			'prepared_by_2_id' => $this->request->getPost('prepared_by_2_id') ?: null,
+			'approved_by_id' => $this->request->getPost('approved_by_id') ?: null,
 		];
 
 		if($id > 0) {

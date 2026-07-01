@@ -8,7 +8,6 @@ $h = $header;
             <input type="hidden" name="id" value="<?= $id ?>">
             <input type="hidden" name="form_type" value="<?= $type ?>">
 
-            <?php if($type == 'maintenance'): ?>
             <div class="card mb-4">
                 <div class="card-header">
                     <h5>PART A - GENERAL INFORMATION</h5>
@@ -24,7 +23,7 @@ $h = $header;
                             <input type="date" class="form-control" name="evaluation_date" value="<?= $h['evaluation_date'] ?? '' ?>">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label>Type of Aircraft</label>
+                            <label>Type of Aircraft / Component Name</label>
                             <input type="text" class="form-control" name="type_of_aircraft" value="<?= $h['type_of_aircraft'] ?? '' ?>">
                         </div>
                         <div class="col-md-6 mb-3">
@@ -46,31 +45,7 @@ $h = $header;
                     </div>
                 </div>
             </div>
-            <?php else: ?>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h5>GENERAL INFORMATION</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label>Capability No</label>
-                            <input type="text" class="form-control" name="capability_no" value="<?= $h['capability_no'] ?? '' ?>">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label>Date</label>
-                            <input type="date" class="form-control" name="evaluation_date" value="<?= $h['evaluation_date'] ?? '' ?>">
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label>Item</label>
-                            <input type="text" class="form-control" name="type_of_aircraft" value="<?= $h['type_of_aircraft'] ?? '' ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
 
-            <?php if($type == 'maintenance'): ?>
             <!-- PART B -->
             <div class="card mb-4">
                 <div class="card-header">
@@ -245,10 +220,6 @@ $h = $header;
                         </table>
                     </div>
                 </div>
-            </div>
-            <?php endif; ?>
-
-            <?php if($type == 'component'): ?>
             <!-- PART F -->
             <div class="card mb-4">
                 <div class="card-header">
@@ -347,9 +318,9 @@ $h = $header;
 
                 </div>
             </div>
-            <?php endif; ?>    <div class="card-footer text-right">
-                    <button type="button" class="btn btn-primary" onclick="saveForm()"><i class="feather icon-save"></i> Save Record</button>
-                </div>
+            <div class="card-footer text-right">
+                <button type="button" class="btn btn-primary" onclick="saveForm()"><i class="feather icon-save"></i> Save Record</button>
+            </div>
             </div>
 
         </form>
