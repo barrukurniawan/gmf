@@ -223,7 +223,7 @@ $user_info = $UsersModel->where('user_id', $session['sup_user_id'])->first();
     
     <script type="text/javascript" src="<?php echo base_url();?>/public/assets/plugins/kendo/kendo.all.min.js"></script>
     <script src="<?php echo base_url();?>/public/assets/plugins/kendo/kendo.timezones.min.js"></script>
-	<script type="text/javascript" src="<?= base_url().'/public/module_scripts/'.$path_url.'.js'; ?>"></script>
+	<script type="text/javascript" src="<?= base_url().'/public/module_scripts/'.$path_url.'.js?v='.filemtime(ROOTPATH.'public/module_scripts/'.$path_url.'.js'); ?>"></script>
     <?php if($router->controllerName() == '\App\Controllers\Erp\Dashboard') { ?>
     	<?php if($user_info['user_type'] == 'staff'){ ?>
 			<?php if($xin_system['is_ssl_available'] == 1){ ?>
