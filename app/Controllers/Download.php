@@ -93,7 +93,7 @@ class Download extends BaseController {
 			$type = basename(str_replace(['..', '/', '\\'], '', $type));
 			
 			// Whitelist allowed subdirectories
-			$allowed_types = ['system_documents', 'official_documents', 'employees', 'training', 'regulation_documents', 'announcements', 'tickets', 'awards', 'travel', 'projects', 'company', 'assets', 'tasks', 'recruitment'];
+			$allowed_types = ['documents', 'system_documents', 'official_documents', 'employees', 'training', 'regulation_documents', 'announcements', 'tickets', 'awards', 'travel', 'projects', 'company', 'assets', 'tasks', 'recruitment'];
 			if (!in_array($type, $allowed_types)) {
 				echo "Invalid file type.";
 				return;
