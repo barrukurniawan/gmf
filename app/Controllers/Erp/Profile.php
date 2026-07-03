@@ -1027,6 +1027,13 @@ class Profile extends BaseController {
 					}
 					$file_name = $document_file->getRandomName();
 					$document_file->move('public/uploads/documents/', $file_name);
+
+					// Delete old file from disk
+					$oldFile = FCPATH . 'uploads/documents/' . $existing['document_file'];
+					if (!empty($existing['document_file']) && file_exists($oldFile)) {
+						unlink($oldFile);
+					}
+
 					$data['document_file'] = $file_name;
 				}
 
