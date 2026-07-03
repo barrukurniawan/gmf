@@ -32,6 +32,10 @@ class CapabilityEvaluation extends BaseController {
 			$session->setFlashdata('unauthorized_module', lang('Dashboard.xin_error_unauthorized_module'));
 			return redirect()->to(site_url('erp/desk'));
 		}
+		if($user_info['user_type'] == 'staff' && !in_array('capability_evaluation1', staff_role_resource())){
+			$session->setFlashdata('unauthorized_module', lang('Dashboard.xin_error_unauthorized_module'));
+			return redirect()->to(site_url('erp/desk'));
+		}
 
 		$xin_system = $SystemModel->where('setting_id', 1)->first();
 		$data['title'] = 'Capability Evaluation | ' . $xin_system['application_name'];
@@ -150,6 +154,18 @@ class CapabilityEvaluation extends BaseController {
 
 		if(!$session->has('sup_username')){
 			$Return['error'] = 'Session expired.';
+			$this->output($Return);
+			return;
+		}
+		$UsersModel = new \App\Models\UsersModel();
+		$user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+		if($user_info['user_type'] != 'company' && $user_info['user_type'] != 'staff'){
+			$Return['error'] = lang('Membership.xin_error_msg');
+			$this->output($Return);
+			return;
+		}
+		if($user_info['user_type'] == 'staff' && !in_array('capability_evaluation1', staff_role_resource())){
+			$Return['error'] = lang('Membership.xin_error_msg');
 			$this->output($Return);
 			return;
 		}

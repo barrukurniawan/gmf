@@ -119,6 +119,12 @@ $setup_modules = unserialize($xin_com_system['setup_modules']);
     Training Record
     </span> </a> </li>
   <?php } ?>
+  <?php if(in_array('capability_evaluation1',staff_role_resource())) { ?>
+  <!-- Capability Evaluation -->
+  <li class="pc-item <?php if($router->controllerName() == '\App\Controllers\Erp\CapabilityEvaluation')echo 'active';?>"> <a href="<?= site_url('erp/capability-evaluation');?>" class="pc-link"> <span class="pc-micon"><i data-feather="send"></i></span><span class="pc-mtext">
+    Capability Evaluation
+    </span> </a> </li>
+  <?php } ?>
   <?php
   $TrainingRecordHeaderModel = new \App\Models\TrainingRecordHeaderModel();
   $has_training_record = $TrainingRecordHeaderModel->where('user_id', $usession['sup_user_id'])->first();

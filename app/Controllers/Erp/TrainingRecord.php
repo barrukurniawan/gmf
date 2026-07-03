@@ -36,6 +36,10 @@ class TrainingRecord extends BaseController {
 			$session->setFlashdata('unauthorized_module',lang('Dashboard.xin_error_unauthorized_module'));
 			return redirect()->to(site_url('erp/desk'));
 		}
+		if($user_info['user_type'] == 'staff' && !in_array('training_record1', staff_role_resource())){
+			$session->setFlashdata('unauthorized_module',lang('Dashboard.xin_error_unauthorized_module'));
+			return redirect()->to(site_url('erp/desk'));
+		}
 
 		$xin_system = $SystemModel->where('setting_id', 1)->first();
 		$data['title'] = 'Training Record | '.$xin_system['application_name'];
@@ -162,6 +166,11 @@ class TrainingRecord extends BaseController {
 
 			// Validate user access
 			if($user_info['user_type'] != 'company' && $user_info['user_type'] != 'staff'){
+				$Return['error'] = lang('Membership.xin_error_msg');
+				$this->output($Return);
+				return;
+			}
+			if($user_info['user_type'] == 'staff' && !in_array('training_record1', staff_role_resource())){
 				$Return['error'] = lang('Membership.xin_error_msg');
 				$this->output($Return);
 				return;

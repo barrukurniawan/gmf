@@ -295,6 +295,8 @@ $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 	{ id: "", class: "role-checkbox custom-control-input input-light-primary", text: "<?= lang('Main.xin_custom_fields');?>", value: "custom_fields",},
 	// Training Record
 	{ id: "", class: "role-checkbox custom-control-input input-light-primary", text: "Training Record", value: "training_record1",},
+	// Capability Evaluation
+	{ id: "", class: "role-checkbox custom-control-input input-light-primary", text: "Capability Evaluation", value: "capability_evaluation1",},
 	//end1st
 	]
 	});

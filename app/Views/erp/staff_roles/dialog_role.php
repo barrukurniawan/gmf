@@ -468,6 +468,8 @@ $(document).ready(function(){
 	
 	// Training Record
 	{ id: "", class: "role-checkbox-modal custom-control-input input-light-primary", text: "Training Record", value: "training_record1", check: "<?php if(isset($role_id)) { if(in_array('training_record1',$role_resources_ids)): echo 'checked'; else: echo ''; endif; }?>",},
+	// Capability Evaluation
+	{ id: "", class: "role-checkbox-modal custom-control-input input-light-primary", text: "Capability Evaluation", value: "capability_evaluation1", check: "<?php if(isset($role_id)) { if(in_array('capability_evaluation1',$role_resources_ids)): echo 'checked'; else: echo ''; endif; }?>",},
 	]
 	});
 	
