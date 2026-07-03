@@ -427,6 +427,9 @@ $(document).ready(function() {
             url : main_url+"profile/user_documents_list/0",
             type : 'GET'
         },
+		"columnDefs": [
+			{ "orderable": false, "targets": 3 }
+		],
 		"language": {
 			"lengthMenu": dt_lengthMenu,
 			"zeroRecords": dt_zeroRecords,
@@ -445,6 +448,107 @@ $(document).ready(function() {
 		$('[data-toggle="tooltip"]').tooltip();          
 		}
     });
+
+	// Delegated: click Edit button in documents table
+	$(document).on('click', '.btn-edit-doc', function(){
+		var id   = $(this).data('id');
+		var name = $(this).data('name');
+		var type = $(this).data('type');
+		$('#edit_doc_token').val(id);
+		$('#edit_doc_name').val(name);
+		$('#edit_doc_type').val(type);
+		$('#edit_doc_file').val('');
+		$('#edit_doc_file').siblings('.custom-file-label').text('Choose file');
+		$('#modal_edit_own_document').modal('show');
+	});
+
+	// Delegated: click Delete button in documents table
+	$(document).on('click', '.btn-delete-doc', function(){
+		var id   = $(this).data('id');
+		var name = $(this).data('name');
+		$('#delete_doc_token_holder').val(id);
+		$('#delete_doc_name_label').text(name);
+		$('#modal_delete_own_document').modal('show');
+	});
+
+	// AJAX: Add own document
+	$("#form_add_own_document").submit(function(e){
+		e.preventDefault();
+		var fd = new FormData(this);
+		fd.append("type", "add_record");
+		$.ajax({
+			url: e.target.action,
+			type: "POST",
+			data: fd,
+			contentType: false,
+			cache: false,
+			processData: false,
+			success: function(JSON){
+				if(JSON.error != ''){
+					toastr.error(JSON.error);
+				} else {
+					toastr.success(JSON.result);
+					$('#modal_add_own_document').modal('hide');
+					$('#form_add_own_document')[0].reset();
+					$('#add_doc_file').siblings('.custom-file-label').text('Choose file');
+					xin_table_document.api().ajax.reload(null, false);
+				}
+			},
+			error: function(){ toastr.error('An error occurred.'); }
+		});
+	});
+
+	// AJAX: Edit own document
+	$("#form_edit_own_document").submit(function(e){
+		e.preventDefault();
+		var fd = new FormData(this);
+		fd.append("type", "edit_record");
+		$.ajax({
+			url: e.target.action,
+			type: "POST",
+			data: fd,
+			contentType: false,
+			cache: false,
+			processData: false,
+			success: function(JSON){
+				if(JSON.error != ''){
+					toastr.error(JSON.error);
+				} else {
+					toastr.success(JSON.result);
+					$('#modal_edit_own_document').modal('hide');
+					xin_table_document.api().ajax.reload(null, false);
+				}
+			},
+			error: function(){ toastr.error('An error occurred.'); }
+		});
+	});
+
+	// AJAX: Delete own document
+	$('#btn_confirm_delete_doc').click(function(){
+		var token = $('#delete_doc_token_holder').val();
+		$.ajax({
+			url: main_url + 'profile/delete_own_document',
+			type: 'POST',
+			data: { _method: 'DELETE', _token: token },
+			success: function(JSON){
+				if(JSON.error != ''){
+					toastr.error(JSON.error);
+				} else {
+					toastr.success(JSON.result);
+					$('#modal_delete_own_document').modal('hide');
+					xin_table_document.api().ajax.reload(null, false);
+				}
+			},
+			error: function(){ toastr.error('An error occurred.'); }
+		});
+	});
+
+	// custom-file-input label update
+	$(document).on('change', '.custom-file-input', function(){
+		var fileName = $(this).val().split('\\').pop();
+		$(this).siblings('.custom-file-label').text(fileName || 'Choose file');
+	});
+
 	// On page load 
 	var xin_table_allowances_ad = $('#xin_table_all_allowances').dataTable({
         "bDestroy": true,

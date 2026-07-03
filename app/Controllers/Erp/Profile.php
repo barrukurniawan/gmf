@@ -852,10 +852,22 @@ class Profile extends BaseController {
           foreach($get_data as $r) {
 			
 			$download_link = '<a href="'.site_url().'download?type=documents&filename='.uencode($r['document_file']).'">'.lang('Main.xin_download').'</a>';
+			$encoded_id    = uencode($r['document_id']);
+			$actions  = '<button class="btn btn-xs btn-outline-primary btn-edit-doc mr-1" ';
+			$actions .= 'data-id="'.$encoded_id.'" ';
+			$actions .= 'data-name="'.htmlspecialchars($r['document_name']).'" ';
+			$actions .= 'data-type="'.htmlspecialchars($r['document_type']).'">';
+			$actions .= '<i class="feather icon-edit-2"></i></button>';
+			$actions .= '<button class="btn btn-xs btn-outline-danger btn-delete-doc" ';
+			$actions .= 'data-id="'.$encoded_id.'" ';
+			$actions .= 'data-name="'.htmlspecialchars($r['document_name']).'">';
+			$actions .= '<i class="feather icon-trash-2"></i></button>';
+
 			$data[] = array(
 				$r['document_name'],
 				$r['document_type'],
-				$download_link
+				$download_link,
+				$actions,
 			);
 			
 		}
@@ -866,6 +878,210 @@ class Profile extends BaseController {
           echo json_encode($output);
           exit();
      } 
+	// |||add record||| — employee adds their own document
+	public function add_own_document() {
+
+		$validation = \Config\Services::validation();
+		$session    = \Config\Services::session();
+		$usession   = $session->get('sup_username');
+		if (!$session->has('sup_username')) {
+			return redirect()->to(site_url('erp/login'));
+		}
+		if ($this->request->getPost('type') === 'add_record') {
+			$Return = array('result' => '', 'error' => '', 'csrf_hash' => '');
+			$Return['csrf_hash'] = csrf_hash();
+			// Validation rules
+			$rules = [
+				'document_name' => [
+					'rules'  => 'required',
+					'errors' => ['required' => lang('Main.xin_error_field_text')]
+				],
+				'document_type' => [
+					'rules'  => 'required',
+					'errors' => ['required' => lang('Main.xin_error_field_text')]
+				],
+				'document_file' => [
+					'rules'  => 'uploaded[document_file]|max_size[document_file,30720]',
+					'errors' => ['uploaded' => lang('Main.xin_error_field_text')]
+				]
+			];
+			if (!$this->validate($rules)) {
+				$ruleErrors = [
+					'document_name' => $validation->getError('document_name'),
+					'document_type' => $validation->getError('document_type'),
+					'document_file' => $validation->getError('document_file'),
+				];
+				foreach ($ruleErrors as $err) {
+					if ($err != '') {
+						$Return['error'] = $err;
+						$this->output($Return);
+					}
+				}
+			} else {
+				$document_file = $this->request->getFile('document_file');
+				$allowed_exts  = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
+				if (!validate_file_extension($document_file, $allowed_exts)) {
+					$Return['error'] = 'Invalid file extension. Allowed: pdf, png, jpg, jpeg, gif, txt, xls, xlsx, doc, docx';
+					$this->output($Return);
+					exit;
+				}
+				$file_name = $document_file->getRandomName();
+				$document_file->move('public/uploads/documents/', $file_name);
+
+				$document_name = $this->request->getPost('document_name', FILTER_SANITIZE_STRING);
+				$document_type = $this->request->getPost('document_type', FILTER_SANITIZE_STRING);
+				$UsersModel    = new UsersModel();
+				$user_info     = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+				$company_id    = ($user_info['user_type'] == 'staff') ? $user_info['company_id'] : $usession['sup_user_id'];
+
+				$data = [
+					'company_id'    => $company_id,
+					'user_id'       => $usession['sup_user_id'],
+					'document_name' => $document_name,
+					'document_type' => $document_type,
+					'document_file' => $file_name,
+					'created_at'    => date('d-m-Y h:i:s'),
+				];
+				$UserdocumentsModel = new UserdocumentsModel();
+				$result = $UserdocumentsModel->insert($data);
+				$Return['csrf_hash'] = csrf_hash();
+				if ($result == TRUE) {
+					$Return['result'] = lang('Success.employee_set_document_success');
+				} else {
+					$Return['error'] = lang('Main.xin_error_msg');
+				}
+				$this->output($Return);
+				exit;
+			}
+		} else {
+			$Return['error'] = lang('Main.xin_error_msg');
+			$this->output($Return);
+			exit;
+		}
+	}
+
+	// |||edit record||| — employee updates their own document
+	public function update_own_document() {
+
+		$validation = \Config\Services::validation();
+		$session    = \Config\Services::session();
+		$usession   = $session->get('sup_username');
+		if (!$session->has('sup_username')) {
+			return redirect()->to(site_url('erp/login'));
+		}
+		if ($this->request->getPost('type') === 'edit_record') {
+			$Return = array('result' => '', 'error' => '', 'csrf_hash' => '');
+			$Return['csrf_hash'] = csrf_hash();
+
+			$document_id = (int) udecode($this->request->getPost('token', FILTER_SANITIZE_STRING));
+
+			// Ownership guard: make sure this document belongs to the logged-in user
+			$UserdocumentsModel = new UserdocumentsModel();
+			$existing = $UserdocumentsModel->where('document_id', $document_id)
+			                               ->where('user_id', $usession['sup_user_id'])
+			                               ->first();
+			if (!$existing) {
+				$Return['error'] = lang('Main.xin_error_msg');
+				$this->output($Return);
+				exit;
+			}
+
+			$rules = [
+				'document_name' => [
+					'rules'  => 'required',
+					'errors' => ['required' => lang('Main.xin_error_field_text')]
+				],
+				'document_type' => [
+					'rules'  => 'required',
+					'errors' => ['required' => lang('Main.xin_error_field_text')]
+				],
+			];
+			if (!$this->validate($rules)) {
+				$ruleErrors = [
+					'document_name' => $validation->getError('document_name'),
+					'document_type' => $validation->getError('document_type'),
+				];
+				foreach ($ruleErrors as $err) {
+					if ($err != '') {
+						$Return['error'] = $err;
+						$this->output($Return);
+					}
+				}
+			} else {
+				$document_name = $this->request->getPost('document_name', FILTER_SANITIZE_STRING);
+				$document_type = $this->request->getPost('document_type', FILTER_SANITIZE_STRING);
+
+				$data = [
+					'document_name' => $document_name,
+					'document_type' => $document_type,
+				];
+
+				// Optional file replacement
+				$document_file = $this->request->getFile('document_file');
+				if ($document_file && $document_file->isValid() && !$document_file->hasMoved()) {
+					$allowed_exts = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
+					if (!validate_file_extension($document_file, $allowed_exts)) {
+						$Return['error'] = 'Invalid file extension. Allowed: pdf, png, jpg, jpeg, gif, txt, xls, xlsx, doc, docx';
+						$this->output($Return);
+						exit;
+					}
+					$file_name = $document_file->getRandomName();
+					$document_file->move('public/uploads/documents/', $file_name);
+					$data['document_file'] = $file_name;
+				}
+
+				$result = $UserdocumentsModel->update($document_id, $data);
+				$Return['csrf_hash'] = csrf_hash();
+				if ($result == TRUE) {
+					$Return['result'] = lang('Success.employee_update_document_success');
+				} else {
+					$Return['error'] = lang('Main.xin_error_msg');
+				}
+				$this->output($Return);
+				exit;
+			}
+		} else {
+			$Return['error'] = lang('Main.xin_error_msg');
+			$this->output($Return);
+			exit;
+		}
+	}
+
+	// |||delete record||| — employee deletes their own document
+	public function delete_own_document() {
+
+		$session  = \Config\Services::session();
+		$usession = $session->get('sup_username');
+		if (!$session->has('sup_username')) {
+			return redirect()->to(site_url('erp/login'));
+		}
+		if ($this->request->getPost('_method') == 'DELETE') {
+			$Return = array('result' => '', 'error' => '', 'csrf_hash' => '');
+			$document_id = (int) udecode($this->request->getPost('_token', FILTER_SANITIZE_STRING));
+			$Return['csrf_hash'] = csrf_hash();
+
+			// Ownership guard: make sure this document belongs to the logged-in user
+			$UserdocumentsModel = new UserdocumentsModel();
+			$existing = $UserdocumentsModel->where('document_id', $document_id)
+			                               ->where('user_id', $usession['sup_user_id'])
+			                               ->first();
+			if (!$existing) {
+				$Return['error'] = lang('Main.xin_error_msg');
+				$this->output($Return);
+				exit;
+			}
+
+			$result = $UserdocumentsModel->delete($document_id);
+			if ($result == TRUE) {
+				$Return['result'] = lang('Success.employee_delete_document_success');
+			} else {
+				$Return['error'] = lang('Main.xin_error_msg');
+			}
+			$this->output($Return);
+			exit;
+		}
+	}
+
 	 // record list
 	public function allowances_list() {
 

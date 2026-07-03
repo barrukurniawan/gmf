@@ -50,9 +50,13 @@ $selected_shift = $ShiftModel->where('office_shift_id', $employee_detail['office
 $xin_system = erp_company_settings();
 // department head
 $idepartment = $DepartmentModel->where('department_id',$employee_detail['department_id'])->first();
-$dep_user = $UsersModel->where('user_id', $idepartment['department_head'])->first();
+$dep_user = ($idepartment && !empty($idepartment['department_head']))
+    ? $UsersModel->where('user_id', $idepartment['department_head'])->first()
+    : null;
+if (!$dep_user) { $dep_user = ['first_name' => '-', 'last_name' => '']; }
 // user designation
 $idesignations = $DesignationModel->where('designation_id',$employee_detail['designation_id'])->first();
+if (!$idesignations) { $idesignations = ['designation_name' => '-']; }
 ?>
 <?php if($result['is_active']=='0'): $_status = '<span class="badge badge-light-danger">'.lang('Main.xin_employees_inactive').'</span>'; endif; ?>
 <?php if($result['is_active']=='1'): $_status = '<span class="badge badge-light-success">'.lang('Main.xin_employees_active').'</span>'; endif; ?>
@@ -1043,6 +1047,11 @@ $status_label = '<i class="fas fa-certificate text-success bg-icon"></i><i class
             <h5><i data-feather="file-plus" class="icon-svg-primary wid-20"></i><span class="p-l-5">
               <?= lang('Employees.xin_documents');?>
               </span></h5>
+            <div class="card-header-right">
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_add_own_document">
+                <i class="feather icon-plus mr-1"></i><?= lang('Main.xin_add');?>
+              </button>
+            </div>
           </div>
           <div class="card-body">
             <div class="box-datatable table-responsive">
@@ -1052,6 +1061,7 @@ $status_label = '<i class="fas fa-certificate text-success bg-icon"></i><i class
                     <th><?= lang('Employees.xin_document_name');?></th>
                     <th><?= lang('Employees.xin_document_type');?></th>
                     <th><?= lang('Employees.xin_document_file');?></th>
+                    <th><?= lang('Main.xin_action');?></th>
                   </tr>
                 </thead>
               </table>
@@ -1060,6 +1070,102 @@ $status_label = '<i class="fas fa-certificate text-success bg-icon"></i><i class
         </div>
       </div>
       <?php } ?>
+
+      <!-- ===== MODAL: ADD OWN DOCUMENT ===== -->
+      <div class="modal fade" id="modal_add_own_document" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><i class="feather icon-file-plus mr-2"></i><?= lang('Employees.xin_documents');?> — <?= lang('Main.xin_add');?></h5>
+              <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <?php $hidden_add = array('token' => uencode($user_id)); ?>
+            <?= form_open_multipart('erp/profile/add_own_document', array('name' => 'add_own_document', 'id' => 'form_add_own_document', 'autocomplete' => 'off'), $hidden_add); ?>
+            <div class="modal-body">
+              <div class="form-group">
+                <label><?= lang('Employees.xin_document_name');?> <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="document_name" placeholder="<?= lang('Employees.xin_document_name');?>" required>
+              </div>
+              <div class="form-group">
+                <label><?= lang('Employees.xin_document_type');?> <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="document_type" placeholder="e.g. Certificate, ID, License" required>
+              </div>
+              <div class="form-group">
+                <label><?= lang('Employees.xin_document_file');?> <span class="text-danger">*</span></label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="document_file" id="add_doc_file">
+                  <label class="custom-file-label" for="add_doc_file"><?= lang('Main.xin_choose_file');?></label>
+                </div>
+                <small class="text-muted">Allowed: pdf, doc, docx, xls, xlsx, txt, jpg, jpeg, png, gif (max 30MB)</small>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= lang('Main.xin_close');?></button>
+              <button type="submit" class="btn btn-primary"><i class="feather icon-save mr-1"></i><?= lang('Main.xin_save');?></button>
+            </div>
+            <?= form_close(); ?>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== MODAL: EDIT OWN DOCUMENT ===== -->
+      <div class="modal fade" id="modal_edit_own_document" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><i class="feather icon-edit-2 mr-2"></i><?= lang('Employees.xin_documents');?> — <?= lang('Main.xin_edit');?></h5>
+              <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <?= form_open_multipart('erp/profile/update_own_document', array('name' => 'edit_own_document', 'id' => 'form_edit_own_document', 'autocomplete' => 'off')); ?>
+            <input type="hidden" name="token" id="edit_doc_token" value="">
+            <div class="modal-body">
+              <div class="form-group">
+                <label><?= lang('Employees.xin_document_name');?> <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="document_name" id="edit_doc_name" placeholder="<?= lang('Employees.xin_document_name');?>" required>
+              </div>
+              <div class="form-group">
+                <label><?= lang('Employees.xin_document_type');?> <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="document_type" id="edit_doc_type" placeholder="e.g. Certificate, ID, License" required>
+              </div>
+              <div class="form-group">
+                <label><?= lang('Employees.xin_document_file');?> <small class="text-muted">(<?= lang('Main.xin_optional');?> — leave blank to keep current file)</small></label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="document_file" id="edit_doc_file">
+                  <label class="custom-file-label" for="edit_doc_file"><?= lang('Main.xin_choose_file');?></label>
+                </div>
+                <small class="text-muted">Allowed: pdf, doc, docx, xls, xlsx, txt, jpg, jpeg, png, gif (max 30MB)</small>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= lang('Main.xin_close');?></button>
+              <button type="submit" class="btn btn-primary"><i class="feather icon-save mr-1"></i><?= lang('Main.xin_save');?></button>
+            </div>
+            <?= form_close(); ?>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== MODAL: DELETE OWN DOCUMENT ===== -->
+      <div class="modal fade" id="modal_delete_own_document" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title"><i class="feather icon-trash-2 mr-2"></i><?= lang('Main.xin_delete');?></h5>
+              <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body text-center">
+              <p><?= lang('Main.xin_delete_record');?></p>
+              <strong id="delete_doc_name_label" class="d-block mb-3 text-danger"></strong>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><?= lang('Main.xin_close');?></button>
+              <button type="button" class="btn btn-danger btn-sm" id="btn_confirm_delete_doc"><i class="feather icon-trash-2 mr-1"></i><?= lang('Main.xin_delete');?></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="hidden" id="delete_doc_token_holder" value="">
+
     </div>
   </div>
   <!-- [] end --> 
