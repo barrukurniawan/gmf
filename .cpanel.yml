@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/DATA/globalmaintenanc/gis.globalmaintenance.co.id
+    - /bin/cp -R * $DEPLOYPATH
