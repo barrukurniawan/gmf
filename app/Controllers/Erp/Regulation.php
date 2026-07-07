@@ -15,6 +15,21 @@ class Regulation extends BaseController
     protected $uploadPath = ROOTPATH . 'public/uploads/regulation_documents/';
     protected $uploadUrl  = 'public/uploads/regulation_documents/';
 
+    protected function allowedDocumentMimes()
+    {
+        return 'application/pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    }
+
+    protected function allowedDocumentExtensions()
+    {
+        return ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
+    }
+
+    protected function canManageDocuments($userInfo)
+    {
+        return isset($userInfo['user_type']) && in_array($userInfo['user_type'], ['company', 'super_user'], true);
+    }
+
     /**
      * Index - Portal Page
      * URL: erp/regulation-portal/ or erp/regulation/view/{id}
@@ -42,7 +57,7 @@ class Regulation extends BaseController
         $data['active_category'] = $request->getGet('category') ?: 'all';
 
         // Role-based CRUD permission: only company/super_user can CRUD
-        $data['can_crud']     = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
+        $data['can_crud']     = $this->canManageDocuments($user_info);
         // Download permission: staff cannot download
         $data['can_download'] = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
 
@@ -74,7 +89,7 @@ class Regulation extends BaseController
         $UsersModel = new UsersModel();
         $usession = $session->get('sup_username');
         $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
-        $canCrud = ($user_info['user_type'] == 'company' || $user_info['user_type'] == 'super_user');
+        $canCrud = $this->canManageDocuments($user_info);
 
         $RegulationDocumentsModel = new RegulationDocumentsModel();
 
@@ -292,7 +307,7 @@ class Regulation extends BaseController
         $UsersModel = new UsersModel();
         $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
 
-        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+        if (!$this->canManageDocuments($user_info)) {
             $session->setFlashdata('unauthorized_module', lang('Dashboard.xin_error_unauthorized_module'));
             return redirect()->to(site_url('erp/desk'));
         }
@@ -325,7 +340,7 @@ class Regulation extends BaseController
 
         $UsersModel = new UsersModel();
         $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
-        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+        if (!$this->canManageDocuments($user_info)) {
             $Return = ['result' => '', 'error' => lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash' => csrf_hash()];
             $this->output($Return);
             exit;
@@ -350,7 +365,7 @@ class Regulation extends BaseController
                 'errors' => ['required' => 'Kategori wajib dipilih.']
             ],
             'document_file' => [
-                'rules'  => 'uploaded[document_file]|max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                'rules'  => 'uploaded[document_file]|max_size[document_file,71680]|mime_in[document_file,' . $this->allowedDocumentMimes() . ']',
                 'errors' => ['uploaded' => 'File dokumen wajib diupload.']
             ]
         ];
@@ -372,27 +387,18 @@ class Regulation extends BaseController
 
         // Handle file upload
         $document_file = $this->request->getFile('document_file');
-        $file_ext = $document_file->getClientExtension();
-        if ($file_ext === '' || $file_ext === null) {
-            $file_ext = $document_file->getExtension();
-        }
-
-        $allowed_exts = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
-        if (!in_array(strtolower($file_ext), $allowed_exts)) {
+        $allowed_exts = $this->allowedDocumentExtensions();
+        if (!validate_file_extension($document_file, $allowed_exts)) {
             $Return['error'] = 'Ekstensi file tidak valid. Diizinkan: pdf, png, jpg, jpeg, gif, txt, xls, xlsx, doc, docx';
             $this->output($Return);
             exit;
         }
 
-        $original_name = $document_file->getName();
-        $random_number = mt_rand(10000, 99999);
-        // Use validated extension from whitelist, NOT from user-controlled pathinfo()
-        $file_name = 'reg_' . $random_number . '_' . time() . '.' . strtolower($file_ext);
-
         if (!is_dir($this->uploadPath)) {
             mkdir($this->uploadPath, 0755, true);
         }
 
+        $file_name = $document_file->getRandomName();
         $document_file->move($this->uploadPath, $file_name);
 
         $title           = $this->request->getPost('title', FILTER_SANITIZE_STRING);
@@ -440,7 +446,7 @@ class Regulation extends BaseController
         $usession = $session->get('sup_username');
         $UsersModel = new UsersModel();
         $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
-        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+        if (!$this->canManageDocuments($user_info)) {
             $Return = ['result' => '', 'error' => lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash' => csrf_hash()];
             $this->output($Return);
             exit;
@@ -507,8 +513,8 @@ class Regulation extends BaseController
         $document_file = $this->request->getFile('document_file');
         if ($document_file && $document_file->isValid() && !$document_file->hasMoved()) {
             $validated = $this->validate([
-                'document_file' => [
-                    'rules'  => 'max_size[document_file,71680]|mime_in[document_file,application/pdf,application/force-download,application/x-download,application/x-pdf,image/png,image/jpg,image/jpeg,image/gif,text/plain,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document]',
+                    'document_file' => [
+                    'rules'  => 'max_size[document_file,71680]|mime_in[document_file,' . $this->allowedDocumentMimes() . ']',
                 ]
             ]);
 
@@ -518,20 +524,14 @@ class Regulation extends BaseController
                 exit;
             }
 
-            $file_ext = $document_file->getClientExtension();
-            if ($file_ext === '' || $file_ext === null) {
-                $file_ext = $document_file->getExtension();
-            }
-            $allowed_exts = ['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'xls', 'xlsx', 'doc', 'docx'];
-            if (!in_array(strtolower($file_ext), $allowed_exts)) {
+            $allowed_exts = $this->allowedDocumentExtensions();
+            if (!validate_file_extension($document_file, $allowed_exts)) {
                 $Return['error'] = 'Ekstensi file tidak valid.';
                 $this->output($Return);
                 exit;
             }
 
-            $random_number = mt_rand(10000, 99999);
-            // Use validated extension from whitelist, NOT from user-controlled pathinfo()
-            $file_name = 'reg_' . $random_number . '_' . time() . '.' . strtolower($file_ext);
+            $file_name = $document_file->getRandomName();
             $document_file->move($this->uploadPath, $file_name);
 
             // Delete old file
@@ -567,7 +567,7 @@ class Regulation extends BaseController
 
         $UsersModel = new UsersModel();
         $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
-        if ($user_info['user_type'] != 'company' && $user_info['user_type'] != 'super_user') {
+        if (!$this->canManageDocuments($user_info)) {
             $Return = ['result' => '', 'error' => lang('Dashboard.xin_error_unauthorized_module'), 'csrf_hash' => csrf_hash()];
             $this->output($Return);
             exit;
@@ -607,5 +607,113 @@ class Regulation extends BaseController
 
         $this->output($Return);
         exit;
+    }
+
+    /**
+     * Save text annotations into an existing PDF (AJAX)
+     */
+    public function saveAnnotated()
+    {
+        $session = \Config\Services::session();
+        $request = \Config\Services::request();
+
+        if (!$session->has('sup_username')) {
+            return $this->response->setJSON([
+                'result' => '',
+                'error' => lang('Dashboard.err_not_logged_in'),
+                'csrf_hash' => csrf_hash(),
+            ])->setStatusCode(401);
+        }
+
+        $usession = $session->get('sup_username');
+        $UsersModel = new UsersModel();
+        $user_info = $UsersModel->where('user_id', $usession['sup_user_id'])->first();
+
+        if (!$this->canManageDocuments($user_info)) {
+            return $this->response->setJSON([
+                'result' => '',
+                'error' => lang('Dashboard.xin_error_unauthorized_module'),
+                'csrf_hash' => csrf_hash(),
+            ])->setStatusCode(403);
+        }
+
+        $Return = ['result' => '', 'error' => '', 'csrf_hash' => csrf_hash()];
+
+        $token = $request->getPost('token', FILTER_SANITIZE_STRING);
+        if (!$token) {
+            $Return['error'] = 'Dokumen tidak valid.';
+            return $this->response->setJSON($Return)->setStatusCode(400);
+        }
+
+        $id = udecode($token);
+        $RegulationDocumentsModel = new RegulationDocumentsModel();
+        $document = $RegulationDocumentsModel->find($id);
+
+        if (!$document) {
+            $Return['error'] = 'Dokumen tidak ditemukan.';
+            return $this->response->setJSON($Return)->setStatusCode(404);
+        }
+
+        $existingFilePath = $this->uploadPath . $document['file_path'];
+        if (!file_exists($existingFilePath)) {
+            $Return['error'] = 'File PDF tidak ditemukan di server.';
+            return $this->response->setJSON($Return)->setStatusCode(404);
+        }
+
+        if (strtolower(pathinfo($document['file_path'], PATHINFO_EXTENSION)) !== 'pdf') {
+            $Return['error'] = 'Hanya dokumen PDF yang dapat diedit.';
+            return $this->response->setJSON($Return)->setStatusCode(422);
+        }
+
+        $annotatedFile = $this->request->getFile('annotated_pdf');
+        if (!$annotatedFile || !$annotatedFile->isValid() || $annotatedFile->hasMoved()) {
+            $Return['error'] = 'File hasil anotasi tidak valid.';
+            return $this->response->setJSON($Return)->setStatusCode(422);
+        }
+
+        $validated = $this->validate([
+            'annotated_pdf' => [
+                'rules' => 'uploaded[annotated_pdf]|max_size[annotated_pdf,71680]|mime_in[annotated_pdf,application/pdf]',
+            ],
+        ]);
+
+        if (!$validated) {
+            $Return['error'] = $this->validator->getError('annotated_pdf') ?: 'File hasil anotasi tidak valid.';
+            return $this->response->setJSON($Return)->setStatusCode(422);
+        }
+
+        if (!validate_file_extension($annotatedFile, ['pdf'])) {
+            $Return['error'] = 'Ekstensi file hasil anotasi harus PDF.';
+            return $this->response->setJSON($Return)->setStatusCode(422);
+        }
+
+        if (!is_dir($this->uploadPath)) {
+            mkdir($this->uploadPath, 0755, true);
+        }
+
+        $newFileName = $annotatedFile->getRandomName();
+        $annotatedFile->move($this->uploadPath, $newFileName);
+
+        $updated = $RegulationDocumentsModel->update($id, [
+            'file_path' => $newFileName,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        if (!$updated) {
+            $savedPath = $this->uploadPath . $newFileName;
+            if (file_exists($savedPath)) {
+                unlink($savedPath);
+            }
+            $Return['error'] = lang('Main.xin_error_msg');
+            return $this->response->setJSON($Return)->setStatusCode(500);
+        }
+
+        if (file_exists($existingFilePath)) {
+            unlink($existingFilePath);
+        }
+
+        $Return['result'] = 'Perubahan PDF berhasil disimpan.';
+        $Return['file_url'] = site_url('erp/regulation/file/' . uencode($id));
+        return $this->response->setJSON($Return);
     }
 }

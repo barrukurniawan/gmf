@@ -374,6 +374,7 @@ $routes->get('erp/regulation/read', 'Regulation::read', ['namespace' => 'App\Con
 $routes->match(['get', 'post'], 'erp/regulation/add', 'Regulation::add', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->match(['get', 'post'], 'erp/regulation/edit', 'Regulation::edit', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 $routes->match(['get', 'post'], 'erp/regulation/delete', 'Regulation::delete', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
+$routes->post('erp/regulation/save-annotated', 'Regulation::saveAnnotated', ['namespace' => 'App\Controllers\Erp','filter' => 'checklogin']);
 
 /**
  * --------------------------------------------------------------------

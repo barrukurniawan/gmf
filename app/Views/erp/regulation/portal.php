@@ -202,6 +202,7 @@ $activeDoc = $active_doc ?? null;
     flex: 1;
     background: #e2e8f0;
     position: relative;
+    overflow: hidden;
 }
 
 .pdf-viewer-body iframe {
@@ -209,6 +210,131 @@ $activeDoc = $active_doc ?? null;
     height: 100%;
     border: 0;
     display: block;
+}
+
+.pdf-editor-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.pdf-editor-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #fff;
+    border-bottom: 1px solid var(--portal-border);
+    flex-wrap: wrap;
+}
+
+.pdf-editor-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pdf-editor-toolbar .form-control,
+.pdf-editor-toolbar .form-control-sm,
+.pdf-editor-toolbar .custom-select,
+.pdf-editor-toolbar input[type="color"] {
+    width: auto;
+}
+
+.pdf-editor-toolbar label {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #475569;
+    font-weight: 600;
+}
+
+.pdf-editor-status {
+    font-size: 0.78rem;
+    color: #64748b;
+}
+
+.pdf-editor-canvas-area {
+    flex: 1;
+    overflow: auto;
+    padding: 1rem;
+    background: linear-gradient(180deg, #dbe5f0 0%, #edf2f7 100%);
+}
+
+.pdf-canvas-stage {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+.pdf-canvas-stage canvas {
+    display: block;
+    max-width: 100%;
+}
+
+.annotation-layer {
+    position: absolute;
+    inset: 0;
+}
+
+.annotation-item {
+    position: absolute;
+    white-space: pre-wrap;
+    line-height: 1.25;
+    padding: 0.15rem 0.2rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    user-select: none;
+    min-width: 0.75rem;
+}
+
+.annotation-item:hover,
+.annotation-item.is-selected {
+    outline: 1px dashed rgba(30, 58, 95, 0.45);
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.annotation-input {
+    position: absolute;
+    min-width: 180px;
+    min-height: 44px;
+    resize: both;
+    z-index: 3;
+    border: 1px solid var(--portal-accent);
+    border-radius: 0.35rem;
+    padding: 0.4rem 0.5rem;
+    box-shadow: 0 8px 24px rgba(43, 87, 154, 0.18);
+}
+
+.annotation-hint {
+    display: none;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 2;
+    background: rgba(30, 58, 95, 0.92);
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.2);
+}
+
+.annotation-hint.is-visible {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pdf-editor-readonly {
+    padding: 0.65rem 1rem;
+    background: #fff8e8;
+    border-bottom: 1px solid #f1dfaa;
+    color: #8a6d1d;
+    font-size: 0.82rem;
 }
 
 .empty-state {
@@ -261,6 +387,19 @@ $activeDoc = $active_doc ?? null;
     .pdf-viewer-panel {
         height: auto;
         min-height: 380px;
+    }
+
+    .pdf-editor-toolbar {
+        align-items: stretch;
+    }
+
+    .pdf-editor-toolbar-group {
+        width: 100%;
+    }
+
+    .annotation-input {
+        min-width: 140px;
+        max-width: calc(100% - 16px);
     }
 }
 
@@ -368,11 +507,11 @@ $activeDoc = $active_doc ?? null;
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="pdf-viewer-body" id="previewBody">
-                                <div class="empty-state">
-                                    <i class="fas fa-file-pdf"></i>
-                                    <p>Pilih dokumen dari daftar untuk melihat pratinjau.</p>
-                                </div>
+                             <div class="pdf-viewer-body" id="previewBody">
+                                 <div class="empty-state">
+                                     <i class="fas fa-file-pdf"></i>
+                                     <p>Pilih dokumen dari daftar untuk melihat pratinjau.</p>
+                                 </div>
                                 <div class="loading-overlay" id="previewLoader" style="display:none;">
                                     <div class="spinner-portal"></div>
                                 </div>
@@ -429,8 +568,12 @@ var REGULATION = {
     csrfName: '<?= csrf_token() ?>',
     csrfHash: '<?= csrf_hash() ?>',
     canDownload: <?= ($can_download ?? false) ? 'true' : 'false' ?>,
+    canAnnotate: <?= ($can_crud ?? false) ? 'true' : 'false' ?>,
     categories: <?= json_encode(array_map(function($c){return $c['label'];}, $categories)) ?>
 };
 // Global csrf_hash for form submissions (used by modal forms)
 var csrf_hash = '<?= csrf_hash() ?>';
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
